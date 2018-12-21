@@ -1,0 +1,5 @@
+alias ls="ls --color"
+alias ll="ls -l"
+alias vconf="nvim ~/.config/nvim/init.vim"
+alias iconf="nvim ~/.config/i3/config"
+alias resource="source ~/.zshrc"

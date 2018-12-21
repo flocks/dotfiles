@@ -1,0 +1,156 @@
+exec --no-startup-id compton -b
+exec --no-startup-id dunst &
+
+set $mod Mod4
+
+font pango:Fira Code 8
+
+# move floating windows with $mod+mouse
+floating_modifier $mod
+
+bindsym $mod+Return exec kitty
+bindsym $mod+c exec google-chrome-stable
+
+# lock screen
+bindsym $mod+w exec i3lock -i ~/wallpapers/blade.png
+# kill focused window
+bindsym $mod+Shift+c kill
+
+bindsym $mod+r exec dmenu_run
+
+bindsym $mod+b bar hidden_state toggle
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+v split h
+
+# split in vertical orientation
+bindsym $mod+d split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+p sticky toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+l layout stacking
+# bindsym $mod+l layout tabbed
+# bindsym $mod+l layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Control+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+Shift+a focus child
+
+bindsym $mod+Shift+Return    move scratchpad
+bindsym $mod+m               scratchpad show
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1: main"
+set $ws2 "2: dev"
+set $ws3 "3: run"
+set $ws4 "4: slack"
+set $ws5 "5: random"
+set $ws6 "6: random"
+set $ws7 "7: random"
+set $ws8 "8: random"
+set $ws9 "9: random"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# move focused container to workspace
+bindsym $mod+Shift+1      move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3      move container to workspace $ws3
+bindsym $mod+Shift+4     move container to workspace $ws4
+bindsym $mod+Shift+5              move container to workspace $ws5
+bindsym $mod+Shift+6          move container to workspace $ws6
+bindsym $mod+Shift+7       move container to workspace $ws7
+bindsym $mod+Shift+8              move container to workspace $ws8
+bindsym $mod+Shift+9           move container to workspace $ws9
+
+# reload the configuration file
+bindsym $mod+Control+r reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+Control+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Shift+w exec "escrotum -s %Y-%m-%d_%H-%M-%S_\$wx\$h.png"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  bindsym h resize grow width 1 px or 1 ppt
+  bindsym j resize shrink width 1 px or 1 ppt
+  bindsym k resize grow height 1 px or 1 ppt
+  bindsym l resize shrink height 1 px or 1 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+Shift+r mode "default"
+}
+
+bindsym $mod+Shift+r mode "resize"
+bindsym $mod+Tab      workspace back_and_forth
+
+# color defines for zenburn styled i3
+set $bg     #2c2c2e
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+
+# set some nice colors      border     background  text
+client.focused              $ac        $ac         $tx
+client.unfocused            $bg        $bg         $ia
+client.focused_inactive     $bg        $bg         $ac
+client.urgent               $rd        $rd         $tx
+
+bar {
+  position top
+  mode hide
+  modifier None
+  status_command i3status --config ~/.config/i3/i3status.conf
+  colors {
+    background          $bg
+    statusline          $fg
+    separator           $hi
+    focused_workspace   $gn        $bg        $ac
+    active_workspace    $gn        $ac        $tx
+    inactive_workspace  $bg        $bg        $ia
+    urgent_workspace    $rd        $bg        $ac
+  }
+}

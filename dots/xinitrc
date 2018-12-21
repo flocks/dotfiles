@@ -1,0 +1,3 @@
+xmodmap ~/.xmodmap.conf
+xset r rate 150 200
+exec i3
