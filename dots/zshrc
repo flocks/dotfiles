@@ -4,6 +4,10 @@ export EDITOR="$(command -v nvim)"
 export WALLPAPERS=~/wallpapers
 set -o emacs
 
+#disable bell
+unsetopt BEEP
+
+
 #oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 # shellcheck disable=SC2034
