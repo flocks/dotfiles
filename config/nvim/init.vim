@@ -31,6 +31,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'mattn/emmet-vim', { 'for': 'javascript' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -343,3 +344,8 @@ let g:flow#enable = 0
 
 " rust.vim
 let g:rustfmt_autosave = 1
+set hidden
+let g:racer_cmd = "/home/flocks/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+
+
