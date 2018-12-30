@@ -144,7 +144,7 @@ bar {
   position top
   mode hide
   modifier None
-  status_command i3status --config ~/.config/i3/i3status.conf
+  status_command i3blocks
   colors {
     background          $bg
     statusline          $fg
