@@ -1,6 +1,7 @@
 exec --no-startup-id compton -b
 exec --no-startup-id dunst &
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
+exec --no-startup-id ~/bin/copy-history &
 
 set $mod Mod4
 
@@ -11,6 +12,7 @@ floating_modifier $mod
 
 bindsym $mod+Return exec kitty
 bindsym $mod+c exec google-chrome-stable
+bindsym $mod+Control+c exec ~/bin/history-dmenu
 
 # lock screen
 bindsym $mod+w exec i3lock -i ~/wallpapers/blade.png
@@ -144,7 +146,7 @@ bar {
   position top
   mode hide
   modifier None
-  status_command i3blocks
+  status_command i3status --config ~/.config/i3/i3status.conf
   colors {
     background          $bg
     statusline          $fg

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+HISTORY_FILE=~/.copy-history
+function main() {
+  createHistoryFile
+  while true
+  do
+    clip=$(xclip -o -selection clipboard)
+    lastLine=$(tail -n 1 $HISTORY_FILE)
+    echo $lastLine
+    echo $clip
+    if [  "$lastLine" != "$clip" ]; then
+      echo "save"
+      echo $clip >> $HISTORY_FILE
+    fi
+
+    sleep 1
+  done
+}
+function createHistoryFile() {
+  if [ ! -f $HISTORY_FILE ]; then
+    touch $HISTORY_FILE
+  fi
+}
+
+main

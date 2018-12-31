@@ -1,0 +1,4 @@
+#!/bin/bash
+CHOICE=$(tac ~/.copy-history | dmenu -l 10)
+echo $CHOICE | xclip --selection keyboard
+xdotool type $CHOICE
