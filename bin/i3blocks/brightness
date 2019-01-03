@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+1) xbacklight -inc 15 ;;
+3) xbacklight -dec 15 ;;
+esac
+BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/brightness)
+echo "$BRIGHTNESS"
