@@ -1,3 +1,6 @@
 #!/bin/bash
 
-acpi
+case $BLOCK_BUTTON in
+  1) notify-send "$(acpi)";;
+esac
+acpi | sed -e "s/,/ /g" | awk '{print $4}'

@@ -1,0 +1,21 @@
+command=~/bin/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=pango
+
+[brightness]
+label=🔆
+interval=5
+
+[battery]
+label=🔋
+interval=5
+
+[time]
+label=📅
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5
+
+[time]
+label=🔈
+command=echo "test"
+interval=5
