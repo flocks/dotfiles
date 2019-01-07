@@ -42,46 +42,23 @@ filetype plugin indent on
 "                                  MAPPING
 "                                  =======
 
-let mapleader="-"
-
-" dvorak buffer navigation
-nnoremap <Space> <NOP>
-nmap <silent> <Space>h :wincmd h<CR>
-nmap <silent> <Space>t :wincmd j<CR>
-nmap <silent> <Space>n :wincmd k<CR>
-nmap <silent> <Space>s :wincmd l<CR>
-
-" reformat
-nnoremap <silent> <Leader><Leader> :ALEFix<CR>
+let mapleader=" "
 
 " quick command in insert mode
 inoremap II <Esc>I
 inoremap AA <Esc>A
 inoremap OO <Esc>O
+inoremap fd <Esc>
 
 " c-p to open files
 nnoremap <C-p> :Files<CR>
 
-" c-s to save
-inoremap <c-s> <Esc>:x<CR>
-nnoremap <c-s> :x<CR>
+nnoremap H 0
+nnoremap L $
 
-" navigate between lint errors
-nmap <silent> <Leader>e <Plug>(ale_next_wrap)
-nmap <silent> <Leader>E <Plug>(ale_previous_wrap)
 
-" paste & select pasted text
-noremap <Leader>p p`[v`]
-noremap <Leader>P P`[v`]
-
-" select pasted text, without first line (useful for re-indenting callbacks)
-nnoremap <Leader>l `[v`]Oj
-
-" select line from first non-blank char to last char
-nnoremap <Leader>m ^vg_
-
-" paste mode with <C-r>
-inoremap <silent> <C-r> <C-r><C-p>
+" copy selection to clipboard
+vnoremap <c-y> "+y<Paste>
 
 " use fzf to search inside files
 let g:fzf_layout = { 'down': '~80%' }
