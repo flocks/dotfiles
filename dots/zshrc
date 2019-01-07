@@ -39,4 +39,6 @@ source "$HOME/.alias"
 source "$HOME/.path"
 source "$HOME/.gitprompt"
 source "$HOME/.prompt"
+source "$HOME/.private"
 
+source /usr/share/nvm/init-nvm.sh
