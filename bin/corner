@@ -1,0 +1,29 @@
+#!/bin/bash
+
+i3-msg floating enable;
+current=$(xdotool getwindowfocus)
+
+# The window will take up no more than a third of
+# the width or height of the screen.
+newwidth=$(($(xdotool getdisplaygeometry | awk '{print $2}') / 3))
+newheight=$(($(xdotool getdisplaygeometry | awk '{print $1}') / 3))
+
+xdotool windowsize "$current" $newheight $newwidth
+
+height=$(($(xdotool getdisplaygeometry | awk '{print $2}') - newwidth))
+width=$(($(xdotool getdisplaygeometry | awk '{print $1}') - newheight))
+
+case $1 in
+  bottom_left)
+    xdotool windowmove "$current" 0 $height ;;
+  top_left)
+    xdotool windowmove "$current" 0 0 ;;
+  bottom_right)
+    xdotool windowmove "$current" $width $height ;;
+  top_right)
+    xdotool windowmove "$current" $width 0 ;;
+  *)
+    i3-msg move position center ;;
+esac
+
+
