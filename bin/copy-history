@@ -7,8 +7,6 @@ function main() {
   do
     clip=$(xclip -o -selection clipboard)
     lastLine=$(tail -n 1 $HISTORY_FILE)
-    echo $lastLine
-    echo $clip
     if [  "$lastLine" != "$clip" ]; then
       echo "save"
       echo $clip >> $HISTORY_FILE
