@@ -1,3 +1,10 @@
 #!/bin/bash
+case $BLOCK_BUTTON in
+1) pulsemixer --change-volume +5 ;;
+3) pulsemixer --change-volume -5 ;;
+esac
 
-echo 🔈
+[ "$(pulsemixer --get-mute)" = "1" ] && echo "🔇"
+
+echo "🔈 $(pulsemixer --get-volume | awk '{print $2}')"
+

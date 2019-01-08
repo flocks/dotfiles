@@ -12,10 +12,8 @@ interval=5
 
 [time]
 label=📅
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
+command=date '+%Y-%m-%d %H:%M'
+interval=60
 
-[time]
-label=🔈
-command=echo "test"
-interval=5
+[sound]
+interval=1
