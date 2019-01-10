@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILENAME=$(escrotum -s %Y-%m-%d_%H-%M-%S_\$wx\$h.png | grep png)
+RENAME=$(echo $FILENAME | dmenu -p "FILENAME")
+mv $FILENAME $RENAME
+
+

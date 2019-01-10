@@ -10,7 +10,10 @@ font pango:Fira Code 8
 # move floating windows with $mod+mouse
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty
+set $term --no-startup-id kitty
+
+bindsym $mod+Return exec $term
+bindsym $mod+Delete exec $term -e htop
 bindsym $mod+c exec google-chrome-stable
 bindsym $mod+Control+c exec ~/bin/history-dmenu
 
@@ -53,11 +56,6 @@ bindsym $mod+d split v
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+p sticky toggle
-
-# change container layout (stacked, tabbed, toggle split)
-# bindsym $mod+l layout stacking
-# bindsym $mod+l layout tabbed
-# bindsym $mod+l layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Control+space floating toggle
@@ -112,7 +110,7 @@ bindsym $mod+Shift+Control+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+Shift+w exec "escrotum -s %Y-%m-%d_%H-%M-%S_\$wx\$h.png"
+bindsym $mod+Shift+w exec ~/bin/dscreenshot
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
