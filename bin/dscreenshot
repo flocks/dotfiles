@@ -1,7 +1,10 @@
 #!/bin/bash
 
-FILENAME=$(escrotum -s %Y-%m-%d_%H-%M-%S_\$wx\$h.png | grep png)
-RENAME=$(echo $FILENAME | dmenu -p "FILENAME")
-mv $FILENAME $RENAME
-
+FILENAME=$(echo "$(date '+%Y-%m-%d %H:%M:%S').png" | dmenu -p "filename")
+echo $FILENAME
+if [[ $FILENAME == *.png ]]; then
+maim -s "$FILENAME"
+else
+  maim -s "$FILENAME.png"
+fi
 
