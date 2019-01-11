@@ -1,2 +1,9 @@
 config/base16-shell
 config/google-chrome
+config/Cypress/
+config/QtProject.conf
+config/VirtualBox/
+config/configstore/
+config/menus
+config/pulse
+config/htop
