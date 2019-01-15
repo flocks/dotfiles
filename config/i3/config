@@ -124,13 +124,17 @@ mode "resize" {
   bindsym $mod+Shift+r mode "default"
 }
 
-mode "sticky" {
-  bindsym l floating enable; sticky toggle; exec ~/bin/sticky
+mode "sound" {
+  bindsym j exec "pulsemixer --change-volume -5"
+  bindsym k exec "pulsemixer --change-volume +5"
+  bindsym m exec "pulsemixer --toggle-mute"
+
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+s mode "sticky"
+
+bindsym $mod+Shift+s mode "sound"
 bindsym $mod+Shift+r mode "resize"
 bindsym $mod+Tab      workspace back_and_forth
 
@@ -153,7 +157,6 @@ client.focused_inactive     $bg        $bg         $ac
 client.urgent               $rd        $rd         $tx
 
 bar {
-  position top
   font pango:mono 9
 
   mode hide
