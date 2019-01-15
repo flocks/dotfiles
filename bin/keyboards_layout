@@ -1,0 +1,6 @@
+#!/bin/bash
+
+LAYOUT=$(localectl list-x11-keymap-layouts | dmenu -p "Layout")
+VARIANT=$(localectl list-x11-keymap-variants $LAYOUT | dmenu -p "Layout")
+setxkbmap -layout $LAYOUT -variant $VARIANT
+
