@@ -1,0 +1,4 @@
+#!/bin/bash
+
+file=$(git status | grep modified | cut -d : -f 2 | tr -d ' ' | fzf)
+git add $file
