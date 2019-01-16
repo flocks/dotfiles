@@ -36,6 +36,7 @@ Plug 'racer-rust/vim-racer'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'chrisbra/Colorizer'
 
 call plug#end()
 filetype plugin indent on
