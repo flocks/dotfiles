@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ls -1th --color=always | head -n ${1-1}
