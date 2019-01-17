@@ -1,4 +1,4 @@
 #!/bin/bash
 
-file=$(git status | grep modified | cut -d : -f 2 | tr -d ' ' | fzf)
-git add $file
+file=$(git status --short | grep -E " M|\?\?" | sed 's/^...//'  | fzf -m)
+[ -n "$file" ] && git add "$file"
