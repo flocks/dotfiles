@@ -7,3 +7,4 @@ config/configstore/
 config/menus
 config/pulse
 config/htop
+config/dconf/user
