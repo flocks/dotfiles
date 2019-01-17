@@ -1,3 +1,4 @@
 xmodmap ~/.xmodmap.conf
 xset r rate 150 200
+setxkbmap -layout us -variant mac
 exec i3
