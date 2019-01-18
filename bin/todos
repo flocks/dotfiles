@@ -1,0 +1,48 @@
+#!/bin/bash
+
+TODOS_FILE=~/.todos
+OPTIONS=(
+  "DONE"
+  "REMOVE"
+  )
+
+function addTodo() {
+  createTodoFileIfNeeded
+  todo=$(echo "" | dmenu -p "ADD TODO")
+  [ -z "$todo" ] && exit 1
+  id=$(wc -l $TODOS_FILE | cut -d ' ' -f 1)
+  echo "$id [ ] $todo" >> $TODOS_FILE
+}
+function listTodos() {
+  exitIfEmpty
+  todo=$(dmenu -l 10 -i < $TODOS_FILE)
+  OPTION=$( ( IFS=$'\n'; echo "${OPTIONS[*]}" ) | dmenu -i)
+  [ -z "$OPTION" ] && exit 1
+  id=$(echo "$todo" | cut -d ' ' -f 1)
+  if [ "$OPTION" == "DONE" ]; then
+    sed -i -e "/^$id/ s/\[ \]/\[✅\]/" $TODOS_FILE
+  else
+    sed -i -e "/^$id/d" $TODOS_FILE
+  fi
+}
+
+function exitIfEmpty() {
+  nbLine=$(wc -l $TODOS_FILE | cut -d ' ' -f 1)
+  [ "$nbLine" == 0 ] && exit 1
+}
+
+function createTodoFileIfNeeded() {
+  if [ ! -f "$TODOS_FILE" ]; then
+    touch "$TODOS_FILE"
+  fi
+}
+
+function main() {
+  if [ "$1" == "add" ]; then
+    addTodo
+  else
+    listTodos
+  fi
+}
+
+main "$@"
