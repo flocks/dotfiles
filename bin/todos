@@ -16,6 +16,7 @@ function addTodo() {
 function listTodos() {
   exitIfEmpty
   todo=$(dmenu -l 10 -i < $TODOS_FILE)
+  [ -z "$todo" ] && exit 1
   OPTION=$( ( IFS=$'\n'; echo "${OPTIONS[*]}" ) | dmenu -i)
   [ -z "$OPTION" ] && exit 1
   id=$(echo "$todo" | cut -d ' ' -f 1)
