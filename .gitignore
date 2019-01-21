@@ -9,3 +9,4 @@ config/pulse
 config/htop
 config/dconf/user
 wallpapers/
+config/nvim/.netrwhist
