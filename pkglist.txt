@@ -104,7 +104,9 @@ s-nail 14.9.11-1
 screenfetch 3.8.0-3
 sed 4.7-1
 shadow 4.6-1
+shellcheck 0.6.0-17
 sudo 1.8.26-2
+sxiv 24-1
 sysfsutils 2.1.0-10
 systemd 239.370-1
 systemd-sysvcompat 239.370-1
@@ -182,5 +184,6 @@ xorg-xwud 1.0.5-1
 xterm 341-1
 yarn 1.12.3-1
 youtube-dl 2018.12.31-1
+zoom 2.6.149990.1216-1
 zsh 5.6.2-1
 zsh-completions 0.29.0-1
