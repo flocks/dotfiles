@@ -25,7 +25,7 @@ bindsym $mod+y exec ~/bin/corner top_right
 bindsym $mod+n exec ~/bin/corner bottom_right
 
 # lock screen
-bindsym $mod+w exec i3lock -i ~/wallpapers/current.png
+bindsym $mod+w exec ~/bin/lock
 # kill focused window
 bindsym $mod+Shift+c kill
 
@@ -111,6 +111,7 @@ bindsym $mod+Shift+Control+r restart
 bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+Shift+w exec ~/bin/dscreenshot
+bindsym $mod+comma exec ~/bin/todos
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

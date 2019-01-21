@@ -1,25 +1,29 @@
 #!/bin/bash
 
+re='^[0-9]+$'
+# if ! [[ $yournumber =~ $re ]] ; then
+#    echo "error: Not a number" >&2; exit 1
+#  fi
+
 TODOS_FILE=~/.todos
 OPTIONS=(
   "DONE"
   "REMOVE"
   )
 
-function addTodo() {
-  createTodoFileIfNeeded
-  todo=$(echo "" | dmenu -p "ADD TODO")
-  [ -z "$todo" ] && exit 1
-  id=$(wc -l $TODOS_FILE | cut -d ' ' -f 1)
-  echo "$id [ ] $todo" >> $TODOS_FILE
-}
 function listTodos() {
-  exitIfEmpty
   todo=$(dmenu -l 10 -i < $TODOS_FILE)
   [ -z "$todo" ] && exit 1
+  id=$(echo "$todo" | cut -d ' ' -f 1)
+
+  if ! [[ "$id" =~ $re ]]; then
+    id=$(wc -l $TODOS_FILE | cut -d ' ' -f 1)
+    echo "$id [ ] $todo" >> $TODOS_FILE
+    exit;
+  fi
+
   OPTION=$( ( IFS=$'\n'; echo "${OPTIONS[*]}" ) | dmenu -i)
   [ -z "$OPTION" ] && exit 1
-  id=$(echo "$todo" | cut -d ' ' -f 1)
   if [ "$OPTION" == "DONE" ]; then
     sed -i -e "/^$id/ s/\[ \]/\[✅\]/" $TODOS_FILE
   else
@@ -39,11 +43,8 @@ function createTodoFileIfNeeded() {
 }
 
 function main() {
-  if [ "$1" == "add" ]; then
-    addTodo
-  else
-    listTodos
-  fi
+  createTodoFileIfNeeded
+  listTodos
 }
 
 main "$@"
