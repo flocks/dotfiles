@@ -1,3 +1,4 @@
 #!/bin/bash
 
 pacman -Qe > ~/dotfiles/pkglist.txt
+notify-send "package list updated"
