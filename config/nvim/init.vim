@@ -28,7 +28,7 @@ Plug 'flowtype/vim-flow'
 Plug 'junegunn/goyo.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-
+Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim', { 'for': 'javascript' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -37,6 +37,8 @@ Plug 'racer-rust/vim-racer'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'chrisbra/Colorizer'
+Plug 'prettier/vim-prettier'
+
 
 call plug#end()
 filetype plugin indent on
@@ -315,20 +317,28 @@ let g:user_emmet_settings = {
 \}
 autocmd FileType javascript.jsx EmmetInstall
 
-" vim-go
-let g:go_fmt_command = "goimports"
+"prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+let g:prettier#config#print_width = 80
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#jsx_bracket_same_line = 'false'
 
-" ale
+
+
+
+
+"false ale
 let g:ale_linters = { 'javascript': ['eslint'] }
-let g:ale_fixers = { 'javascript': ['eslint', 'prettier'], 'typescript': ['prettier'] }
-let g:ale_fix_on_save = 1
-let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = 'ℹ'
 let g:ale_set_highlights = 0
 
 " vim-flow
-let g:flow#enable = 0
+let g:flow#enable = 1
 
 " rust.vim
 let g:rustfmt_autosave = 1
