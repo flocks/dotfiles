@@ -8,6 +8,7 @@ alias front="cd ~/ledger-vault-front"
 alias driver="cd ~/ledger-vault-hsm-driver"
 alias inte="cd ~/vault-integration"
 alias dot="cd ~/dotfiles"
+alias gate="cd ~/ledger-vault-api"
 
 
 # git stuff
