@@ -5,6 +5,7 @@ alias resource="source ~/.zshrc"
 
 # folder
 alias front="cd ~/ledger-vault-front"
+alias llw="cd ~/ledger-live-web"
 alias driver="cd ~/ledger-vault-hsm-driver"
 alias inte="cd ~/vault-integration"
 alias dot="cd ~/dotfiles"
@@ -22,6 +23,7 @@ alias vim="nvim"
 alias nb=newsboat
 
 # utils
+alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | less"
 alias chmox="chmod +x"
 alias ls="ls --color"
 alias ll="ls -l"
