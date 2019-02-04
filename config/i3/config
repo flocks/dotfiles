@@ -5,6 +5,9 @@ exec --no-startup-id ~/bin/copy-history &
 
 set $mod Mod4
 
+gaps inner 10
+gaps outer 10
+
 font pango:Fira Code 8
 
 # move floating windows with $mod+mouse
