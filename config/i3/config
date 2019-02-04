@@ -115,6 +115,7 @@ bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit
 
 bindsym $mod+Shift+w exec ~/bin/dscreenshot
 bindsym $mod+comma exec ~/bin/todos
+bindsym $mod+period exec ~/bin/chrome-bookmarks
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
