@@ -6,6 +6,7 @@ alias resource="source ~/.zshrc"
 # folder
 alias front="cd ~/ledger-vault-front"
 alias llw="cd ~/ledger-live-web"
+alias lld="cd ~/ledger-live-desktop"
 alias driver="cd ~/ledger-vault-hsm-driver"
 alias inte="cd ~/vault-integration"
 alias dot="cd ~/dotfiles"
