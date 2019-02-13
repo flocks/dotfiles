@@ -38,6 +38,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'prettier/vim-prettier'
+Plug 'easymotion/vim-easymotion'
 
 
 call plug#end()
