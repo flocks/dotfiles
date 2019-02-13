@@ -3,6 +3,10 @@
 BOOKMARK_FILE=~/.bookmarks
 set -e
 url=$(dmenu -i -p "BOOKMARK" -l 10 < $BOOKMARK_FILE)
-[ -n "$url" ] && google-chrome-stable "$url"
+if grep -q "$url" $BOOKMARK_FILE; then
+    google-chrome-stable "$url"
+else
+    google-chrome-stable "https://www.google.com/search?&q=$url"
+  fi
 
 
