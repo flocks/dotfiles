@@ -5,8 +5,8 @@ exec --no-startup-id ~/bin/copy-history &
 
 set $mod Mod4
 
-gaps inner 10
-gaps outer 10
+#gaps inner 10
+#gaps outer 10
 
 font pango:Fira Code 8
 
@@ -139,6 +139,7 @@ mode "sound" {
 }
 
 
+bindsym $mod+Shift+g exec kitty ~/bin/record
 bindsym $mod+Shift+s mode "sound"
 bindsym $mod+Shift+r mode "resize"
 bindsym $mod+Tab      workspace back_and_forth
@@ -155,11 +156,28 @@ set $yw     #ccdc90
 set $gn     #88b090
 set $rd     #e89393
 
+set $base00 #263238
+set $base01 #2E3C43
+set $base02 #314549
+set $base03 #546E7A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+
 # set some nice colors      border     background  text
-client.focused              $ac        $ac         $tx
-client.unfocused            $bg        $bg         $ia
-client.focused_inactive     $bg        $bg         $ac
-client.urgent               $rd        $rd         $tx
+client.focused              $base05        $base0D         $base00
+client.unfocused            $base01        $base00         $base05
+client.focused_inactive     $base01        $base01         $base05
+client.urgent               $base08        $base08         $base00
 
 bar {
   font pango:mono 9
@@ -168,12 +186,12 @@ bar {
   modifier None
   status_command i3blocks
   colors {
-    background          $bg
-    statusline          $fg
-    separator           $hi
-    focused_workspace   $gn        $bg        $ac
-    active_workspace    $gn        $ac        $tx
-    inactive_workspace  $bg        $bg        $ia
-    urgent_workspace    $rd        $bg        $ac
+    background          $base00
+    statusline          $base04
+    separator           $base01
+    focused_workspace   $base05        $base0D        $base00
+    active_workspace    $base05        $base03        $base00
+    inactive_workspace  $base03        $base01        $base05
+    urgent_workspace    $base08        $base08        $base00
   }
 }
