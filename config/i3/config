@@ -3,10 +3,13 @@ exec --no-startup-id dunst &
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
 exec --no-startup-id ~/bin/copy-history &
 
+for_window [class="kitty"] border pixel 0
+
+
 set $mod Mod4
 
-#gaps inner 10
-#gaps outer 10
+gaps inner 10
+gaps outer 10
 
 font pango:Fira Code 8
 
