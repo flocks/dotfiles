@@ -249,7 +249,7 @@ endif
 
 " lightline
 let g:lightline = {
-\   'colorscheme': 'jellybeans',
+\   'colorscheme': 'deus',
 \   'active': {
 \     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
 \     'right': [ [ 'lineinfo' ], [ 'linter_warnings', 'linter_errors', 'linter_ok' ] ]
