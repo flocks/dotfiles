@@ -75,6 +75,7 @@ vnoremap <c-y> "+y<Paste>
 " use fzf to search inside files
 let g:fzf_layout = { 'down': '~80%' }
 nnoremap <c-f> :Find<space>
+nnoremap <c-b> :Buffers<space>
 nnoremap <Leader>f :Find<space><C-r><C-w><cr>
 command! -bang -nargs=* Find call fzf#vim#grep(
   \ 'rg --column --line-number --no-heading --fixed-strings --smart-case --hidden --follow --color "always" '.shellescape(<q-args>),
