@@ -344,5 +344,6 @@ let g:rustfmt_autosave = 1
 set hidden
 let g:racer_cmd = "/home/flocks/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
+nnoremap <Leader>r :RustRun<CR>
 
 
