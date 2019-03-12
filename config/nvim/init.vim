@@ -30,7 +30,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim', { 'for': 'javascript' }
-Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer'
 
@@ -38,7 +37,6 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'prettier/vim-prettier'
-Plug 'easymotion/vim-easymotion'
 
 
 call plug#end()
@@ -217,7 +215,6 @@ set wildignore+=*dist*,*dist-server*,*lib*
 set wildmenu
 
 " indentation by language
-autocmd Filetype go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.gyp set syntax=javascript
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
