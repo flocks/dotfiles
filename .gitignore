@@ -11,3 +11,5 @@ config/dconf/user
 wallpapers/
 config/nvim/.netrwhist
 wallpapers/current.png
+config/Pinta/
+config/inkscape/
