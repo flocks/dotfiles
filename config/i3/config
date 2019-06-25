@@ -3,23 +3,26 @@ exec --no-startup-id dunst &
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
 exec --no-startup-id ~/bin/copy-history &
 
-for_window [class="kitty"] border pixel 0
+#for_window [class="kitty"] border pixel 0
+for_window [title="fzf-menu"] border pixel 0
 
 
 set $mod Mod4
 
-gaps inner 10
-gaps outer 10
+#gaps inner 12
+#gaps outer 12
 
-font pango:Fira Code 8
+font pango:Fira Code 7
 
 # move floating windows with $mod+mouse
 floating_modifier $mod
 
 set $term --no-startup-id kitty
 
+bindsym $mod+Shift+d exec --no-startup-id kitty --title 'fzf-menu' -e 'i3-dmenu-desktop --dmenu=fzf'
+for_window [title="fzf-menu"] floating enable
+
 bindsym $mod+Return exec $term
-bindsym $mod+Delete exec $term -e htop
 bindsym $mod+c exec google-chrome-stable
 bindsym $mod+Control+c exec ~/bin/history-dmenu
 
@@ -29,6 +32,8 @@ bindsym $mod+t exec ~/bin/corner top_left
 bindsym $mod+b exec ~/bin/corner bottom_left
 bindsym $mod+y exec ~/bin/corner top_right
 bindsym $mod+n exec ~/bin/corner bottom_right
+
+bindsym $mod+Shift+b exec ~/bin/btc
 
 # lock screen
 bindsym $mod+w exec ~/bin/lock
