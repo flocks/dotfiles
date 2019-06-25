@@ -10,3 +10,4 @@ config/htop
 config/dconf/user
 wallpapers/
 config/nvim/.netrwhist
+wallpapers/current.png
