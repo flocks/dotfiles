@@ -117,8 +117,9 @@ bindsym $mod+Shift+Control+r restart
 bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+Shift+w exec ~/bin/dscreenshot
-bindsym $mod+comma exec ~/bin/todos
-bindsym $mod+period exec ~/bin/chrome-bookmarks
+bindsym $mod+comma exec ~/bin/chrome-bookmarks
+bindsym $mod+period exec ~/bin/dmenu-links
+bindsym $mod+slash exec ~/bin/history-dmenu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

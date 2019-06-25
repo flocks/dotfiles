@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if  [ -n "${1}" ]; then
+  file="$1"
+else
+  file=$(xclip -o)
+  [ -z "$file" ] && exit 1
+fi
+
+case "$(printf "copy url\\nmpv\\nbrowser\\n" | dmenu -i -p "Open [$file] with what program?")" in
+  "copy url") echo "$file" | xclip -selection c ;;
+  mpv) setsid mpv -quiet "$file" >/dev/null 2>&1 & ;;
+  browser) setsid google-chrome-stable "$file" >/dev/null 2>&1 & ;;
+esac
+
