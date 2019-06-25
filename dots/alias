@@ -10,6 +10,7 @@ alias lld="cd ~/ledger-live-desktop"
 alias driver="cd ~/ledger-vault-hsm-driver"
 alias inte="cd ~/vault-integration"
 alias dot="cd ~/dotfiles"
+alias poker="cd ~/nlhe-range"
 alias gate="cd ~/ledger-vault-api"
 
 
@@ -21,13 +22,17 @@ alias gm="git commit"
 # programs
 alias v="nvim"
 alias vim="nvim"
+alias img="sxiv"
 alias nb=newsboat
+alias m="neomutt"
 
 # utils
-alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | less"
+alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
 alias chmox="chmod +x"
 alias ls="ls --color"
 alias ll="ls -l"
 alias q="exit"
+alias cfgs="cat ~/dotfiles/configs"
+alias c="~/bin/configs"
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
