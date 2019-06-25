@@ -4,9 +4,7 @@ xset r rate 150 200
 setxkbmap -layout us -variant mac
 if lsusb | grep -q "USB Keyboard"
 then
-  echo "resetting keys remap"
   setxkbmap -option
 else
-  echo "xmodmap"
   xmodmap ~/.xmodmap.conf
 fi
