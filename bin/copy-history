@@ -1,17 +1,20 @@
 #!/bin/bash
 
+# TODO handle multiline copy/paste
+MAX_SIZE=5
 HISTORY_FILE=~/.copy-history
 function main() {
-  createHistoryFile
   while true
+  createHistoryFile
   do
     clip=$(xclip -o -selection clipboard)
-    lastLine=$(tail -n 1 $HISTORY_FILE)
-    if [  "$lastLine" != "$clip" ]; then
-      echo "save"
-      echo $clip >> $HISTORY_FILE
+    if [ "$(grep -c "$clip" "$HISTORY_FILE")" = 0 ]; then
+      echo "$clip" >> "$HISTORY_FILE"
+      nbLines=$(wc -l "$HISTORY_FILE" | cut -d ' ' -f1)
+      if [ "$nbLines" -gt "$MAX_SIZE" ]; then
+        sed -i '1d' "$HISTORY_FILE"
+      fi
     fi
-
     sleep 1
   done
 }
