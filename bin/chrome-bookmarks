@@ -2,11 +2,13 @@
 
 BOOKMARK_FILE=~/.bookmarks
 set -e
-url=$(dmenu -i -p "BOOKMARK" -l 10 < $BOOKMARK_FILE)
+choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | dmenu -i -p "BOOKMARK" -l 10)
+# url=$(dmenu -i -p "BOOKMARK" -l 10 < $BOOKMARK_FILE)
+url=$(grep "$choice" "$BOOKMARK_FILE" | awk {'print $2'})
 if grep -q "$url" $BOOKMARK_FILE; then
     google-chrome-stable "$url"
 else
-    google-chrome-stable "https://www.google.com/search?&q=$url"
+    google-chrome-stable "https://www.google.com/search?&q=$choice"
   fi
 
 
