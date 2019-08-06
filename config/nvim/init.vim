@@ -21,8 +21,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-sexp'
+Plug 'luochen1990/rainbow'
 Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
 Plug 'junegunn/goyo.vim'
@@ -46,6 +50,7 @@ filetype plugin indent on
 "                                  =======
 
 let mapleader=" "
+let maplocalleader=","
 
 " quick command in insert mode
 inoremap II <Esc>I
@@ -215,9 +220,17 @@ set wildignore+=*release*
 set wildignore+=*dist*,*dist-server*,*lib*
 set wildmenu
 
+" Re-indent the whole buffer.
+function! Indent()
+  call Preserve('normal gg=G')
+endfunction
+
 " indentation by language
 autocmd BufNewFile,BufRead *.gyp set syntax=javascript
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+autocmd BufNewFile,BufRead *.c set formatprg=indent\ -kr\ -ts4
+autocmd BufWritePre *.c :normal gg=G
+
 
 " highlight for json5
 au BufNewFile,BufRead *.json5 set filetype=javascript
@@ -346,4 +359,12 @@ let g:racer_cmd = "/home/flocks/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 nnoremap <Leader>r :RustRun<CR>
 
+" rainbow parenthesis
+let g:rainbow_active = 1
+
+" vim-fireplace binding
+nnoremap <C-e> :Eval<CR>
+xnoremap <C-e> :%Eval<CR>
+
+" nnoremap <C-l> :Last<CR>
 
