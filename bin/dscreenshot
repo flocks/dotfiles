@@ -1,10 +1,6 @@
 #!/bin/bash
 
-FILENAME=$(echo "$(date '+%Y-%m-%d %H:%M:%S').png" | dmenu -p "filename")
-echo $FILENAME
-if [[ $FILENAME == *.png ]]; then
+FILENAME="$(date '+%Y-%m-%d %H:%M:%S').png"
 maim -s "$FILENAME"
-else
-  maim -s "$FILENAME.png"
-fi
-
+xclip -selection clipboard -target image/png "$FILENAME"
+notify-send "COPIED" "$FILENAME copied directly on clipboard"
