@@ -2,11 +2,13 @@
 alias vconf="nvim ~/.config/nvim/init.vim"
 alias iconf="nvim ~/.config/i3/config"
 alias resource="source ~/.zshrc"
+alias kconf="nvim ~/.config/kitty/kitty.conf"
 
 # folder
 alias front="cd ~/ledger-vault-front"
 alias llw="cd ~/ledger-live-web"
 alias lld="cd ~/ledger-live-desktop"
+alias llc="cd ~/ledger-live-common"
 alias driver="cd ~/ledger-vault-hsm-driver"
 alias inte="cd ~/vault-integration"
 alias dot="cd ~/dotfiles"
@@ -18,6 +20,7 @@ alias gate="cd ~/ledger-vault-api"
 alias ga="~/bin/git_add_fzf"
 alias gs="git status"
 alias gm="git commit"
+alias g="git log -p"
 
 # programs
 alias v="nvim"
@@ -38,3 +41,7 @@ alias cfgs="cat ~/dotfiles/configs"
 alias c="~/bin/configs"
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
+
+function whereispackagebin {
+  for ARG in $(pacman -Qql $1); do [ ! -d $ARG ] && [ -x $ARG ] && echo $ARG; done
+}
