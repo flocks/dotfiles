@@ -8,3 +8,4 @@ then
 else
   xmodmap ~/.xmodmap.conf
 fi
+xcape -e 'Control_L=Escape'
