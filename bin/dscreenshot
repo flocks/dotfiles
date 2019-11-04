@@ -1,6 +1,8 @@
 #!/bin/bash
 
-FILENAME="$(date '+%Y-%m-%d %H:%M:%S').png"
+SCREENSHOT_FOLDER=~/screenshots
+
+FILENAME="$SCREENSHOT_FOLDER/$(date '+%Y-%m-%d %H:%M:%S').png"
 maim -s "$FILENAME"
 xclip -selection clipboard -target image/png "$FILENAME"
 notify-send "COPIED" "$FILENAME copied directly on clipboard"
