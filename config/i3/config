@@ -1,16 +1,19 @@
-exec --no-startup-id compton -b
+# exec --no-startup-id compton --config ~/.compton.conf -b
 exec --no-startup-id dunst &
+# clipboard manager to preserver clipboard content when app close
+exec --no-startup-id parcellite &
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
 exec --no-startup-id ~/bin/copy-history &
 
-#for_window [class="kitty"] border pixel 0
 for_window [title="fzf-menu"] border pixel 0
+
+
 
 
 set $mod Mod4
 
-#gaps inner 12
-#gaps outer 12
+# gaps inner 12
+# gaps outer 10
 
 font pango:Fira Code 7
 
@@ -19,7 +22,6 @@ floating_modifier $mod
 
 set $term --no-startup-id kitty
 
-bindsym $mod+Shift+d exec --no-startup-id kitty --title 'fzf-menu' -e 'i3-dmenu-desktop --dmenu=fzf'
 for_window [title="fzf-menu"] floating enable
 
 bindsym $mod+Return exec $term
@@ -125,6 +127,7 @@ bindsym $mod+Shift+w exec ~/bin/dscreenshot
 bindsym $mod+comma exec ~/bin/chrome-bookmarks
 bindsym $mod+period exec ~/bin/dmenu-links
 bindsym $mod+slash exec ~/bin/history-dmenu
+bindsym $mod+Shift+d exec ~/bin/dmenu_docker
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
