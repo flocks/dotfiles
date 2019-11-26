@@ -2,4 +2,5 @@ xinput disable "Synaptics TM3276-022" && xinput --set-prop "TPPS/2 IBM TrackPoin
 xmodmap ~/.xmodmap.conf
 xset r rate 150 200
 setxkbmap -layout us -variant mac
+sxhkd &
 exec i3

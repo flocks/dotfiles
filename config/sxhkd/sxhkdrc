@@ -1,0 +1,64 @@
+# launch terminal
+super + Return
+      $TERMINAL
+# launch chrome
+super + c
+      google-chrome-stable
+# ncmpcpp music player
+super + shift + p
+      $TERMINAL -e ncmpcpp
+# htop
+super + shift + t
+      $TERMINAL -e htop
+# opening ranger
+super + shift + f
+      $TERMINAL -e ranger
+
+# moving window
+super + u
+    ~/bin/corner
+super + t
+    ~/bin/corner top_left
+super + b
+    ~/bin/corner bottom_left
+super + n
+    ~/bin/corner top_right
+super + y
+    ~/bin/corner bottom_right
+
+# lock screen
+super + w
+    ~/bin/lock
+
+# demnu to lock/restart/shutdown/etcc
+super + control + r
+  ~/bin/computer
+
+# taking screnshot
+super + shift + w
+    ~/bin/dscreenshot
+# dmenu with chrome bookmarks
+super + comma
+    ~/bin/chrome-bookmarks
+# dmenu link handler
+super + period
+    ~/bin/dmenu-links
+# dmenu to copy docker container id
+super + shift + d
+    ~/bin/dmenu_docker
+
+# increase sound
+super + equal
+    pulsemixer --change-volume +5
+# decrease sound
+super + plus
+    pulsemixer --change-volume -5
+# mute sound
+XF86AudioMute
+    pulsemixer --toggle-mute
+# mpc toggle play/pause
+super + s
+    mpc toggle
+# dmenu to launch app
+super + r
+  dmenu_run

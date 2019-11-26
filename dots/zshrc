@@ -1,6 +1,9 @@
 # common
+#
+
 
 export EDITOR="$(command -v nvim)"
+export TERMINAL="$(command -v kitty)"
 export WALLPAPERS=~/wallpapers
 set -o emacs
 
