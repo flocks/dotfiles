@@ -1,19 +1,20 @@
-# exec --no-startup-id compton --config ~/.compton.conf -b
+exec --no-startup-id compton -b
 exec --no-startup-id dunst &
+exec --no-startup-id mpd &
 # clipboard manager to preserver clipboard content when app close
 exec --no-startup-id parcellite &
 exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
-exec --no-startup-id ~/bin/copy-history &
 
 for_window [title="fzf-menu"] border pixel 0
 
-
-
+hide_edge_borders smart
+default_border pixel 3
+# border_radius 4
 
 set $mod Mod4
 
-# gaps inner 12
-# gaps outer 10
+gaps inner 20
+gaps outer 20
 
 font pango:Fira Code 7
 
@@ -184,21 +185,22 @@ set $base0C #89DDFF
 set $base0D #82AAFF
 set $base0E #C792EA
 set $base0F #FF5370
+set $orange #FFA500
 
 # set some nice colors      border     background  text
-client.focused              $base05        $base0D         $base00
+client.focused              $orange        $orange         $orange
 client.unfocused            $base01        $base00         $base05
 client.focused_inactive     $base01        $base01         $base05
 client.urgent               $base08        $base08         $base00
 
 bar {
   font pango:mono 9
-
+  position top
   mode hide
   modifier None
   status_command i3blocks
   colors {
-    background          $base00
+    background          $bg
     statusline          $base04
     separator           $base01
     focused_workspace   $base05        $base0D        $base00
