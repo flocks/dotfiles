@@ -9,9 +9,10 @@ fi
 font="Liberation Sans-20:Bold"
 
 
-case "$(printf "copy url\\nmpv\\nbrowser\\n" | dmenu -fn "$font" -i -p "Open [$file] with what program?")" in
+case "$(printf "copy url\\nmpv\\nmusic\nbrowser\\n" | dmenu -fn "$font" -i -p "Open [$file] with what program?")" in
   "copy url") echo "$file" | xclip -selection c ;;
   mpv) setsid mpv -quiet "$file" >/dev/null 2>&1 & ;;
   browser) setsid google-chrome-stable "$file" >/dev/null 2>&1 & ;;
+  music) dlsound "$file";;
 esac
 

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[[ -z $1 ]] && exit 1;
+name=$(echo "" | dmenu -p "Enter name of the file")
+[[ -z $name ]] && exit 1;
+
+youtube-dl "$1" -o "~/music/$name"
+last_status=$?
+test $last_status -eq 0 || notify-send -u critical "Error happened" && exit 1
+
