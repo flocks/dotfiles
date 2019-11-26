@@ -6,6 +6,7 @@ alias kconf="nvim ~/.config/kitty/kitty.conf"
 
 # folder
 alias front="cd ~/ledger-vault-front"
+alias gql="cd ~/ledger-vault-graphql-api"
 alias llw="cd ~/ledger-live-web"
 alias lld="cd ~/ledger-live-desktop"
 alias llc="cd ~/ledger-live-common"
@@ -30,6 +31,7 @@ alias nb=newsboat
 alias m="neomutt"
 alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
 alias tign='tig --no-merges'
+alias player="ncmpcpp"
 
 # utils
 alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
@@ -41,6 +43,9 @@ alias cfgs="cat ~/dotfiles/configs"
 alias c="~/bin/configs"
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
+
+
+alias kb="keyboard_plug"
 
 function whereispackagebin {
   for ARG in $(pacman -Qql $1); do [ ! -d $ARG ] && [ -x $ARG ] && echo $ARG; done
