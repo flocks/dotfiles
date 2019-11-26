@@ -2,10 +2,16 @@ command=~/bin/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=pango
 
+[music]
+interval=1
+color=#FFA500
+
 [BTC]
 interval=60
 label=BTC
 command=curl --silent https://blockchain.info/ticker | grep USD | cut -d ":" -f 3 | cut -d "," -f 1 | sed 's/ //'
+color=#FFD700
+
 
 [brightness]
 label=🔆
@@ -13,12 +19,13 @@ interval=5
 
 [battery]
 label=🔋
-interval=5
+interval=60
 
 [time]
 label=📅
 command=date '+%Y-%m-%d %H:%M'
 interval=60
+color=#e50000
 
 [sound]
 interval=1
