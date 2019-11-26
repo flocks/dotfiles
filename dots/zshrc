@@ -5,7 +5,6 @@
 export EDITOR="$(command -v nvim)"
 export TERMINAL="$(command -v kitty)"
 export WALLPAPERS=~/wallpapers
-set -o emacs
 
 #disable bell
 unsetopt BEEP
@@ -47,10 +46,10 @@ fi
 # => base16                                                                    #
 #    --------------------------------------------------------------------------#
 
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-  eval "$("$BASE16_SHELL/profile_helper.sh")"
+# BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#   [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#   eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
 #ssh
