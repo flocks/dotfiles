@@ -2,9 +2,8 @@
 
 BOOKMARK_FILE=~/.bookmarks
 set -e
-font="Liberation Sans-15:Bold"
 
-choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | dmenu -fn "$font" -i -p "BOOKMARK" -l 10)
+choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | dmenu -c -i -l 10)
 # url=$(dmenu -i -p "BOOKMARK" -l 10 < $BOOKMARK_FILE)
 url=$(grep "$choice" "$BOOKMARK_FILE" | awk {'print $2'})
 if grep -q "$url" $BOOKMARK_FILE; then
