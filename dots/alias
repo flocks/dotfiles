@@ -32,6 +32,8 @@ alias m="neomutt"
 alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
 alias tign='tig --no-merges'
 alias player="ncmpcpp"
+alias vimup="vim +'PlugUpgrade|PlugInstall|PlugUpdate|qa!'"
+
 
 # utils
 alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
