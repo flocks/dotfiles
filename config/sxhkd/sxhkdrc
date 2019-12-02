@@ -14,6 +14,18 @@ super + shift + t
 super + shift + f
       $TERMINAL -e ranger
 
+# opening newboat
+super + shift + b
+      $TERMINAL -e newsboat
+
+# opening neomutt
+super + shift + m
+      $TERMINAL -e neomutt
+
+super + r
+  dmenu_run
+
+
 # moving window
 super + u
     ~/bin/corner
