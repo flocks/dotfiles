@@ -41,7 +41,10 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'chrisbra/Colorizer'
 Plug 'prettier/vim-prettier'
+Plug 'meck/vim-brittany'
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
+Plug 'tpope/vim-rsi'
 
 call plug#end()
 filetype plugin indent on
@@ -75,7 +78,7 @@ nnoremap <C-k> <C-w>k
 
 
 " copy selection to clipboard
-vnoremap <c-y> "+y<Paste>
+vnoremap <c-y> "+y
 
 " use fzf to search inside files
 let g:fzf_layout = { 'down': '~80%' }
