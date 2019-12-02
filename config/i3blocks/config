@@ -8,9 +8,8 @@ color=#FFA500
 
 [BTC]
 interval=60
-label=BTC
+label=BTC 
 command=curl --silent https://blockchain.info/ticker | grep USD | cut -d ":" -f 3 | cut -d "," -f 1 | sed 's/ //'
-color=#FFD700
 
 
 [brightness]
@@ -25,7 +24,7 @@ interval=60
 label=📅
 command=date '+%Y-%m-%d %H:%M'
 interval=60
-color=#e50000
+color=#FFA500
 
 [sound]
 interval=1
