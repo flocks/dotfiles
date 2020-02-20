@@ -11,6 +11,8 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export EDITOR="$(command -v nvim)"
 export TERMINAL="$(command -v kitty)"
+export BROWSER="$(command -v google-chrome-stable)"
+# export BROWSER="$(command -v qutebrowser)"
 export WALLPAPERS=~/wallpapers
 
 #disable bell
