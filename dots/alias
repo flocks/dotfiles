@@ -6,6 +6,7 @@ alias kconf="nvim ~/.config/kitty/kitty.conf"
 
 # folder
 alias front="cd ~/ledger-vault-front"
+alias f="cd ~/ledger-vault-front"
 alias gql="cd ~/ledger-vault-graphql-api"
 alias llw="cd ~/ledger-live-web"
 alias lld="cd ~/ledger-live-desktop"
@@ -28,6 +29,7 @@ alias v="nvim"
 alias vim="nvim"
 alias img="sxiv"
 alias nb=newsboat
+alias r=ranger
 alias m="neomutt"
 alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
 alias tign='tig --no-merges'
@@ -43,6 +45,7 @@ alias ll="ls -l"
 alias q="exit"
 alias cfgs="cat ~/dotfiles/configs"
 alias c="~/bin/configs"
+alias json="cat | jq | nvim"
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
 
