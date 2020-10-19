@@ -15,8 +15,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
-Plug '42Zavattas/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'mxw/vim-jsx'
 Plug 'scrooloose/nerdcommenter'
@@ -24,8 +22,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'luochen1990/rainbow'
 Plug 'w0rp/ale'
 Plug 'flowtype/vim-flow'
@@ -33,18 +31,31 @@ Plug 'junegunn/goyo.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'tpope/vim-fugitive'
-Plug 'mattn/emmet-vim', { 'for': 'javascript' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'racer-rust/vim-racer'
+Plug 'cloudhead/neovim-ghcid'
+
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
+
+" Plug 'mattn/emmet-vim', { 'for': 'javascript' }
+" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+" Plug 'racer-rust/vim-racer'
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'chrisbra/Colorizer'
+Plug 'liuchengxu/vim-clap'
+
+Plug 'lilydjwg/colorizer'
 Plug 'prettier/vim-prettier'
 Plug 'meck/vim-brittany'
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 
 Plug 'tpope/vim-rsi'
+
+Plug 'neovimhaskell/haskell-vim'
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': './install.sh'
+    \ }
 
 call plug#end()
 filetype plugin indent on
@@ -66,6 +77,8 @@ nnoremap <C-p> :Files<CR>
 
 nnoremap H 0
 nnoremap L $
+vnoremap H 0
+vnoremap L $
 
 " window split
 nnoremap <silent> vv <C-w>v
@@ -76,6 +89,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
+nnoremap ( %
+vnoremap ( %
+
 
 " copy selection to clipboard
 vnoremap <c-y> "+y
@@ -83,18 +99,18 @@ vnoremap <c-y> "+y
 " use fzf to search inside files
 let g:fzf_layout = { 'down': '~80%' }
 nnoremap <c-f> :Find<space>
-nnoremap <c-b> :Buffers<space>
+nnoremap <c-b> :Buffers<CR>
 nnoremap <Leader>f :Find<space><C-r><C-w><cr>
 command! -bang -nargs=* Find call fzf#vim#grep(
-  \ 'rg --column --line-number --no-heading --fixed-strings --smart-case --hidden --follow --color "always" '.shellescape(<q-args>),
-  \ 1,
-  \ fzf#vim#with_preview(),
-  \ <bang>0
-\ )
+      \ 'rg --column --line-number --no-heading --fixed-strings --smart-case --hidden --follow --color "always" '.shellescape(<q-args>),
+      \ 1,
+      \ fzf#vim#with_preview(),
+      \ <bang>0
+      \ )
 
 " custom files preview
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, <bang>0)
+      \ call fzf#vim#files(<q-args>, <bang>0)
 
 " grep in current project & navigate in results
 " use silver searcher if possible
@@ -265,26 +281,26 @@ endif
 
 " lightline
 let g:lightline = {
-\   'colorscheme': 'deus',
-\   'active': {
-\     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
-\     'right': [ [ 'lineinfo' ], [ 'linter_warnings', 'linter_errors', 'linter_ok' ] ]
-\    },
-\   'inactive': {
-\     'left': [ ['relativepath' ] ],
-\     'right': []
-\    },
-\   'component_expand': {
-\     'linter_warnings': 'LightlineLinterWarnings',
-\     'linter_errors': 'LightlineLinterErrors',
-\     'linter_ok': 'LightlineLinterOK'
-\   },
-\   'component_type': {
-\     'linter_warnings': 'warning',
-\     'linter_errors': 'error',
-\     'linter_ok': 'ok'
-\   },
-\ }
+      \   'colorscheme': 'deus',
+      \   'active': {
+      \     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+      \     'right': [ [ 'lineinfo' ], [ 'linter_warnings', 'linter_errors', 'linter_ok' ] ]
+      \    },
+      \   'inactive': {
+      \     'left': [ ['relativepath' ] ],
+      \     'right': []
+      \    },
+      \   'component_expand': {
+      \     'linter_warnings': 'LightlineLinterWarnings',
+      \     'linter_errors': 'LightlineLinterErrors',
+      \     'linter_ok': 'LightlineLinterOK'
+      \   },
+      \   'component_type': {
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'ok'
+      \   },
+      \ }
 
 autocmd User ALELint call lightline#update()
 
@@ -310,10 +326,6 @@ function! LightlineLinterOK() abort
   return l:counts.total == 0 ? '✓' : ''
 endfunction
 
-" ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " vim jsx
 let g:jsx_ext_required = 0
@@ -323,51 +335,46 @@ let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDDefaultAlign = 'left'
 
-" emmet
-" let g:user_emmet_install_global = 0
-let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\    'extends' : 'jsx',
-\  },
-\}
-autocmd FileType javascript.jsx EmmetInstall
-
 "prettier
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-let g:prettier#config#print_width = 80
-let g:prettier#config#single_quote = 'false'
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#trailing_comma = 'none'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-
-
-
+" let g:prettier#config#print_width = 80
+" let g:prettier#config#single_quote = 'false'
+" let g:prettier#config#bracket_spacing = 'true'
+" let g:prettier#config#trailing_comma = 'none'
+" let g:prettier#config#jsx_bracket_same_line = 'false'
 
 
 "false ale
-let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_linters = { 'javascript': ['eslint', 'flow'] }
 let g:ale_fixers = { 'javascript': ['eslint'] }
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = 'ℹ'
 let g:ale_set_highlights = 0
 
-" vim-flow
-let g:flow#enable = 1
-
-" rust.vim
-let g:rustfmt_autosave = 1
-set hidden
-let g:racer_cmd = "/home/flocks/.cargo/bin/racer"
-let g:racer_experimental_completer = 1
-nnoremap <Leader>r :RustRun<CR>
+nnoremap <Leader>d :ALEDetail<CR>
 
 " rainbow parenthesis
 let g:rainbow_active = 1
 
-" vim-fireplace binding
-nnoremap <C-e> :Eval<CR>
-xnoremap <C-e> :%Eval<CR>
 
-" nnoremap <C-l> :Last<CR>
+" terminal escape mode
+tnoremap <Esc> <C-\><C-n>
+
+
+" nnoremap <C-=> :vsplit term://zsh
+" let g:slime_target = "neovim"
+
+
+" autocmd FileType haskell nnoremap <buffer> <leader>? :call ale#cursor#ShowCursorDetail()<cr>
+"
+nnor ,fn :let @"=expand("%")<CR>      " Mnemonic: yank File Name
+hi Normal guibg=NONE ctermbg=NONE
+
+
+let g:lf_map_keys = 0
+map <leader>F :Lf<CR>
+
+
+let g:flow#flowpath = "/home/flocks/ledger/ledger-vault-front/node_modules/.bin/flow"
 
