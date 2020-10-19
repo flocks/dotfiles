@@ -1,0 +1,7 @@
+#!/bin/bash
+
+name="video-$(date '+%y%m%d-%H%M-%S')"
+ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast "$HOME/$name.mkv" &
+echo $! > /tmp/recordingpid
+
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[ -z "$1" ] && exit 1;
+
+cd ~/pr-reviews/ledger-vault-front
+git checkout develop
+git pull origin develop
+remote_branch=$(curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github-shadow-cat-preview.json" https://api.github.com/repos/ledgerhq/ledger-vault-front/pulls/1282 | jq '.head."label"')
+remote=$(echo "$remote_branch" | cut -d : -f 1 | sed 's/"//g')
+branch=$(echo "$remote_branch" | cut -d : -f 2 | sed 's/"//g')
+
+git fetch $remote
+git checkout $remote/$branch
+git diff develop
+
+

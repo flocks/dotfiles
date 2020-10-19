@@ -1,0 +1,14 @@
+#!/bin/bash
+
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+thresold=30
+
+acpi_value=$(acpi -b)
+echo $percents
+if [[ $acpi_value == *"Charging"* ]]; then
+  exit 0
+fi
+total=$(echo $acpi_value | grep -o '[^ ]*%' | cut -d '%' -f1 | awk '{s+=$1} END {print s}')
+if [ "$thresold" -gt "$total" ]; then
+  /usr/bin/notify-send -u critical "⚠️  BATTERY LOW" "$(acpi)"
+fi

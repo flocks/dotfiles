@@ -1,0 +1,7 @@
+#!/bin/bash
+
+THEME_FOLDER=~/kitty-themes/themes
+chosen=$(ls "$THEME_FOLDER" | dmenu -l 10 -p "THEME")
+
+[ -z "$chosen" ] && exit 1
+ln -sf "$THEME_FOLDER/$chosen" ~/.config/kitty/theme.conf

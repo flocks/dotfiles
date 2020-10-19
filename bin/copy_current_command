@@ -1,0 +1,6 @@
+#!/bin/bash
+
+last=$(awk '/./{line=$0} END{print line}')
+commandWithoutPrompt=$(echo "$last" | sed -e 's#.*$ \(\)#\1#')
+echo $commandWithoutPrompt | xclip -selection c && notify-send "$commandWithoutPrompt"
+sleep 0.5

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+file=$(find $HOME/dotfiles/* -type f | sed '/google/d; /yarn/d; /Slack/d; /electron/d; /Cypress/d; /gtk/d; /pulse/d; /Virtual/d; /Ledger/d; /ledger/d; /mono/d; /Electron/d; /coc/d' | fzf)
+[ -z $file ] && exit 1
+$EDITOR "$file"
