@@ -35,7 +35,6 @@ bindsym $mod+q kill
 bindsym --release $mod+Shift+g exec "~/bin/i3block/test-ffcast"
 
 bindsym $mod+Shift+g mode "gap_mode"
-bindsym $mod+Shift+space mode "mouse"
 
 mode "gap_mode" {
     bindsym j gaps inner all minus 5
@@ -129,13 +128,19 @@ bindsym $mod+Shift+Control+r restart
 bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-bindsym $mod+Control+l resize grow width 1 px or 1 ppt
-bindsym $mod+Control+h resize shrink width 1 px or 1 ppt
-bindsym $mod+Control+j resize grow height 1 px or 1 ppt
-bindsym $mod+Control+k resize shrink height 1 px or 1 ppt
+bindsym $mod+Control+l resize grow width 5 px or 5 ppt
+bindsym $mod+Control+h resize shrink width 5 px or 5 ppt
+bindsym $mod+Control+j resize grow height 5 px or 5 ppt
+bindsym $mod+Control+k resize shrink height 5 px or 5 ppt
 
 
 bindsym $mod+Tab      workspace back_and_forth
+bindsym $mod+m bar mode toggle
+bindsym $mod+grave layout tabbed
+bindsym $mod+Shift+grave layout default
+
+
+
 
 # color defines for zenburn styled i3
 set $bg     #2c2c2e
