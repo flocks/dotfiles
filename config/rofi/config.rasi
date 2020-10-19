@@ -1,0 +1,44 @@
+configuration {
+  lines: 8;
+  font: "Fira Code 16";
+  location: 2;
+  yoffset: 300;
+  fixed-num-lines: false;
+  show-icons: true;
+  icon-theme: "Papirus-Dark";
+}
+* {
+  background-color: transparent;
+  color: #b2ccd6;
+}
+
+window {
+  background-color: #282828;
+  padding: 5px;
+  border: 2px solid;
+  border-color: #3998E2;
+}
+
+mainbox {
+}
+
+prompt {
+  enabled: false;
+}
+
+inputbar {
+}
+
+listview {
+  margin: 0;
+}
+
+element {
+  padding: 10px;
+}
+
+element selected {
+  background-color: #ebdbb2;
+  color: black;
+  border-radius: 4px;
+}
