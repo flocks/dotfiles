@@ -1,3 +1,0 @@
-#!/bin/bash
-CHOICE=$(tac ~/.copy-history | dmenu -c -l 10)
-echo $CHOICE | xclip -selection c
