@@ -1,15 +1,14 @@
 #!/bin/bash
 
 BOOKMARK_FILE=~/.bookmarks
-set -e
 
-choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | dmenu -c -i -l 10)
+choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | rofi -i -dmenu)
 # url=$(dmenu -i -p "BOOKMARK" -l 10 < $BOOKMARK_FILE)
 url=$(grep "$choice" "$BOOKMARK_FILE" | awk {'print $2'})
 if grep -q "$url" $BOOKMARK_FILE; then
-    google-chrome-stable "$url"
+    $BROWSER "$url"
 else
-    google-chrome-stable "https://www.google.com/search?&q=$choice"
+    $BROWSER "https://www.google.com/search?&q=$choice"
   fi
 
 

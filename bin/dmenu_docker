@@ -2,6 +2,8 @@
 
 font="Liberation Sans-15:Bold"
 
-choice=$(docker ps | tail -n +2 |  awk '{print $2}' | dmenu -c -fn "$font" -l 10)
+choice=$(docker ps | tail -n +2 |  awk '{print $2}' | rofi -i -dmenu)
 id=$(docker ps | grep "$choice" | awk '{print $1}')
-echo "$id" | xclip -selection c
+echo "$id" | tr -d '\n' | xclip -selection clipboard
+notify-send "'$id' copied to clipboard." &
+

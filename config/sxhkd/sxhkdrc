@@ -71,6 +71,10 @@ XF86AudioMute
 # mpc toggle play/pause
 super + s
     mpc toggle
+
 # dmenu to launch app
 super + r
-  dmenu_run
+  rofi -show run
+# record screen
+super + shift + r
+  ~/bin/record

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-chosen=$(netctl list | grep "" | sed 's/^..//g' | dmenu -i -p -c "choose network");
+networks=$(sudo netctl list)
+chosen=$(echo "$networks"| grep "" | sed 's/^..//g' | rofi -dmenu -i);
 [[ -z $chosen ]] && exit 1;
 sudo netctl stop-all;
 sudo netctl start "$chosen";

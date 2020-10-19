@@ -8,7 +8,7 @@ else
 fi
 
 
-case "$(printf "copy url\\nmpv\\nmusic\nbrowser\\n" | dmenu -l 10 -i -c)" in
+case "$(printf "copy url\\nmpv\\nmusic\nbrowser\\n" | rofi -i -dmenu)" in
   "copy url") echo "$file" | xclip -selection c ;;
   mpv) setsid mpv -quiet "$file" >/dev/null 2>&1 & ;;
   browser) setsid google-chrome-stable "$file" >/dev/null 2>&1 & ;;
