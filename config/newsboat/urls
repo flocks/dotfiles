@@ -1,6 +1,25 @@
-http://lukesmith.xyz/rss.xml
-https://notrelated.libsyn.com/rss
+" "
+---YOUTUBE---
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith (YouTube)"
-https://www.archlinux.org/feeds/news/ "tech"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA "~Brodie Robertson"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCEbYhDd6c6vngsF5PQpFVWg "~Tsoding"
+https://videos.lukesmith.xyz/feeds/videos.xml?videoChannelId=2 "~Luke Smith Peertube"
+" "
+---OTHER---
+http://lukesmith.xyz/rss.xml
+https://notrelated.libsyn.com/rss "NOT RELATED"
 http://enmarge.org/index.php/feed/
 https://overreacted.io/rss.xml
+https://nitter.net/phl43/rss
+https://sebsauvage.net/rss-bridge/?action=display&bridge=CNET&topic=&format=Atom "CNET"
+http://www.aaronsw.com/2002/feeds/pgessays.rss
+https://necpluribusimpar.net/fr/feed/
+" "
+---HASKELL---
+http://neilmitchell.blogspot.com/feeds/posts/default
+https://kseo.github.io/rss.xml
+https://ocharles.org.uk/posts.rss
+" "
+---GITHUB---
+https://github.com/LedgerHQ/ledger-live-common/commits/master.atom
+https://www.archlinux.org/feeds/news/ "tech"
