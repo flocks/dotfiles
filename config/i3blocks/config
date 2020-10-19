@@ -1,16 +1,15 @@
 command=~/bin/i3blocks/$BLOCK_NAME
-separator_block_width=15
+separator_block_width=20
 markup=pango
+
 
 [music]
 interval=1
-color=#FFA500
+color=#ffffff
 
-[BTC]
-interval=60
-label=BTC 
-command=curl --silent https://blockchain.info/ticker | grep USD | cut -d ":" -f 3 | cut -d "," -f 1 | sed 's/ //'
-
+[record]
+interval=1
+color=#ffffff
 
 [brightness]
 label=🔆
