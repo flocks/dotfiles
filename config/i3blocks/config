@@ -21,10 +21,10 @@ label=🔋
 interval=60
 
 [time]
-label=📅
+label=📅 
 command=date '+%Y-%m-%d %H:%M'
 interval=60
-color=#FFA500
+color=#FFFFFF
 
 [sound]
 interval=1

@@ -11,8 +11,8 @@ super + shift + p
 super + shift + t
       $TERMINAL -e htop
 # opening ranger
-super + shift + f
-      $TERMINAL -e ranger
+super + e
+      $TERMINAL -e lf
 
 # opening newboat
 super + shift + b
@@ -22,8 +22,11 @@ super + shift + b
 super + shift + m
       $TERMINAL -e neomutt
 
-super + r
-  dmenu_run
+# dmenu for chosing a blockchain address
+super + shift + a
+    ~/bin/blockchain-address
+super + shift + e
+    ~/bin/dmenuunicode
 
 
 # moving window
@@ -34,9 +37,9 @@ super + t
 super + b
     ~/bin/corner bottom_left
 super + n
-    ~/bin/corner top_right
-super + y
     ~/bin/corner bottom_right
+super + y
+    ~/bin/corner top_right
 
 # lock screen
 super + w
@@ -45,6 +48,9 @@ super + w
 # demnu to lock/restart/shutdown/etcc
 super + control + r
   ~/bin/computer
+
+super + x
+  rofi -show window
 
 # taking screnshot
 super + shift + w

@@ -5,8 +5,8 @@ esac
 
 if mpc | grep -q "playing"; then
   title=$(mpc | head -n 1)
-  echo "🎜 ${title%.*}"
+  echo "🎜 ${title%.*} "
 elif mpc | grep -q "paused"; then
   title=$(mpc | head -n 1)
-  echo "🔇 🎜 ${title%.*} 🔇"
+  echo " 🎜 ${title%.*} "
 fi
