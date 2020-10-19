@@ -5,36 +5,47 @@ alias resource="source ~/.zshrc"
 alias kconf="nvim ~/.config/kitty/kitty.conf"
 
 # folder
-alias front="cd ~/ledger-vault-front"
-alias f="cd ~/ledger-vault-front"
-alias gql="cd ~/ledger-vault-graphql-api"
-alias llw="cd ~/ledger-live-web"
-alias lld="cd ~/ledger-live-desktop"
-alias llc="cd ~/ledger-live-common"
-alias driver="cd ~/ledger-vault-hsm-driver"
-alias inte="cd ~/vault-integration"
+alias front="cd ~/ledger/ledger-vault-front"
+alias f="cd ~/ledger/ledger-vault-front"
+alias vc="cd ~/vault-common"
+alias gql="cd ~/ledger/ledger-vault-graphql-api"
+alias llw="cd ~/ledger/ledger-live-web"
+alias lld="cd ~/ledger/ledger-live-desktop"
+alias llc="cd ~/ledger/ledger-live-common"
+alias driver="cd ~/ledger/ledger-vault-hsm-driver"
+alias inte="cd ~/ledger/vault-integration"
 alias dot="cd ~/dotfiles"
 alias poker="cd ~/nlhe-range"
-alias gate="cd ~/ledger-vault-api"
+alias gate="cd ~/ledger/ledger-vault-api"
+alias wd="cd ~/ledger/ledger-wallet-daemon"
 
 
 # git stuff
 alias ga="~/bin/git_add_fzf"
 alias gs="git status"
 alias gm="git commit"
+alias gd="git diff"
 alias g="git log -p"
+alias gca="git commit --amend"
+alias gcan="git commit --amend --no-edit"
 
 # programs
+alias t="tig"
 alias v="nvim"
 alias vim="nvim"
+alias lg="lazygit"
 alias img="sxiv"
 alias nb=newsboat
 alias r=ranger
-alias m="neomutt"
+alias m="cd ~/music"
 alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
 alias tign='tig --no-merges'
 alias player="ncmpcpp"
 alias vimup="vim +'PlugUpgrade|PlugInstall|PlugUpdate|qa!'"
+alias lv="ledger-vault"
+alias lvo="ledger-vault run onboarding"
+alias lvco="ledger-vault create user --role operator --name $(date +%s)"
+alias lvca="ledger-vault create user --role admin --name $(date +%s)"
 
 
 # utils
@@ -48,6 +59,7 @@ alias c="~/bin/configs"
 alias json="cat | jq | nvim"
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
+alias killdocker='ps aux | rg docker | rg containerd-shim | awk "{ print $2 }" | xargs -r sudo kill -9'
 
 
 alias kb="keyboard_plug"
