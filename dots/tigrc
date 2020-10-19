@@ -1,2 +1,5 @@
 bind main R !git rebase -i %(commit)^
 bind diff R !git rebase -i %(commit)^
+
+set main-view   = line-number:no,interval=5 id:no date:no author:no commit-title:yes,graph,refs,overflow=n
+
