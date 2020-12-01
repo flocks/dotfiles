@@ -3,32 +3,8 @@ set previewer ~/.config/lf/scope
 set shellopts '-eu'
 set ifs "\n"
 set scrolloff 10
-set color256
 set icons
-
-cmd moveto ${{
-  set -f
-  clear; echo "Move to where?"
-  dest="$(cut -d' ' -f2- ~/.config/directories | fzf)" &&
-  eval mv -iv $fx $dest &&
-  notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
-
-cmd movetoAll ${{
-  set -f
-  clear; echo "Move to where?"
-  dest="$(find ~ -maxdepth 3 -type d | fzf)" &&
-  eval mv -iv "$fx" $dest &&
-  notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
-cmd movetoIn ${{
-  notify-send "$f"
-  set -f
-  clear; echo "Move to where?"
-  dest="$(find . -maxdepth 5 -type d | sed  -e '/^.\/node/d' -e '/^.\/.git/d' | fzf)" &&
-  eval mv -iv $fx $dest &&
-  notify-send "🚚 File(s) moved." "File(s) moved to $dest."
-}}
+set color256
 
 cmd cdIn ${{
   clear; echo "go to where?"
@@ -38,14 +14,14 @@ cmd cdIn ${{
 
 cmd open ${{
       case $(file --mime-type $f -b) in
-      text/troff) man ./ $f;;
-          text/*) $EDITOR $fx;;
-  image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
-  image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
-  audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
-  video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
-  application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
-          *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
+        text/troff) man ./ $f;;
+        text/*) $EDITOR $fx;;
+        image/x-xcf|image/svg+xml) setsid gimp $f >/dev/null 2>&1 & ;;
+        image/*) rotdir $f | setsid sxiv -aio 2>/dev/null | lf-select & ;;
+        audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
+        video/*) swallow setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
+        application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
+        *) for f in $fx; do setsid $OPENER $f >/dev/null 2>&1 & done;;
       esac
 }}
 
@@ -76,49 +52,61 @@ cmd delete ${{
   [ $ans = "y" ] && rm -rf $fx
 }}
 
-cmd removeSpaceInName ${{
-  set -f
-  printf "%s\n\t" "$fx"
-  printf "rename without space?[y/N]"
-  read ans
-  [ $ans = "y" ] && rename-without-space "$fx"
-}}
+cmd trash %set -f; mv $fx ~/.trash
 
 cmd copyto ${{
   set -f
   clear; echo "Copy to where?"
-  dest="$(cut -d' ' -f2- ~/.config/directories | fzf)" &&
-  eval cp -ivr $fx $dest &&
+  dest="$(cut -d' ' -f2- ~/.config/directories | fzf | sed 's|~|$HOME|')" &&
+  eval cp -ivr \"$fx\" \"$dest\" &&
   notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
-map D delete
+cmd moveto ${{
+  set -f
+  clear; echo "Move to where?"
+  dest="$(cut -d' ' -f2- ~/.config/directories | fzf | sed 's|~|$HOME|')" &&
+  eval mv -iv \"$fx\" \"$dest\" &&
+  notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+}}
+cmd mkdir ${{
+  printf "Directory Name: "
+  read ans
+  mkdir $ans
+}}
+
+cmd mkfile ${{
+  printf "File Name: "
+  read ans
+  $EDITOR $ans
+}}
+
+
+map m
+
+map D trash
 map C copyto
-map Mm moveto
-map Ma movetoAll
-map Mi movetoIn
+map M moveto
 map <enter> shell
 map b bulkrename
-map R removeSpaceInName
 
 
 map gh cd ~
-map c $lf -remote "send $id cd $(cut -d' ' -f2 ~/.config/directories | fzf)"
 map gm cd ~/music
 map gl cd ~/ledger
-map gv cd ~/ledger/ledger-vault-front
+map gv cd ~/videos
 map gw cd ~/wallpapers
 map gj cd ~/gifs
 map gd cd ~/Downloads
 map gc cd ~/.config
 map gs cd ~/screenshots
-map e
-map ec go_config
+map c go_config
+map mf mkfile
+map md mkdir
+map x cut
 map gg top
 map <c-f> :fzf_jump
 
 map sn :set sortby natural; set info
 map ss :set sortby size; set info size
 map st :set sortby time; set info time
-
-map - $~/.config/lf/draw_img.sh $f
