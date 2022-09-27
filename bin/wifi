@@ -1,0 +1,7 @@
+#!/bin/bash
+
+networks=$(sudo netctl list)
+chosen=$(echo "$networks"| grep "" | sed 's/^..//g' | dmenu -l 10 -i);
+[[ -z $chosen ]] && exit 1;
+sudo netctl stop-all;
+sudo netctl start "$chosen";

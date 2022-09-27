@@ -1,0 +1,37 @@
+-*- restclient -*-
+
+:my-auth := <<
+(let ((token (funcall
+   (plist-get (nth 0
+				   (auth-source-search :host "ledgerhq.atlassian.net"
+									   :user "florent.teissier@ledger.fr"))
+			  :secret))))
+  (format "Basic %s"
+   (shell-command-to-string
+    (format "echo -n florent.teissier@ledger.fr:%s | base64 -w0" token))))
+#
+
+:my-headers = <<
+Authorization: :my-auth
+Content-Type: application/json
+#
+
+
+# GET all boards
+GET https://ledgerhq.atlassian.net/rest/agile/latest/board
+:my-headers
+
+# GET all board issues
+GET https://ledgerhq.atlassian.net/rest/agile/latest/board/24/issue
+:my-headers
+
+# GET an issue
+GET https://ledgerhq.atlassian.net/rest/api/2/issue/VSD-1286
+:my-headers
+
+# GET an issue
+GET https://ledgerhq.atlassian.net/rest/api/2/issue/VSD-1286
+
+# GET VFE board
+GET https://ledgerhq.atlassian.net/rest/api/latest/search?jql=project=VFE&limit=5
+:my-headers

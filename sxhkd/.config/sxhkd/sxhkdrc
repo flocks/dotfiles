@@ -1,0 +1,77 @@
+# launch terminal inside emacs
+super + e
+      emacsclient -c -a ''
+super + Return
+      $TERMINAL
+# launch clipmenu copy history with dmenu
+#super + shift + c
+#      clipmenu
+# launch chrome
+super + c
+      google-chrome-stable
+# htop
+#super + shift + t
+#      $TERMINAL -e htop
+# opening newboat
+#super + shift + b
+#      $TERMINAL -e newsboat
+
+super + bracketleft
+      $TERMINAL -e k9s
+
+# super + shift + p
+#    $TERMINAL -e ncmpcpp
+
+# dmenu for chosing a blockchain address
+super + shift + a
+    ~/bin/blockchain-address
+
+super + shift + m
+    ~/bin/reset-minivault
+# super + shift + e
+#     ~/bin/dmenuunicode
+
+# moving window
+#super + u
+#    ~/bin/corner
+
+# lock screen
+super + w
+    ~/bin/lock
+
+# demnu to lock/restart/shutdown/etcc
+super + control + r
+  ~/bin/computer
+
+super + x
+  rofi -show window
+
+# taking screnshot
+super + shift + w
+    ~/bin/dscreenshot
+# dmenu with chrome bookmarks
+super + comma
+    ~/bin/chrome-bookmarks
+# dmenu link handler
+super + period
+    ~/bin/dmenu-links
+# dmenu to copy docker container id
+super + shift + d
+    ~/bin/dmenu_docker
+
+# increase sound
+super + equal
+    pulsemixer --change-volume +5
+# decrease sound
+super + plus
+    pulsemixer --change-volume -5
+# mute sound
+XF86AudioMute
+    pulsemixer --toggle-mute
+# mpc toggle play/pause
+super + s
+    mpc toggle
+
+# dmenu to launch app
+super + r
+  dmenu_run -l 20

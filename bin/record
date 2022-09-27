@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# set -e
+
+tmpDir=$(mktemp -d)
+fileName="$tmpDir/$(date '+%Y-%m-%d %H:%M:%S'.mp4)"
+
+ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast "$fileName"
+
+
+notify-send "MP4 RECORDED" "encoding as gif now..."
+output=$(echo "filename.gif" | dmenu -p "FILENAME" -i)
+gifgen -o "$HOME/$output" "$fileName"
+xclip -selection clipboard -target image/gif "$fileName"
+notify-send "GIF READY" "Gif file is ready at $HOME/$output"
+
+echo "$fileName"
+
+function cleanup() {
+  rm -rf "$tmpDir"
+  echo "cleanup"
+}
+trap cleanup EXIT
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+focus=$(xdotool getwindowfocus)
+class=$(xdotool getwindowclassname "$focus")
+match='Emacs'
+if [[ "$class" == *"$match"* ]]; then
+    # emacsclient -e "(ft-i3-move-$1)"
+    case "$1" in
+	"left")
+	    emacsclient -e '(ft-i3-move-left)';
+	    exit 0;
+	    ;;
+	"right")
+	    emacsclient -e '(ft-i3-move-right)'
+	    exit 0;
+	    ;;
+	"up")
+	    emacsclient -e '(ft-i3-move-up)'
+	    exit 0;
+	    ;;
+	"down")
+	    emacsclient -e '(ft-i3-move-down)'
+	    exit 0;
+	    ;;
+	*)
+	    notify-send "error"
+	    exit 1;
+     esac
+else
+    i3-msg focus "$1"
+fi

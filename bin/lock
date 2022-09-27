@@ -1,0 +1,8 @@
+#!/bin/bash
+
+maim ~/screen.png
+# convert -scale 10% -blur 0x1 -resize 1000% ~/screen.png ~/screen.png
+# convert -composite screen.png blueledger.png -gravity South -geometry -20x1200 ~/screen.png
+
+mpc pause
+i3lock -n -e -i ~/screen.png

@@ -1,0 +1,12 @@
+#!/bin/bash
+case $BLOCK_BUTTON in
+1) mpc toggle ;;
+esac
+
+if mpc | grep -q "playing"; then
+  title=$(mpc | head -n 1)
+  echo "🎜 ${title%.*} "
+elif mpc | grep -q "paused"; then
+  title=$(mpc | head -n 1)
+  echo " 🎜 ${title%.*} "
+fi

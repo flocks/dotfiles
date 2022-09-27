@@ -1,0 +1,84 @@
+# edit confs
+alias V="nvim ~/.config/nvim/init.vim"
+alias I="nvim ~/.config/i3/config"
+alias resource="source ~/.zshrc"
+alias K="nvim ~/.config/kitty/kitty.conf"
+
+# folder
+alias ex="cd ~/exvoto"
+alias dl="cd ~/Downloads"
+alias front="cd ~/ledger/ledger-vault-front"
+alias f="cd ~/ledger/ledger-vault-front"
+alias min="cd ~/ledger/minivault"
+alias vjs="cd ~/ledger/vault-ts"
+alias remote="cd ~/ledger/vault-remote"
+alias llc="cd ~/ledger/ledger-live-common"
+alias driver="cd ~/ledger/ledger-vault-hsm-driver"
+alias inte="cd ~/.vault/vault-integration"
+alias dot="cd ~/dotfiles"
+alias hr="cd ~/holdem-range"
+alias gate="cd ~/ledger/ledger-vault-api"
+alias wd="cd ~/ledger/ledger-wallet-daemon"
+
+
+# git stuff
+alias ga="~/bin/git_add_fzf"
+# alias gs="git status"
+alias gm="git commit"
+alias gd="git diff"
+# alias g="git log -p"
+alias g="magit"
+alias gca="git commit --amend"
+alias gcan="git commit --amend --no-edit"
+alias dgate="echo 339393993 | copy"
+alias gv="git status --short | cut -d ' ' -f3 | xargs nvim"
+alias magit='emacs -nw -a '' -e "(dired \"`pwd`\")"'
+
+# programs
+alias ydl="youtube-dl"
+alias t="tmux attach"
+alias ec='emacsclient -nw -c'
+alias pic="sxiv"
+alias v="nvim"
+alias vim="nvim"
+alias lg="lazygit"
+alias img="sxiv"
+alias nb=newsboat
+alias m="cd ~/music"
+alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
+alias tign='tig --no-merges'
+alias ts='tig status'
+alias player="ncmpcpp"
+alias vimup="vim +'PlugUpgrade|PlugInstall|PlugUpdate|qa!'"
+alias vgit="nvim +'Git'"
+alias lv="ledger-vault"
+alias lvo="ledger-vault run onboarding"
+alias lvco="ledger-vault create user --role operator --name $(date +%s)"
+alias lvca="ledger-vault create user --role admin --name $(date +%s)"
+alias s="swallow"
+
+#emacs links
+alias mg="magit"
+
+# utils
+alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
+alias chmox="chmod +x"
+alias ls="ls --color"
+alias ll="ls -l"
+alias q="exit"
+alias cfgs="cat ~/dotfiles/configs"
+alias c="~/bin/configs"
+alias json="cat | jq | nvim"
+alias rgfiles="cut -d : -f 1 | sort | uniq"
+alias rv="cut -d : -f 1 | sort | uniq | xargs nvim"
+alias difffiles="cut -d' ' -f 2 | sort | uniq"
+alias flowfiles='rg "^Error" | cut -d " " -f 3 | cut -d : -f 1 | sort | uniq'
+# useful to pipe, eg cat file.log | copy
+alias copy="xclip -selection c"
+alias killdocker='ps aux | rg docker | rg containerd-shim | awk "{ print $2 }" | xargs -r sudo kill -9'
+# alias rv='reset-vault'
+# alias sv='stop-vault'
+alias dstart='docker ps | rg starting | wc -l'
+
+
+alias kb="keyboard_plug"

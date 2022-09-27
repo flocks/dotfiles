@@ -1,0 +1,31 @@
+#!/bin/bash
+
+OPTIONS=(
+  "exit X"
+  "restart i3"
+  "reload i3 conf"
+  "lock"
+  "reboot"
+  "shutdown"
+)
+
+IFS=$'\n'
+CHOSEN=$(echo "${OPTIONS[*]}" | dmenu)
+
+case $CHOSEN in
+  "reload i3 conf") i3-msg reload
+    ;;
+  "restart i3") i3-msg restart
+    ;;
+  "reboot") SUDO_ASKPASS=~/dotfiles/bin/dpass sudo -A reboot now
+    ;;
+  "shutdown") SUDO_ASKPASS=~/dotfiles/bin/dpass sudo -A shutdown now
+    ;;
+  "exit X") i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'
+    ;;
+  "lock") i3lock -i ~/dotfiles/wallpapers/current.png
+    ;;
+  *) exit 1;
+    ;;
+esac
+

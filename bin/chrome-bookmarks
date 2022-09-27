@@ -1,0 +1,16 @@
+#!/bin/bash
+
+BOOKMARK_FILE=~/.bookmarks
+
+# choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | rofi -i -dmenu)
+choice=$(dmenu -l 10 < $BOOKMARK_FILE)
+url=$(grep "$choice" "$BOOKMARK_FILE" | awk {'print $2'})
+    notify-send "$url"
+if grep -q "$url" $BOOKMARK_FILE; then
+    notify-send "$url"
+    $BROWSER "$url"
+else
+    $BROWSER "https://www.google.com/search?&q=$choice"
+fi
+
+

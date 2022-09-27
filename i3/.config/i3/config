@@ -1,0 +1,233 @@
+# exec --no-startup-id compton -b
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# clipboard manager to preserver clipboard content when app close
+# exec --no-startup-id parcellite &
+# exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
+
+# for_window [title="ncmpcpp"] floating enable
+# for_window [title="ncmpcpp"] resize set width 800
+# for_window [title="ncmpcpp"] resize set height 500
+# for_window [title="ncmpcpp"] move position center center
+
+for_window [class="mpv"] floating enable
+for_window [title="mpv"] resize set width 1000
+for_window [title="mpv"] resize set height 600
+for_window [title="mpv"] move position center center
+
+
+
+hide_edge_borders smart
+default_border pixel 1
+
+set $mod Mod4
+
+gaps inner 4
+gaps outer 2
+
+font pango:Fira Code 7
+
+# move floating windows with $mod+mouse
+floating_modifier $mod
+
+set $term --no-startup-id kitty
+
+for_window [title="fzf-menu"] floating enable
+
+# kill focused window
+bindsym $mod+q kill
+
+bindsym --release $mod+Shift+g exec "~/bin/i3block/test-ffcast"
+
+bindsym $mod+Shift+g mode "gap_mode"
+
+mode "gap_mode" {
+    bindsym j gaps inner all minus 5
+    bindsym k gaps inner all plus 5
+
+    bindsym h gaps outer all minus 5
+    bindsym l gaps outer all plus 5
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+bindsym $mod+r exec dmenu_run
+
+# bindsym $mod+m bar hidden_state toggle
+
+# change focus
+# bindsym $mod+h focus left
+# bindsym $mod+j focus down
+# bindsym $mod+k focus up
+# bindsym $mod+l focus right
+
+# bindsym $mod+y focus left
+# bindsym $mod+u focus down
+# bindsym $mod+i focus up
+# bindsym $mod+o focus right
+
+bindsym $mod+Left move left
+bindsym $mod+Down move down
+bindsym $mod+Up move up
+bindsym $mod+Right move right
+
+bindsym $mod+h exec "emacs-i3 left"
+bindsym $mod+l exec "emacs-i3 right"
+bindsym $mod+j exec "emacs-i3 down"
+bindsym $mod+k exec "emacs-i3 up"
+
+# change focus
+# bindsym $mod+Control+h focus left
+# bindsym $mod+Control+j focus down
+# bindsym $mod+Control+k focus up
+# bindsym $mod+Control+l focus right
+#
+# move focused window
+# bindsym $mod+Shift+h move left
+# bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+k move up
+# bindsym $mod+Shift+l move right
+
+
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+Control+Shift+l resize grow width 5 px or 5 ppt
+bindsym $mod+Control+Shift+h resize shrink width 5 px or 5 ppt
+bindsym $mod+Control+Shift+j resize grow height 5 px or 5 ppt
+bindsym $mod+Control+Shift+k resize shrink height 5 px or 5 ppt
+
+# split in horizontal orientation
+bindsym $mod+v split h
+
+# split in vertical orientation
+bindsym $mod+d split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# bindsym $mod+shift+f sticky toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+t floating toggle
+
+# change focus between tiling / floating windows
+# bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+Shift+a focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# move focused container to workspace
+bindsym $mod+Shift+1      move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3      move container to workspace $ws3
+bindsym $mod+Shift+4     move container to workspace $ws4
+bindsym $mod+Shift+5              move container to workspace $ws5
+bindsym $mod+Shift+6          move container to workspace $ws6
+bindsym $mod+Shift+7       move container to workspace $ws7
+bindsym $mod+Shift+8              move container to workspace $ws8
+bindsym $mod+Shift+9           move container to workspace $ws9
+
+# reload the configuration file
+# bindsym $mod+Control+r exec ~/dotfiles/bin/computer
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+Control+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+
+#open terminal with conf
+# bindsym $mod+shift+v exec "~/bin/open-conf ~/.config/nvim/init.vim"
+# bindsym $mod+shift+i exec "~/bin/open-conf ~/.config/i3/config"
+# bindsym $mod+shift+z exec "~/bin/open-conf ~/.zshrc"
+
+
+# bindsym $mod+Tab      workspace prev
+bindsym $mod+Tab     workspace back_and_forth
+bindsym $mod+m bar mode toggle
+bindsym $mod+grave layout tabbed
+bindsym $mod+Shift+grave layout default
+
+
+
+
+# color defines for zenburn styled i3
+# set $bg     #2c2c2e
+set $bg     #000000
+set $fg     #9f9f9f
+set $hi     #efef8f
+set $ac     #a0afa0
+set $tx     #040404
+set $ia     #8f8f8f
+set $be     #8faf9f
+set $yw     #ccdc90
+set $gn     #88b090
+set $rd     #e89393
+set $bg_alt    #222224
+
+set $base00 #263238
+set $base01 #2E3C43
+set $base02 #314549
+set $base03 #546E7A
+set $base04 #B2CCD6
+set $base05 #EEFFFF
+set $base06 #EEFFFF
+set $base07 #FFFFFF
+set $base08 #F07178
+set $base09 #F78C6C
+set $base0A #FFCB6B
+set $base0B #C3E88D
+set $base0C #89DDFF
+set $base0D #82AAFF
+set $base0E #C792EA
+set $base0F #FF5370
+set $orange #FFA500
+set $blue   #3998E2
+
+# set some nice colors      border     background  text
+client.focused              $orange        $base00           #ffffff
+client.unfocused            $base01        $bg         $base05
+client.focused_inactive     $base01        $base01         $base05
+client.urgent               $base08        $base08         $base00
+
+bar {
+  font pango:mono 5
+  position top
+  mode dock
+  modifier None
+  status_command i3blocks
+  colors {
+    background          $bg
+    statusline          $base04
+    separator           $blue
+    focused_workspace   #3998E2        #3998E2        $base00
+    active_workspace    $bg_alt        $bg_alt        $base00
+    inactive_workspace  $bg       $bg        $base05
+    urgent_workspace    $base08        $base08        $base00
+  }
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+xset r rate 150 200
+setxkbmap -layout us -variant mac
+if lsusb | grep -q "USB Keyboard"
+then
+  setxkbmap -option
+else
+  xmodmap ~/.xmodmap.conf
+fi
+xcape -e 'Control_L=Escape'

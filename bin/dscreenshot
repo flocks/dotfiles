@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SCREENSHOT_FOLDER=~/screenshots
+
+FILENAME="$SCREENSHOT_FOLDER/$(date +%s).png"
+maim -s "$FILENAME"
+xclip -selection clipboard -target image/png "$FILENAME"
+notify-send "COPIED" "$FILENAME copied directly on clipboard"

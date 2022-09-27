@@ -1,0 +1,18 @@
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	excludesfile = /home/flocks/.gitignore
+[user]
+	email = teissierflorent@gmail.com
+	name = Florent Teissier
+	signingkey = 40C7E981C0E32C00
+[commit]
+	gpgsign = true
+[github]
+	user = flocks
+[tig "color"]
+	cursor		= white	default underline
+[push]
+  default = simple
+  followTags = true
+[gpg]
+	program = gpg2

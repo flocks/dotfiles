@@ -1,0 +1,6 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+  1) notify-send "$(acpi)";;
+esac
+acpi -b | grep -o '[^ ]*%' | cut -d '%' -f1 | awk '{s+=$1} END {print s}'
