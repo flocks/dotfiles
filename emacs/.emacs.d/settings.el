@@ -69,6 +69,9 @@
 (setq epa-pinentry-mode 'loopback)
 
 
+(use-package modus-themes
+  :straight t)
+
 (use-package ivy-xref
   :straight t
   :config
