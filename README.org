@@ -1,0 +1,15 @@
+* my dotfiles
+
+** Installation
+
+#+BEGIN_SRC bash
+  stow bin
+  stow i3
+  stow git
+  stow emacs
+  stow prompt
+  stow sxhkd
+  stow xinit
+  stow xmodmap
+  stow zsh
+#+END_SRC
