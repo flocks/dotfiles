@@ -46,7 +46,7 @@
 (defun ft/edit-config-file ()
   "Open settings.org file"
   (interactive)
-  (find-file (concat user-emacs-directory "settings.el")))
+  (find-file "~/dotfiles/emacs/.emacs.d/settings.el"))
 
 (defun ft-fuzzy-find-file ()
   "Use 'project-find-file' when inside a project,
