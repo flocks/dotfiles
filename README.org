@@ -3,7 +3,7 @@
 ** Installation
 
 #+BEGIN_SRC bash
-  stow bin
+  stow scripts
   stow i3
   stow git
   stow emacs
