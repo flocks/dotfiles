@@ -8,6 +8,7 @@
   stow git
   stow emacs
   stow prompt
+  stow path
   stow sxhkd
   stow xinit
   stow xmodmap
