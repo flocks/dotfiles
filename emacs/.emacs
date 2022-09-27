@@ -1,4 +1,4 @@
 (load-file (concat user-emacs-directory "settings.el"))
 
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file "~/dotfiles/emacs/.emacs.d/custom.el")
 (load custom-file :noerror)
