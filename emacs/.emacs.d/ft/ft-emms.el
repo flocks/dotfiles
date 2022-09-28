@@ -1,4 +1,5 @@
 (use-package emms
+    :straight t
     :config 
     (emms-player-mpd-connect)
     (add-to-list 'emms-player-list 'emms-player-mpd)
