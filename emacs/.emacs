@@ -2,3 +2,4 @@
 
 (setq custom-file "~/dotfiles/emacs/.emacs.d/custom.el")
 (load custom-file :noerror)
+(put 'narrow-to-region 'disabled nil)

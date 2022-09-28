@@ -4,6 +4,7 @@
 (set-default 'truncate-lines t)
 
 ;; use tab-bar as a notif bar
+(tab-bar-mode 1)
 (setq tab-bar-format '(tab-bar-format-align-right tab-bar-format-global))
 
 (setq visible-bell       nil
