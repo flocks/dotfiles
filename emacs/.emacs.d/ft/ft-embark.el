@@ -50,7 +50,9 @@
   :straight t
   :bind (:map selectrum-minibuffer-map
          ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)))
+         ("C-x C-j" . consult-dir-jump-file)
+		 :map global-map
+         ("C-x C-d" . consult-dir)))
 
 ;; (use-package bookmark-view
 ;;   :straight t
