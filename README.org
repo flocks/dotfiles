@@ -13,4 +13,5 @@
   stow xinit
   stow xmodmap
   stow zsh
+  stow kitty
 #+END_SRC
