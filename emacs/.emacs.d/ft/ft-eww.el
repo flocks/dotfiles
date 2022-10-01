@@ -41,10 +41,8 @@
 
   (defun ft-eww-prompt (arg)
 	(interactive "P")
-	(eww-read-bookmarks t) ;; populate eww-bookmarks
 	(let* ((history eww-prompt-history)
-		   (bookmarks (mapcar (lambda (x) (plist-get x :url)) eww-bookmarks))
-		   (pages (cl-remove-duplicates (append history bookmarks) :test (lambda (x y) (equal x y))))
+		   (pages (cl-remove-duplicates (append history nil) :test (lambda (x y) (equal x y))))
 		   (initial-prompt (plist-get eww-data :url)))
 	  (eww (completing-read "EWW: " pages nil nil initial-prompt) arg)))
 
