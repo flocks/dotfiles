@@ -105,3 +105,19 @@ and move this file to this folder renamed as index.{ext}"
 	(evil-insert 0)))
 
 
+(defun ft-change-dir-shell-command ()
+  (interactive)
+  (let* ((enable-recursive-minibuffers t)
+		 (file-name (file-name-nondirectory (minibuffer-contents)))
+		 (new-dir (consult-dir--pick))
+		 (new-full-name (concat (file-name-as-directory new-dir)
+								file-name)))
+	(when new-dir
+	  (let ((default-directory new-full-name)
+			(previous-content (minibuffer-contents)))
+		(message "%s" previous-content)
+		(minibuffer-quit-recursive-edit)
+		(call-interactively #'shell-command)
+		))))
+
+(define-key minibuffer-local-map (kbd "C-x C-d") 'ft-change-dir-shell-command)
