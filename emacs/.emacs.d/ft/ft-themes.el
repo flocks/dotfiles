@@ -64,6 +64,9 @@
   (setq darkroom-margins 0.2)
   (global-set-key (kbd "<XF86Tools>") 'ft-darkroom-setup))
 
+(use-package ef-themes
+  :straight t)
+
 (use-package pulsar
   :straight t
   :config
