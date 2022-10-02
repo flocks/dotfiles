@@ -32,7 +32,7 @@
   :config (minions-mode))
 
 (use-package modus-themes
-  :straight
+  :straight t
   :init
   ;; Add all your customizations prior to loading the themes
   (global-set-key (kbd "<XF86Favorites>") 'modus-themes-toggle)

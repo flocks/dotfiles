@@ -4,9 +4,6 @@
 (add-to-list 'load-path
 	     (expand-file-name (concat user-emacs-directory "ft")))
 
-(add-to-list 'load-path
-	     (expand-file-name (concat user-emacs-directory "manual-packages/ef-themes")))
-
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -68,9 +65,6 @@
 
 (setq epa-pinentry-mode 'loopback)
 
-
-(use-package modus-themes
-  :straight t)
 
 (use-package ivy-xref
   :straight t
