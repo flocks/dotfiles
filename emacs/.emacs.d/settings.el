@@ -115,7 +115,7 @@
 	(interactive)
 	(let (completion-cycle-threshold completion-cycling)
 	  (apply #'consult-completion-in-region completion-in-region--data)))
-  (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer)))
+  (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer))
 
 (use-package which-key
   :straight t
