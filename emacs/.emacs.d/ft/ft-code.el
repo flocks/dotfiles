@@ -22,6 +22,10 @@
   ("C-x g" . magit-status)
   ("C-c g" . magit-file-dispatch))
 
+
+(use-package magit-scripts
+  :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
+
 (use-package typescript-mode
   :straight t
   :config
