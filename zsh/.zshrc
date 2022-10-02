@@ -62,26 +62,6 @@ source "$HOME/.gitprompt"
 source "$HOME/.prompt"
 source "$HOME/.private"
 
-
-# Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" >/dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
-# commment because can use C-x C-e and keeps C-e for end of line
-# bindkey '^e' edit-command-line
-# Use lf to switch directories and bind it to ctrl-o
-# bindkey -s '^[g' 'nvim +":Git"\n'
-# bindkey -s '^[s' 'git status\n'
-# bindkey -s '^[a' 'git add '
-# bindkey -s '^[D' 'git diff\n'
-
 bindkey -s '^x^j' 'nvim .\n'
 bindkey -s '^d' 'cd $(fd --type directory | fzf) \n'
 bindkey -s '^[g' 'nvim +":Git"\n'
