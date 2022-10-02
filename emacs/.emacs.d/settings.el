@@ -97,11 +97,25 @@
 (electric-pair-mode 1)
 
 
-(use-package company
+;; (use-package company
+;;   :straight t
+;;   :config (setq company-dabbrev-downcase nil)
+;;   :init (global-company-mode)
+;;   :diminish company-mode)
+
+(use-package corfu
   :straight t
-  :config (setq company-dabbrev-downcase nil)
-  :init (global-company-mode)
-  :diminish company-mode)
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  :init
+  (global-corfu-mode)
+  :config
+  (defun corfu-move-to-minibuffer ()
+	(interactive)
+	(let (completion-cycle-threshold completion-cycling)
+	  (apply #'consult-completion-in-region completion-in-region--data)))
+  (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer)))
 
 (use-package which-key
   :straight t
