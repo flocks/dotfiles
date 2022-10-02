@@ -49,49 +49,6 @@
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 
-(provide 'ft-compile)
-
-;;; idea
-
-;; do compilation+ mode inspired by rg.el
-;; d to change default-directory
-;; c to change compile command
-;; s to save uniquename => rename buffer
-;; S to choose the name
-;; l to list all compilation buffer
-;; i to pass to interactive mode
-;; export command outside of emacs in a terminal
-;; do it may be specific to yarn multiple package lerna
-;; with option to watch files changes
-
-
-;; idea to leverage rg.el
-;; define a search to grep through all emacs manual, entr should
-;; bring the user inside the manual with ability to go up/down the hierarchie
-
-;; rg -z Introduction /usr/share/info/elisp.info.gz 
-;; then use (info file-name) to open the item
-
-
-(defun ft-compile-dwim (arg)
-  (interactive "P")
-  (if (eq major-mode 'compilation-mode)
-      ;; when in compilation mode we want to build a new compilation buffer
-      ;; TODO rename current buffer if name is *compilation*
-      (call-interactively 'ft-compile-new-compile)
-    ;; when not in compilation buffer we want to either
-    ;; if compl window is already visible -> recompile
-    ;; open in another window an existing compilation buffer for the project
-    ;; and recompile
-    ;; or
-    ;; create a compilation buffer if no one exist
-    (message "not comp mode")))
-
-(defun ft--multiple-packages-p ()
-  "return t if current project contains multiples packages.
-ie lerna projects"
-  (let ((root-folder (locate-dominating-file default-directory ".git")))
-    (file-exists-p (format "%s/packages/" root-folder))))
 
 (defun ft-compile-change-directory-packages ()
   "Change lerna package to compile on.
@@ -145,10 +102,6 @@ recompile."
 	(buffer (completing-read "Compilation buffers: " buffers)))
     (switch-to-buffer buffer)))
 
-(mapcar 'buffer-name (seq-filter
-  (lambda (x)
-    (string-match "*compilation*" (buffer-name x)))
-  (buffer-list)))
 
 (defun ft-compile-new-compile (dir)
   "Start a new compilation from the current one"
@@ -158,14 +111,11 @@ recompile."
 	  (default-directory dir))
       (compile command))))
 
-(defun ft-compile-export-command ()
+(defun ft-kill-command ()
   "Takes the command and compilation directory and execute command in $TERMINAL"
   (interactive)
-  (shell-command
-   (format "kitty --directory %s %s"
-	   default-directory compile-command))
-  (message "%s run %s" dir command))
-
+  (kill-new compile-command)
+  (message "Copy command to clipboard"))
 
 (let ((map compilation-mode-map))
   (evil-define-key 'normal map
@@ -174,13 +124,13 @@ recompile."
     (kbd "D") 'ft-compile-change-directory-packages)
   (evil-define-key 'normal map
     (kbd "c") 'ft-compile-change-command)
+  (evil-define-key 'normal map
+    (kbd "Y") 'ft-kill-command)
 
   (evil-define-key 'normal map
     (kbd "L") 'ft-compile-list-other-buffers-completion)
   (evil-define-key 'normal map
     (kbd "+") 'ft-compile-new-compile)
-  (evil-define-key 'normal map
-    (kbd "E") 'ft-compile-export-command)
   (evil-define-key 'normal map
     (kbd "s") 'ft-compile-change-buffer-name))
 
@@ -216,34 +166,7 @@ to choose the target.
 
 (global-set-key (kbd "s-C") 'ft-project-compile-dwim)
 (global-set-key (kbd "s-u") 'ft-project-compile-dwim)
-
-
-
-(defun ft--compile-get-project-compilation-buffer ()
-  (let ((project-name (file-name-nondirectory
-					   (directory-file-name default-directory))))
-	(format "*%s-compilation*" project-name)))
-
-(defun ft-compile-test ()
-  (let ((buffer (get-buffer (ft--compile-get-project-compilation-buffer))))
-	(if buffer
-		(pop-to-buffer buffer)
-	  (message "have to create new one"))))
-
-
-(defun ft-start-multi-packages-compile ()
-  (interactive)
-  (let* ((root-folder (locate-dominating-file default-directory ".git"))
-	 (default-directory (format "%s/packages" root-folder))
-	 (packages (cons "root" (split-string (shell-command-to-string "ls"))) )
-	 (package (completing-read "Packages: " packages))
-	 (dir (if (string-equal package "root")
-		  "~/ledger/vault-js"
-		(format "~/ledger/vault-js/packages/%s" package))))
-    (setq compilation-directory dir)
-    (message "%s" compilation-directory)
-    (recompile))
-  )
-
 (global-set-key (kbd "M-*") 'project-compile)
 (global-set-key (kbd "C-c r") 'recompile)
+
+(provide 'ft-compile)
