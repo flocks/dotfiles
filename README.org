@@ -1,6 +1,39 @@
 * my dotfiles
 
-** Installation
+** Install packages
+
+*** YAY
+Install `yay` the AUR package manager for arch, it automatically
+fallbacks to pacman when the target package is not an AUR package
+
+#+BEGIN_SRC bash
+  bash ~/dotfiles/packages/install-yay.sh
+#+END_SRC
+
+*** Packages
+I try to maintain a list of all the packages that I'm using, even if I
+need to clean it up. I get the list of packages I installed
+explicitely with
+
+#+BEGIN_SRC bash
+  pacman -Qeq > packages.list
+#+END_SRC
+
+Install all the packages from the list:
+
+#+BEGIN_SRC bash
+  bash ~/dotfiles/packages/install-packages.sh
+#+END_SRC
+
+I prefer to compile emacs myself, so I can use any configuration flag
+I may want. So far I'm only using --with-native-compilation
+
+#+BEGIN_SRC bash
+  bash ~/dotfiles/packages/install-emacs.sh
+#+END_SRC
+
+
+** Config files
 
 #+BEGIN_SRC bash
   stow scripts
@@ -15,3 +48,6 @@
   stow zsh
   stow kitty
 #+END_SRC
+
+** TODO
+*** clean and add vim config
