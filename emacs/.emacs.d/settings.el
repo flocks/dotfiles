@@ -129,6 +129,9 @@
 		      (split-window-horizontally)
 		      (other-window 1))))
 
+(use-package request
+  :straight t)
+
 (require 'ft-evil)
 (require 'ft-themes)
 (require 'ft-jump)
