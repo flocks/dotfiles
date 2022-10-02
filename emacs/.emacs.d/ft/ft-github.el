@@ -1,3 +1,5 @@
+(require 'json)
+
 (use-package dashub
   :straight (dashub :type git :host github :repo "flocks/dashub")
   :config
@@ -27,3 +29,5 @@
 
   (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
   (remove-hook 'magit-status-sections-hook 'forge-insert-issues))
+
+(provide 'ft-github)
