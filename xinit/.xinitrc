@@ -9,4 +9,6 @@ mpd &
 dunst &
 emacs --daemon
 compton &
+# fix GTK apps being slow to start up
+dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec i3
