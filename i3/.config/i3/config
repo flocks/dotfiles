@@ -1,24 +1,10 @@
-# exec --no-startup-id compton -b
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# clipboard manager to preserver clipboard content when app close
-# exec --no-startup-id parcellite &
-# exec --no-startup-id feh --bg-scale ~/dotfiles/wallpapers/current.png
-
-# for_window [title="ncmpcpp"] floating enable
-# for_window [title="ncmpcpp"] resize set width 800
-# for_window [title="ncmpcpp"] resize set height 500
-# for_window [title="ncmpcpp"] move position center center
-
 for_window [class="mpv"] floating enable
 for_window [title="mpv"] resize set width 1000
 for_window [title="mpv"] resize set height 600
 for_window [title="mpv"] move position center center
 
-
-
-hide_edge_borders smart
 default_border pixel 1
+default_floating_border pixel 1
 
 set $mod Mod4
 
@@ -26,18 +12,13 @@ gaps inner 4
 gaps outer 2
 
 font pango:Fira Code 7
-
 # move floating windows with $mod+mouse
 floating_modifier $mod
 
 set $term --no-startup-id kitty
 
-for_window [title="fzf-menu"] floating enable
-
 # kill focused window
 bindsym $mod+q kill
-
-bindsym --release $mod+Shift+g exec "~/bin/i3block/test-ffcast"
 
 bindsym $mod+Shift+g mode "gap_mode"
 
@@ -54,19 +35,6 @@ mode "gap_mode" {
 
 bindsym $mod+r exec dmenu_run
 
-# bindsym $mod+m bar hidden_state toggle
-
-# change focus
-# bindsym $mod+h focus left
-# bindsym $mod+j focus down
-# bindsym $mod+k focus up
-# bindsym $mod+l focus right
-
-# bindsym $mod+y focus left
-# bindsym $mod+u focus down
-# bindsym $mod+i focus up
-# bindsym $mod+o focus right
-
 bindsym $mod+Left move left
 bindsym $mod+Down move down
 bindsym $mod+Up move up
@@ -76,20 +44,6 @@ bindsym $mod+h exec "emacs-i3 left"
 bindsym $mod+l exec "emacs-i3 right"
 bindsym $mod+j exec "emacs-i3 down"
 bindsym $mod+k exec "emacs-i3 up"
-
-# change focus
-# bindsym $mod+Control+h focus left
-# bindsym $mod+Control+j focus down
-# bindsym $mod+Control+k focus up
-# bindsym $mod+Control+l focus right
-#
-# move focused window
-# bindsym $mod+Shift+h move left
-# bindsym $mod+Shift+j move down
-# bindsym $mod+Shift+k move up
-# bindsym $mod+Shift+l move right
-
-
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+Control+Shift+l resize grow width 5 px or 5 ppt
@@ -153,28 +107,16 @@ bindsym $mod+Shift+7       move container to workspace $ws7
 bindsym $mod+Shift+8              move container to workspace $ws8
 bindsym $mod+Shift+9           move container to workspace $ws9
 
-# reload the configuration file
-# bindsym $mod+Control+r exec ~/dotfiles/bin/computer
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+Control+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+s exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-
-#open terminal with conf
-# bindsym $mod+shift+v exec "~/bin/open-conf ~/.config/nvim/init.vim"
-# bindsym $mod+shift+i exec "~/bin/open-conf ~/.config/i3/config"
-# bindsym $mod+shift+z exec "~/bin/open-conf ~/.zshrc"
-
 
 # bindsym $mod+Tab      workspace prev
 bindsym $mod+Tab     workspace back_and_forth
 bindsym $mod+m bar mode toggle
 bindsym $mod+grave layout tabbed
 bindsym $mod+Shift+grave layout default
-
-
-
 
 # color defines for zenburn styled i3
 # set $bg     #2c2c2e
