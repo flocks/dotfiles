@@ -56,13 +56,13 @@ I may want. So far I'm only using --with-native-compilation
   stow i3
   stow git
   stow emacs
-  stow prompt
-  stow path
   stow sxhkd
-  stow xinit
-  stow xmodmap
-  stow zsh
   stow kitty
+  stow --dotfiles prompt
+  stow --dotfiles path
+  stow --dotfiles xinit
+  stow --dotfiles xmodmap
+  stow --dotfiles zsh
 #+END_SRC
 
 ** TODO
