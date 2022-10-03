@@ -1,5 +1,20 @@
 * my dotfiles
 
+** Initial setup
+
+*** private env
+
+#+BEGIN_SRC bash
+  touch ~/.private
+#+END_SRC
+
+*** zsh
+
+#+BEGIN_SRC bash
+  chsh -s $(which zsh)
+#+END_SRC
+
+
 ** Install packages
 
 *** YAY
