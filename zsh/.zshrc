@@ -21,13 +21,15 @@ export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
 export LANG=en_US.UTF-8
 #disable bell
 unsetopt BEEP
+
 #oh-my-zsh
-export ZSH=$HOME/.oh-my-zsh
-# shellcheck disable=SC2034
+source "/usr/share/oh-my-zsh/zshrc"
+source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# shellchece disable=SC2034
 CASE_SENSITIVE="true"
 # shellcheck disable=SC2034
 plugins=()
-source "$ZSH/oh-my-zsh.sh"
 
 #fzf
 export FZF_DEFAULT_COMMAND='rg --files --follow'
@@ -67,7 +69,6 @@ bindkey -s '^d' 'cd $(fd --type directory | fzf) \n'
 bindkey -s '^[g' 'nvim +":Git"\n'
 
 
-source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 #
 # useful for pinentry-tty prompt
 export GPG_TTY="$(tty)"
