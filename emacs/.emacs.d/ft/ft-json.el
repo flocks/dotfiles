@@ -1,4 +1,5 @@
-(use-package json-mode)
+(use-package json-mode
+  :straight t)
 
 (defun ft-json-view (start end)
   "Format json inside selection into a another buffer"
