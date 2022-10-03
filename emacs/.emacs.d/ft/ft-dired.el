@@ -11,6 +11,7 @@
   (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
   (require 'dired-x)
+  (evil-define-key 'normal dired-mode-map (kbd "M-%") 'dired-do-query-replace-regexp)
   )
 
 (use-package dired-copy-paste
