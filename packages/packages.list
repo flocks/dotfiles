@@ -52,7 +52,6 @@ file
 file-roller
 filesystem
 findutils
-flameshot
 flex
 font-victor-mono
 freeglut
@@ -153,6 +152,7 @@ nushell
 nvidia
 nvim-packer-git
 nvm
+oh-my-zsh-git
 opam
 openssh
 orca
@@ -337,3 +337,4 @@ zathura-pdf-mupdf
 zip
 zsh
 zsh-completions
+zsh-syntax-highlighting
