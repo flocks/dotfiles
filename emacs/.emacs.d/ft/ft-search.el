@@ -33,4 +33,22 @@
 
 	(evil-define-key '(motion normal) global-map (kbd "C-f") 'ft-my-consult-ripgrep)))
 
+
+
+(defun ft-grep-to-dired ()
+  "Inside a consult--grep buffer, takes all files and produce a
+dired buffer"
+  (interactive)
+  (save-excursion
+	(goto-char (point-min))
+	(let ((files))
+	  (while (not (eobp))
+		(when (thing-at-point 'filename)
+		  (when-let (file (get-text-property (point) 'consult--grep-file))
+			(push file files)))
+		(forward-line 1))
+	  (dired (cons "Grep" (cl-remove-duplicates files :test 'string=))))))
+
+(define-key grep-mode-map (kbd "C-c d") 'ft-grep-to-dired)
+
 (provide 'ft-search)
