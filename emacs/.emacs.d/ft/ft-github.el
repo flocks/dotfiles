@@ -1,4 +1,5 @@
-(require 'json)
+(use-package json
+  :straight t)
 
 (use-package dashub
   :straight (dashub :type git :host github :repo "flocks/dashub")
