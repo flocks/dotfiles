@@ -57,26 +57,7 @@
   (let ((map elfeed-show-mode-map))
 	(evil-define-key 'normal map (kbd "C-c C-y") 'ft-elfeed-copy-link))
 
-  (setq elfeed-feeds
-		'(("http://nullprogram.com/feed/" tech)
-		  ("https://blog.cleancoder.com/atom.xml" tech)
-		  ("https://noahcarl.substack.com/feeds/" philo)
-		  ("https://ploum.net/feed/" tech philo)
-		  ("https://protesilaos.com/master.xml" emacs philo)
-		  ("http://www.madore.org/~david/weblog/weblog.rss" math)
-		  ("https://www.masteringemacs.org/feed" emacs)
-		  ("https://cdn.feedcontrol.net/8/1114-wioSIX3uu8MEj.xml" news media)
-		  ("https://www.reutersagency.com/feed/?best-regions=europe&post_type=best" news media)
-		  ("https://drewdevault.com/blog/index.xml" blog opensource)
-		  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC0uTPqBCFIpZxlz_Lv1tk_g" media youtube emacs)
-		  ("http://www2.technologyreview.com/rss/feeds/mainrss.aspx" tech sciences)
-		  ("https://karthinks.com/index.xml" emacs)
-		  ("https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw" youtube linux)
-		  ("https://lukesmith.xyz/rss" linux freedom)
-		  ("https://xenodium.com/" emacs)
-		  ("https://lukesmith.xyz/videos" linux freedom media youtube)
-		  ("https://notrelated.xyz/rss" podcast media)
-		  ("https://emacsair.me/feed.xml" emacs))))
+  (load-file "~/dotfiles/emacs/.emacs.d/feeds.el.gpg"))
 
 (use-package elfeed-notifier
   :straight (elfeed-notifier :type git :host github :repo "flocks/elfeed-notifier")
