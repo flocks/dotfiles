@@ -137,6 +137,8 @@
 		      (split-window-horizontally)
 		      (other-window 1))))
 
+(setq bookmark-file "~/dotfiles/emacs/.emacs.d/bookmarks.gpg")
+
 (use-package request
   :straight t)
 
