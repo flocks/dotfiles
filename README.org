@@ -3,6 +3,9 @@
 ** Initial setup
 
 *** private env
+I use a ~/.private file that I never commit and that contains some
+private bash env variables I want to source. My zshrc source a file
+~/.private so I create an empty one to avoid error.
 
 #+BEGIN_SRC bash
   touch ~/.private
@@ -10,6 +13,7 @@
 
 *** zsh
 
+Switch from bash to zsh
 #+BEGIN_SRC bash
   chsh -s $(which zsh)
 #+END_SRC
@@ -66,4 +70,4 @@ I may want. So far I'm only using --with-native-compilation
 #+END_SRC
 
 ** TODO
-*** clean and add vim config
+clean and add vim config
