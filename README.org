@@ -4,7 +4,8 @@
 
 *** YAY
 Install `yay` the AUR package manager for arch, it automatically
-fallbacks to pacman when the target package is not an AUR package
+fallbacks to pacman when the target package is not an AUR package and
+it has the same CLI interface.
 
 #+BEGIN_SRC bash
   bash ~/dotfiles/packages/install-yay.sh
