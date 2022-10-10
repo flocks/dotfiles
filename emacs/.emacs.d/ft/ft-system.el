@@ -1,7 +1,10 @@
 ;;; Code:
 
+
 (use-package docker
-   :straight t)
+  :after (transient)
+  :straight t
+  :bind ("C-c d" . docker))
 
 (use-package daemons
    :straight t)
