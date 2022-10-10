@@ -1,0 +1,181 @@
+* Archlinux installation
+
+
+** Boot mode
+We have to make sure we are in UEFI mode
+#+BEGIN_SRC bash
+ls /sys/firmware/efi/efivars
+#+END_SRC
+should not return any errors.
+
+** Wifi configuration
+#+BEGIN_SRC bash
+  iwctl
+  device list
+  station wlan0 scan
+  station wlan0 get-networks
+  station wlan0 connect network-name
+  station wlan0 show
+  exit
+#+END_SRC
+
+** System clock
+Making sure the system clock is accurate:
+#+BEGIN_SRC bash
+timedatectl status
+#+END_SRC
+
+** Disk partition
+
+List all disks
+#+BEGIN_SRC bash
+fdisk -l
+#+END_SRC
+
+Start partitionig the disk
+#+BEGIN_SRC bash
+  fdisk /dev/sda
+#+END_SRC
+
+We end up in an interactive mode where we can create partitions.
+Most important commands are: 
+- /m/ brings help menu
+- /d/ delete a partition
+- /n/ add a new partition
+- /p/ print the partition table
+
+We first delete all partitions with /d/ (as many times as necessary
+depending on the tisk)
+
+Then we create the following partitions:
+- a primary partition for boot of 200M
+- a primary partition for swap of 12G
+- a primary partition for the rest (default value takes all remaining space)
+
+When we are happy we can saves the change with /w/. ⚠️ It will format
+the disk.
+
+We need to set filesytem for our partitions
+
+For the boot and the main partition
+#+BEGIN_SRC bash
+  mkfs.fat -F 32 /dev/sda1
+  mkfs.ext4 /dev/sda3
+#+END_SRC
+
+For the swap partition
+#+BEGIN_SRC bash
+  mkswap /dev/sda2
+  swapon /dev/sda2
+#+END_SRC
+
+** Final installation
+
+Finally we are going to mount the main partition in order to be able
+to install archlinux on it.
+
+#+BEGIN_SRC bash
+  mount /dev/sda3 /mnt
+
+  mkdir /mnt/boot
+  mount /dev/sda1 /mnt/boot
+#+END_SRC
+
+/lsblk/ can be used to check if everything is properly mounted.
+
+#+BEGIN_SRC bash
+  pacman -Sy archlinux-keyring
+  pacstrap /mnt base base-devel linux linux-firmware vim dhcpcd netctl dialog wpa_supplicant git
+#+END_SRC
+
+** fstab and boot
+
+We generate a fstab so the system can automatically mount things appropriately 
+#+BEGIN_SRC bash
+  # first run to check the output
+  # -U is to use uuid
+  genfstab -U /mnt 
+
+  # actually write the fstab
+  genfstab -U /mnt >> /mnt/etc/fstab
+#+END_SRC
+
+Let's switch from the USB drive to the new arch install
+#+BEGIN_SRC bash
+  arch-chroot /mnt
+#+END_SRC
+
+#+BEGIN_SRC bash
+  pacman -S refind
+  refind-install
+  vim /boot/refind_linux.conf
+  #keep only the good line
+#+END_SRC
+
+** Final configuration
+
+*** Root password
+root password:
+#+BEGIN_SRC bash
+  passwd
+#+END_SRC
+
+*** locale and lang settings
+locale settings
+#+BEGIN_SRC bash
+  vim /etc/locale.gen
+  #uncomment en_US lines
+
+  locale-gen
+#+END_SRC
+
+#+BEGIN_SRC bash
+  # new file
+  vim /etc/locale.conf
+  # insert LANG=en-US.UTF-8
+#+END_SRC
+
+#+BEGIN_SRC bash
+  ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
+#+END_SRC
+
+*** hostname
+#+BEGIN_SRC bash
+  #new file
+  vim /etc/hostname
+  #insert hostname (thinkpad for instance)
+#+END_SRC
+
+** Reboot and post-install setup
+
+#+BEGIN_SRC bash
+  exit
+  reboot now
+#+END_SRC
+
+*** Set up user
+#+BEGIN_SRC bash
+  useradd -m -g wheel flocks
+  passwd flocks
+#+END_SRC
+
+Get user sudo access
+
+#+BEGIN_SRC bash
+  vim /etc/sudoers
+  #uncomment %wheel ALL=(ALL) ALL
+#+END_SRC
+
+
+*** ssh and gpg
+- copy .ssh backup folder
+#+BEGIN_SRC bash
+  chown -R flocks:wheel ~/.ssh
+  chmod 600 ~/.ssh/id_rsa
+  chmod 644 ~/.ssh/id_rsa.pub
+  ssh-add ~/.ssh/id_rsa #ssh-agent should already be on
+#+END_SRC
+
+#+BEGIN_SRC bash
+  gpg --import path-to-file.asc
+#+END_SRC
