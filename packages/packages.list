@@ -1,6 +1,5 @@
 0ad
 acpi
-act
 alsa-utils
 archlinux-keyring
 asdf-vm
@@ -42,7 +41,6 @@ entr
 eog
 epiphany
 esy
-evince
 fakeroot
 fasd
 fd
@@ -58,7 +56,6 @@ freeglut
 frescobaldi
 fuse2
 fzf
-garcon
 gawk
 gcc
 gcc-libs
@@ -68,7 +65,6 @@ glfw-x11
 glibc
 godef
 google-chrome
-gparted
 gpointing-device-settings
 grep
 grilo-plugins
@@ -148,7 +144,6 @@ nodejs-lts-gallium
 notmuch
 noto-fonts
 noto-fonts-emoji
-nushell
 nvidia
 nvim-packer-git
 nvm
@@ -159,7 +154,6 @@ orca
 pacman
 pacman-contrib
 pandoc
-papirus-icon-theme
 parcellite
 pass
 patch
@@ -270,16 +264,6 @@ xdg-user-dirs-gtk
 xdotool
 xf86-video-intel
 xf86-video-vesa
-xfce4-appfinder
-xfce4-panel
-xfce4-power-manager
-xfce4-session
-xfce4-settings
-xfce4-terminal
-xfdesktop
-xfsprogs
-xfwm4
-xfwm4-themes
 xorg-bdftopcf
 xorg-docs
 xorg-font-util
