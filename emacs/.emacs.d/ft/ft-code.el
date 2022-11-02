@@ -133,7 +133,9 @@
 (evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error)
 
 (use-package git-link
-  :straight t)
+  :straight t
+  :config
+  (setq git-link-default-branch "main"))
 
 ;; realud is a frontend wrapper to run debugger (gdb, bashdb..etc..)
 (use-package realgud
@@ -141,5 +143,6 @@
 
 (use-package multiple-cursors
   :straight t)
+
 
 (provide 'ft-code)
