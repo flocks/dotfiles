@@ -1,2 +1,2 @@
-  # user script
-  PATH=$PATH:$HOME/bin
+# user script
+PATH=$PATH:$HOME/bin
