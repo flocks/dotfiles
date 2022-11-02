@@ -45,6 +45,13 @@ Install all the packages from the list:
   bash ~/dotfiles/packages/install-packages.sh
 #+END_SRC
 
+#+BEGIN_SRC bash
+  git clone git@github.com:flocks/st.git
+  cd st
+  make
+  sudo make install
+#+END_SRC
+
 I prefer to compile emacs myself, so I can use any configuration flag
 I may want. So far I'm only using --with-native-compilation
 
@@ -60,6 +67,7 @@ I may want. So far I'm only using --with-native-compilation
   stow i3
   stow git
   stow emacs
+  stow nvim
   stow sxhkd
   stow kitty
   stow --dotfiles prompt
