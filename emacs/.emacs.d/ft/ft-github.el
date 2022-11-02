@@ -7,6 +7,7 @@
   (require 'dashub-evil)
   (setq dashub--favorite-repos '("LedgerHQ/ledger-vault-api"
 								 "LedgerHQ/ledger-vault-front"
+								 "LedgerHQ/vault-automation"
 								 "LedgerHQ/minivault"
 								 "LedgerHQ/vault-remote"
 								 "LedgerHQ/vault-ts"))
