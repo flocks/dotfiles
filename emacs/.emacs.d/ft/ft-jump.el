@@ -5,6 +5,7 @@
   (evil-define-key '(motion insert normal visual) global-map (kbd "C-e") 'transjump)
   (setq transjump-folders
 		'((:name  "front" :key  "f" :path  "~/ledger/ledger-vault-front")
+		  (:name  "front-legacy" :key  "F" :path  "~/ledger/ledger-vault-front-legacy")
 		  (:name  "vjs" :key  "v" :path  "~/ledger/vault-ts")
 		  (:name  "e2e" :key  "e" :path  "~/ledger/vault-e2e-tests")
 		  (:name  "minivault" :key  "m" :path  "~/ledger/minivault")
@@ -18,7 +19,7 @@
 		  (:name  "home" :key  "h" :path  "~")
 		  (:name  "ledger" :key  "l" :path  "~/ledger")
 		  (:name  "vault-remote" :key  "r" :path  "~/ledger/vault-remote")
-		  (:name  "ft" :key  "F"  :path  "~/.emacs.d/ft")
+		  ;; (:name  "ft" :key  "F"  :path  "~/.emacs.d/ft")
 		  (:name  "bin" :key  "b" :path  "~/bin")
 		  (:name  "blog" :key  "B" :path  "~/florent.link"))))
 
