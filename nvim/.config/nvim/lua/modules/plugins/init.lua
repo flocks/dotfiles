@@ -20,6 +20,8 @@ require('packer').startup(function()
 
   use "itchyny/vim-qfedit"                   -- edit quickfix list
 
+  use "ruifm/gitlinker.nvim"                 -- link to github
+
   -- Tim Pope section LOL
   use "tpope/vim-dispatch"                   -- make/compiler async helper
   use 'tpope/vim-fugitive'                   -- git wrapper

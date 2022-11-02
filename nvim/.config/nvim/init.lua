@@ -4,6 +4,11 @@ require 'core.mappings'
 require 'modules.plugins'
 
 require('nvim-autopairs').setup()
+require"gitlinker".setup({
+  opts = {
+    add_current_line_on_normal_mode = false
+  }
+})
 
 local prettierd = {
    function()
@@ -79,4 +84,5 @@ lspconfig.tailwindcss.setup({
   flags = lsp_flags,
   capabilities = capabilities,
 })
+
 
