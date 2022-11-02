@@ -8,7 +8,7 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 export EDITOR="$(command -v nvim)"
-export TERMINAL="$(command -v kitty)"
+export TERMINAL="$(command -v st)"
 export BROWSER="$(command -v google-chrome-stable)"
 # PATH
 export PATH=$PATH:~/.local/bin
@@ -22,10 +22,6 @@ export LANG=en_US.UTF-8
 #disable bell
 unsetopt BEEP
 
-#oh-my-zsh
-source "/usr/share/oh-my-zsh/zshrc"
-source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 # shellchece disable=SC2034
 CASE_SENSITIVE="true"
 # shellcheck disable=SC2034
@@ -37,12 +33,6 @@ export FZF_CTRL_T_COMMAND='rg --files --follow 2>/dev/null'
 export FZF_ALT_C_COMMAND="fd --type directory"
 
 
-
-# Use vim keys in tab complete menu:
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 fzfKeyBindings=/usr/share/fzf/key-bindings.zsh
 if [ -f $fzfKeyBindings ]; then
   source $fzfKeyBindings
@@ -66,9 +56,27 @@ source "$HOME/.private"
 
 bindkey -s '^x^j' 'nvim .\n'
 bindkey -s '^d' 'cd $(fd --type directory | fzf) \n'
-bindkey -s '^[g' 'nvim +":Git"\n'
+# bindkey -s '^[g' 'nvim +":Git"\n'
+bindkey -s "^[gs" "git status\n"
+bindkey -s "^[gt" "tig\n"
+
+# History settings
+HISTFILE=~/.zsh_history
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+# immediatly append to history
+setopt INC_APPEND_HISTORY
+# remove dup
+setopt HIST_FIND_NO_DUPS
 
 
+
+bindkey -e
+bindkey "\C-p" history-search-backward
+bindkey "\C-n" history-search-forward
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
 #
 # useful for pinentry-tty prompt
 export GPG_TTY="$(tty)"
@@ -80,4 +88,17 @@ PERL_LOCAL_LIB_ROOT="/home/flocks/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_
 PERL_MB_OPT="--install_base \"/home/flocks/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/flocks/perl5"; export PERL_MM_OPT;
 
-
+jump_ledger () {
+  folder=$(fd . ~/ledger -d 1 | fzf)
+  [ -d "$folder" ] && cd "$folder"
+}
+jump_bin () {
+  file=$(find ~/bin/* | fzf)
+  [ -e "$file" ] && nvim "$file"
+}
+jump_branch () {
+  git branch | fzf | xargs git checkout
+}
+bindkey -s "^j^l" jump_ledger"\n"
+bindkey -s "^j^b" jump_bin"\n"
+bindkey -s "^x^g" jump_branch"\n"
