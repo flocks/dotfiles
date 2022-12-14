@@ -52,6 +52,7 @@ documentation string.  BODY is the set of arguments passed to the
   (interactive)
   (let ((output (ft-eshell--command-output)))
 	(with-current-buffer (get-buffer-create "*Eshell Output*")
+	  (erase-buffer)
 	  (goto-char (point-max))
 	  (newline)
 	  (insert output)
