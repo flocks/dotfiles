@@ -49,8 +49,12 @@
 		 (display-buffer-no-window))
 		("\\**mpv-elfeed*"
 		 (display-buffer-no-window))
-		("\\*.*\\(e?shell\\|v?term\\).*"
-		 (display-buffer-reuse-mode-window display-buffer-below-selected))
+		("\\**shelldon.*"
+		 (display-buffer-reuse-window display-buffer-pop-up-window))
 		))
+
+
+
+
 
 (provide 'ft-buffer)
