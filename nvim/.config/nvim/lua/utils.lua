@@ -28,6 +28,10 @@ M.vmap = function(...)
     M.map("v", ...)
 end
 
+M.cmap = function(...)
+    M.map("c", ...)
+end
+
 M.buf_map = function(mode, target, source, opts, bufnr)
     api.nvim_buf_set_keymap(bufnr or 0, mode, target, source, get_map_options(opts))
 end

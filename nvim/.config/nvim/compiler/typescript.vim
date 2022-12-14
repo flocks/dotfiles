@@ -1,2 +1,3 @@
-CompilerSet makeprg=pnpm\ typecheck
-CompilerSet errorformat=%f:\ %m
+CompilerSet makeprg=check.sh
+CompilerSet errorformat=%+A\ %#%f\ %#(%l\\\,%c):\ %m,%C%m
+

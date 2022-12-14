@@ -19,6 +19,7 @@ vim.opt.laststatus = 2 -- always show status bar
 vim.opt.list = true -- show blank characters
 vim.opt.listchars = "tab:>-,trail:·,nbsp:%" -- define blank characters
 vim.opt.number = true -- show line numbers
+vim.opt.numberwidth = 1 -- line numbers width
 vim.opt.pumheight = 10 -- maximum number of items to show in the popup menu
 vim.opt.relativenumber = true -- relative line numbers
 vim.opt.scrolloff = 5 -- number of lines to keep above & below cursor when scrolling

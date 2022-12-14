@@ -3,6 +3,15 @@ require 'core.options'
 require 'core.mappings'
 require 'modules.plugins'
 
+require('impatient')
+
+require("dirbuf").setup{
+  hash_padding = 1,
+  show_hidden = true,
+  sort_order = "default",
+  write_cmd = "DirbufSync",
+}
+require("leap").add_default_mappings(true) -- true means override existing mapping
 require('nvim-autopairs').setup()
 require"gitlinker".setup({
   opts = {
@@ -85,4 +94,8 @@ lspconfig.tailwindcss.setup({
   capabilities = capabilities,
 })
 
+function tscheck()
+  vim.cmd("compiler typescript")
+  vim.cmd("AsyncRun yarn typecheck")
+end
 
