@@ -18,7 +18,7 @@
 		    :weight 'SemiBold
 		    ;; :slant 'italic
 		    :width 'normal
-		    :height 140)
+		    :height 132)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
@@ -37,6 +37,7 @@
   ;; Add all your customizations prior to loading the themes
   (global-set-key (kbd "<XF86Favorites>") 'modus-themes-toggle)
 
+  (setq modus-themes-fringes nil)
   (setq modus-themes-mode-line '(borderless moody accented))
   (setq modus-themes-region '(no-extend))
   (setq modus-themes-prompts '(intense bold))
@@ -65,6 +66,12 @@
   (global-set-key (kbd "<XF86Tools>") 'ft-darkroom-setup))
 
 (use-package ef-themes
+  :straight t)
+
+(use-package gruvbox-theme
+  :straight t)
+
+(use-package doom-themes
   :straight t)
 
 (use-package pulsar
