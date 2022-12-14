@@ -85,7 +85,7 @@ a dired buffer on the same directory"
 	(rename-buffer name)))
 
 (define-key dired-mode-map (kbd "C-x D") 'ft-clone-dired-buffer)
-(define-key dired-mode-map (kbd "C-x d") 'find-dired)
+(global-set-key (kbd "C-x d") 'find-dired)
 
 (defun dired-do-eshell-command (command)
   "Run an Eshell command on the marked files."

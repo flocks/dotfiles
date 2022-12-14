@@ -22,7 +22,6 @@
   ("C-x g" . magit-status)
   ("C-c g" . magit-file-dispatch))
 
-
 (use-package magit-scripts
   :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
 
@@ -53,6 +52,7 @@
   :straight t
   :init
   (add-hook 'web-mode-hook 'add-node-modules-path t))
+
 (use-package prettier
   :straight t
     :init
