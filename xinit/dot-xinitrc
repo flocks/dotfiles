@@ -4,6 +4,8 @@ xset r rate 150 200
 setxkbmap -layout us -variant mac
 keyboard_plug &
 sxhkd &
+parcellite &
+polybar &
 setbg &
 mpd &
 dunst &
