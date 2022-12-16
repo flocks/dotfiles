@@ -1,8 +1,10 @@
 # edit confs
-alias V="nvim ~/.config/nvim/init.vim"
-alias I="nvim ~/.config/i3/config"
+alias V="nvim ~/dotfiles/nvim/.config/nvim"
+alias I="nvim ~/dotfiles/i3/.config/i3/config"
+alias K="nvim ~/dotfiles/kitty/.config/kitty/kitty.conf"
+alias Z="nvim ~/.zshrc"
+
 alias resource="source ~/.zshrc"
-alias K="nvim ~/.config/kitty/kitty.conf"
 
 # folder
 alias ex="cd ~/exvoto"
