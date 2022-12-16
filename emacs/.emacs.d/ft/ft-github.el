@@ -1,7 +1,11 @@
 (use-package json
   :straight t)
 
+(use-package ghub
+  :straight t)
+
 (use-package dashub
+  :after (ghub)
   :straight (dashub :type git :host github :repo "flocks/dashub")
   :config
   (require 'dashub-evil)
@@ -15,8 +19,9 @@
   (custom-set-variables '(dashub--notify-delay 60))
   (global-set-key (kbd "C-c G") 'dashub))
 
+
+
 (use-package code-review
-  :after (dashub)
   :straight t
   :config
   (defun dashub-review-pr (notif)
