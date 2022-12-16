@@ -13,7 +13,6 @@
   (use-local-map vault-mode-map)
   (setq tabulated-list-format [("Name" 30 t)
 							   ("Owner" 30 t)
-							   ("CID" 10 t)
 							   ("Status" 10 t '(:right-align t))])
 
   (setq tabulated-list-entries (vault--get-tabulated-entries))
@@ -49,7 +48,7 @@ NAME is the buffer name."
 
 (defun vault--get-instances ()
   (with-current-buffer
-	  (url-retrieve-synchronously (format "%s/instances" vault--api-url) t)
+	(url-retrieve-synchronously (format "%s/instances" vault--api-url) t)
 	(ft-parse-retrieve-buffer)))
 
 (defun vault--get-presets ()
@@ -69,7 +68,6 @@ NAME is the buffer name."
 	   `(,(alist-get 'name instance)
 		 ,(vector (vault--propertize-name (alist-get 'name instance))
 				  (vault--propertize-owner (alist-get 'owner instance))
-				  (vault--propertize-cid (number-to-string (alist-get 'cid instance)))
 				  (vault--propertize-status (alist-get 'status instance)))) result ))
 	result))
 
@@ -79,14 +77,11 @@ NAME is the buffer name."
 		(t (propertize status 'face '(:foreground "red")))))
 
 
-(defun vault--propertize-cid (owner)
-  (propertize owner 'face '(:foreground "grey")))
-
 (defun vault--propertize-owner (owner)
-  (propertize owner 'face 'italic))
+  (propertize owner 'face 'font-lock-comment-face))
 
 (defun vault--propertize-name (name)
-  (propertize name 'face '(:foreground "blue"  :underline t )))
+  name)
 
 (defun vault-copy-url (instance &optional prefix)
   (interactive
@@ -142,7 +137,7 @@ NAME is the buffer name."
 									  device salt minivault-url)))))
 
 (defun vault--list-bake-preset ()
-  (let ((default-directory "~/ledger/vault-js/packages/cli/src/presets"))
+  (let ((default-directory "~/ledger/vault-ts/apps/cli/src/presets"))
     (mapcar
      (lambda (preset) (string-trim-right preset ".json"))
      (split-string (shell-command-to-string "ls")))))
@@ -186,6 +181,48 @@ NAME is the buffer name."
 	(when confirm
 	  (url-retrieve (format "https://remote.minivault.ledger-sbx.com/api/instances/%s" instance) (lambda (_)
 																								   (run-at-time 3 nil 'vault))))))
+(define-minor-mode vault-recipe-mode
+  "Vault recipe mode"
+  :keymap (make-sparse-keymap))
+
+(defun ft-vault-recipe-bake ()
+  (interactive)
+  (let ((buff-manifest (current-buffer)) 
+		(file (make-temp-file "vault-bake")))
+	(with-current-buffer (find-file-noselect file)
+	  (erase-buffer)
+	  (insert-buffer buff-manifest)
+	  (write-file file))
+
+	(async-shell-command (format "ledger-vault bake %s --minivaultURL %s --salt %s"
+								 file vault--url vault--salt)))
+  )
+
+(define-key vault-recipe-mode-map (kbd "C-c C-c") 'ft-vault-recipe-bake)
+
+(defun vault-recipe (instance)
+  (interactive
+   (list (or (tabulated-list-get-id)
+			 (completing-read "Instance: " (vault--list-instances)))))
+  (let* ((salt (read-string "Salt: ")) 
+		 (buff-name (format "*vault-recipe* %s" instance))
+		 (url (format "https://%s.minivault.ledger-sbx.com" instance) )
+		 (buffer (get-buffer-create buff-name)))
+	(when-let ((process (get-buffer-process buffer)))
+	  (kill-process process))
+	(with-current-buffer buff-name
+	  (erase-buffer)
+	  (json-mode)
+	  (setq-local vault--salt salt)
+	  (setq-local vault--url url)
+	  (switch-to-buffer-other-window (current-buffer)))
+	(make-process
+	 :name buff-name
+	 :buffer buff-name
+	 :sentinel #'vault--recipe-sentinel
+	 :command `("ledger-vault" "recipe" "--minivaultURL" ,url "--salt" ,salt))
+	))
+
 
 (defun vault-view-config (instance)
   (interactive
@@ -214,6 +251,7 @@ NAME is the buffer name."
 	(kbd "RET") #'vault-view-config
 	(kbd "+") #'vault-deploy
 	(kbd "C-c b") #'vault-bake
+	(kbd "C-c r") #'vault-recipe
 	(kbd "C-c f") #'vault-fetch
 	(kbd "C-c y") #'vault-copy-url
 	(kbd "C-c d") #'vault-destroy
@@ -238,6 +276,13 @@ NAME is the buffer name."
 	  (json-pretty-print-buffer)
 	  (goto-char (point-min)))))
 
+(defun vault--recipe-sentinel (process event)
+  (when (eq 0 (process-exit-status process))
+	(with-current-buffer (process-buffer process)
+	  (json-pretty-print-buffer)
+	  (vault-recipe-mode)
+	  (goto-char (point-min)))))
+
 (defun vault--cli-fetch (cmd)
   (let ((buff-name (format "*vault* %s" cmd)))
 	(when (get-buffer buff-name)
@@ -250,59 +295,3 @@ NAME is the buffer name."
 	 :sentinel #'vault--cli-fetch-sentinel)
 	(switch-to-buffer-other-window buff-name)))
 
-(defface vault-buffer-comment
-  '((t (:inherit font-lock-comment-face)))
-  "Face used in instance buffer"
-  :group 'vault-faces)
-
-(defun vault--create-instance-buffer (instance)
-  ;; (interactive
-  ;;  (list (or (tabulated-list-get-id)
-  ;; 			 (completing-read "Instance: " (vault--list-instances)))))
-
-  (interactive
-   (list (or (tabulated-list-get-id)
-			 (completing-read "Instance: " '("florent")))))
-  (message "%s" instance)
-  (let* ((buff (get-buffer-create (format "*vault* %s" instance))))
-	(with-current-buffer buff
-	  (let ((inhibit-read-only t))
-		(erase-buffer))
-	  
-
-	  (let ((fields '(("Instance" . "https://localhosttagueule")
-					  ("Device" . "4")
-					  ("Salt" . "salt"))))
-		(dolist (field fields)
-		  (insert (propertize (format "%s: " (car field)) 'face 'vault-buffer-comment))
-		  (insert (propertize (cdr field) 'face 'vault-buffer-comment))
-		  (insert "\n"))
-		(insert (propertize "=============" 'face 'vault-buffer-comment))
-		(goto-char (point-min))
-		(search-forward "=")
-		(end-of-line)
-		;; (add-text-properties 1 (point) ')
-		))
-
-	(switch-to-buffer buff))
-  )
-
-
-(defun vault--buffer-get-device ()
-  (save-excursion
-	(goto-char (point-min))
-	(search-forward "Device: ")
-	(thing-at-point 'word)))
-
-(defun vault--buffer-get-url ()
-  (save-excursion
-	(goto-char (point-min))
-	(search-forward "Instance: ")
-	(thing-at-point 'word)))
-
-
-  
- ;; (let ((url (if prefix (format "https://remote.minivault.ledger-sbx.com/instances/%s" instance)
- ;; 				(format "https://%s.minivault.ledger-sbx.com" instance))))
- ;; 	(kill-new url)
- ;; 	(message "Copy %s" url)) 
