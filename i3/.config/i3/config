@@ -3,8 +3,8 @@ for_window [title="mpv"] resize set width 1000
 for_window [title="mpv"] resize set height 600
 for_window [title="mpv"] move position center center
 
-default_border pixel 1
-default_floating_border pixel 1
+default_border pixel 2
+default_floating_border pixel 2
 
 set $mod Mod4
 
@@ -59,7 +59,7 @@ bindsym $mod+d split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-# bindsym $mod+shift+f sticky toggle
+bindsym $mod+shift+s sticky toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+t floating toggle
@@ -157,19 +157,19 @@ client.unfocused            $base01        $bg         $base05
 client.focused_inactive     $base01        $base01         $base05
 client.urgent               $base08        $base08         $base00
 
-bar {
-  font pango:mono 5
-  position top
-  mode dock
-  modifier None
-  status_command i3blocks
-  colors {
-    background          $bg
-    statusline          $base04
-    separator           $blue
-    focused_workspace   #3998E2        #3998E2        $base00
-    active_workspace    $bg_alt        $bg_alt        $base00
-    inactive_workspace  $bg       $bg        $base05
-    urgent_workspace    $base08        $base08        $base00
-  }
-}
+#bar {
+  #font pango:mono 11
+  #position top
+  #mode dock
+  #modifier None
+  #status_command i3blocks
+  #colors {
+    #background          $bg
+    #statusline          $base04
+    #separator           $blue
+    #focused_workspace   #3998E2        #3998E2        $base00
+    #active_workspace    $bg_alt        $bg_alt        $base00
+    #inactive_workspace  $bg       $bg        $base05
+    #urgent_workspace    $base08        $base08        $base00
+  #}
+#}
