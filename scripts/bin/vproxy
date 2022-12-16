@@ -1,0 +1,3 @@
+#!/bin/bash
+
+eval $(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "ledger-vault proxy https://"$1".minivault.ledger-sbx.com"}')

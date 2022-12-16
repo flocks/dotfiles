@@ -1,0 +1,6 @@
+#!/bin/bash
+
+namespace=$(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "minivault-"$1""}')
+pod=$(kubectl get pods --namespace "$namespace" | sed 1d | awk '{print $1}' | fzf -sync)
+kubectl logs "$pod" --namespace "$namespace"
+
