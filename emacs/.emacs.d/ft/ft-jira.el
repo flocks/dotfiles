@@ -90,10 +90,6 @@
 			(shell-command-to-string
 			 (format "echo -n florent.teissier@ledger.fr:%s | base64 -w0" token)))))
 
-(let ((token (ft-view-diff--get-github-token)))
-    (format "https://%s:x-oauth-basic@%s" token "api.github.com/repos/LedgerHQ/ledger-vault-front/pulls"))
-
-
 (setq jira-organization-name "ledgerhq")
 (setq jira-folder "~/.emacs.d/ft/")
 
