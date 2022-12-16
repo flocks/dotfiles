@@ -62,6 +62,7 @@ I may want. So far I'm only using --with-native-compilation
 
 ** Config files
 
+
 #+BEGIN_SRC bash
   stow scripts
   stow i3
@@ -70,6 +71,7 @@ I may want. So far I'm only using --with-native-compilation
   stow nvim
   stow sxhkd
   stow kitty
+  stow polybar
   stow --dotfiles prompt
   stow --dotfiles path
   stow --dotfiles xinit
