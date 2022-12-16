@@ -46,6 +46,11 @@ prefix arg"
 		(call-interactively #'compile)))))
 
 (global-set-key (kbd "M-*") 'ft-compile-run)
-(global-set-key (kbd "C-c r") 'recompile)
+(defun ft-recompile ()
+  (interactive)
+  (with-current-buffer "*compilation*"
+	(call-interactively #'recompile)))
+
+(global-set-key (kbd "C-c r") 'ft-recompile)
 
 (provide 'ft-compile)
