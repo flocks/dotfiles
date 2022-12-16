@@ -2,7 +2,6 @@
 
 
 (use-package docker
-  :after (transient)
   :straight t
   :bind ("C-c d" . docker))
 
