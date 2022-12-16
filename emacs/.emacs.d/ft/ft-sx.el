@@ -26,6 +26,4 @@
 
 (global-set-key (kbd "C-c C-h") 'ft-search-stack)
 
-
-
 (provide 'ft-sx)
