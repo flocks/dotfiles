@@ -2,18 +2,24 @@
 (use-package consult
   :straight t
   :config
-  (global-set-key (kbd "C-;") 'consult-buffer))
+  (global-set-key (kbd "C-;") 'consult-buffer)
+  (setq consult-find-args
+		"find . -not ( -wholename */.* -prune ) -not ( -wholename *node_modules* -prune )")
 
-(use-package selectrum
+  (define-key evil-normal-state-map (kbd "C-p") 'consult-find))
+
+(use-package vertico
   :straight t
   :config
-  (selectrum-mode))
+  (vertico-mode)
+  (define-key vertico-map (kbd "M-r") 'consult-history)
+  (define-key minibuffer-local-shell-command-map (kbd "M-r") 'consult-history))
 
 
 (use-package embark
   :straight t
   :bind
-  (("M-o" . embark-act)      
+  (("C-=" . embark-act)      
    ("C-c C-o" . embark-export))       
 
   :init
@@ -48,28 +54,15 @@
 
 (use-package consult-dir
   :straight t
-  :bind (:map selectrum-minibuffer-map
-         ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)
-		 :map global-map
-         ("C-x C-d" . consult-dir)))
-
-;; (use-package bookmark-view
-;;   :straight t
-;;   :after consult
-;;   :config
-;;   (global-set-key (kbd "C-c V") 'bookmark-view-push)
-;;   (add-to-list 'consult-buffer-sources
-;; 			   (list :name     "View"
-;; 					 :narrow   ?v
-;; 					 :category 'bookmark
-;; 					 :face     'font-lock-keyword-face
-;; 					 :history  'bookmark-view-history
-;; 					 :action   #'consult--bookmark-action
-;; 					 :items    #'bookmark-view-names)
-;; 			   'append))
+  :bind (:map vertico-map
+         ("C-;" . consult-dir)
+         ("C-x C-f" . consult-dir-jump-file)
+		 )
+  :config
+  (setq consult-dir-shadow-filenames nil))
 
 (global-set-key (kbd "C-s") 'consult-line)
+
 (defun embark-which-key-indicator ()
   "An embark indicator that displays keymaps using which-key.
 The which-key help message will show the type and value of the
