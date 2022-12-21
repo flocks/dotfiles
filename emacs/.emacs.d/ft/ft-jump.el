@@ -1,27 +1,15 @@
 
-(use-package transjump
-  :straight (transjump :type git :host github :repo "flocks/transjump")
-  :config
-  (evil-define-key '(motion insert normal visual) global-map (kbd "C-e") 'transjump)
-  (setq transjump-folders
-		'((:name  "front" :key  "f" :path  "~/ledger/ledger-vault-front")
-		  (:name  "front-legacy" :key  "F" :path  "~/ledger/ledger-vault-front-legacy")
-		  (:name  "vjs" :key  "v" :path  "~/ledger/vault-ts")
-		  (:name  "e2e" :key  "e" :path  "~/ledger/vault-e2e-tests")
-		  (:name  "minivault" :key  "m" :path  "~/ledger/minivault")
-		  (:name  "downloads" :key  "d" :path  "~/dotfiles")
-		  (:name  "gate" :key  "g" :path  "~/ledger/ledger-vault-api")
-		  (:name  "vault-automation" :key  "a" :path  "~/ledger/vault-automation")
-		  (:name  "emacs packages" :key  "p" :path  "~/emacs-packages")
-		  (:name  "Notes" :key  "N" :path  "~/denotes")
-		  (:name  "Notes" :key  "D" :path  "~/Downloads")
-		  (:name  "settings" :key  "s" :path  "~/.emacs.d")
-		  (:name  "home" :key  "h" :path  "~")
-		  (:name  "ledger" :key  "l" :path  "~/ledger")
-		  (:name  "vault-remote" :key  "r" :path  "~/ledger/vault-remote")
-		  ;; (:name  "ft" :key  "F"  :path  "~/.emacs.d/ft")
-		  (:name  "bin" :key  "b" :path  "~/bin")
-		  (:name  "blog" :key  "B" :path  "~/florent.link"))))
+(use-package hydra
+  :straight t)
+
+(defhydra hydra-jump (evil-motion-state-map "C-e")
+  "Jump"
+  ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")))
+  ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")))
+  ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")))
+  ("d" (lambda () (interactive) (find-file "~/dotfiles")))
+  ("h" (lambda () (interactive) (find-file "~")))
+  ("l" (lambda () (interactive) (find-file "~/ledger"))))
 
 (defun ft-diff-file-dwim ()
   (interactive)
