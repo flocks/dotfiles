@@ -33,11 +33,15 @@
 	(interactive)
 	(eww (ft-elfeed--get-link)))
 
-  (defun ft-elfeed-mpv ()
-	(interactive)
-	(let ((command (format "mpv '%s'" (ft-elfeed--get-link))))
+  (defun ft-mpv-video (video-link)
+	(interactive (list (read-string "Video link")))
+	(let ((command (format "mpv '%s'" video-link)))
 	  (message "launching mpv....")
 	  (async-shell-command command "*mpv-elfeed*")))
+
+  (defun ft-elfeed-mpv ()
+	(interactive)
+	(ft-mpv-video (ft-elfeed--get-link)))
 
   (let ((map elfeed-show-mode-map))
 	(evil-define-key 'normal map (kbd "&") 'ft-elfeed-browse-entry-eww))
