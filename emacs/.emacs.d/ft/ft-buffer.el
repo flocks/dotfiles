@@ -34,7 +34,7 @@
   (interactive "P")
   (let ((mode
 		 (if prefix
-			 (completing-read "Mode: " '("emacs-lisp-mode" "json-mode"))
+			 (completing-read "Mode: " '("emacs-lisp-mode" "json-ts-mode"))
 		   "text-mode")))
 	(pop-to-buffer
 	 (get-buffer-create

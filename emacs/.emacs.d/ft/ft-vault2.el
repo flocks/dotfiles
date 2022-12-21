@@ -212,7 +212,7 @@ NAME is the buffer name."
 	  (kill-process process))
 	(with-current-buffer buff-name
 	  (erase-buffer)
-	  (json-mode)
+	  (json-ts-mode)
 	  (setq-local vault--salt salt)
 	  (setq-local vault--url url)
 	  (switch-to-buffer-other-window (current-buffer)))
@@ -242,7 +242,7 @@ NAME is the buffer name."
 					(when (get-buffer buff-name)
 					  (kill-buffer buff-name))
 					(rename-buffer buff-name))
-				  (json-mode)
+				  (json-ts-mode)
 				  (switch-to-buffer-other-window (current-buffer)))))
 
 
@@ -272,7 +272,7 @@ NAME is the buffer name."
 (defun vault--cli-fetch-sentinel (process event)
   (when (eq 0 (process-exit-status process))
 	(with-current-buffer (process-buffer process)
-	  (json-mode)
+	  (json-ts-mode)
 	  (json-pretty-print-buffer)
 	  (goto-char (point-min)))))
 

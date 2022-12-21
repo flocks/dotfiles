@@ -28,7 +28,7 @@
 	  (with-current-buffer buf
 		(message "%s" command)
 		(erase-buffer)
-		(json-mode)
+		(json-ts-mode)
 		(insert output)
 		(json-pretty-print-buffer)
 		(goto-char (point-min)))
@@ -95,7 +95,7 @@ with json-mode to display it."
   (let ((buf (get-buffer-create buffer-name)))
 	(with-current-buffer buf
 	  (erase-buffer)
-	  (json-mode)
+	  (json-ts-mode)
 	  (insert json)
 	  (json-pretty-print-buffer)
 	  (goto-char (point-min)))

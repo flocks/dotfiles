@@ -2,6 +2,14 @@
 (setq typescript-indent-level 2)
 (setq js-import-style "absolute")
 
+
+(require 'treesit)
+(setq treesit-extra-load-path '("~/tree-sitter-module/dist"))
+
+;; use json-ts-mode from tree-sitter instead of default json-mode
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
+
 (use-package magit
   :straight t
   :config
@@ -25,17 +33,13 @@
 (use-package magit-scripts
   :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
 
-(use-package typescript-mode
-  :straight t
-  :config
-  (define-derived-mode typescript-react-mode typescript-mode
-    "Typescript JSX")
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-react-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
-
-;;; for clojure
-(use-package cider
-  :straight t)
+;; (use-package typescript-mode
+;;   :straight t
+;;   :config
+;;   (define-derived-mode typescript-react-mode typescript-mode
+;;     "Typescript JSX")
+;;   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-react-mode))
+;;   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
 (use-package flymake-eslint
   :straight t
@@ -56,9 +60,9 @@
 (use-package prettier
   :straight t
     :init
-    (add-hook 'typescript-mode-hook 'prettier-mode)
+    (add-hook 'typescript-ts-mode-hook 'prettier-mode)
     (add-hook 'js-mode-hook 'prettier-mode)
-    (add-hook 'json-mode-hook 'prettier-mode)
+    (add-hook 'json-ts-mode-hook 'prettier-mode)
     (add-hook 'web-mode-hook 'prettier-mode)
   )
 
@@ -71,12 +75,14 @@
 (use-package eglot
   :straight t
   :config
-  (add-hook 'typescript-mode-hook 'eglot-ensure)
+  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+  (add-hook 'js-ts-mode-hook 'eglot-ensure)
   (add-hook 'js-mode-hook 'eglot-ensure)
   (add-hook 'web-mode-hook 'eglot-ensure)
 
-  (setq eglot-server-programs '((typescript-mode . ("typescript-language-server" "--stdio"))
+  (setq eglot-server-programs '((typescript-ts-mode . ("typescript-language-server" "--stdio"))
 								(web-mode . ("npx" "--no-install" "flow" "lsp"))
+								(js-ts-mode . ("npx" "--no-install" "flow" "lsp"))
 								(js-mode . ("npx" "--no-install" "flow" "lsp"))))
 
   (define-key eglot-mode-map (kbd "C-c A") 'eglot-code-actions)
@@ -127,7 +133,7 @@
 (use-package yafolding
   :straight t
   :config
-  (add-hook 'json-mode-hook 'yafolding-mode))
+  (add-hook 'json-ts-mode-hook 'yafolding-mode))
 
 (evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
 (evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error)

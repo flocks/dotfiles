@@ -9,7 +9,7 @@
   (let ((json (buffer-substring-no-properties start end))
 	(buff (get-buffer-create (format "*json* - %s" (format-time-string "%s")))))
     (switch-to-buffer-other-window buff)
-    (json-mode)
+    (json-ts-mode)
     (insert json)
 	(evil-join-whitespace (point-min) (point-max))
     (json-pretty-print-buffer)
@@ -23,6 +23,7 @@
   :after (json)
   :config
   (define-key json-mode-map (kbd "C-c C-j") 'jjumper-jump-key)
+  (define-key json-ts-mode-map (kbd "C-c C-j") 'jjumper-jump-key)
 
   (defun ft-insert-translation-key ()
 	(interactive)
