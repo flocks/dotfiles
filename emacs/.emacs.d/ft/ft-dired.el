@@ -55,14 +55,21 @@ the preset date (1hour/1week/1month)"
   (let ((time-today (format-time-string "%b %d" (time-stamp))))
     (dired-mark-sexp '(string-match-p time-today time))))
 
+(defun ft-dired-sort-date ()
+  (interactive)
+  (dired-sort-other "-alt")
+  (goto-char (point-min)))
+
 (defun ft-dired-insert-sub-directory ()
   (interactive)
   (dired-insert-subdir
    (completing-read "Dir: "
 		    (split-string (shell-command-to-string "fd --type directory")))))
 
+
 (let ((map dired-mode-map))
   (evil-define-key 'normal map (kbd "C-c C-p") 'dired-toggle-read-only) ;; to be consisent with rg.el/occur/grep
+  (evil-define-key 'normal map (kbd "C-c C-d d") 'ft-dired-sort-date)
   (evil-define-key 'normal map (kbd "C-c C-d i") 'ft-dired-mark-images)
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
