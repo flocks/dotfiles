@@ -18,7 +18,7 @@
 		    :weight 'SemiBold
 		    ;; :slant 'italic
 		    :width 'normal
-		    :height 132)
+		    :height 130)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
