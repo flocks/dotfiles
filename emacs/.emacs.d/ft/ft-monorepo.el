@@ -69,3 +69,5 @@
 
 (add-to-list 'consult-buffer-sources 'consult--source-folders-files 'append)
 (add-to-list 'consult-dir-sources 'consult-dir--source-folders-files 'append)
+
+(provide 'ft-monorepo)

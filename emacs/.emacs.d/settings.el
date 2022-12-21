@@ -160,6 +160,8 @@
 (require 'ft-eshell)
 (require 'ft-emms)
 (require 'ft-code)
+(require 'ft-github)
+(require 'ft-monorepo)
 (require 'ft-sx)
 
 (use-package notmuch)
