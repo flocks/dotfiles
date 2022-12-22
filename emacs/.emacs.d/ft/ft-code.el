@@ -9,6 +9,7 @@
 ;; use json-ts-mode from tree-sitter instead of default json-mode
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
 
 (use-package magit
   :straight t
