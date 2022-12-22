@@ -119,6 +119,25 @@ This function checks if at leat 1 mark has been explicitly set."
 	  (forward-line 1))
 	(not (= (point) (point-max))))))
 
+(defun ft-dired-concat-images (arg)
+  "Use imagemagick to concat marked images.
+
+With a prefix ARG, the command can be edited"
+  (interactive "P")
+  (let ((files (dired-get-marked-files t)))
+	(unless (> (length files) 1)
+	  (user-error "needs at least 2 images"))
+	(let* ((output (read-string "Name: "))
+		   (files-input (string-join files " "))
+		   (default-command
+			(format "convert -background white -border 100 -bordercolor white -append %s %s"
+					files-input output))
+		   (command (or (and arg (read-string "Command: " default-command))
+						default-command)))
+	  (shell-command command)
+	  (revert-buffer)
+	  (dired-jump nil output))))
+
 
 (use-package dired-narrow
   :straight t
