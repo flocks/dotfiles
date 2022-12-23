@@ -71,6 +71,7 @@ the preset date (1hour/1week/1month)"
   (evil-define-key 'normal map (kbd "C-c C-p") 'dired-toggle-read-only) ;; to be consisent with rg.el/occur/grep
   (evil-define-key 'normal map (kbd "C-c C-d d") 'ft-dired-sort-date)
   (evil-define-key 'normal map (kbd "C-c C-d i") 'ft-dired-mark-images)
+  (evil-define-key 'normal map (kbd "C-c C-d c") 'ft-dired-concat-images)
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
   (evil-define-key 'normal map (kbd "C-c C-d m") 'dired-mark-files-regexp)
