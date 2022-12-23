@@ -144,12 +144,6 @@
   :config
   (setq git-link-default-branch "main"))
 
-;; realud is a frontend wrapper to run debugger (gdb, bashdb..etc..)
-(use-package realgud
-  :straight t)
-
-(use-package multiple-cursors
-  :straight t)
 (use-package nodejs-repl
   :straight t
   :config
