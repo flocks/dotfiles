@@ -6,6 +6,7 @@
   "Jump"
   ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")))
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")))
+  ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")))
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")))
   ("d" (lambda () (interactive) (find-file "~/dotfiles")))
   ("h" (lambda () (interactive) (find-file "~")))
