@@ -12,13 +12,13 @@
 ; default font
 (set-face-attribute 'default nil
 		    ;; :family "Roboto Mono"
-		    :family "VictorMono"
+		    ;; :family "VictorMono"
 		    ;; :family "IBM Plex Mono"
-		    ;; :family "Fira Code"
-		    :weight 'SemiBold
+		    :family "Iosevka Comfy"
+		    ;; :weight 'SemiBold
 		    ;; :slant 'italic
 		    :width 'normal
-		    :height 130)
+		    :height 140)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
