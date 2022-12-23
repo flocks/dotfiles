@@ -17,4 +17,6 @@
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587)
 
+(global-set-key (kbd "C-c m") 'notmuch)
+
 (provide 'ft-mail)
