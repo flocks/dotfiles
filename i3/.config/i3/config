@@ -1,6 +1,7 @@
 for_window [class="mpv"] floating enable
 for_window [title="mpv"] resize set width 1000
 for_window [title="mpv"] resize set height 600
+for_window [class="ksnip"] floating enable, fullscreen enable
 for_window [title="mpv"] move position center center
 
 default_border pixel 2
