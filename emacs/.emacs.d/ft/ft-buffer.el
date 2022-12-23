@@ -5,8 +5,6 @@
 (setq uniquify-after-kill-buffer-p t)    ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
-(global-set-key (kbd "s-H") 'previous-buffer)
-(global-set-key (kbd "s-L") 'next-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (let ((map ctl-x-x-map))              
