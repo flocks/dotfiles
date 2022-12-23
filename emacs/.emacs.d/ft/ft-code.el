@@ -6,6 +6,11 @@
 (require 'treesit)
 (setq treesit-extra-load-path '("~/tree-sitter-module/dist"))
 
+(require 'eglot)
+;; I don't like the small lag the first time I open a file that
+;; that starts the server
+(setq eglot-sync-connect nil)
+
 ;; use json-ts-mode from tree-sitter instead of default json-mode
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
