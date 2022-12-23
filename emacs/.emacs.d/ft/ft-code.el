@@ -150,6 +150,10 @@
 
 (use-package multiple-cursors
   :straight t)
+(use-package nodejs-repl
+  :straight t
+  :config
+  (global-set-key (kbd "C-c C-n") 'nodejs-repl))
 
 
 (provide 'ft-code)
