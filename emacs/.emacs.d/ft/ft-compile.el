@@ -32,6 +32,12 @@
 (defun ft-get-project-root ()
   (locate-dominating-file (or (buffer-file-name) default-directory) "package.json"))
 
+
+
+;; make emacs consider project with package.json as full project
+;; useful for monorepo!
+(setq project-vc-extra-root-markers '("package.json"))
+
 (defun ft-compile-run (prefix)
   "Wrapper to run compile command.
 Prompt for a directory target if it's not dired or if we have a
