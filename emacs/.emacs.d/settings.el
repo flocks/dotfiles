@@ -162,6 +162,7 @@
 (require 'ft-code)
 (require 'ft-github)
 (require 'ft-monorepo)
+(require 'ft-mail)
 (require 'ft-sx)
 
 (use-package notmuch)
