@@ -18,7 +18,7 @@
 		    ;; :weight 'SemiBold
 		    ;; :slant 'italic
 		    :width 'normal
-		    :height 130)
+		    :height 135)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
@@ -51,6 +51,11 @@
   ;; Load the theme of your choice:
   (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
   )
+
+(use-package standard-themes
+  :straight t
+  :config
+  (setq standard-themes-fringes nil))
 
 ;; free distracting editing/reading
 (use-package darkroom
