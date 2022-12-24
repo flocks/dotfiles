@@ -17,6 +17,16 @@
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587)
 
-(global-set-key (kbd "C-c m") 'notmuch)
+(use-package notmuch-indicator
+  :straight t
+  :init
+  (notmuch-indicator-mode)
+  :config
+  '((:terms "tag:unread and tag:inbox" :label "@")))
+
+(global-set-key (kbd "C-c m") (lambda () (interactive)
+								(notmuch)
+								(notmuch-jump-search)
+								))
 
 (provide 'ft-mail)
