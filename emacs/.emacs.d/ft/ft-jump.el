@@ -4,13 +4,13 @@
 
 (defhydra hydra-jump (evil-motion-state-map "C-e")
   "Jump"
-  ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")))
-  ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")))
-  ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")))
-  ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")))
-  ("d" (lambda () (interactive) (find-file "~/dotfiles")))
-  ("h" (lambda () (interactive) (find-file "~")))
-  ("l" (lambda () (interactive) (find-file "~/ledger"))))
+  ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")) :exit t)
+  ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
+  ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
+  ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
+  ("d" (lambda () (interactive) (find-file "~/dotfiles")) :exit t)
+  ("h" (lambda () (interactive) (find-file "~")) :exit t)
+  ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t))
 
 (defun ft-diff-file-dwim ()
   (interactive)
