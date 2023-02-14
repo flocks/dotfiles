@@ -28,12 +28,10 @@ super + shift + a
 
 super + shift + m
     ~/bin/reset-minivault
-# super + shift + e
-#     ~/bin/dmenuunicode
 
-# moving window
-#super + u
-#    ~/bin/corner
+super + m
+ polybar-msg cmd toggle
+
 
 # lock screen
 super + w
