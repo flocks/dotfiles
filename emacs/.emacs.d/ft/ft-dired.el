@@ -131,7 +131,7 @@ With a prefix ARG, the command can be edited"
 	(unless (> (length files) 1)
 	  (user-error "needs at least 2 images"))
 	(let* ((output (read-string "Name: "))
-		   (files-input (string-join files " "))
+		   (files-input (string-join (mapcar (lambda (x) (format "\"%s\"" x)) files) " "))
 		   (default-command
 			(format "convert -background white -border 100 -bordercolor white -append %s %s"
 					files-input output))
