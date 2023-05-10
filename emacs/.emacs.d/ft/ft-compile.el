@@ -27,7 +27,12 @@
 (let ((map compilation-mode-map))
   (evil-define-key 'normal map
     (kbd "Y") 'ft-kill-command)
+  (evil-define-key 'normal map
+	(kbd "R") (lambda ()
+				(interactive)
+				(recompile t)))
   )
+
 ;; TODO makes this more generic to  use also  .git
 (defun ft-get-project-root ()
   (locate-dominating-file (or (buffer-file-name) default-directory) "package.json"))
@@ -47,16 +52,11 @@ prefix arg"
 		 (prompt-dir prefix))
 	(let ((default-directory
 		   (or (and prompt-dir (read-directory-name "Dir: "))
-			   (ft-get-project-root))))
+			   (ft-get-project-root)
+			   default-directory)))
 	  (let ((current-prefix-arg nil))
 		(call-interactively #'compile)))))
 
 (global-set-key (kbd "M-*") 'ft-compile-run)
-(defun ft-recompile ()
-  (interactive)
-  (with-current-buffer "*compilation*"
-	(call-interactively #'recompile)))
-
-(global-set-key (kbd "C-c r") 'ft-recompile)
 
 (provide 'ft-compile)
