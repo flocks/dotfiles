@@ -49,6 +49,11 @@ dired buffer"
 		(forward-line 1))
 	  (dired (cons "Grep" (cl-remove-duplicates files :test 'string=))))))
 
+(defun rgl (dir regexp)
+  (interactive "DFind-grep (directory): \nsFind-grep (grep regexp): ")
+  (let ((default-directory dir))
+	(dired (cons (format "*rgl* - %s" regexp) (process-lines "rg" "-l" regexp)))))
+
 (define-key grep-mode-map (kbd "C-c d") 'ft-grep-to-dired)
 
 (provide 'ft-search)
