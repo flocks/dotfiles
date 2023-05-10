@@ -12,6 +12,8 @@
   (add-hook 'dired-mode-hook #'dired-hide-details-mode)
   (require 'dired-x)
   (evil-define-key 'normal dired-mode-map (kbd "M-%") 'dired-do-query-replace-regexp)
+  ;; I don't want repeat mode for dired-jump
+  (setq dired-jump-map nil)
   )
 
 (use-package dired-copy-paste
