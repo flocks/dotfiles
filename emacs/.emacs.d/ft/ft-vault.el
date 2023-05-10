@@ -389,5 +389,5 @@ NAME is the buffer name."
 	(switch-to-buffer-other-window buff-name)))
 
 
-(provide 'ft-vault2)
+(provide 'ft-vault)
 
