@@ -4,6 +4,13 @@ westend=(
    "5G1ojzh47Yt8KoYhuAjXpHcazvsoCXe3G8LZchKDvumozJJJ" 
    "5GYaYNVq6e855t5hVCyk4Wuqssaf6ADTrvdPZ3QXyHvFXTip"
 )
+cosmos=(
+	"cosmos1axrtywdnv9h74hr207kg2e942tvk9c5mscr58g"
+)
+
+bep20=(
+	"0xd13E4bF0d8b793e00977aC7Cf19800faC7A97fc8"
+)
 bitcoin=(
   "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
   "3DB5T1FbE86UHWvCQjZmHR7zFw7mBMFtVL"
@@ -49,7 +56,9 @@ Bitcoin (testnet)
 Ethereum
 Ethereum (testnet)
 Westend
+cosmos
 XRP
+Bep20
 Contract" | dmenu -i -l 10)
 
 [[ "$currency" == "" ]] && exit 0
@@ -58,9 +67,11 @@ list=""
 [[ "$currency" == "Bitcoin" ]] && list="${bitcoin[*]}"
 [[ "$currency" == "Bitcoin (testnet)" ]] && list="${bitcoin_testnet[*]}"
 [[ "$currency" == "Ethereum" ]] && list="${ethereum[*]}"
+[[ "$currency" == "Bep20" ]] && list="${bep20[*]}"
 [[ "$currency" == "Ethereum (testnet)" ]] && list="${ropsten[*]}"
 [[ "$currency" == "Westend" ]] && list="${westend[*]}"
 [[ "$currency" == "XRP" ]] && list="${xrp[*]}"
+[[ "$currency" == "cosmos" ]] && list="${cosmos[*]}"
 [[ "$currency" == "Contract" ]] && list="${contract[*]}"
 
 addr=$(echo -e "$list" | dmenu -l 10)
