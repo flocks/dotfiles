@@ -88,13 +88,26 @@ Tree-sitter needs some grammars files
   stow sxhkd
   stow kitty
   stow polybar
+  stow system
+  stow notmuch
   stow --dotfiles tmux
+  stow --dotfiles mbsync
   stow --dotfiles prompt
   stow --dotfiles path
   stow --dotfiles xinit
   stow --dotfiles xmodmap
   stow --dotfiles zsh
 #+END_SRC
+
+Enable systemd services
+
+
+#+BEGIN_SRC bash
+systemctl enable --user mbsync.timer
+systemctl enable --user mbsync.service
+systemctl start --user mbsync.timer
+#+END_SRC
+
 
 ** TODO
 clean and add vim config

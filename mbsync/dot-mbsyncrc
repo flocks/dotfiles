@@ -1,0 +1,24 @@
+IMAPAccount gmail
+Host imap.gmail.com
+UserCmd "gpg2 -q --for-your-eyes-only -d ~/.authinfo.gpg | grep smtp | awk -F ' ' '{print $4}'"
+PassCmd "gpg2 -q --for-your-eyes-only -d ~/.authinfo.gpg | grep smtp | awk -F ' ' '{print $6}'"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+#to avoid being kicked out by gmail
+#PipelineDepth 1
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Subfolders Verbatim
+Path ~/Mail/
+Inbox ~/Mail/Inbox
+
+Channel gmail
+Far :gmail-remote:
+Near :gmail-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *

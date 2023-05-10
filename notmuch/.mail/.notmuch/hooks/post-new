@@ -1,0 +1,17 @@
+#!/bin/bash
+
+notmuch tag -unread -new -- tag:replied
+
+# tag all "new" messages "inbox" and "unread"
+notmuch tag +inbox +unread -new -- tag:new
+
+
+# github
+notmuch tag -inbox +github -- from:notifications@github.com
+
+# mailing lists
+## emacs
+notmuch tag -inbox +list +emacs -- from:emacs-devel@gnu.org or to:emacs-devel@gnu.org
+notmuch tag -inbox +list +emacs -- from:emacs-orgmode@gnu.org or to:emacs-orgmode@gnu.org
+notmuch tag -inbox +list +emacs -- 'to:"/*@debbugs.gnu.org*/"'
+notmuch tag -inbox +list +emacs -- from:emacs-humanities@gnu.org or to:emacs-humanities@gnu.org not to:emacs-humanities-owner@gnu.org
