@@ -27,19 +27,15 @@
   ;; I prefer to manually toggle the filter rather than adding a hook
   (define-key ibuffer-mode-map (kbd "C-c C-p") 'ibuffer-vc-set-filter-groups-by-vc-root))
 
+(use-package scratch
+  :straight t
+  :config
+  (defun ft-new-buffer (prefix)
+	(interactive "P")
+	(let ((current-prefix-arg (if prefix nil 4)))
+	  (call-interactively #'scratch))) 
 
-(defun ft-new-buffer (prefix)
-  (interactive "P")
-  (let ((mode
-		 (if prefix
-			 (completing-read "Mode: " '("emacs-lisp-mode" "json-ts-mode"))
-		   "text-mode")))
-	(pop-to-buffer
-	 (get-buffer-create
-	  (format "*new* - %s" (format-time-string "%R:%S" (current-time)))))
-	(call-interactively (intern mode))))
-
-(global-set-key (kbd "C-c n") 'ft-new-buffer)
+  (global-set-key (kbd "C-c n") 'ft-new-buffer))
 
 (setq display-buffer-alist
 	  `(;; no window
