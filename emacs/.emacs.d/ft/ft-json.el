@@ -1,11 +1,15 @@
+(require 'json)
 (use-package json-mode
+  :straight t)
+
+(use-package jq-mode
   :straight t)
 
 (defun ft-json-view (start end)
   "Format json inside selection into a another buffer"
   (interactive "r")
-  (unless (region-active-p)
-	(user-error "Need to select the json"))
+  ;; (unless (region-active-p)
+  ;; 	(user-error "Need to select the json"))
   (let ((json (buffer-substring-no-properties start end))
 	(buff (get-buffer-create (format "*json* - %s" (format-time-string "%s")))))
     (switch-to-buffer-other-window buff)
@@ -15,15 +19,22 @@
     (json-pretty-print-buffer)
 	(goto-char (point-min))))
 
+
 (global-set-key (kbd "C-c C-j") 'ft-json-view)
 
 
 (use-package jjumper
   :straight (jjumper :type git :host github :repo "flocks/jjumper")
-  :after (json)
+  :after (json-ts-mode)
   :config
-  (define-key json-mode-map (kbd "C-c C-j") 'jjumper-jump-key)
-  (define-key json-ts-mode-map (kbd "C-c C-j") 'jjumper-jump-key)
+
+  (defun ft-json-command (arg)
+	(interactive "P")
+	(if arg (call-interactively #'jq-interactively)
+	  (call-interactively #'jjumper-jump-key)))
+
+  (define-key json-mode-map (kbd "C-c C-j") 'ft-json-command)
+  (define-key json-ts-mode-map (kbd "C-c C-j") 'ft-json-command)
 
   (defun ft-insert-translation-key ()
 	(interactive)

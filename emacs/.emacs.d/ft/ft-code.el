@@ -1,20 +1,15 @@
+(require 'evil)
 (setq js-indent-level 2)
 (setq typescript-indent-level 2)
 (setq js-import-style "absolute")
 
 
-(require 'treesit)
-(setq treesit-extra-load-path '("~/tree-sitter-module/dist"))
 
-(require 'eglot)
-;; I don't like the small lag the first time I open a file that
-;; that starts the server
-(setq eglot-sync-connect nil)
-
-;; use json-ts-mode from tree-sitter instead of default json-mode
-(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 (use-package magit
   :straight t
@@ -53,24 +48,47 @@
   (add-hook 'web-mode-hook (lambda ()
 							;; it seems we need to wait for eglot
 							(run-with-timer 10 nil 'flymake-eslint-enable)))
-  (add-hook 'js-mode-hook (lambda ()
+  (add-hook 'js-ts-mode-hook (lambda ()
 							;; it seems we need to wait for eglot
 							(run-with-timer 10 nil 'flymake-eslint-enable))))
 
 
+ (use-package eldoc-box
+   :straight t
+   :config
+   (global-set-key (kbd "C-c C-k") #'eldoc-box-help-at-point))
+
+(setq eldoc-echo-area-use-multiline-p nil)
+(setq eglot-events-buffer-size 0
+	  ;; eglot-ignored-server-capabilities '(:hoverProvider
+	  ;; 									  :documentHighlightProvider)
+	  eglot-autoshutdown t)
+
+
 (use-package add-node-modules-path
-  :straight t
+    :straight t
   :init
   (add-hook 'web-mode-hook 'add-node-modules-path t))
 
-(use-package prettier
-  :straight t
-    :init
-    (add-hook 'typescript-ts-mode-hook 'prettier-mode)
-    (add-hook 'js-mode-hook 'prettier-mode)
-    (add-hook 'json-ts-mode-hook 'prettier-mode)
-    (add-hook 'web-mode-hook 'prettier-mode)
-  )
+;; (use-package prettier
+;;   :straight t
+;;   :init
+;;   ;; (setq prettier-prettify-on-save-flag nil)
+;;   (setq prettier-mode-sync-config-flag nil)
+;;   (add-hook 'typescript-ts-mode-hook 'prettier-mode)
+;;   (add-hook 'js-mode-hook 'prettier-mode)
+;;   (add-hook 'js-ts-mode-hook 'prettier-mode)
+;;   (add-hook 'json-ts-mode-hook 'prettier-mode)
+;;   (add-hook 'web-mode-hook 'prettier-mode)
+;;   :config
+;;   (global-set-key (kbd "C-c C-f") 'prettier-prettify)
+
+;;   )
+
+(use-package msp
+  :straight (:local-repo "~/.emacs.d/straight/repos/msp")
+  :config
+  (global-set-key (kbd "C-c C-f") 'msp-prettify))
 
 (use-package haskell-mode
   :straight t)
@@ -79,15 +97,27 @@
   :straight t)
 
 (use-package eglot
-  :straight t
   :config
+  ;; I don't like the small lag the first time I open a file that
+  ;; that starts the server
+  (setq eglot-sync-connect nil)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+  (add-hook 'rust-ts-mode-hook 'eglot-ensure)
+  (add-hook 'go-ts-mode-hook 'eglot-ensure)
+  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'js-ts-mode-hook 'eglot-ensure)
   (add-hook 'js-mode-hook 'eglot-ensure)
   (add-hook 'web-mode-hook 'eglot-ensure)
 
-  (setq eglot-server-programs '((typescript-ts-mode . ("typescript-language-server" "--stdio"))
+  (setq eglot-server-programs '(
+								;;(typescript-ts-mode . ("typescript-language-server" "--stdio"))
+								;; (tsx-ts-mode . ,(eglot-alternatives '(("typescript-language-server" "--stdio") ("tailwindcss-language-server" "--stdio"))))
+								(html-mode . ("tailwindcss-language-server" "--stdio"))
+								(tsx-ts-mode . ("typescript-language-server" "--stdio"))
+								(typescript-ts-mode . ("typescript-language-server" "--stdio"))
+								(rust-ts-mode . ("rust-analyzer"))
 								(web-mode . ("npx" "--no-install" "flow" "lsp"))
+								(go-ts-mode . ("gopls"))
 								(js-ts-mode . ("npx" "--no-install" "flow" "lsp"))
 								(js-mode . ("npx" "--no-install" "flow" "lsp"))))
 
@@ -97,10 +127,6 @@
 (use-package restclient
   :straight t)
 
-(use-package eldoc-box
-  :straight t
-  :config
-  (add-hook 'eglot-connect-hook #'eldoc-box-hover-at-point-mode t))
 
 (use-package edbi
   :straight t
@@ -141,8 +167,9 @@
   :config
   (add-hook 'json-ts-mode-hook 'yafolding-mode))
 
-(evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
-(evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error)
+  (progn
+	(evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+	(evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error))
 
 (use-package git-link
   :straight t
@@ -152,7 +179,9 @@
 (use-package nodejs-repl
   :straight t
   :config
-  (global-set-key (kbd "C-c C-n") 'nodejs-repl))
-
+  (global-set-key (kbd "C-c C-n") 'nodejs-repl)
+  (defun dp/nodejs-repl-remove-broken-filter ()
+	(remove-hook 'comint-output-filter-functions 'nodejs-repl--delete-prompt t))
+  (add-hook 'nodejs-repl-mode-hook #'dp/nodejs-repl-remove-broken-filter))
 
 (provide 'ft-code)
