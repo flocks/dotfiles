@@ -4,8 +4,12 @@ for_window [title="mpv"] resize set height 600
 for_window [class="ksnip"] floating enable, fullscreen enable
 for_window [title="mpv"] move position center center
 
+
+hide_edge_borders smart
+
 default_border pixel 2
 default_floating_border pixel 2
+
 
 set $mod Mod4
 
@@ -98,15 +102,15 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 # move focused container to workspace
-bindsym $mod+Shift+1      move container to workspace $ws1
-bindsym $mod+Shift+2    move container to workspace $ws2
-bindsym $mod+Shift+3      move container to workspace $ws3
-bindsym $mod+Shift+4     move container to workspace $ws4
-bindsym $mod+Shift+5              move container to workspace $ws5
-bindsym $mod+Shift+6          move container to workspace $ws6
-bindsym $mod+Shift+7       move container to workspace $ws7
-bindsym $mod+Shift+8              move container to workspace $ws8
-bindsym $mod+Shift+9           move container to workspace $ws9
+bindsym $mod+Shift+1   move container to workspace $ws1
+bindsym $mod+Shift+2   move container to workspace $ws2
+bindsym $mod+Shift+3   move container to workspace $ws3
+bindsym $mod+Shift+4   move container to workspace $ws4
+bindsym $mod+Shift+5   move container to workspace $ws5
+bindsym $mod+Shift+6   move container to workspace $ws6
+bindsym $mod+Shift+7   move container to workspace $ws7
+bindsym $mod+Shift+8   move container to workspace $ws8
+bindsym $mod+Shift+9   move container to workspace $ws9
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+Control+r restart
@@ -119,58 +123,6 @@ bindsym $mod+m bar mode toggle
 bindsym $mod+grave layout tabbed
 bindsym $mod+Shift+grave layout default
 
-# color defines for zenburn styled i3
-# set $bg     #2c2c2e
-set $bg     #000000
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #a0afa0
-set $tx     #040404
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #ccdc90
-set $gn     #88b090
-set $rd     #e89393
-set $bg_alt    #222224
 
-set $base00 #263238
-set $base01 #2E3C43
-set $base02 #314549
-set $base03 #546E7A
-set $base04 #B2CCD6
-set $base05 #EEFFFF
-set $base06 #EEFFFF
-set $base07 #FFFFFF
-set $base08 #F07178
-set $base09 #F78C6C
-set $base0A #FFCB6B
-set $base0B #C3E88D
-set $base0C #89DDFF
-set $base0D #82AAFF
-set $base0E #C792EA
-set $base0F #FF5370
-set $orange #FFA500
-set $blue   #3998E2
 
-# set some nice colors      border     background  text
-client.focused              $orange        $base00           #ffffff
-client.unfocused            $base01        $bg         $base05
-client.focused_inactive     $base01        $base01         $base05
-client.urgent               $base08        $base08         $base00
-
-#bar {
-  #font pango:mono 11
-  #position top
-  #mode dock
-  #modifier None
-  #status_command i3blocks
-  #colors {
-    #background          $bg
-    #statusline          $base04
-    #separator           $blue
-    #focused_workspace   #3998E2        #3998E2        $base00
-    #active_workspace    $bg_alt        $bg_alt        $base00
-    #inactive_workspace  $bg       $bg        $base05
-    #urgent_workspace    $base08        $base08        $base00
-  #}
-#}
+client.focused          #FFA500 #FFA500 #000000 #FFA500   #FFA500
