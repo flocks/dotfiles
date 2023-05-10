@@ -1,3 +1,4 @@
 #!/bin/bash
 
+kill -9 $(lsof -i :8443 | tail -n -1 | awk '{print $2}') >/dev/null 2>&1
 eval $(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "ledger-vault proxy https://"$1".minivault.ledger-sbx.com"}')
