@@ -2,11 +2,15 @@
 
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 INITIAL_QUERY="${*:-}"
-IFS=: read -ra selected < <(
-  FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
-  fzf --ansi \
-      --disabled --query "$INITIAL_QUERY" \
-      --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-      --delimiter : \
+FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")"
+result=$(fzf --ansi \
+--disabled --query "$INITIAL_QUERY" \
+--print-query \
+--bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+--delimiter : \
 )
-[ -n "${selected[0]}" ] && nvim "${selected[0]}" "+${selected[1]}"
+query=$(echo "$result" | head -n 1)
+file=$(echo "$result" | sed '1d' | cut -d: -f1)
+line=$(echo "$result" | sed '1d' | cut -d: -f2)
+[[ -z $file ]] && exit 1
+nvim -c "cexpr system('rg --vimgrep $query') | edit +$line $file"
