@@ -15,8 +15,8 @@
 		    ;; :family "VictorMono"
 		    ;; :family "IBM Plex Mono"
 		    :family "Iosevka Comfy"
-		    ;; :weight 'SemiBold
-		    ;; :slant 'italic
+		    :weight 'normal
+		    ;; :slant 'normal
 		    :width 'normal
 		    :height 135)
 ;; highlight/hide current line
@@ -33,29 +33,12 @@
 
 (use-package modus-themes
   :straight t
-  :init
-  ;; Add all your customizations prior to loading the themes
-  (global-set-key (kbd "<XF86Favorites>") 'modus-themes-toggle)
-
-  (setq modus-themes-fringes nil)
-  (setq modus-themes-mode-line '(borderless moody accented))
-  (setq modus-themes-region '(no-extend))
-  (setq modus-themes-prompts '(intense bold))
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil
-        modus-themes-region '(bg-only no-extend))
-
-  ;; Load the theme files before enabling a theme
-  (modus-themes-load-themes)
   :config
-  ;; Load the theme of your choice:
-  (modus-themes-load-operandi) ;; OR (modus-themes-load-vivendi)
-  )
-
-(use-package standard-themes
-  :straight t
-  :config
-  (setq standard-themes-fringes nil))
+  (setq modus-themes-slanted-constructs t)
+  (setq modus-themes-bold-constructs t)
+  (setq modus-themes-italic-constructs t)
+  (setq modus-themes-common-palette-overrides
+		'((fringe unspecified))))
 
 ;; free distracting editing/reading
 (use-package darkroom
@@ -68,7 +51,7 @@
 	(call-interactively 'darkroom-mode))
   (setq darkroom-text-scale-increase 1)
   (setq darkroom-margins 0.2)
-  (global-set-key (kbd "<XF86Tools>") 'ft-darkroom-setup))
+  (global-set-key (kbd "C-c C-t F") 'ft-darkroom-setup))
 
 (use-package ef-themes
   :straight t)
@@ -113,5 +96,31 @@
   (interactive)
   (mapc #'disable-theme custom-enabled-themes)
   (call-interactively 'load-theme))
+
+(use-package fontaine
+  :straight t
+  :config
+  (setq fontaine-presets
+		'((regular
+		   :default-height 115)
+		  (medium-regular
+		   :default-height 125)
+		  (medium
+		   :default-height 135)
+		  (large
+		   :default-weight semilight
+		   :default-height 180
+		   :bold-weight extrabold)
+		  (t ; our shared fallback properties
+		   :default-family "Iosevka Comfy"
+		   :default-weight normal
+		   :variable-pitch-family "FiraGO"
+		   :variable-pitch-height 1.05)))
+  )
+
+(global-set-key (kbd "C-c C-t l") 'global-display-line-numbers-mode)
+(global-set-key (kbd "C-c C-t t") 'modus-themes-toggle)
+(global-set-key (kbd "C-c C-t f") 'fontaine-set-preset)
+
 
 (provide 'ft-themes)
