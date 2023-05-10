@@ -90,18 +90,12 @@
 ;; auto insert closing parenthesis/bracket/quote..etc..
 (electric-pair-mode 1)
 
-
-;; (use-package company
-;;   :straight t
-;;   :config (setq company-dabbrev-downcase nil)
-;;   :init (global-company-mode)
-;;   :diminish company-mode)
-
 (use-package corfu
   :straight t
   :custom
   (corfu-cycle t)
   (corfu-auto t)
+  (corfu-auto-delay 0.2)
   :init
   (global-corfu-mode)
   :config
@@ -109,6 +103,7 @@
 	(interactive)
 	(let (completion-cycle-threshold completion-cycling)
 	  (apply #'consult-completion-in-region completion-in-region--data)))
+  (global-set-key (kbd "C-SPC") #'completion-at-point)
   (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer))
 
 (use-package which-key
