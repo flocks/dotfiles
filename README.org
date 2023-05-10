@@ -88,6 +88,7 @@ Tree-sitter needs some grammars files
   stow sxhkd
   stow kitty
   stow polybar
+  stow --dotfiles tmux
   stow --dotfiles prompt
   stow --dotfiles path
   stow --dotfiles xinit
