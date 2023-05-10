@@ -115,9 +115,42 @@ and move this file to this folder renamed as index.{ext}"
 	(when new-dir
 	  (let ((default-directory new-full-name)
 			(previous-content (minibuffer-contents)))
-		(message "%s" previous-content)
 		(minibuffer-quit-recursive-edit)
-		(call-interactively #'shell-command)
-		))))
+		(call-interactively #'shell-command)))))
 
 (define-key minibuffer-local-map (kbd "C-x C-d") 'ft-change-dir-shell-command)
+
+
+
+(defun ft-button ()
+  (interactive)
+  (let ((changes '(("variant=\"primary\"". "variant=\"color\"")
+				   ("variant=\"outline\"". "variant=\"color\"\noutline\n")
+				   ("variant=\"unstyled\"". "")
+				   ("variant=\"outline_danger\"". "variant=\"error\"\noutline\n")
+				   ("square". "iconButton")
+				   ("variant=\"transparent\"". "variant=\"main\"\noutline\n")
+				   ("iconOnRight". "iconPosition=\"right\"")
+				   ("variant=\"link\"". "variant=\"shade\""))))
+	(ignore-errors
+	  (goto-char (point-min))
+	  (while (and (re-search-forward "<Button") (not (eobp)))
+		(re-search-backward "<")
+		(mark-sexp)
+		(narrow-to-region (region-beginning) (region-end))
+		(dolist (change changes)
+		  (while (re-search-forward (car change) nil t)
+			(replace-match (cdr change))))
+		(widen)
+		(forward-word)
+
+		)
+	  (deactivate-mark)))
+  )
+
+(defun ft-dired-buttons ()
+  (interactive)
+  (dolist (file (dired-get-marked-files))
+	(with-current-buffer (find-file-noselect file)
+	  (ft-button)
+	  (save-buffer))))
