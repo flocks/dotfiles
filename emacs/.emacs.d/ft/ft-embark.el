@@ -7,6 +7,10 @@
   (setq consult-find-args
 		"find . -not ( -wholename */.* -prune ) -not ( -wholename *node_modules* -prune )")
 
+  (global-set-key (kbd "C-c M-i") 'consult-imenu)
+  (global-set-key (kbd "C-c M-f") 'consult-focus-lines)
+  (global-set-key (kbd "C-c M-k") 'consult-keep-lines)
+  (global-set-key (kbd "C-c M-t") 'consult-theme)
   (define-key evil-normal-state-map (kbd "C-p") 'consult-find))
 
 (use-package vertico
