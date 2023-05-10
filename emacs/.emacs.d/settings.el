@@ -141,7 +141,7 @@
 (require 'ft-evil)
 (require 'ft-themes)
 (require 'ft-jump)
-(require 'ft-vault2)
+(require 'ft-vault)
 (require 'ft-system)
 (require 'ft-window)
 (require 'ft-json)
