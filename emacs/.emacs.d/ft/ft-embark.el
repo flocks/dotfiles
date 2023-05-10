@@ -115,5 +115,9 @@ targets."
   (define-key vertico-map (kbd "M-U") 'monobuffer-root)
   )
 
+(use-package marginalia
+  :straight t
+  :init
+  (marginalia-mode))
 
 (provide 'ft-embark)
