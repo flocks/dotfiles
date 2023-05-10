@@ -140,7 +140,6 @@
 (require 'ft-jump)
 (require 'ft-vault2)
 (require 'ft-system)
-(require 'ft-yarn)
 (require 'ft-window)
 (require 'ft-json)
 (require 'ft-term)
