@@ -14,20 +14,29 @@
 	(evil-insert-state)
 	(eshell-previous-matching-input-from-input ""))
 
-  (add-hook 'eshell-mode-hook
-			(lambda ()
-			  (evil-define-key 'insert eshell-mode-map
-				(kbd "C-p") 'eshell-previous-matching-input-from-input)
-			  (evil-define-key 'normal eshell-mode-map
-				(kbd "C-p") 'ft/eshell-previous-and-insert)
-			  (evil-define-key 'insert eshell-mode-map
-				(kbd "C-a") 'eshell-bol)
-			  (evil-define-key 'insert eshell-mode-map
-				(kbd "C-k") 'evil-collection-eshell-evil-delete-line)
-			  (evil-define-key 'insert eshell-mode-map
-				(kbd "C-r") 'counsel-esh-history)
-			  (evil-define-key 'normal eshell-mode-map
-				(kbd "C-r") 'counsel-esh-history)))
+  (defun ft/eshell-prompt-history ()
+	(interactive)
+	(let ((history (ring-elements eshell-history-ring))
+		  (content (eshell-get-old-input)))
+	  (when-let ((new-content (completing-read "Command: " history nil nil content)))
+		(eshell-kill-input)
+		(insert new-content))))
+
+  (let ((map eshell-mode-map))
+
+	(evil-define-key 'insert map
+	  (kbd "C-p") 'eshell-previous-matching-input-from-input)
+	(evil-define-key 'normal map
+	  (kbd "C-p") 'ft/eshell-previous-and-insert)
+	(evil-define-key 'insert map
+	  (kbd "C-a") 'eshell-bol)
+	(evil-define-key 'insert map
+	  (kbd "C-k") 'evil-collection-eshell-evil-delete-line)
+	(evil-define-key 'insert map
+	  (kbd "C-r") 'ft/eshell-prompt-history)
+	)
+
+  
   (setq
    eshell-scroll-to-bottom-on-input t
    eshell-hist-ignoredups t)
@@ -138,6 +147,8 @@ directory."
 	(call-interactively 'eshell)))
 
 (global-set-key (kbd "M-`") 'ft-eshell-launcher)
+(global-set-key (kbd "M-~") 'vterm)
+
 (let ((map eshell-mode-map))
   (define-key map (kbd "C-c Y") 'ft-yank-eshell-output)
   (define-key map (kbd "C-c A") 'ft-select-eshell-output)
