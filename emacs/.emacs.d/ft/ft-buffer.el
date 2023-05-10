@@ -39,6 +39,8 @@
 
 (setq display-buffer-alist
 	  `(;; no window
+		("\\*kubel stderr\\*"
+		 (display-buffer-no-window))
 		("\\**vault-deploy*"
 		 (display-buffer-no-window))
 		("\\**mpv-elfeed*"
