@@ -20,6 +20,9 @@
 ;; I always accicentally do this keystroke that is slow
 (global-set-key (kbd "C-h h") nil)
 
+;;; I don't like that is done auto
+(setq auto-save-default nil)
+
 ;;; setup straight.el 
 (defvar bootstrap-version)
 (let ((bootstrap-file
