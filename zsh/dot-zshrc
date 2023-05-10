@@ -16,29 +16,25 @@ export PATH=~/.yarn/bin:$PATH
 export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
 
 export LANG=en_US.UTF-8
-#disable bell
-unsetopt BEEP
 
-# shellchece disable=SC2034
-CASE_SENSITIVE="true"
-# shellcheck disable=SC2034
+source "/home/flocks/ohmyzsh/oh-my-zsh.sh"
+
 plugins=()
 
+source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+CASE_SENSITIVE="true"
+
 #fzf
+FZF_HOME=/usr/share/fzf
+source "$FZF_HOME/completion.zsh"
+source "$FZF_HOME/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --follow'
 export FZF_CTRL_T_COMMAND='rg --files --follow 2>/dev/null'
 export FZF_ALT_C_COMMAND="fd --type directory"
-
-source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-fzfKeyBindings=/usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
-# alt_c is already taken by Kitty, we bind fzf-cd-widget to alt-d
 
+export FZF_DEFAULT_COMMAND="'find . -type f' fzf --bind 'ctrl-d:reload(find . -type d),ctrl-f:reload(eval "$FZF_DEFAULT_COMMAND")' --height=50% --layout=reverse"
 
-if [ -f $fzfKeyBindings ]; then
-  source $fzfKeyBindings
-fi
 
 #ssh
 if [ -z "$SSH_AUTH_SOCK" ] ; then
@@ -56,26 +52,9 @@ source "$HOME/.gitprompt"
 source "$HOME/.prompt"
 source "$HOME/.private"
 
-# History settings
-HISTFILE=~/.zsh_history
-export HISTFILESIZE=1000000000
-export HISTSIZE=1000000000
-# immediatly append to history
-setopt INC_APPEND_HISTORY
-# remove dup
-setopt HIST_FIND_NO_DUPS
-
 #
 # useful for pinentry-tty prompt
 export GPG_TTY="$(tty)"
-
-setopt PROMPT_SUBST
-PATH="/home/flocks/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/flocks/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/flocks/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/flocks/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/flocks/perl5"; export PERL_MM_OPT;
-
 
 pb-kill-line () {
   zle kill-line
@@ -89,14 +68,47 @@ pb-copy-region-as-kill-deactivate-mark () {
 }
 
 wrap() {
-	BUFFER="nvim \$($BUFFER)";
-	zle end-of-line;
+	BUFFER=" \$($BUFFER)";
+	zle beginning-of-line;
+}
+
+wrapProcess() {
+	BUFFER=" <($BUFFER)";
+	zle beginning-of-line;
+}
+
+wrapQuickfix() {
+	BUFFER="nvim -q <($BUFFER)";
+	zle beginning-of-line;
+}
+
+wrapQuote() {
+	BUFFER="\"$BUFFER\"";
+	zle beginning-of-line;
 }
 
 dir() {
-    dir=$(find -type d | fzf)
+  dir=$(find -type d | rg -v "node_modules|.git" |  fzf)
 	BUFFER="$BUFFER $dir"
 	CURSOR=$(($CURSOR + $#dir + 1))
+}
+
+insert_branch() {
+  branch=$(git branch | fzf | awk '{print $1}')
+	BUFFER="$BUFFER $branch"
+	CURSOR=$(($CURSOR + $#branch + 1))
+}
+
+insert_modified_file() {
+  file=$(git status --short | awk '{print $2}' | fzf)
+	BUFFER="$BUFFER $file"
+	CURSOR=$(($CURSOR + $#file + 1))
+}
+
+insert_vault_instance() {
+  vault=$(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "https://"$1".minivault.ledger-sbx.com"}')
+	BUFFER="$BUFFER $vault"
+	CURSOR=$(($CURSOR + $#vault + 1))
 }
 
 lh () {
@@ -106,16 +118,29 @@ lh () {
 bindkey -e
 zle -N pb-kill-line
 zle -N pb-copy-region-as-kill-deactivate-mark
+zle -N wrapQuickfix
+zle -N wrapProcess
 zle -N wrap
+zle -N wrapQuote
 zle -N dir
+zle -N insert_branch
+zle -N insert_modified_file
+zle -N insert_vault_instance
 zle -N edit-command-line
 bindkey '^K'   pb-kill-line
 bindkey '^w'   pb-copy-region-as-kill-deactivate-mark
-bindkey "\C-p" history-search-backward
-bindkey "\C-n" history-search-forward
 
 autoload -z edit-command-line
 bindkey "^X^E" edit-command-line
 
-bindkey "^X^W" wrap
-bindkey "^X^J" dir
+bindkey "^[q" wrapQuickfix
+bindkey "^[$" wrap
+bindkey "^[\<" wrapProcess
+bindkey "^[\"" wrapQuote
+bindkey "^[B" insert_branch
+bindkey "^[T" insert_modified_file
+bindkey "^[V" insert_vault_instance
+
+# proto
+# export PROTO_ROOT="$HOME/.proto"
+# export PATH="$PROTO_ROOT/bin:$PATH"
