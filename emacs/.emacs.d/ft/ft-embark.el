@@ -104,27 +104,12 @@ targets."
             :around #'embark-hide-which-key-indicator)
 
 
-
-(defun ft-add-trailing-slash (dir)
-  (if (string-suffix-p "/" dir)
-	  dir
-    (concat dir "/")))
-
-(defun ft-insert-previous-path ()
-  (interactive)
-  (when-let ((new-content (ft-minibuffer--get-new-path (minibuffer-contents))))
-	(delete-minibuffer-contents)
-	(insert-and-inherit new-content)))
-
-(defun ft-minibuffer--get-new-path (current-path)
-  (let ((project
-		 (locate-dominating-file current-path "package.json")))
-	(if (string= (ft-add-trailing-slash current-path) project)
-		(locate-dominating-file current-path ".git")
-	  (or project (locate-dominating-file current-path ".git") "~"))))
-
-(define-key vertico-map (kbd "M-u") 'ft-insert-previous-path)
-
+(use-package monobuffer
+  :straight (monobuffer :type git :host github :repo "flocks/monobuffer.el")
+  :config
+  (define-key vertico-map (kbd "M-u") 'monobuffer)
+  (define-key vertico-map (kbd "M-U") 'monobuffer-root)
+  )
 
 
 (provide 'ft-embark)
