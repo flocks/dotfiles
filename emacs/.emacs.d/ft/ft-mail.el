@@ -68,9 +68,9 @@
   :straight t
   :init
   (setq notmuch-indicator-args
-		'((:terms "tag:unread and tag:inbox" :label "📧 ")
-		  (:terms "tag:unread and tag:github" :label "🖥️ ")
-		  (:terms "tag:unread and tag:list") :label "L "))
+		'((:terms "tag:unread and tag:inbox" :label "📧")
+		  (:terms "tag:unread and tag:github" :label "🖥️")
+		  (:terms "tag:unread and tag:list" :label "L")))
   (notmuch-indicator-mode))
 
 (global-set-key (kbd "C-c m")
