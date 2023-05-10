@@ -1,0 +1,4 @@
+#!/bin/bash
+
+namespace=$(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "minivault-"$1"-sbx"}')
+k9s -n "$namespace"
