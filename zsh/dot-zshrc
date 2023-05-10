@@ -8,7 +8,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export EDITOR="$(command -v nvim)"
 export TERMINAL="$(command -v kitty)"
 export BROWSER="$(command -v google-chrome-stable)"
-# PATH
+export PAGER="$(command -v nvimpager)"
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/endorsement/bin
 export PATH=~/.npm-global/bin:$PATH
