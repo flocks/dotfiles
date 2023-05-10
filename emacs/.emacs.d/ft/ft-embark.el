@@ -3,6 +3,7 @@
   :straight t
   :config
   (global-set-key (kbd "C-;") 'consult-buffer)
+  (setq consult-async-min-input 2)
   (setq consult-find-args
 		"find . -not ( -wholename */.* -prune ) -not ( -wholename *node_modules* -prune )")
 
