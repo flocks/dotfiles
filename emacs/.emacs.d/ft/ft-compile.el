@@ -3,7 +3,7 @@
 (add-to-list
  'compilation-error-regexp-alist-alist
  '(ts-build
- "^\s?+\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)"
+   "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)"
    1 2 3))
 
 
