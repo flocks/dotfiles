@@ -33,7 +33,7 @@ export FZF_CTRL_T_COMMAND='rg --files --follow 2>/dev/null'
 export FZF_ALT_C_COMMAND="fd --type directory"
 export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all"
 
-export FZF_DEFAULT_COMMAND="'find . -type f' fzf --bind 'ctrl-d:reload(find . -type d),ctrl-f:reload(eval "$FZF_DEFAULT_COMMAND")' --height=50% --layout=reverse"
+# export FZF_DEFAULT_COMMAND="'find . -type f' fzf --bind 'ctrl-d:reload(find . -type d),ctrl-f:reload(eval "$FZF_DEFAULT_COMMAND")' --height=50% --layout=reverse"
 
 
 #ssh
