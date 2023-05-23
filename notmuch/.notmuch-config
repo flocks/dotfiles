@@ -11,8 +11,8 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/home/flocks/Mail
-hook_dir=/home/flocks/.mail/.notmuch/hooks
+path=/home/fteissier/Mail
+hook_dir=/home/fteissier/.mail/.notmuch/hooks
 
 # User configuration
 #

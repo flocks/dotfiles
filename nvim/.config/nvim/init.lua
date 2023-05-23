@@ -134,11 +134,9 @@ end
 
 local lsp_servers = {
   'bashls',
-  'efm',
   'rust_analyzer',
   'pyright',
   'tsserver',
-  'gopls',
   'tailwindcss',
 }
 
@@ -304,77 +302,6 @@ require("lazy").setup({
     end
   },
 
-  -- treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = function()
-      local ts_install = require('nvim-treesitter.install')
-      pcall(ts_install.update({ with_sync = true }))
-    end,
-    config = function()
-      local ts_configs = require('nvim-treesitter.configs')
-      ts_configs.setup({
-        ensure_installed = { 'lua', 'python', 'rust', 'typescript', 'help' },
-        highlight = { enable = true },
-        indent = { enable = false },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            node_decremental = '<c-backspace>',
-          },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>A'] = '@parameter.inner',
-            },
-          },
-        },
-      })
-    end
-  },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
-
   -- fuzzy finder
   { "nvim-lua/plenary.nvim", build = 'make' },
   { "nvim-telescope/telescope-fzf-native.nvim" },
@@ -448,7 +375,6 @@ require("lazy").setup({
         'rust_analyzer',
         'pyright',
         'tsserver',
-        'gopls',
         'tailwindcss',
       }
 
@@ -474,21 +400,6 @@ require("lazy").setup({
           }
         end
       end
-
-      lspconfig.efm.setup({
-        on_attach = require("lsp-format").on_attach,
-        init_options = { documentFormatting = true },
-        settings = {
-          languages = {
-            json = { prettier },
-            typescript = { prettier },
-            typescriptreact = { prettier },
-            javascript = { prettier },
-            javascriptreact = { prettier },
-            yaml = { prettier },
-          },
-        },
-      })
 
       lspconfig.flow.setup({
         on_attach = on_attach,

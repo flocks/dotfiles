@@ -1,18 +1,28 @@
 (add-to-list 'compilation-error-regexp-alist
              'ts-build)
+
+(add-to-list 'compilation-error-regexp-alist
+             'vitest)
+
+(add-to-list 'compilation-error-regexp-alist
+             'flowtype)
+
 (add-to-list
  'compilation-error-regexp-alist-alist
  '(ts-build
    "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)"
    1 2 3))
 
-(add-to-list 'compilation-error-regexp-alist
-             'vitest)
 (add-to-list
  'compilation-error-regexp-alist-alist
  '(vitest
    "^ ❯ \s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)"
+   1 2 3))
 
+(add-to-list
+ 'compilation-error-regexp-alist-alist
+ '(flowtype
+   "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)"
    1 2 3))
 
 (setq project-compilation-buffer-name-function 'project-prefixed-buffer-name)

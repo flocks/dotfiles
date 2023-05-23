@@ -17,15 +17,15 @@ export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
 
 export LANG=en_US.UTF-8
 
-source "/home/flocks/ohmyzsh/oh-my-zsh.sh"
+source "$HOME/ohmyzsh/oh-my-zsh.sh"
 
 plugins=()
 
-source "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 CASE_SENSITIVE="true"
 
 #fzf
-FZF_HOME=/usr/share/fzf
+FZF_HOME=/usr/share/doc/fzf/examples
 source "$FZF_HOME/completion.zsh"
 source "$FZF_HOME/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --follow'

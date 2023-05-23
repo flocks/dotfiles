@@ -1,2 +1,4 @@
 # user script
 PATH=$PATH:$HOME/bin
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:/home/linuxbrew/.linuxbrew/bin

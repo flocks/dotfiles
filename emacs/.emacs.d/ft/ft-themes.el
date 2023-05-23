@@ -115,8 +115,7 @@
 		   :default-family "Iosevka Comfy"
 		   :default-weight normal
 		   :variable-pitch-family "FiraGO"
-		   :variable-pitch-height 1.05)))
-  )
+		   :variable-pitch-height 1.05))))
 
 (global-set-key (kbd "C-c C-t l") 'global-display-line-numbers-mode)
 (global-set-key (kbd "C-c C-t t") 'modus-themes-toggle)

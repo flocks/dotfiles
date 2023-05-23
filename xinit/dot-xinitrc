@@ -1,14 +1,10 @@
-xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 1
-xmodmap ~/.xmodmap.conf
-xset r rate 150 200
-setxkbmap -layout us -variant mac
 keyboard_plug &
 sxhkd &
 parcellite &
-polybar &
 setbg &
 mpd &
 dunst &
-# fix GTK apps being slow to start up
+sleep 1s && polybar -c "$HOME/.config/polybar/config.ini" example &
+## fix GTK apps being slow to start up
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 exec i3

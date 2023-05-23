@@ -21,20 +21,20 @@
 
 
 
-(use-package code-review
-  :straight t
-  :config
-  (defun dashub-review-pr (notif)
-	(let* ((url (plist-get notif :url))
-		   (type (plist-get notif :type)))
-	  (cond ((string= "PullRequest" type)
-			 (code-review-start (dashub--get-pull-request-url url)))
-			t (message (format "%s not supported" type))))
-	)
-  (setq code-review-auth-login-marker 'forge)
-  (setq dashub--action #'dashub-review-pr)
+;; (use-package code-review
+;;   :straight t
+;;   :config
+;;   (defun dashub-review-pr (notif)
+;; 	(let* ((url (plist-get notif :url))
+;; 		   (type (plist-get notif :type)))
+;; 	  (cond ((string= "PullRequest" type)
+;; 			 (code-review-start (dashub--get-pull-request-url url)))
+;; 			t (message (format "%s not supported" type))))
+;; 	)
+;;   (setq code-review-auth-login-marker 'forge)
+;;   (setq dashub--action #'dashub-review-pr)
 
-  (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
-  (remove-hook 'magit-status-sections-hook 'forge-insert-issues))
+;;   (remove-hook 'magit-status-sections-hook 'forge-insert-pullreqs)
+;;   (remove-hook 'magit-status-sections-hook 'forge-insert-issues))
 
 (provide 'ft-github)

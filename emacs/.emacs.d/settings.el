@@ -5,6 +5,7 @@
 	     (expand-file-name (concat user-emacs-directory "ft")))
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
@@ -66,7 +67,7 @@
 (setq auto-save-file-name-transforms
   `((".*" "~/.emacs-saves/" t)))
 
-(setq epa-pinentry-mode 'loopback)
+;; (setq epa-pinentry-mode 'loopback)
 
 
 (require 'treesit)
