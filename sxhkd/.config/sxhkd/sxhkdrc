@@ -2,10 +2,7 @@
 super + e
       emacsclient -c -a ''
 super + Return
-      $TERMINAL
-# launch clipmenu copy history with dmenu
-#super + shift + c
-#      clipmenu
+      ~/bin/open-terminal
 # launch chrome
 super + c
       google-chrome-stable

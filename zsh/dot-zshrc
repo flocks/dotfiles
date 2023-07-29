@@ -146,3 +146,7 @@ bindkey "^[V" insert_vault_instance
 # proto
 # export PROTO_ROOT="$HOME/.proto"
 # export PATH="$PROTO_ROOT/bin:$PATH"
+
+precmd() { pwd > /tmp/current-dir }
+in() { cd $(dirname $1) }
+in() { cd $(dirname $1) }
