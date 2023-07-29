@@ -168,6 +168,9 @@ require("lazy").setup({
     "tpope/vim-dispatch"
   },
   {
+    "lambdalisue/vim-manpager"
+  },
+  {
     "tpope/vim-eunuch"
   },
   {
