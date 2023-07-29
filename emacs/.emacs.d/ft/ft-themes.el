@@ -38,7 +38,13 @@
   (setq modus-themes-bold-constructs t)
   (setq modus-themes-italic-constructs t)
   (setq modus-themes-common-palette-overrides
-		'((fringe unspecified))))
+		'((fg-line-number-inactive "gray50")
+		  (fg-line-number-active red-cooler)
+		  (bg-line-number-inactive unspecified)
+		  (fringe unspecified)
+		  (bg-line-number-active unspecified)))
+
+  (modus-themes-toggle))
 
 ;; free distracting editing/reading
 (use-package darkroom
