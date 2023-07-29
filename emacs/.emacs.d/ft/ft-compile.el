@@ -1,29 +1,18 @@
-(add-to-list 'compilation-error-regexp-alist
-             'ts-build)
-
-(add-to-list 'compilation-error-regexp-alist
-             'vitest)
-
-(add-to-list 'compilation-error-regexp-alist
-             'flowtype)
-
-(add-to-list
- 'compilation-error-regexp-alist-alist
- '(ts-build
-   "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)"
-   1 2 3))
-
-(add-to-list
- 'compilation-error-regexp-alist-alist
- '(vitest
-   "^ ❯ \s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)"
-   1 2 3))
-
-(add-to-list
- 'compilation-error-regexp-alist-alist
- '(flowtype
-   "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)"
-   1 2 3))
+(let ((regex-alist
+	   '(
+		 ("ts-build". "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ("vitest" . "^ ❯ \s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ("turbo" ."\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ("cc" . "^\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ("flowtype" . "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ("typecheck" . "^\s?+\\(src.*\\):\\([0-9]+\\):\\([0-9]+\\)"  )
+		 )))
+  (dolist (regex regex-alist)
+	(add-to-list 'compilation-error-regexp-alist (intern (car regex)))
+	(add-to-list 'compilation-error-regexp-alist-alist
+				 `(,(intern (car regex))
+				  ,(cdr regex)
+				  1 2 3))))
 
 (setq project-compilation-buffer-name-function 'project-prefixed-buffer-name)
 (setq compilation-ask-about-save nil)
