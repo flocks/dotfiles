@@ -129,8 +129,6 @@ zle -N insert_branch
 zle -N insert_modified_file
 zle -N insert_vault_instance
 zle -N edit-command-line
-bindkey '^K'   pb-kill-line
-bindkey '^w'   pb-copy-region-as-kill-deactivate-mark
 
 autoload -z edit-command-line
 bindkey "^X^E" edit-command-line
