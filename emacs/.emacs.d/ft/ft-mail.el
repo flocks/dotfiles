@@ -67,6 +67,8 @@
 (use-package notmuch-indicator
   :straight t
   :init
+  (setq notmuch-indicator-display-command (lambda ()
+											(setq minibar-group-left '((lambda () notmuch-indicator-string)))))
   (setq notmuch-indicator-args
 		'((:terms "tag:unread and tag:inbox" :label "📧")
 		  (:terms "tag:unread and tag:github" :label "🖥️")
