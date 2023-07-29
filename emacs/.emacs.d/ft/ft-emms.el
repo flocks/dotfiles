@@ -8,7 +8,7 @@
 			(let ((file-name (alist-get 'name track)))
 			  (file-name-base file-name))))
 
-    (setq emms-player-mpd-music-directory "/home/flocks/music"))
+    (setq emms-player-mpd-music-directory (format "%s/music" (getenv "HOME"))))
 
 (define-minor-mode emms-dired-mode
   "Emms dired mode"
