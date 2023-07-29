@@ -150,6 +150,7 @@ directory."
 (global-set-key (kbd "M-~") 'vterm)
 
 (let ((map eshell-mode-map))
+  (evil-collection-define-key 'normal 'map (kbd "C-p") nil)
   (define-key map (kbd "C-c Y") 'ft-yank-eshell-output)
   (define-key map (kbd "C-c A") 'ft-select-eshell-output)
   (define-key map (kbd "C-c C") 'ft-export-eshell-output-compilation)
