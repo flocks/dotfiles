@@ -1,4 +1,7 @@
 # user script
+PNPM_HOME=$HOME/.local/share/pnpm
 PATH=$PATH:$HOME/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+PATH=$PATH:$PNPM_HOME
+PATH=$PATH:/usr/local/lib/python3.10/dist-packages
