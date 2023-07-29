@@ -88,6 +88,7 @@
 (use-package msp
   :straight (:local-repo "~/.emacs.d/straight/repos/msp")
   :config
+  (setq msp-config-file '(".prettierrc" ".prettierrc.js" ".prettierrc.json"))
   (global-set-key (kbd "C-c C-f") 'msp-prettify))
 
 (use-package haskell-mode
