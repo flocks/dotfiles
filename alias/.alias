@@ -1,5 +1,5 @@
 # edit confs
-alias V="cd ~/dotfiles/nvim/.config/nvim"
+alias V="nvim ~/dotfiles/nvim/.config/nvim/init.lua"
 alias I="nvim ~/dotfiles/i3/.config/i3/config"
 alias K="nvim ~/dotfiles/kitty/.config/kitty/kitty.conf"
 alias Z="nvim ~/.zshrc"
@@ -7,6 +7,8 @@ alias Z="nvim ~/.zshrc"
 alias resource="source ~/.zshrc"
 
 # folder
+alias s="cd ~/screenshots"
+alias gof="cd ~/gof"
 alias ex="cd ~/exvoto"
 alias dl="cd ~/Downloads"
 alias front="cd ~/ledger/ledger-vault-front"
@@ -27,6 +29,8 @@ alias wd="cd ~/ledger/ledger-wallet-daemon"
 alias dot="cd ~/dotfiles"
 alias dp="cd ~/deeprun-front/"
 alias b="cd ~/bin"
+alias h="cd"
+alias live="cd ~/ledger/ledger-live"
 
 
 # git stuff
@@ -69,7 +73,6 @@ alias lv="ledger-vault"
 alias lvo="ledger-vault run onboarding"
 alias lvco="ledger-vault create user --role operator --name $(date +%s)"
 alias lvca="ledger-vault create user --role admin --name $(date +%s)"
-alias s="swallow"
 alias music="ncmpcpp"
 
 #emacs links
@@ -77,6 +80,9 @@ alias mg="magit"
 alias p="pnpm"
 
 # utils
+alias fn="find . -name"
+alias pcopy="pwd | copy"
+alias pc="pwd | copy"
 alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
 alias chmox="chmod +x"
 alias ls="ls --color"
