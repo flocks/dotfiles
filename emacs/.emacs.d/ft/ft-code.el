@@ -105,19 +105,19 @@
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
   (add-hook 'rust-ts-mode-hook 'eglot-ensure)
   (add-hook 'go-ts-mode-hook 'eglot-ensure)
+  (add-hook 'go-mode-hook 'eglot-ensure)
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'js-ts-mode-hook 'eglot-ensure)
   (add-hook 'js-mode-hook 'eglot-ensure)
   (add-hook 'web-mode-hook 'eglot-ensure)
 
-  (setq eglot-server-programs '(
-								;;(typescript-ts-mode . ("typescript-language-server" "--stdio"))
-								;; (tsx-ts-mode . ,(eglot-alternatives '(("typescript-language-server" "--stdio") ("tailwindcss-language-server" "--stdio"))))
-								(html-mode . ("tailwindcss-language-server" "--stdio"))
+  (setq eglot-server-programs '((html-mode . ("tailwindcss-language-server" "--stdio"))
 								(tsx-ts-mode . ("typescript-language-server" "--stdio"))
 								(typescript-ts-mode . ("typescript-language-server" "--stdio"))
 								(rust-ts-mode . ("rust-analyzer"))
+								(c-mode . ("clangd-12"))
 								(web-mode . ("npx" "--no-install" "flow" "lsp"))
+								(go-mode . ("gopls"))
 								(go-ts-mode . ("gopls"))
 								(js-ts-mode . ("npx" "--no-install" "flow" "lsp"))
 								(js-mode . ("npx" "--no-install" "flow" "lsp"))))
@@ -184,5 +184,6 @@
   (defun dp/nodejs-repl-remove-broken-filter ()
 	(remove-hook 'comint-output-filter-functions 'nodejs-repl--delete-prompt t))
   (add-hook 'nodejs-repl-mode-hook #'dp/nodejs-repl-remove-broken-filter))
+
 
 (provide 'ft-code)
