@@ -19,6 +19,7 @@
   (use-local-map vault-mode-map)
   (setq tabulated-list-format [("Name" 30 t)
 							   ("Owner" 30 t)
+							   ("Preset" 30 t)
 							   ("Status" 10 t '(:right-align t))])
 
   (setq tabulated-list-entries (vault--set-tabulated-entries vault-instances))
@@ -74,6 +75,7 @@ NAME is the buffer name."
 	   `(,(alist-get 'name instance)
 		 ,(vector (vault--propertize-name (alist-get 'name instance))
 				  (vault--propertize-owner (alist-get 'owner instance))
+				  (vault--propertize-owner (alist-get 'preset instance))
 				  (vault--propertize-status (alist-get 'status instance)))) result ))
 	result))
 
@@ -214,6 +216,9 @@ NAME is the buffer name."
 	(compile command)))
 
 
+(defun vault-get-token (instance-url device salt)
+  (shell-command-to-string (format "ledger-vault getAuthToken --device %s  --salt %s --minivaultURL %s"
+								   device salt instance-url)))
 (defun vault-token (instance)
   (interactive
    (list (or (tabulated-list-get-id)
