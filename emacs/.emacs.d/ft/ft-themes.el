@@ -27,9 +27,9 @@
   :config
   (tab-bar-echo-area-mode))
 
-(use-package minions
-  :straight t
-  :config (minions-mode))
+;; (use-package minions
+;;   :straight t
+;;   :config (minions-mode))
 
 (use-package modus-themes
   :straight t
