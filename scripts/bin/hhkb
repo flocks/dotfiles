@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# reset
+pkill xcape
+
+# swap Esc and `
+xmodmap -e 'keycode 9 = grave asciitilde'
+xmodmap -e 'keycode 49 = Escape'
+
+#swap left alt and left super
+xmodmap -e 'remove mod1 = Alt_L'
+xmodmap -e 'remove mod4 = Super_L'
+xmodmap -e 'keycode 133 = Alt_L'
+xmodmap -e 'keycode 64 = Super_L'
+xmodmap -e 'add mod1 = Alt_L  '
+xmodmap -e 'add mod4 = Super_L'
+
+#swap right alt and right super
+xmodmap -e 'remove mod1 = Alt_L'
+xmodmap -e 'remove mod4 = Super_R'
+xmodmap -e 'keycode 134 = ISO_Level3_Shift'
+xmodmap -e 'keycode 108 = Super_R'
+xmodmap -e 'add mod1 = Alt_R ISO_Level3_Shift'
+xmodmap -e 'add mod4 = Super_R'
+
+xcape -e 'Control_L=Escape'

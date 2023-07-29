@@ -2,10 +2,11 @@
 
 xset r rate 150 200
 setxkbmap -layout us -variant mac
-if lsusb | grep -q "USB Keyboard"
+if lsusb | grep -q "HHKB"
 then
-  setxkbmap -option
+  ~/bin/hhkb
 else
+  pkill xscape
   xmodmap ~/.xmodmap.conf
+  xcape -e 'Control_L=Escape'
 fi
-xcape -e 'Control_L=Escape'
