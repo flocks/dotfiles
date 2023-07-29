@@ -6,13 +6,13 @@ for_window [title="mpv"] move position center center
 
 
 hide_edge_borders smart
-
 default_border pixel 2
 default_floating_border pixel 2
 
 
 set $mod Mod4
 
+# gaps inner all set 5
 
 font pango:Fira Code 7
 # move floating windows with $mod+mouse
@@ -24,6 +24,17 @@ set $term --no-startup-id kitty
 bindsym $mod+q kill
 
 bindsym $mod+Shift+g mode "gap_mode"
+
+mode "gap_mode" {
+    bindsym j gaps inner all set 5
+    bindsym k gaps inner all plus 5
+
+    bindsym h gaps outer all minus 5
+    bindsym l gaps outer all plus 5
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
 
 bindsym $mod+r exec dmenu_run
 
