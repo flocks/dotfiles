@@ -44,6 +44,9 @@
 (defun ft-get-project-root ()
   (locate-dominating-file (or (buffer-file-name) default-directory) "package.json"))
 
+(defun ft-get-git-root ()
+  (locate-dominating-file (or (buffer-file-name) default-directory) ".git"))
+
 
 
 ;; make emacs consider project with package.json as full project
@@ -64,6 +67,32 @@ prefix arg"
 	  (let ((current-prefix-arg nil))
 		(call-interactively #'compile)))))
 
-(global-set-key (kbd "M-*") 'ft-compile-run)
+
+(defun ft/project-custom-ci ()
+  (interactive)
+  (let ((current (file-name-nondirectory (directory-file-name (ft-get-git-root))))
+		(projects '(("ledger-vault-front" .
+					 "yarn lint --format unix && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck")
+					("turboph" .
+					 "stack build")
+					("gof" .
+					 "go test")
+					("concage" .
+					 "go run main.go")
+					("vault-ts" .
+					 "pnpm run ci")
+					("vault-remote" .
+					 "yarn lint && yarn prettier:check --loglevel silent && yarn typecheck && yarn validate-hooks && yarn test --coverage --coverageThreshold '{ \"global\": { \"branches\": 100, \"functions\": 100, \"lines\": 100, \"statements\": 100 } }'"))))
+	(if-let ((project (assoc current projects)))
+		(let ((compilation-read-command nil)
+			  (compile-command (cdr project)))
+		  (call-interactively #'project-compile))
+	  (call-interactively #'project-compile))))
+
+(global-set-key (kbd "M-*") 'ft/project-custom-ci)
+
+;; idea being able to filter output of commands
+;; match the command, hide output until another command is run (by detecting prompt $)
+
 
 (provide 'ft-compile)
