@@ -30,28 +30,6 @@
 ;; find `ci' script
 ;; append --loglevel silent to prettier task
 
-
-(defun ft/front-ci ()
-  (interactive)
-  (let ((default-directory "~/ledger/ledger-vault-front")
-		(compilation-read-command nil)
-		(compile-command "yarn lint && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck" ))
-	(call-interactively #'project-compile)))
-
-(use-package minibar
-  :straight '(:type git :repo  "https://codeberg.org/akib/emacs-minibar.git")
-  :config
-  (setq minibar-group-left '((lambda ()
-							   (if (boundp 'notmuch-indicator-string)
-								   notmuch-indicator-string
-								 ""))))
-  (setq minibar-group-middle '((lambda ()
-								 (if (boundp 'erc-modified-channels-object)
-									 erc-modified-channels-object
-								   ""))))
-  (minibar-mode))
-
-
 (provide 'ft-misc)
 
 
