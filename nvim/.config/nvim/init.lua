@@ -404,6 +404,26 @@ require("lazy").setup({
         end
       end
 
+      lspconfig.pylsp.setup({
+        cmd = { "pylsp"},
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {"py"}
+      })
+
+      lspconfig.gopls.setup({
+        cmd = { "gopls"},
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {"go"}
+      })
+
+      lspconfig.clangd.setup({
+        cmd = { "clangd-12"},
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
       lspconfig.flow.setup({
         on_attach = on_attach,
         capabilities = capabilities,
