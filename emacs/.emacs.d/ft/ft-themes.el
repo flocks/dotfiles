@@ -122,4 +122,6 @@
 (global-set-key (kbd "C-c C-t f") 'fontaine-set-preset)
 
 
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(setq display-line-numbers 'relative)
 (provide 'ft-themes)
