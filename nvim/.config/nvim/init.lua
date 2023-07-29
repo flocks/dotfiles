@@ -64,6 +64,9 @@ vim.keymap.set('n', '<leader>N', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>Y', ":let @+ = @%<CR>")
+vim.keymap.set('n', '<leader>y', ":let @+ = expand('%:p')<CR>")
+vim.keymap.set('n', '<leader>d', ":let @+ = expand('%:p:h')<CR>")
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
 vim.keymap.set('n', "<C-c><C-f>", ":Format<CR>") -- reformat
