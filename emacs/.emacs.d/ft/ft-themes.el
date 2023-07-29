@@ -107,11 +107,13 @@
   :straight t
   :config
   (setq fontaine-presets
-		'((regular
+		'((small
+		   :default-height 100)
+		  (regular
 		   :default-height 115)
-		  (medium-regular
-		   :default-height 125)
 		  (medium
+		   :default-height 125)
+		  (big
 		   :default-height 135)
 		  (large
 		   :default-weight semilight
