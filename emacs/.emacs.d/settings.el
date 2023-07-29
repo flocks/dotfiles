@@ -164,7 +164,6 @@
 (require 'ft-github)
 (require 'ft-misc)
 (require 'ft-mail)
-(require 'ft-sx)
 (require 'ft-social)
 
 (use-package notmuch)
