@@ -57,7 +57,7 @@
 	(call-interactively 'darkroom-mode))
   (setq darkroom-text-scale-increase 1)
   (setq darkroom-margins 0.2)
-  (global-set-key (kbd "C-c C-t F") 'ft-darkroom-setup))
+  (global-set-key (kbd "C-x F F") 'ft-darkroom-setup))
 
 (use-package ef-themes
   :straight t)
@@ -125,9 +125,9 @@
 		   :variable-pitch-family "FiraGO"
 		   :variable-pitch-height 1.05))))
 
-(global-set-key (kbd "C-c C-t l") 'global-display-line-numbers-mode)
-(global-set-key (kbd "C-c C-t t") 'modus-themes-toggle)
-(global-set-key (kbd "C-c C-t f") 'fontaine-set-preset)
+(global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
+(global-set-key (kbd "C-x F t") 'modus-themes-toggle)
+(global-set-key (kbd "C-x F f") 'fontaine-set-preset)
 
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
