@@ -147,10 +147,16 @@ require("lazy").setup({
   -- color scheme
   { 
     "rose-pine/neovim", 
+    -- config = function()
+    --   vim.cmd([[colorscheme rose-pine]])
+    -- end,
+  },
+  { "ellisonleao/gruvbox.nvim",
     config = function()
-      vim.cmd([[colorscheme rose-pine]])
+      vim.cmd([[colorscheme gruvbox]])
     end,
   },
+
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -203,7 +209,7 @@ require("lazy").setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'rose-pine',
+        theme = 'gruvbox',
         component_separators = '',
         section_separators = { left = '', right = '' },
       },
