@@ -57,5 +57,6 @@ dired buffer"
 	(dired (cons (format "*rgl* - %s" regexp) (process-lines "rg" "-l" regexp)))))
 
 (define-key grep-mode-map (kbd "C-c d") 'ft-grep-to-dired)
+(evil-define-key 'normal grep-mode-map (kbd "g r") 'embark-rerun-collect-or-export)
 
 (provide 'ft-search)
