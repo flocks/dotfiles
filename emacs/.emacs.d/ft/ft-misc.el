@@ -25,11 +25,4 @@
 	 :sentinel #'ft-start-front-project--sentinel
 	 :command `("git" "clone" "git@github.com:flocks/ts-lib-starter.git" ,dir ))))
 
-;; make this work for other project
-;; detect package builder (pnpm,yarn/npm)
-;; find `ci' script
-;; append --loglevel silent to prettier task
-
 (provide 'ft-misc)
-
-
