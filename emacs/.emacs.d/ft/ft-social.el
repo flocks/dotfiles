@@ -41,14 +41,12 @@
 (use-package sx
   :straight t
   :config
-  
   (defun ft-search-stack ()
 	(interactive)
 	(call-interactively 'sx-search))
 
    (global-set-key (kbd "C-c C-h") 'ft-search-stack)
-   ;; (evil-define-key 'normal sx-question-list-mode-map (kbd "RET") 'sx-display)
-  )
+   (evil-define-key 'normal sx-question-list-mode-map (kbd "RET") 'sx-display))
 
 (use-package elpher
   :straight t)
