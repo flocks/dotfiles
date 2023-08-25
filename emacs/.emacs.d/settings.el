@@ -165,6 +165,7 @@
 (require 'ft-misc)
 (require 'ft-mail)
 (require 'ft-social)
+(require 'ft-modeline)
 
 (use-package notmuch)
 
