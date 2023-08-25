@@ -12,6 +12,10 @@
 (global-set-key "\C-x2" #'ft-my-split-window-vertically)
 (global-set-key "\C-x3" #'ft-my-split-window-horizontally)
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+;; same as C-x 4 4
+(global-set-key (kbd "M-4") 'other-window-prefix)
+
+
 
 (use-package winner
    :straight t
