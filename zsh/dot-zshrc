@@ -27,7 +27,7 @@ source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 CASE_SENSITIVE="true"
 
 #fzf
-FZF_HOME=/usr/share/doc/fzf/examples
+FZF_HOME=/usr/share/fzf
 source "$FZF_HOME/completion.zsh"
 source "$FZF_HOME/key-bindings.zsh"
 export FZF_DEFAULT_COMMAND='rg --files --follow'
