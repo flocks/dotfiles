@@ -140,17 +140,17 @@
 (use-package spacious-padding
   :straight (spacious-padding :type git :host github :repo "protesilaos/spacious-padding"))
 
-(use-package minibar
-  :straight '(:type git :repo  "https://codeberg.org/akib/emacs-minibar.git")
-  :config
-  (setq minibar-group-left '((lambda ()
-							   (if (boundp 'notmuch-indicator-string)
-								   notmuch-indicator-string
-								 ""))))
-  (setq minibar-group-middle '((lambda ()
-								 (if (boundp 'erc-modified-channels-object)
-									 erc-modified-channels-object
-								   ""))))
-  (minibar-mode))
+;; (use-package minibar
+;;   :straight '(:type git :repo  "https://codeberg.org/akib/emacs-minibar.git")
+;;   :config
+;;   (setq minibar-group-left '((lambda ()
+;; 							   (if (boundp 'notmuch-indicator-string)
+;; 								   notmuch-indicator-string
+;; 								 ""))))
+;;   (setq minibar-group-middle '((lambda ()
+;; 								 (if (boundp 'erc-modified-channels-object)
+;; 									 erc-modified-channels-object
+;; 								   ""))))
+;;   (minibar-mode))
 
 (provide 'ft-themes)
