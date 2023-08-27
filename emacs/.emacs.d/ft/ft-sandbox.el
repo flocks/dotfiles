@@ -148,6 +148,12 @@ and move this file to this folder renamed as index.{ext}"
 	  (deactivate-mark)))
   )
 
+(defun ft-list-of-files-in-dired (beginning end)
+  (interactive "r")
+  (if (use-region-p)
+	  (dired (cons (read-string "Buffer name: ") (split-string (buffer-substring-no-properties beginning end))))
+	))
+
 (defun ft-dired-buttons ()
   (interactive)
   (dolist (file (dired-get-marked-files))
