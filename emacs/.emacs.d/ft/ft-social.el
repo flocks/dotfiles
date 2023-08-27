@@ -51,5 +51,12 @@
 (use-package elpher
   :straight t)
 
+(use-package bongo
+  :straight t
+  :config
+  (evil-define-key 'normal bongo-mode-map (kbd "RET") 'bongo-play)
+  ;; (define-key 'normal bongo-mode-map (kbd "o") 'bongo-insert-file)
+  (evil-define-key 'normal bongo-mode-map (kbd "o") 'bongo-insert-file))
+
 
 (provide 'ft-social)
