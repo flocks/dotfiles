@@ -81,6 +81,8 @@ alias p="pnpm"
 
 # utils
 alias fn="find . -name"
+alias fic="find-in-code.sh"
+alias rgc="find-in-code.sh | xargs rg"
 alias pcopy="pwd | copy"
 alias pc="pwd | copy"
 alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10"
