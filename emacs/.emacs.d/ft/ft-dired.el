@@ -68,6 +68,15 @@ the preset date (1hour/1week/1month)"
    (completing-read "Dir: "
 		    (split-string (shell-command-to-string "fd --type directory")))))
 
+(defun ft-list-of-files-in-dired (beginning end)
+  "Take files listed in the region and create a dired buffer with
+the list"
+  (interactive "r")
+  (if (use-region-p)
+	  (let* ((files (split-string (buffer-substring-no-properties beginning end)))
+			 (filtered-files (seq-filter (lambda (file) (file-exists-p file)) files)))
+		(when filtered-files
+		  (dired (cons (read-string "Buffer name: ") filtered-files))))))
 
 (let ((map dired-mode-map))
   (evil-define-key 'normal map (kbd "C-c C-p") 'dired-toggle-read-only) ;; to be consisent with rg.el/occur/grep
@@ -141,6 +150,11 @@ With a prefix ARG, the command can be edited"
 	  (revert-buffer)
 	  (dired-jump nil output))))
 
+(defun ft-dired-last ()
+  (interactive)
+  (revert-buffer)
+  (goto-char (point-max))
+  (forward-line -1))
 
 (use-package dired-narrow
   :straight t
