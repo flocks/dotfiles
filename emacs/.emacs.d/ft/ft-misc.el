@@ -25,4 +25,11 @@
 	 :sentinel #'ft-start-front-project--sentinel
 	 :command `("git" "clone" "git@github.com:flocks/ts-lib-starter.git" ,dir ))))
 
+(defun ft-last-screenshots ()
+  (interactive)
+  (find-file-other-window "~/screenshots")
+  (revert-buffer)
+  (goto-char (point-max))
+  (forward-line -1))
+
 (provide 'ft-misc)
