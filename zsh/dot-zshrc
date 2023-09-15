@@ -148,3 +148,9 @@ bindkey "^[V" insert_vault_instance
 precmd() { pwd > /tmp/current-dir }
 in() { cd $(dirname $1) }
 in() { cd $(dirname $1) }
+p() {
+    col="$1"
+    while read -r line; do
+      echo "$line" | awk -v col="$col" '{print $col}'
+    done
+}

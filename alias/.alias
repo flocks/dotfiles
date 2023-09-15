@@ -77,7 +77,7 @@ alias music="ncmpcpp"
 
 #emacs links
 alias mg="magit"
-alias p="pnpm"
+# alias p="pnpm"
 
 # utils
 alias fn="find . -name"
