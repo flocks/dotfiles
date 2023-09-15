@@ -8,6 +8,7 @@
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
+  ("R" (lambda () (interactive) (find-file "~/ledger/revault")) :exit t)
   ("m" (lambda () (interactive) (find-file "~/ledger/minivault")) :exit t)
   ("w" (lambda () (interactive) (find-file "~/ledger/wallet-connect-live-app")) :exit t)
   ("D" (lambda () (interactive) (find-file "~/Downloads")) :exit t)
@@ -16,8 +17,8 @@
   ("a" (lambda () (interactive) (find-file "~/ledger/vault-apdu-connector")) :exit t)
   ("d" (lambda () (interactive) (find-file "~/dotfiles")) :exit t)
   ("h" (lambda () (interactive) (find-file "~")) :exit t)
-  ("L" (lambda () (interactive) (find-file "~/ledger")) :exit t)
-  ("l" (lambda () (interactive) (find-file "~/ledger/ledger-live")) :exit t)
+  ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t)
+  ("L" (lambda () (interactive) (find-file "~/ledger/ledger-live")) :exit t)
   )
 
 (defun ft-diff-file-dwim ()
