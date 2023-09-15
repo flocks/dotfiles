@@ -16,12 +16,12 @@
   (setq dired-jump-map nil)
   )
 
-(use-package dired-copy-paste
-  :straight (dired-copy-paste :type git :host github :repo "jsilve24/dired-copy-paste")
-  :config
-  (evil-define-key 'normal dired-mode-map "d" 'dired-copy-paste-do-cut)
-  (evil-define-key 'normal dired-mode-map "p" 'dired-copy-paste-do-paste)
-  (evil-define-key 'normal dired-mode-map "y" 'dired-copy-paste-do-copy))
+;; (use-package dired-copy-paste
+;;   :straight (dired-copy-paste :type git :host github :repo "jsilve24/dired-copy-paste")
+;;   :config
+;;   (evil-define-key 'normal dired-mode-map "d" 'dired-copy-paste-do-cut)
+;;   (evil-define-key 'normal dired-mode-map "p" 'dired-copy-paste-do-paste)
+;;   (evil-define-key 'normal dired-mode-map "y" 'dired-copy-paste-do-copy))
 
 (use-package dired-subtree
   :straight t)
@@ -86,8 +86,8 @@ the list"
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
   (evil-define-key 'normal map (kbd "C-c C-d m") 'dired-mark-files-regexp)
+  (evil-define-key 'normal map (kbd ";y") 'ft-dired-copy-project-filename-as-kill)
   (evil-define-key 'normal map (kbd "C-c C-d r") 'ft-dired-mark-recent))
-
 
 
 (defun ft-clone-dired-buffer ()
@@ -149,6 +149,16 @@ With a prefix ARG, the command can be edited"
 	  (shell-command command)
 	  (revert-buffer)
 	  (dired-jump nil output))))
+
+
+(defun ft-dired-copy-project-filename-as-kill ()
+  (interactive)
+  (let* ((files (dired-get-marked-files))
+		 (project-path (file-truename (locate-dominating-file default-directory ".git")))
+		 (result (mapconcat
+				  (lambda (file) (file-relative-name file project-path)) files " ")))
+    (message "%s" result)
+	(kill-new result)))
 
 (defun ft-dired-last ()
   (interactive)
