@@ -185,5 +185,8 @@
 	(remove-hook 'comint-output-filter-functions 'nodejs-repl--delete-prompt t))
   (add-hook 'nodejs-repl-mode-hook #'dp/nodejs-repl-remove-broken-filter))
 
+;; ocaml repl
+(use-package utop
+  :straight t)
 
 (provide 'ft-code)
