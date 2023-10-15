@@ -38,7 +38,9 @@
 (defvar-local ft-modeline-misc
     '(:eval
       (when (mode-line-window-selected-p)
-        (list erc-modified-channels-object notmuch-indicator-string dashub-alert-mode-line)))
+        (list erc-modified-channels-object
+			  ;; notmuch-indicator-string
+			  dashub-alert-mode-line)))
 
   "Mode line construct to display the major mode.")
 
