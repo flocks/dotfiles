@@ -89,11 +89,7 @@ and move this file to this folder renamed as index.{ext}"
 (setq shell-command-prompt-show-cwd t)
 (setq enable-recursive-minibuffers t)
 
-(use-package shelldon
-  :straight t
-  :config
-  (evil-define-key 'motion global-map (kbd "M-&") 'shelldon)
-  (global-set-key (kbd "M-&") 'shelldon))
+(global-set-key (kbd "M-&") 'compile)
 
 (defun ft-insert-current-defun-call ()
   "Take current defun and insert a new line calling defun"
@@ -142,11 +138,9 @@ and move this file to this folder renamed as index.{ext}"
 		  (while (re-search-forward (car change) nil t)
 			(replace-match (cdr change))))
 		(widen)
-		(forward-word)
+		(forward-word))
+	  (deactivate-mark))))
 
-		)
-	  (deactivate-mark)))
-  )
 
 (defun ft-dired-buttons ()
   (interactive)
