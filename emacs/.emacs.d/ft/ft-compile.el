@@ -6,7 +6,8 @@
 		 ("cc" . "^\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
 		 ("flowtype" . "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
 		 ("prettier" . "\\[error] \\(.*\\): SyntaxError: Unexpected token (\\([0-9]+\\):\\([0-9]+\\)")
-		 ("typecheck" . "^\s?+\\(src.*\\):\\([0-9]+\\):\\([0-9]+\\)"  )
+		 ("typecheck" . "^\s?+\\(src.*\\):\\([0-9]+\\):\\([0-9]+\\)" )
+		 ("haskell" . "\\([a-zA-Z]+.hs\\):\\([0-9]+\\):\\([0-9]+\\)")
 		 )))
   (dolist (regex regex-alist)
 	(add-to-list 'compilation-error-regexp-alist (intern (car regex)))
@@ -76,6 +77,8 @@ prefix arg"
 					 "yarn lint --format unix && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck")
 					("turboph" .
 					 "stack build")
+					("hchess" .
+					 "cabal build")
 					("gof" .
 					 "go test")
 					("concage" .
@@ -91,6 +94,7 @@ prefix arg"
 	  (call-interactively #'project-compile))))
 
 (global-set-key (kbd "M-*") 'ft/project-custom-ci)
+
 
 ;; idea being able to filter output of commands
 ;; match the command, hide output until another command is run (by detecting prompt $)
