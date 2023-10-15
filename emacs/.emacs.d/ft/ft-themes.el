@@ -13,12 +13,11 @@
 (set-face-attribute 'default nil
 		    ;; :family "Roboto Mono"
 		    ;; :family "VictorMono"
-		    ;; :family "IBM Plex Mono"
-		    :family "Iosevka Comfy"
-		    :weight 'normal
+		    :family "Caskaydia Cove"
+		    :weight 'light
 		    ;; :slant 'normal
 		    :width 'normal
-		    :height 135)
+		    :height 115)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
@@ -43,7 +42,7 @@
 		  (bg-line-number-inactive unspecified)
 		  (fringe unspecified)
 		  (bg-line-number-active unspecified)
-		  (border-mode-line-inactive blue-faint)
+		  (border-mode-line-inactive blue-intense)
 		  (bg-mode-line-active unspecified)
 		  (fg-mode-line-active fg-main)
 		  (bg-mode-line-inactive unspecified)
@@ -100,8 +99,7 @@
         windmove-swap-states-down
         tab-new
         tab-close
-        tab-next
-        )))
+        tab-next)))
 
 (defun ft-load-theme ()
   (interactive)
