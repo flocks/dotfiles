@@ -116,7 +116,9 @@
 (use-package which-key
   :straight t
   :config
-  (which-key-mode 1))
+  (which-key-mode 1)
+  (setq which-key-side-window-location 'left)
+  (setq which-key-max-description-length 100))
 
 (use-package key-chord
   :straight t
