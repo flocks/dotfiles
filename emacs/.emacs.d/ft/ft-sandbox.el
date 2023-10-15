@@ -89,7 +89,6 @@ and move this file to this folder renamed as index.{ext}"
 (setq shell-command-prompt-show-cwd t)
 (setq enable-recursive-minibuffers t)
 
-(global-set-key (kbd "M-&") 'compile)
 
 (defun ft-insert-current-defun-call ()
   "Take current defun and insert a new line calling defun"

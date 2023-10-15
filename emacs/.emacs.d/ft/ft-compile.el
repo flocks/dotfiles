@@ -95,6 +95,7 @@ prefix arg"
 
 (global-set-key (kbd "M-*") 'ft/project-custom-ci)
 
+(global-set-key (kbd "M-&") 'compile)
 
 ;; idea being able to filter output of commands
 ;; match the command, hide output until another command is run (by detecting prompt $)
