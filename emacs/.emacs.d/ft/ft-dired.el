@@ -13,15 +13,7 @@
   (require 'dired-x)
   (evil-define-key 'normal dired-mode-map (kbd "M-%") 'dired-do-query-replace-regexp)
   ;; I don't want repeat mode for dired-jump
-  (setq dired-jump-map nil)
-  )
-
-;; (use-package dired-copy-paste
-;;   :straight (dired-copy-paste :type git :host github :repo "jsilve24/dired-copy-paste")
-;;   :config
-;;   (evil-define-key 'normal dired-mode-map "d" 'dired-copy-paste-do-cut)
-;;   (evil-define-key 'normal dired-mode-map "p" 'dired-copy-paste-do-paste)
-;;   (evil-define-key 'normal dired-mode-map "y" 'dired-copy-paste-do-copy))
+  (setq dired-jump-map nil))
 
 (use-package dired-subtree
   :straight t)
