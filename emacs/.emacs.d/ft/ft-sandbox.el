@@ -140,6 +140,12 @@ and move this file to this folder renamed as index.{ext}"
 		(forward-word))
 	  (deactivate-mark))))
 
+(defun ft-secpr1 ()
+  (interactive)
+  (let* ((default-directory "~/secp256k1")
+		 (result (shell-command-to-string "ts-node src/index.ts | head -n 1 | awk '{print $3}'")))
+	(message "%s" result)
+	(kill-new result)))
 
 (defun ft-dired-buttons ()
   (interactive)
