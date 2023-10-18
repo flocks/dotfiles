@@ -9,8 +9,8 @@
 
   :config ;; tweak evil after loading it
   (add-hook 'view-mode-hook 'evil-local-mode)
-  ;; (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?- "w")))
-  ;; (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?- "w")))
+  (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
   (evil-mode))
 
 (use-package evil-commentary
