@@ -18,6 +18,21 @@
 (use-package dired-subtree
   :straight t)
 
+(defun ft-dired-do-compile-command (command &optional arg file-list)
+  "Same as dired-do-async-shell-command but with compilation-mode"
+  (interactive
+   (let ((files (dired-get-marked-files t current-prefix-arg nil nil t)))
+     (list
+      ;; Want to give feedback whether this file or marked files are used:
+      (dired-read-shell-command "& on %s: " current-prefix-arg files)
+      current-prefix-arg
+      files)))
+  
+  (let ((compile-command (format "%s %s" command (s-join " " file-list)))
+		(compilation-read-command nil))
+	(call-interactively #'compile)))
+
+
 (defun ft--ensure-dired-buffer ()
   (unless (eq major-mode 'dired-mode)
     (error "Not in a dired buffer")))
@@ -78,6 +93,7 @@ the list"
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
   (evil-define-key 'normal map (kbd "C-c C-d m") 'dired-mark-files-regexp)
+  (evil-define-key 'normal map (kbd "&") 'ft-dired-do-compile-command)
   (evil-define-key 'normal map (kbd ";y") 'ft-dired-copy-project-filename-as-kill)
   (evil-define-key 'normal map (kbd "C-c C-d r") 'ft-dired-mark-recent))
 
