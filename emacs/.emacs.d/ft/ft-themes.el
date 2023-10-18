@@ -42,11 +42,11 @@
 		  (bg-line-number-inactive unspecified)
 		  (fringe unspecified)
 		  (bg-line-number-active unspecified)
-		  (border-mode-line-inactive blue-intense)
 		  (bg-mode-line-active unspecified)
 		  (fg-mode-line-active fg-main)
-		  (bg-mode-line-inactive unspecified)
-		  (border-mode-line-active blue-intense)))
+		  (border-mode-line-active blue-intense)
+		  (border-mode-line-inactive "#696969")
+		  (bg-mode-line-inactive unspecified)))
 
   (modus-themes-toggle))
 
