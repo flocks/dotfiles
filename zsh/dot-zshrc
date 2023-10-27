@@ -154,3 +154,5 @@ p() {
       echo "$line" | awk -v col="$col" '{print $col}'
     done
 }
+
+eval $(opam env)
