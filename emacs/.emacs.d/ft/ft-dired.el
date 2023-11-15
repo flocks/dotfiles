@@ -51,12 +51,6 @@ With a prefix argument, prompt for the regex."
     ;; (dired-do-kill-lines)))
 
 
-(defun ft-dired-mark-recent (number)
-  "Mark n latest update files"
-  (interactive "nLast number items: ")
-  (ft--ensure-dired-buffer)
-  (message "GOO"))
-
 (defun ft-dired-mark-today ()
   "Filter files created today, with a prefix argument change
 the preset date (1hour/1week/1month)"
@@ -94,9 +88,7 @@ the list"
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
   (evil-define-key 'normal map (kbd "C-c C-d m") 'dired-mark-files-regexp)
   (evil-define-key 'normal map (kbd "&") 'ft-dired-do-compile-command)
-  (evil-define-key 'normal map (kbd ";y") 'ft-dired-copy-project-filename-as-kill)
-  (evil-define-key 'normal map (kbd "C-c C-d r") 'ft-dired-mark-recent))
-
+  (evil-define-key 'normal map (kbd ";y") 'ft-dired-copy-project-filename-as-kill))
 
 (defun ft-clone-dired-buffer ()
   "Build a new independant buffer with files present in current dired buffer.
@@ -113,13 +105,6 @@ a dired buffer on the same directory"
 
 (define-key dired-mode-map (kbd "C-x D") 'ft-clone-dired-buffer)
 (global-set-key (kbd "C-x d") 'find-dired)
-
-(defun dired-do-eshell-command (command)
-  "Run an Eshell command on the marked files."
-  (interactive "sEshell command: ")
-  (let ((files (dired-get-marked-files t)))
-    (eshell-command
-     (format "%s %s" command (mapconcat #'identity files " ")))))
 
 (defun ft-dired-is-mark-active ()
   "dired `dired-get-marked-files' returns file under cursor even
@@ -173,6 +158,25 @@ With a prefix ARG, the command can be edited"
   (revert-buffer)
   (goto-char (point-max))
   (forward-line -1))
+
+
+(defun ft-build-dired ()
+  "Build interactively a dired buffer with arbitrary files.
+
+We can reuse a dired buffer and it will append the marked files."
+  (interactive)
+  (unless (equal major-mode 'dired-mode)
+	(user-error "Not a dired buffer"))
+  (let ((files (dired-get-marked-files t))
+		(buffer-name (read-buffer "Buffer name: " nil nil
+								  (lambda (b)
+									(with-current-buffer (car b)
+									  (equal major-mode 'dired-mode))))))
+	(if (get-buffer buffer-name)
+		(let ((existing-files (with-current-buffer buffer-name (dired-utils-get-all-files))))
+		  (kill-buffer buffer-name)
+		  (dired (cons buffer-name (append existing-files files))))
+	  (dired (cons buffer-name files)))))
 
 (use-package dired-narrow
   :straight t

@@ -39,15 +39,12 @@
 
 (setq display-buffer-alist
 	  `(;; no window
-		("\\*kubel stderr\\*"
+		("\\*Embark Actions\\*"
 		 (display-buffer-no-window))
 		("\\**vault-deploy*"
 		 (display-buffer-no-window))
 		("\\**mpv-elfeed*"
-		 (display-buffer-no-window))
-		("\\**shelldon.*"
-		 (display-buffer-reuse-window display-buffer-pop-up-window))
-		))
+		 (display-buffer-no-window))))
 
 (defun ft-get-erc-buffers-of-mode (mode)
   "Return list of buffer where major-mode is MODE"
