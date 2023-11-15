@@ -7,6 +7,7 @@ alias Z="nvim ~/.zshrc"
 alias resource="source ~/.zshrc"
 
 # folder
+alias 0="cd ~/0xparser"
 alias s="cd ~/screenshots"
 alias gof="cd ~/gof"
 alias ex="cd ~/exvoto"

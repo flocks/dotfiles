@@ -7,6 +7,7 @@
   ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")) :exit t)
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
+  ("0" (lambda () (interactive) (find-file "~/0xparser")) :exit t)
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
   ("R" (lambda () (interactive) (find-file "~/ledger/revault")) :exit t)
   ("m" (lambda () (interactive) (find-file "~/ledger/minivault")) :exit t)
