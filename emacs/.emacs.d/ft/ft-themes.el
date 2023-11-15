@@ -14,7 +14,7 @@
 		    ;; :family "Roboto Mono"
 		    ;; :family "VictorMono"
 		    :family "Caskaydia Cove"
-		    :weight 'light
+		    ;; :weight 'light
 		    ;; :slant 'normal
 		    :width 'normal
 		    :height 115)
@@ -25,6 +25,10 @@
   :straight t
   :config
   (tab-bar-echo-area-mode))
+
+
+(use-package rose-pine-emacs
+  :straight (rose-pine-emacs :type git :host github :repo "Caelie/rose-pine-emacs"))
 
 ;; (use-package minions
 ;;   :straight t
@@ -113,20 +117,16 @@
 		'((small
 		   :default-height 100)
 		  (regular
-		   :default-height 115)
-		  (medium
 		   :default-height 125)
-		  (big
+		  (medium
 		   :default-height 135)
+		  (big
+		   :deeault-height 155)
 		  (large
-		   :default-weight semilight
-		   :default-height 180
-		   :bold-weight extrabold)
+		   :default-height 180)
 		  (t ; our shared fallback properties
-		   :default-family "Iosevka Comfy"
-		   :default-weight normal
-		   :variable-pitch-family "FiraGO"
-		   :variable-pitch-height 1.05))))
+		   :default-family "Caskaydia Cove"
+		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
 (global-set-key (kbd "C-x F t") 'modus-themes-toggle)
@@ -135,8 +135,9 @@
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq display-line-numbers 'relative)
-(use-package spacious-padding
-  :straight (spacious-padding :type git :host github :repo "protesilaos/spacious-padding"))
+
+(use-package rose-pine-emacs
+  :straight (rose-pine-emacs :type git :host github :repo "thongpv87/rose-pine-emacs"))
 
 ;; (use-package minibar
 ;;   :straight '(:type git :repo  "https://codeberg.org/akib/emacs-minibar.git")
