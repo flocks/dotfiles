@@ -32,4 +32,6 @@
   (goto-char (point-max))
   (forward-line -1))
 
+(global-set-key (kbd "M-^") 'project-dired)
+
 (provide 'ft-misc)
