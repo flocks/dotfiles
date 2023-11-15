@@ -12,7 +12,10 @@
    :straight t)
 
 (use-package proced
-   :straight t)
+  :straight t
+  :config
+  (setq proced-enable-color-flag t)
+  (setq proced-goal-attribute nil))
 
 ;; kubernetes
 (use-package kubel
