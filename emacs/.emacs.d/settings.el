@@ -120,26 +120,26 @@
   (setq which-key-side-window-location 'left)
   (setq which-key-max-description-length 100))
 
-(use-package key-chord
-  :straight t
-  :after evil
-  :config (key-chord-mode)
-  (key-chord-define evil-motion-state-map ",s"
-		    (lambda (arg)
-		      (interactive "P")
-		      (let ((file "~/.emacs.d/settings.el"))
-			(if arg (find-file-other-window file)
-			  (find-file file)))))
-  (key-chord-define evil-motion-state-map "ss"
-		    (lambda ()
-		      (interactive)
-		      (split-window-vertically)
-		      (other-window 1)))
-  (key-chord-define evil-motion-state-map "vv"
-		    (lambda ()
-		      (interactive)
-		      (split-window-horizontally)
-		      (other-window 1))))
+;; (use-package key-chord
+;;   :straight t
+;;   :after evil
+;;   :config (key-chord-mode)
+;;   (key-chord-define evil-motion-state-map ",s"
+;; 		    (lambda (arg)
+;; 		      (interactive "P")
+;; 		      (let ((file "~/.emacs.d/settings.el"))
+;; 			(if arg (find-file-other-window file)
+;; 			  (find-file file)))))
+;;   (key-chord-define evil-motion-state-map "ss"
+;; 		    (lambda ()
+;; 		      (interactive)
+;; 		      (split-window-vertically)
+;; 		      (other-window 1)))
+;;   (key-chord-define evil-motion-state-map "vv"
+;; 		    (lambda ()
+;; 		      (interactive)
+;; 		      (split-window-horizontally)
+;; 		      (other-window 1))))
 
 (use-package request
   :straight t)
