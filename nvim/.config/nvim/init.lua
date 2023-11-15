@@ -147,15 +147,15 @@ require("lazy").setup({
   -- color scheme
   { 
     "rose-pine/neovim", 
-    -- config = function()
-    --   vim.cmd([[colorscheme rose-pine]])
-    -- end,
-  },
-  { "ellisonleao/gruvbox.nvim",
     config = function()
-      vim.cmd([[colorscheme gruvbox]])
+      vim.cmd([[colorscheme rose-pine]])
     end,
   },
+  -- { "ellisonleao/gruvbox.nvim",
+  --   config = function()
+  --     vim.cmd([[colorscheme gruvbox]])
+  --   end,
+  -- },
 
   {
     "kylechui/nvim-surround",
