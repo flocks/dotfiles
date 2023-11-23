@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# set -e
+
+fileName="$HOME/$(date '+%Y-%m-%d %H:%M:%S'.mp4)"
+ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast "$fileName"
+notify-send "YEP" "It's done. $fileName"
+gifgen -o "$HOME/$output" "$fileName"
+
