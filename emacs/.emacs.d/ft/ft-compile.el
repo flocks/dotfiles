@@ -100,5 +100,12 @@ prefix arg"
 ;; idea being able to filter output of commands
 ;; match the command, hide output until another command is run (by detecting prompt $)
 
+(defun ft-compile-wrapper ()
+  (interactive)
+  (if (project-current)
+	  (call-interactively 'project-compile)
+	(call-interactively 'compile)))
+
+(global-set-key (kbd "C-x p c") 'ft-compile-wrapper)
 
 (provide 'ft-compile)
