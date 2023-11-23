@@ -34,4 +34,7 @@
 
 (global-set-key (kbd "M-^") 'project-dired)
 
+(setq ediff-split-window-function 'split-window-horizontally)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
 (provide 'ft-misc)
