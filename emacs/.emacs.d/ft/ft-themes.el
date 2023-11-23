@@ -26,9 +26,9 @@
   :config
   (tab-bar-echo-area-mode))
 
+(use-package gruber-darker-theme
+  :straight t)
 
-(use-package rose-pine-emacs
-  :straight (rose-pine-emacs :type git :host github :repo "Caelie/rose-pine-emacs"))
 
 ;; (use-package minions
 ;;   :straight t
