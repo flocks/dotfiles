@@ -161,8 +161,7 @@ With a prefix ARG, the command can be edited"
 
 
 (defun ft-build-dired ()
-  "Build interactively a dired buffer with arbitrary files.
-
+  "Build a dired buffer with marked files.
 We can reuse a dired buffer and it will append the marked files."
   (interactive)
   (unless (equal major-mode 'dired-mode)
