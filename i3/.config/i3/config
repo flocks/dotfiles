@@ -126,5 +126,5 @@ bindsym $mod+Shift+grave layout default
 client.focused          #FFA500 #FFA500 #000000 #FFA500   #FFA500
 
 bar {
-  status_command i3status
+  status_command i3status -c "~/dotfiles/i3/.config/i3/i3status.conf"
 }
