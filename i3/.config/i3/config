@@ -124,3 +124,7 @@ bindsym $mod+Shift+grave layout default
 
 
 client.focused          #FFA500 #FFA500 #000000 #FFA500   #FFA500
+
+bar {
+  status_command i3status
+}
