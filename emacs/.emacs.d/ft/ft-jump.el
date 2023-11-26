@@ -15,6 +15,7 @@
   ("D" (lambda () (interactive) (find-file "~/Downloads")) :exit t)
   ("p" (lambda () (interactive) (find-file "~/deeprun-front")) :exit t)
   ("s" (lambda () (interactive) (find-file "~/screenshots")) :exit t)
+  ("S" (lambda () (interactive) (find-file "~/sandbox/main.ts")) :exit t)
   ("a" (lambda () (interactive) (find-file "~/ledger/vault-apdu-connector")) :exit t)
   ("d" (lambda () (interactive) (find-file "~/dotfiles")) :exit t)
   ("h" (lambda () (interactive) (find-file "~")) :exit t)
