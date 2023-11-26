@@ -55,20 +55,6 @@
 ;; useful for monorepo!
 (setq project-vc-extra-root-markers '("package.json"))
 
-(defun ft-compile-run (prefix)
-  "Wrapper to run compile command.
-Prompt for a directory target if it's not dired or if we have a
-prefix arg"
-  (interactive "P")
-  (let* ((is-dired (eq 'dired-mode major-mode))
-		 (prompt-dir prefix))
-	(let ((default-directory
-		   (or (and prompt-dir (read-directory-name "Dir: "))
-			   (ft-get-project-root)
-			   default-directory)))
-	  (let ((current-prefix-arg nil))
-		(call-interactively #'compile)))))
-
 
 (defun ft/project-custom-ci ()
   (interactive)
@@ -96,9 +82,6 @@ prefix arg"
 (global-set-key (kbd "M-*") 'ft/project-custom-ci)
 
 (global-set-key (kbd "M-&") 'compile)
-
-;; idea being able to filter output of commands
-;; match the command, hide output until another command is run (by detecting prompt $)
 
 (defun ft-compile-wrapper ()
   (interactive)
