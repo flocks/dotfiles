@@ -13,6 +13,8 @@ super + c
 #super + shift + b
 #      $TERMINAL -e newsboat
 
+super + shift + c
+  clipmenu
 super + bracketleft
       $TERMINAL -e k9s
 
