@@ -1,14 +1,15 @@
 # edit confs
-alias V="nvim ~/dotfiles/nvim/.config/nvim/init.lua"
-alias I="nvim ~/dotfiles/i3/.config/i3/config"
-alias K="nvim ~/dotfiles/kitty/.config/kitty/kitty.conf"
-alias Z="nvim ~/.zshrc"
+alias V="cd ~/dotfiles/nvim/.config/nvim && nvim init.lua"
+alias I="cd ~/dotfiles/i3/.config/i3 && nvim config"
+alias K="cd ~/dotfiles/kitty/.config/kitty && nvim kitty.conf"
+alias Z="cd ~ && nvim .zshrc"
 
 alias resource="source ~/.zshrc"
 
 # folder
 alias 0="cd ~/0xparser"
 alias s="cd ~/screenshots"
+alias S="cd ~/sandbox && v main.ts"
 alias gof="cd ~/gof"
 alias ex="cd ~/exvoto"
 alias dl="cd ~/Downloads"
