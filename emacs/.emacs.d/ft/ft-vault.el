@@ -196,7 +196,7 @@ NAME is the buffer name."
 		 (salt (vault-read-salt))
 		 (salt-param (if (not (string= salt "")) (format "--salt %s" salt) ""))
 		 (minivault-url (format "https://%s.%s" instance vault-remote-base-url))
-		 (command (format "ledger-vault bake %s --minivaultURL %s %s --noiseChannelV2"
+		 (command (format "ledger-vault bake %s --minivaultURL %s %s --onboardingV2"
 						  manifest minivault-url salt-param))
 		 (compilation-buffer-name-function (lambda (mode) (format "*vault-bake-%s*" instance))))
 	(compile command)))
