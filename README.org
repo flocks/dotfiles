@@ -90,6 +90,7 @@ Tree-sitter needs some grammars files
   stow polybar
   stow system
   stow notmuch
+  stow --dotfiles tig
   stow --dotfiles tmux
   stow --dotfiles mbsync
   stow --dotfiles prompt
