@@ -82,7 +82,7 @@ vim.keymap.set('n', "<C-j>", "<C-w>j")
 vim.keymap.set('n', "<C-k>", "<C-w>k")
 
 vim.keymap.set('n', "<M-p>", ":cprevious<CR>") -- reformat
-vim.keymap.set('n', "<M-o>", ":cwindow<CR>") -- reformat
+vim.keymap.set('n', "<space>", ":copen<CR>") -- openquickfix lsit
 vim.keymap.set('n', "<Leader>o", ":%bd|e#<CR>") -- close all buffers except the current one
 vim.keymap.set('n', "<Leader>m", "^vg_o") -- select all line content
 vim.keymap.set('n', "Q", ":cq<CR>") -- never use Ex useless mode
@@ -145,17 +145,29 @@ local lsp_servers = {
 
 require("lazy").setup({
   -- color scheme
-  { 
-    "rose-pine/neovim", 
-    config = function()
-      vim.cmd([[colorscheme rose-pine]])
-    end,
-  },
+  -- { 
+  --   "rose-pine/neovim", 
+  --   config = function()
+  --     vim.cmd([[colorscheme rose-pine]])
+  --   end,
+  -- },
+  --
+  -- { 
+  --   "ishan9299/modus-theme-vim", 
+  --   config = function()
+  --     vim.cmd([[colorscheme modus-vivendi]])
+  --   end,
+  -- },
   -- { "ellisonleao/gruvbox.nvim",
   --   config = function()
   --     vim.cmd([[colorscheme gruvbox]])
   --   end,
   -- },
+  { "shaunsingh/nord.nvim",
+    config = function()
+      vim.cmd([[colorscheme nord]])
+    end,
+  },
 
   {
     "kylechui/nvim-surround",
@@ -168,7 +180,17 @@ require("lazy").setup({
     end
   },
   {
-    "iberianpig/tig-explorer.vim"
+    "tamago324/lir.nvim",
+     config = function()
+        require("lir").setup({})
+     end
+
+  },
+  { 
+    "ruifm/gitlinker.nvim",
+     config = function()
+        require("gitlinker").setup()
+     end
   },
   {
     "tpope/vim-dispatch"
@@ -209,7 +231,7 @@ require("lazy").setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'gruvbox',
+        theme = 'nord',
         component_separators = '',
         section_separators = { left = '', right = '' },
       },
@@ -234,11 +256,6 @@ require("lazy").setup({
         lualine_z = {}
       },
     },
-  },
-  { "ruifm/gitlinker.nvim",
-    config = function()
-      require("gitlinker").setup()
-    end
   },
   -- harpoon
   { "ThePrimeagen/harpoon",
@@ -273,7 +290,6 @@ require("lazy").setup({
       opleader = { line = 'cc' },
     },
   },
-
   -- auto pairs
   {
     "windwp/nvim-autopairs",
