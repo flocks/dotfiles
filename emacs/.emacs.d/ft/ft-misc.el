@@ -34,6 +34,17 @@
 
 (global-set-key (kbd "M-^") 'project-dired)
 
+(defun ft-copy-project-file-name ()
+  ;; inside /home/flocks/project/src/app.js will copy src/app
+  (interactive)
+  (let* ((root (file-truename (locate-dominating-file default-directory ".git")))
+		(filename (file-name-sans-extension (buffer-file-name)))
+		(copy (file-relative-name filename root)))
+	(kill-new copy)
+	(message "Copied %s" copy)))
+
+(global-set-key (kbd "C-x p y") 'ft-copy-project-file-name)
+
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
