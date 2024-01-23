@@ -1,0 +1,10 @@
+#!/bin/bash
+
+
+instance="${1:-ledger-sbx}"
+
+curl -s https://remote.minivault."$instance".com/api/instances  | jq -r '.[] | "\(.name),\(.owner),\(.preset),\(.status)"' |
+while IFS="," read -r name owner preset status; do
+    url="https://${name}.minivault.${instance}.com"
+    printf "%-20s %-30s %-10s %s\n" "$owner" "$preset" "$status" $url
+done

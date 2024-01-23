@@ -108,7 +108,7 @@ insert_modified_file() {
 }
 
 insert_vault_instance() {
-  vault=$(curl -s https://remote.minivault.ledger-sbx.com/api/instances | jq  -r '.[].name' | fzf | awk '{print "https://"$1".minivault.ledger-sbx.com"}')
+  vault=$(instances | fzf | awk '{print $4}')
 	BUFFER="$BUFFER$vault"
 	CURSOR=$(($CURSOR + $#vault + 1))
 }
