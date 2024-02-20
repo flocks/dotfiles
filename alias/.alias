@@ -77,6 +77,7 @@ alias lvo="ledger-vault run onboarding"
 alias lvco="ledger-vault create user --role operator --name $(date +%s)"
 alias lvca="ledger-vault create user --role admin --name $(date +%s)"
 alias music="ncmpcpp"
+alias i="instances"
 
 #emacs links
 alias mg="magit"
