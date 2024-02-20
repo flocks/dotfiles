@@ -70,8 +70,12 @@ vim.keymap.set('n', '<leader>d', ":let @+ = expand('%:p:h')<CR>")
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
 vim.keymap.set('n', "<C-c><C-f>", ":Format<CR>") -- reformat
-vim.keymap.set('n', "<C-x><C-j>", ":Exp<CR>") -- file explorer
+vim.keymap.set('n', "<C-x><C-j>", ":Oil<CR>") -- file explorer
 vim.keymap.set('n', "<M-n>", ":cnext<CR>") -- reformat
+
+-- save with <C-Enter>
+vim.keymap.set("i", "<C-Enter>", "<C-O>:w<CR>")
+vim.keymap.set("n", "<C-Enter>", ":w<CR>")
 
 -- split management
 vim.keymap.set('n', "vv", "<C-w>v")   
@@ -145,27 +149,27 @@ local lsp_servers = {
 
 require("lazy").setup({
   -- color scheme
-  -- { 
-  --   "rose-pine/neovim", 
-  --   config = function()
-  --     vim.cmd([[colorscheme rose-pine]])
-  --   end,
-  -- },
+  { 
+    "rose-pine/neovim", 
+    config = function()
+      -- vim.cmd([[colorscheme rose-pine]])
+    end,
+  },
   --
-  -- { 
-  --   "ishan9299/modus-theme-vim", 
-  --   config = function()
-  --     vim.cmd([[colorscheme modus-vivendi]])
-  --   end,
-  -- },
-  -- { "ellisonleao/gruvbox.nvim",
-  --   config = function()
-  --     vim.cmd([[colorscheme gruvbox]])
-  --   end,
-  -- },
+  { 
+    "ishan9299/modus-theme-vim", 
+    config = function()
+      -- vim.cmd([[colorscheme modus-vivendi]])
+    end,
+  },
+  { "ellisonleao/gruvbox.nvim",
+    config = function()
+      vim.cmd([[colorscheme gruvbox]])
+    end,
+  },
   { "shaunsingh/nord.nvim",
     config = function()
-      vim.cmd([[colorscheme nord]])
+      -- vim.cmd([[colorscheme nord]])
     end,
   },
 
@@ -231,7 +235,7 @@ require("lazy").setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'nord',
+        theme = 'gruvbox',
         component_separators = '',
         section_separators = { left = '', right = '' },
       },
@@ -296,6 +300,14 @@ require("lazy").setup({
     config = function()
       require("nvim-autopairs").setup({ map_cr = true })
     end
+  },
+
+  {
+    "stevearc/oil.nvim",
+    config = function()
+      require("oil").setup()
+    end
+    
   },
 
   -- lint
