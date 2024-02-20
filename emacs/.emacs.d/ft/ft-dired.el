@@ -69,6 +69,10 @@ the preset date (1hour/1week/1month)"
    (completing-read "Dir: "
 		    (split-string (shell-command-to-string "fd --type directory")))))
 
+
+(defun ft-gen-id ()
+  (substring (sha1 (format "%s" (float-time))) 0 5))
+
 (defun ft-list-of-files-in-dired (beginning end)
   "Take files listed in the region and create a dired buffer with
 the list"
@@ -77,7 +81,8 @@ the list"
 	  (let* ((files (split-string (buffer-substring-no-properties beginning end)))
 			 (filtered-files (seq-filter (lambda (file) (file-exists-p file)) files)))
 		(when filtered-files
-		  (dired (cons (read-string "Buffer name: ") filtered-files))))))
+		  (let ((buff-name (concat "*Dired-find* " (ft-gen-id))))
+			(dired (cons buff-name filtered-files)))))))
 
 (let ((map dired-mode-map))
   (evil-define-key 'normal map (kbd "C-c C-p") 'dired-toggle-read-only) ;; to be consisent with rg.el/occur/grep
