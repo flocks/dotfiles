@@ -37,10 +37,16 @@
   (evil-define-key 'normal map
     (kbd "Y") 'ft-kill-command)
   (evil-define-key 'normal map
+	(kbd "D") 'ft-compilation-switch-directory
 	(kbd "R") (lambda ()
 				(interactive)
-				(recompile t)))
-  )
+				(recompile t))))
+
+(defun ft-compilation-switch-directory (dir)
+  (interactive "D")
+  (setq compilation-directory dir)
+  (setq default-directory dir)
+  (recompile))
 
 ;; TODO makes this more generic to  use also  .git
 (defun ft-get-project-root ()
