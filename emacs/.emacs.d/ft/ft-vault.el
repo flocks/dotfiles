@@ -93,9 +93,6 @@ NAME is the buffer name."
   (vault-mode)
   (vault--get-instances-async))
 
-(defun vault-draw ()
-
-  )
 
 (defun vault--get-tabulated-entries ()
   (let ((json (append (vault--get-instances) nil))
@@ -152,10 +149,11 @@ NAME is the buffer name."
 			 (completing-read "Instance: " (vault--list-instances)))))
   (let* ((salt (vault-read-salt))
 		 (endpoint (read-string "Endpoint: "))
+         (salt-param (if (not (string= salt "")) (format "--salt %s" salt) ""))
 		 (url (format "https://%s.%s" instance vault-remote-base-url))
 		 (device (read-number "Device" 4))
-		 (command (format "ledger-vault fetch %s --salt %s --device %s --minivaultURL %s"
-						  endpoint salt device url)))
+		 (command (format "ledger-vault fetch %s %s --device %s --minivaultURL %s"
+						  endpoint salt-param device url)))
 	(vault--cli-fetch command)))
 
 (defun vault-change-host ()
