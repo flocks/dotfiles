@@ -13,11 +13,11 @@
 (set-face-attribute 'default nil
 		    ;; :family "Roboto Mono"
 		    ;; :family "VictorMono"
-		    :family "Caskaydia Cove"
-		    ;; :weight 'light
+		    :family "Iosevka Comfy"
+		    ;; :weight 'semibold
 		    ;; :slant 'normal
 		    :width 'normal
-		    :height 115)
+		    :height 120)
 ;; highlight/hide current line
 (global-hl-line-mode -1)
 
@@ -53,6 +53,10 @@
 		  (bg-mode-line-inactive unspecified)))
 
   (modus-themes-toggle))
+
+
+(use-package standard-themes
+  :straight t)
 
 ;; free distracting editing/reading
 (use-package darkroom
@@ -125,7 +129,7 @@
 		  (large
 		   :default-height 180)
 		  (t ; our shared fallback properties
-		   :default-family "Caskaydia Cove"
+		   :default-family "Iosevka Comfy"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
