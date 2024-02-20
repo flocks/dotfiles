@@ -48,6 +48,8 @@ bindsym $mod+l focus right
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 
+bindsym $mod+b move workspace to output next 
+
 # resize window (you can also use the mouse for that)
 bindsym $mod+Control+l resize grow width 5 px or 5 ppt
 bindsym $mod+Control+h resize shrink width 5 px or 5 ppt
