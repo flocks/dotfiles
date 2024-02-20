@@ -33,6 +33,8 @@
 
 	(evil-define-key '(motion normal) global-map (kbd "C-f") 'ft-my-consult-ripgrep)))
 
+(evil-define-key '(motion normal) global-map (kbd "C-x j") 'compile)
+
 (defun ft--sanitize-grep-filename (filename)
   "Just clear filename from `:line:col' that is in the grep buffer"
   (car (split-string filename ":")))
