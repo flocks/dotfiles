@@ -1,6 +1,8 @@
 # launch terminal inside emacs
 super + e
       emacsclient -c -a ''
+super + shift + e
+      emacs -q --load ~/dotfiles/minimal-emacs/init.el
 super + Return
       ~/bin/open-terminal
 # launch chrome
