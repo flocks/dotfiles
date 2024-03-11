@@ -48,6 +48,11 @@ vim.wo.number = true -- Make line numbers default
 vim.wo.signcolumn = 'yes' -- always show sign column
 vim.g.netrw_banner = 0; -- hide netrw file explorer banner
 
+vim.g.asyncrun_open = 8
+vim.b.prettier_exec_cmd = "prettierd"
+
+
+
 local signs = {Error = "", Warn = "", Hint = "", Info = ""}
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -56,6 +61,13 @@ end
 
 vim.cmd("au BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe \"normal! g'\\\"\" | endif") -- retrieve last edited line
 vim.cmd("autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc") -- properly highlight json5 files
+vim.cmd("autocmd FileType typescript,typescriptreact compiler tsc")
+vim.cmd("colorscheme habamax")
+
+vim.api.nvim_command("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case") -- use rg for :grep/lgrep
+--
+-- insert dir of current file into prompt
+vim.api.nvim_set_keymap('c', '<C-M-e>', 'expand("%:p:h") . "/"<Space>', { expr = true, noremap = true, silent = true })
 
 vim.keymap.set({ 'n', 'v' }, '-', '<Nop>', { silent = true }) -- disable default behavior of '-' (because leader)
 
@@ -69,9 +81,12 @@ vim.keymap.set('n', '<leader>y', ":let @+ = expand('%:p')<CR>")
 vim.keymap.set('n', '<leader>d', ":let @+ = expand('%:p:h')<CR>")
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
-vim.keymap.set('n', "<C-c><C-f>", ":Format<CR>") -- reformat
+vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
+vim.keymap.set('n', "<C-c><C-c>", ":Compile<CR>") -- reformat
 vim.keymap.set('n', "<C-x><C-j>", ":Oil<CR>") -- file explorer
-vim.keymap.set('n', "<M-n>", ":cnext<CR>") -- reformat
+vim.keymap.set('n', "<C-c><C-r>", ":%s/<C-r><C-w>/") -- file explorer
+vim.keymap.set('n', "<M-p>", ":cprev<CR>") -- previous in quickfix list
+vim.keymap.set('n', "<M-n>", ":cnext<CR>") -- next in quickfix list
 
 -- save with <C-Enter>
 vim.keymap.set("i", "<C-Enter>", "<C-O>:w<CR>")
@@ -90,6 +105,11 @@ vim.keymap.set('n', "<space>", ":copen<CR>") -- openquickfix lsit
 vim.keymap.set('n', "<Leader>o", ":%bd|e#<CR>") -- close all buffers except the current one
 vim.keymap.set('n', "<Leader>m", "^vg_o") -- select all line content
 vim.keymap.set('n', "Q", ":cq<CR>") -- never use Ex useless mode
+
+
+vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
+
+
 
 vim.keymap.set('n', "<leader>f", ":Git grep -w -q <C-r><C-w><CR>") -- search word under cursor and populates quickfix
 
@@ -126,53 +146,17 @@ local on_attach = function(_, bufnr)
   nmap('gi', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    if vim.lsp.buf.format then
-      vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-      vim.lsp.buf.formatting()
-    end
-  end, { desc = 'Format current buffer with LSP' })
 end
 
 -- PLUGINS
 -- =======
 
 local lsp_servers = {
-  'bashls',
-  'rust_analyzer',
-  'pyright',
   'tsserver',
   'tailwindcss',
 }
 
 require("lazy").setup({
-  -- color scheme
-  { 
-    "rose-pine/neovim", 
-    config = function()
-      -- vim.cmd([[colorscheme rose-pine]])
-    end,
-  },
-  --
-  { 
-    "ishan9299/modus-theme-vim", 
-    config = function()
-      -- vim.cmd([[colorscheme modus-vivendi]])
-    end,
-  },
-  { "ellisonleao/gruvbox.nvim",
-    config = function()
-      vim.cmd([[colorscheme gruvbox]])
-    end,
-  },
-  { "shaunsingh/nord.nvim",
-    config = function()
-      -- vim.cmd([[colorscheme nord]])
-    end,
-  },
-
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -184,11 +168,17 @@ require("lazy").setup({
     end
   },
   {
-    "tamago324/lir.nvim",
-     config = function()
-        require("lir").setup({})
-     end
-
+    "lambdalisue/vim-manpager"
+  },
+  {
+    "skywind3000/asyncrun.vim"
+  },
+  {"prettier/vim-prettier"},
+  {
+    "tpope/vim-eunuch"
+  },
+  {
+    "tpope/vim-commentary"
   },
   { 
     "ruifm/gitlinker.nvim",
@@ -197,29 +187,7 @@ require("lazy").setup({
      end
   },
   {
-    "tpope/vim-dispatch"
-  },
-  {
-    "lambdalisue/vim-manpager"
-  },
-  {
-    "tpope/vim-eunuch"
-  },
-  {
-    "tpope/vim-commentary"
-  },
-  {
     "tpope/vim-fugitive"
-  },
-  {
-    "tpope/vim-dadbod"
-  },
-  {
-    "mbbill/undotree",
-    config = function()
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
-    end
-
   },
   {
     "tpope/vim-rsi"
@@ -227,41 +195,6 @@ require("lazy").setup({
   {
     "itchyny/vim-qfedit"                   -- edit quickfix list
   },
-  -- status line
-  {
-    "nvim-lualine/lualine.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'gruvbox',
-        component_separators = '',
-        section_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'diagnostics' },
-        lualine_c = {
-          { 'filename', path = 1 },
-        },
-        lualine_x = {},
-        lualine_y = { 'branch' },
-        lualine_z = { 'location' }
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          { 'filename', path = 1 },
-        },
-        lualine_x = { 'location' },
-        lualine_y = {},
-        lualine_z = {}
-      },
-    },
-  },
-  -- harpoon
   { "ThePrimeagen/harpoon",
     config = function()
       require("harpoon").setup({})
@@ -271,29 +204,6 @@ require("lazy").setup({
          vim.keymap.set('n', '<C-M-e>', harpoon_mark.add_file)
     end
   },
-
-  -- git signs in gutter
-  { "lewis6991/gitsigns.nvim", opts = {} },
-
-  -- emmet
-  {
-    "mattn/emmet-vim",
-    ft = {
-      'javascript',
-      'javascriptreact',
-      'typescript.tsx',
-      'typescriptreact',
-    },
-  },
-
-  -- comment lines
-  {
-    "numToStr/Comment.nvim",
-    opts = {
-      toggler = { line = '<leader>cc' },
-      opleader = { line = 'cc' },
-    },
-  },
   -- auto pairs
   {
     "windwp/nvim-autopairs",
@@ -301,47 +211,6 @@ require("lazy").setup({
       require("nvim-autopairs").setup({ map_cr = true })
     end
   },
-
-  {
-    "stevearc/oil.nvim",
-    config = function()
-      require("oil").setup()
-    end
-    
-  },
-
-  -- lint
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require('null-ls').setup()
-    end
-  },
-  {
-    "MunifTanjim/eslint.nvim",
-    config = function()
-      require("eslint").setup({
-        bin = 'eslint_d', -- or `eslint_d`
-        code_actions = {
-          enable = true,
-          apply_on_save = {
-            enable = false,
-            types = {"problem"} -- "directive", "problem", "suggestion", "layout"
-          },
-          disable_rule_comment = {
-            enable = true,
-            location = "separate_line" -- or `same_line`
-          }
-        },
-        diagnostics = {
-          enable = true,
-          report_unused_disable_directives = false,
-          run_on = "type" -- or `save`
-        }
-      })
-    end
-  },
-
   -- fuzzy finder
   { "nvim-lua/plenary.nvim", build = 'make' },
   { "nvim-telescope/telescope-fzf-native.nvim" },
@@ -372,8 +241,23 @@ require("lazy").setup({
             },
           },
         },
+        pickers = {
+          find_files = {
+            previewer = false
+          }
+        },
       })
 
+      vim.api.nvim_create_user_command(
+          'FindCurrentDir',
+          function ()
+              ts_builtin.find_files({cwd = vim.fn.expand('%:p:h')})
+          end,
+          {}
+      )
+
+      vim.api.nvim_set_keymap('n', '<C-c>p', ':FindCurrentDir<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<C-c>f', ':Telescope diagnostics<CR>', { noremap = true, silent = true })
       vim.keymap.set('n', '<C-p>', ts_builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<C-;>', ts_builtin.buffers )
       vim.keymap.set('n', '<C-b>', ts_builtin.buffers )
@@ -384,12 +268,6 @@ require("lazy").setup({
   },
 
   -- LSP
-  {
-    "lukas-reineke/lsp-format.nvim",
-    config = function()
-      require("lsp-format").setup()
-    end
-  },
   { "williamboman/mason.nvim" },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -401,30 +279,16 @@ require("lazy").setup({
     end
   },
   {
-    "j-hui/fidget.nvim",
-    priority = 10,
-    config = function()
-      require('fidget').setup({})
-    end
-  },
-  {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require('lspconfig')
       local servers = {
-        'rust_analyzer',
-        'pyright',
         'tsserver',
         'tailwindcss',
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-      local prettier = {
-        formatCommand = 'prettierd "${INPUT}"',
-        formatStdin = true,
-      }
 
       for _, lsp in ipairs(servers) do
         if lsp == 'tsserver' then
@@ -441,34 +305,15 @@ require("lazy").setup({
         end
       end
 
-      lspconfig.pylsp.setup({
-        cmd = { "pylsp"},
-        on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = {"py"}
-      })
-
-      lspconfig.gopls.setup({
-        cmd = { "gopls"},
-        on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = {"go"}
-      })
-
       lspconfig.clangd.setup({
         cmd = { "clangd-12"},
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      lspconfig.flow.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = {"javascript", "javascriptreact"}
-      })
+
     end
   },
-
   -- completion
   { "hrsh7th/cmp-nvim-lsp" },
   {
@@ -539,3 +384,4 @@ require("lazy").setup({
     end
   },
 }, opts)
+
