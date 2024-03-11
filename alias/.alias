@@ -42,12 +42,12 @@ alias gc="git commit"
 alias gd="git diff"
 alias amend="git commit --amend"
 alias amendd="git commit --amend --no-edit"
-# alias g="git log -p"
 alias g="nvim '+Git|only'"
 alias gv="git status --short | cut -d ' ' -f3 | xargs nvim"
 alias bb='git branch | fzf | xargs git checkout'
 
 # programs
+alias rgn="rg --vimgrep"
 alias ydl="youtube-dl"
 alias t="tmux attach"
 alias ec='emacsclient -nw -c'
@@ -99,8 +99,6 @@ alias flowfiles='rg "^Error" | cut -d " " -f 3 | cut -d : -f 1 | sort | uniq'
 # useful to pipe, eg cat file.log | copy
 alias copy="xclip -selection c"
 alias killdocker='ps aux | rg docker | rg containerd-shim | awk "{ print $2 }" | xargs -r sudo kill -9'
-# alias rv='reset-vault'
-# alias sv='stop-vault'
 alias dstart='docker ps | rg starting | wc -l'
 alias u='source monorepo-nav.sh'
 
