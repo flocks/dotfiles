@@ -119,6 +119,19 @@ vim.keymap.set("i", "AA", "<Esc>A") -- quick command in insert mode: go to line 
 vim.keymap.set("i", "II", "<Esc>I") -- quick command in insert mode: go to line start
 vim.keymap.set("i", "OO", "<Esc>O") -- quick command in insert mode: go to line above
 
+
+
+-- automatically set current file directory into register d
+vim.api.nvim_create_autocmd('BufEnter', {
+  callback = function()
+    local current_file = vim.fn.expand("%:p")
+    local folder = vim.fn.fnamemodify(current_file, ":p:h")
+    folder = folder .. "/"
+    vim.fn.setreg('d', folder)
+  end,
+  pattern = '*',
+})
+
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
