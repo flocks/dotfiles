@@ -13,7 +13,8 @@
 (set-face-attribute 'default nil
 		    ;; :family "Roboto Mono"
 		    ;; :family "VictorMono"
-		    :family "Iosevka Comfy"
+		    :family "Berkeley Mono"
+		    ;; :family "Iosevka Comfy"
 		    ;; :weight 'semibold
 		    ;; :slant 'normal
 		    :width 'normal
@@ -54,11 +55,7 @@
 
   (modus-themes-toggle))
 
-
-(use-package standard-themes
-  :straight t)
-
-;; free distracting editing/reading
+(use-package standard-themes :straight t) ;; free distracting editing/reading
 (use-package darkroom
   :straight t
   :config
@@ -125,7 +122,7 @@
 		  (medium
 		   :default-height 135)
 		  (big
-		   :deeault-height 155)
+		   :default-height 155)
 		  (large
 		   :default-height 180)
 		  (t ; our shared fallback properties
