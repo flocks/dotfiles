@@ -62,7 +62,6 @@ end
 vim.cmd("au BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe \"normal! g'\\\"\" | endif") -- retrieve last edited line
 vim.cmd("autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc") -- properly highlight json5 files
 vim.cmd("autocmd FileType typescript,typescriptreact compiler tsc")
-vim.cmd("colorscheme habamax")
 
 vim.api.nvim_command("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case") -- use rg for :grep/lgrep
 --
@@ -126,8 +125,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
     local current_file = vim.fn.expand("%:p")
     local folder = vim.fn.fnamemodify(current_file, ":p:h")
+    local filename_without_extension = vim.fn.fnamemodify(current_file, ":t:r")
     folder = folder .. "/"
+
     vim.fn.setreg('d', folder)
+    vim.fn.setreg('f', filename_without_extension)
   end,
   pattern = '*',
 })
@@ -181,6 +183,18 @@ require("lazy").setup({
     end
   },
   {
+    "stevearc/oil.nvim",
+    config = function()
+      require("oil").setup({
+        skip_confirm_for_simple_edits = false,
+
+      })
+    end
+  },
+  {
+    "elihunter173/dirbuf.nvim"
+  },
+  {
     "lambdalisue/vim-manpager"
   },
   {
@@ -189,6 +203,13 @@ require("lazy").setup({
   {"prettier/vim-prettier"},
   {
     "tpope/vim-eunuch"
+  },
+  {"mogelbrod/vim-jsonpath"},
+  {
+    "blazkowolf/gruber-darker.nvim",
+    config = function ()
+      vim.cmd("colorscheme gruber-darker")
+    end
   },
   {
     "tpope/vim-commentary"
