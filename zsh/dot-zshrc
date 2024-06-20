@@ -8,13 +8,11 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export EDITOR="$(command -v nvim)"
 export TERMINAL="$(command -v kitty)"
 export BROWSER="$(command -v google-chrome-stable)"
-export PAGER="$(command -v nvimpager)"
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/endorsement/bin
 export PATH=~/.npm-global/bin:$PATH
 export PATH=~/.yarn/bin:$PATH
 export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
-export MANPAGER="nvim -c ASMANPAGER -"
 
 
 export LANG=en_US.UTF-8
