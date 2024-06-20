@@ -153,3 +153,23 @@ and move this file to this folder renamed as index.{ext}"
 	(with-current-buffer (find-file-noselect file)
 	  (ft-button)
 	  (save-buffer))))
+
+(let ((default-directory (project-root (project-current t)))
+        (compilation-buffer-name-function
+         (or project-compilation-buffer-name-function
+             compilation-buffer-name-function)))
+    (call-interactively #'compile))
+
+(defun ft-search-word ()
+  (interactive)
+  (let* ((search (thing-at-point 'word))
+		(default-directory (project-root (project-current t)))
+		(compilation-buffer-name-function (lambda (_) (format "grep %s" search)))
+		(compile-command (format "rg --vimgrep %s" search)))
+	(call-interactively #'compile)))
+
+
+(global-set-key (kbd "M-*") 'ft-search-word)
+
+
+(define-key minibuffer-mode-map (kbd "C-SPC") 'set-mark-command)
