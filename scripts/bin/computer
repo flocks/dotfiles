@@ -10,7 +10,7 @@ OPTIONS=(
 )
 
 IFS=$'\n'
-CHOSEN=$(echo "${OPTIONS[*]}" | dmenu)
+CHOSEN=$(echo "${OPTIONS[*]}" | rofi -dmenu -i)
 
 case $CHOSEN in
   "reload i3 conf") i3-msg reload

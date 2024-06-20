@@ -27,6 +27,7 @@ bitcoin=(
   "1F1tAaz5x1HUXrCNLbtMDqcw6o5GNn4xqX"
   "3DB5T1FbE86UHWvCQjZmHR7zFw7mBMFtVL"
   "1JUToCyRL5UwgeucjnFAagKs4v1YqhjT1d"
+  "mmizX66rU546AD6A5BBd7qKoyBKBwJWD4h"
 )
 
 tezos=(
@@ -80,7 +81,7 @@ Bep20
 Stellar
 Polkadot
 Cardano
-Contract" | dmenu -i -l 10)
+Contract" | rofi -dmenu -i)
 
 [[ "$currency" == "" ]] && exit 0
 
@@ -100,7 +101,7 @@ list=""
 [[ "$currency" == "Cardano" ]] && list="${cardano[*]}"
 [[ "$currency" == "Contract" ]] && list="${contract[*]}"
 
-addr=$(echo -e "$list" | dmenu -l 10)
+addr=$(echo -e "$list" | rofi -dmenu -i)
 
 [[ "$addr" == "" ]] && exit 0
 

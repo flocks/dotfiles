@@ -3,7 +3,7 @@
 BOOKMARK_FILE=~/.bookmarks
 
 # choice=$(cat "$BOOKMARK_FILE" | awk {'print $1'} | rofi -i -dmenu)
-choice=$(dmenu -l 10 < $BOOKMARK_FILE)
+choice=$(rofi -dmenu -i < $BOOKMARK_FILE)
 url=$(grep "$choice" "$BOOKMARK_FILE" | awk {'print $2'})
 if grep -q "$url" $BOOKMARK_FILE; then
   echo "$url" | xclip -selection c

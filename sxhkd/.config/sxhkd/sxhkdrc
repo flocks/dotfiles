@@ -73,4 +73,4 @@ super + s
 
 # dmenu to launch app
 super + r
-  dmenu_run -l 20
+ rofi -show run
