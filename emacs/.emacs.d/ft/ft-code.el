@@ -3,8 +3,6 @@
 (setq typescript-indent-level 2)
 (setq js-import-style "absolute")
 
-
-
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
@@ -70,21 +68,6 @@
   :init
   (add-hook 'web-mode-hook 'add-node-modules-path t))
 
-;; (use-package prettier
-;;   :straight t
-;;   :init
-;;   ;; (setq prettier-prettify-on-save-flag nil)
-;;   (setq prettier-mode-sync-config-flag nil)
-;;   (add-hook 'typescript-ts-mode-hook 'prettier-mode)
-;;   (add-hook 'js-mode-hook 'prettier-mode)
-;;   (add-hook 'js-ts-mode-hook 'prettier-mode)
-;;   (add-hook 'json-ts-mode-hook 'prettier-mode)
-;;   (add-hook 'web-mode-hook 'prettier-mode)
-;;   :config
-;;   (global-set-key (kbd "C-c C-f") 'prettier-prettify)
-
-;;   )
-
 (use-package msp
   :straight (:local-repo "~/.emacs.d/straight/repos/msp")
   :config
@@ -112,15 +95,17 @@
   (add-hook 'web-mode-hook 'eglot-ensure)
 
   (setq eglot-server-programs '((html-mode . ("tailwindcss-language-server" "--stdio"))
-								(tsx-ts-mode . ("typescript-language-server" "--stdio"))
-								(typescript-ts-mode . ("typescript-language-server" "--stdio"))
+								(tsx-ts-mode . ("typescript-language-server" "--stdio" "--log-level" "4"))
+								;; (typescript-ts-mode . ,(eglot-alternatives '("typescript-language-server" "--stdio" "--log-level" "4")))
+								(typescript-ts-mode . ("typescript-language-server" "--stdio" "--log-level" "4"))
 								(rust-ts-mode . ("rust-analyzer"))
 								(c-mode . ("clangd-12"))
-								(web-mode . ("npx" "--no-install" "flow" "lsp"))
+								;; (web-mode . ("npx" "--no-install" "flow" "lsp"))
 								(go-mode . ("gopls"))
 								(go-ts-mode . ("gopls"))
-								(js-ts-mode . ("npx" "--no-install" "flow" "lsp"))
-								(js-mode . ("npx" "--no-install" "flow" "lsp"))))
+								;; (js-ts-mode . ("npx" "--no-install" "flow" "lsp"))
+								;; (js-mode . ("npx" "--no-install" "flow" "lsp"))
+								))
 
   (define-key eglot-mode-map (kbd "C-c A") 'eglot-code-actions)
   (define-key eglot-mode-map (kbd "C-c C-r") 'eglot-rename))
