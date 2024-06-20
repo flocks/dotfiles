@@ -17,9 +17,9 @@
   (setq mode-name "Vault")
   (setq major-mode 'vault-mode)
   (use-local-map vault-mode-map)
-  (setq tabulated-list-format [("Name" 30 t)
-							   ("Owner" 30 t)
-							   ("Preset" 30 t)
+  (setq tabulated-list-format [("Name" 22 t)
+							   ("Owner" 25 t)
+							   ("Preset" 24 t)
 							   ("Status" 10 t '(:right-align t))])
 
   (setq tabulated-list-entries (vault--set-tabulated-entries vault-instances))
