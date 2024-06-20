@@ -67,6 +67,8 @@ bindsym $mod+d split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 bindsym $mod+shift+s sticky toggle
+bindsym $mod+space focus mode_toggle
+
 
 # toggle tiling / floating
 bindsym $mod+Shift+t floating toggle
@@ -127,25 +129,44 @@ bindsym $mod+Shift+grave layout default
 
 
 
-client.focused          #81a1c1 #81a1c1 #ffffff #81a1c1
-client.unfocused        #2e3440 #1f222d #888888 #1f222d
-client.focused_inactive #2e3440 #1f222d #888888 #1f222d
-client.placeholder      #2e3440 #1f222d #888888 #1f222d
-client.urgent           #900000 #900000 #ffffff #900000
+# class                    border  backgr. text    indicator child_border
 
+# client.focused          #FFCC66 #33415E #FFFFFF #ff0000   #FFCC66
+# client.focused_inactive #1F2430 #1F2430 #FFFFFF #484E50   #1F2430
+# client.unfocused        #1F2430 #1F2430 #888888 #292D2E   #1F2430
+# client.urgent           #2F343A #FF3333 #FFFFFF #900000   #900000
+# client.placeholder      #1F2430 #1F2430 #FFFFFF #000000   #0C0C0C
+
+set $g "#181818"
+set $w "#f4f6ff"
+set $r "#2e2e2e"
+set $l "#555555"
+set $y "#ffff00"
+set $b "#000000"
+
+client.focused          $r $r $w $r $r
+client.focused_inactive $g $g $l $g $g
+client.unfocused        $g $g $l $g $g
+client.urgent           $y $y $b $y $y
+client.placeholder      $r $r $w $r $r
+client.background       $w
 
 bar {
+    workspace_min_width 40
     position bottom
     status_command i3status -c "~/dotfiles/i3/.config/i3/i3status.conf"
-    colors {
-            # separator  #1f222d
-            # background #1f222d
-            # statusline #81a1c1
+    font pango: BerkeleyMono
+    tray_output none
 
-            # focused_workspace  #1f222d #8394c7    #050417
-            # active_workspace   #1f222d #252936    #5e81ac
-            # inactive_workspace #1f222d #1f222d    #4c566a
-            # urgent_workspace   #1f222d #1f222d    #ee829f
-            # binding_mode       #1f222d #81a1c1    #2e3440
+    colors {
+            separator  #1f222d
+            background #2e2e2e
+            statusline #81a1c1
+
+            focused_workspace  #2e2e2e #181818    #ffffff
+            active_workspace   #2e2e2e #2e2e2e    #5e81ac
+            inactive_workspace #2e2e2e #2e2e2e    #4c566a
+            urgent_workspace   #2e2e2e #2e2e2e    #ee829f
+            binding_mode       #2e2e2e #2e2e2e    #2e3440
     }
 }
