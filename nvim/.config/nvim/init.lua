@@ -193,6 +193,12 @@ require("lazy").setup({
   {
     "tpope/vim-commentary"
   },
+  {"norcalli/nvim-colorizer.lua", 
+  config = function ()
+    local colorizer = require("colorizer")
+    colorizer.setup()
+  end
+  },
   { 
     "ruifm/gitlinker.nvim",
      config = function()
