@@ -1,4 +1,3 @@
-
 (use-package hydra
   :straight t)
 
@@ -11,9 +10,10 @@
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
   ("R" (lambda () (interactive) (find-file "~/ledger/revault")) :exit t)
   ("m" (lambda () (interactive) (find-file "~/ledger/minivault")) :exit t)
+  ("M" (lambda () (interactive) (find-file "~/ledger/vault-mobile-app")) :exit t)
   ("w" (lambda () (interactive) (find-file "~/ledger/wallet-connect-live-app")) :exit t)
   ("D" (lambda () (interactive) (find-file "~/Downloads")) :exit t)
-  ("p" (lambda () (interactive) (find-file "~/deeprun-front")) :exit t)
+  ("p" (lambda () (interactive) (find-file "~/riverodds")) :exit t)
   ("s" (lambda () (interactive) (find-file "~/screenshots")) :exit t)
   ("S" (lambda () (interactive) (find-file "~/sandbox/main.ts")) :exit t)
   ("a" (lambda () (interactive) (find-file "~/ledger/vault-apdu-connector")) :exit t)
@@ -66,8 +66,8 @@ fallback to counsel-fzf otherwise."
 
 (with-eval-after-load 'ft-evil
   (define-key evil-normal-state-map (kbd "C-p") 'ft-fuzzy-find-file))
+
 (global-set-key (kbd "C-=") 'ft/edit-config-file)
-(global-set-key (kbd "C-c =") 'ft-diff-file-dwim )
 (global-set-key (kbd "C-h e") 'visit-*Messages*)
 (global-set-key (kbd "C-c L") 'ft-open-lisp-file)
 
