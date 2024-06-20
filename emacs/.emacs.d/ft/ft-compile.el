@@ -18,6 +18,7 @@
 
 (setq project-compilation-buffer-name-function 'project-prefixed-buffer-name)
 (setq compilation-ask-about-save nil)
+(setq shell-command-switch "-c")
 
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
