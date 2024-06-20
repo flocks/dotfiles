@@ -38,6 +38,8 @@
   (evil-define-key 'normal map
     (kbd "Y") 'ft-kill-command)
   (evil-define-key 'normal map
+	(kbd "J") 'next-error-no-select
+	(kbd "K") 'previous-error-no-select
 	(kbd "D") 'ft-compilation-switch-directory
 	(kbd "R") (lambda ()
 				(interactive)
@@ -88,6 +90,8 @@
 
 (global-set-key (kbd "M-*") 'ft/project-custom-ci)
 
+(global-set-key (kbd "M-!") 'async-shell-command)
+(define-key dired-mode-map (kbd "M-!") 'async-shell-command)
 (global-set-key (kbd "M-&") 'compile)
 
 (defun ft-compile-wrapper ()
