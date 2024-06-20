@@ -14,12 +14,13 @@ export PATH=~/.npm-global/bin:$PATH
 export PATH=~/.yarn/bin:$PATH
 export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
 
-
 export LANG=en_US.UTF-8
 
 source "$HOME/ohmyzsh/oh-my-zsh.sh"
+source "/home/fteissier/zsh-abbr/zsh-abbr.zsh"
 
-plugins=()
+plugins=( git z )
+
 
 source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 CASE_SENSITIVE="true"
@@ -132,6 +133,7 @@ autoload -z edit-command-line
 bindkey "^X^E" edit-command-line
 
 bindkey "^[q" wrapQuickfix
+bindkey "^[w" pb-copy-region-as-kill-deactivate-mark
 bindkey "^[$" wrap
 bindkey "^[\<" wrapProcess
 bindkey "^[\"" wrapQuote
@@ -145,12 +147,12 @@ bindkey "^[V" insert_vault_instance
 
 precmd() { pwd > /tmp/current-dir }
 in() { cd $(dirname $1) }
-in() { cd $(dirname $1) }
-p() {
-    col="$1"
-    while read -r line; do
-      echo "$line" | awk -v col="$col" '{print $col}'
-    done
-}
 
-eval $(opam env)
+# disable it's too slow
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export ANDROID_HOME=$HOME/Android/Sdk && export PATH=$PATH:$ANDROID_HOME/emulator && export PATH=$PATH:$ANDROID_HOME/platform-tools
+
