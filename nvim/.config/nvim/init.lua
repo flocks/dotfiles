@@ -81,7 +81,6 @@ vim.keymap.set('n', '<leader>d', ":let @+ = expand('%:p:h')<CR>")
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
 vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
-vim.keymap.set('n', "<C-c><C-c>", ":Compile<CR>") -- reformat
 vim.keymap.set('n', "<C-x><C-j>", ":Oil<CR>") -- file explorer
 vim.keymap.set('n', "<C-c><C-r>", ":%s/<C-r><C-w>/") -- file explorer
 vim.keymap.set('n', "<M-p>", ":cprev<CR>") -- previous in quickfix list
@@ -106,7 +105,9 @@ vim.keymap.set('n', "<Leader>m", "^vg_o") -- select all line content
 vim.keymap.set('n', "Q", ":cq<CR>") -- never use Ex useless mode
 
 
+-- vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
 vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
+vim.keymap.set('n', "<C-c><C-c>", ":AsyncRun<Space>make<CR>") -- never use Ex useless mode
 
 
 
