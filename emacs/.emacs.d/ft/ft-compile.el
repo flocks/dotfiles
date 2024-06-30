@@ -92,7 +92,7 @@
 
 (global-set-key (kbd "M-!") 'async-shell-command)
 (define-key dired-mode-map (kbd "M-!") 'async-shell-command)
-(global-set-key (kbd "M-&") 'compile)
+(global-set-key (kbd "C-c c") 'compile)
 
 (defun ft-compile-wrapper ()
   (interactive)
