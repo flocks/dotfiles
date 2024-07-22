@@ -69,7 +69,7 @@
   (add-hook 'web-mode-hook 'add-node-modules-path t))
 
 (use-package msp
-  :straight (:local-repo "~/.emacs.d/straight/repos/msp")
+  :straight (:repo "https://github.com/flocks/msp.git")
   :config
   (setq msp-config-file '(".prettierrc" ".prettierrc.js" ".prettierrc.json" "prettier.config.cjs"))
   (global-set-key (kbd "C-c C-f") 'msp-prettify))
