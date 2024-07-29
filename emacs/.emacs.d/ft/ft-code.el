@@ -29,6 +29,10 @@
   ("C-x g" . magit-status)
   ("C-c g" . magit-file-dispatch))
 
+;; useful to turn camelCase to snakeCase etc
+(use-package string-inflection
+  :straight t)
+
 (use-package magit-scripts
   :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
 
