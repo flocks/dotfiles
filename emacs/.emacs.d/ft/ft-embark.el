@@ -59,9 +59,6 @@
   :config
   (setq consult-dir-shadow-filenames nil))
 
-(global-set-key (kbd "C-s") 'consult-line)
-
-
 (use-package monobuffer
   :straight (monobuffer :type git :host github :repo "flocks/monobuffer.el")
   :config
