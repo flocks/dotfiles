@@ -85,7 +85,6 @@ the list"
 			(dired (cons buff-name filtered-files)))))))
 
 (let ((map dired-mode-map))
-  (evil-define-key 'normal map (kbd "C-c C-p") 'dired-toggle-read-only) ;; to be consisent with rg.el/occur/grep
   (evil-define-key 'normal map (kbd "C-c C-d d") 'ft-dired-sort-date)
   (evil-define-key 'normal map (kbd "C-c C-d i") 'ft-dired-mark-images)
   (evil-define-key 'normal map (kbd "C-c C-d c") 'ft-dired-concat-images)
