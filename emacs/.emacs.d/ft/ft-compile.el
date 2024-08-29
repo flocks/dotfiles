@@ -101,5 +101,6 @@
 	(call-interactively 'compile)))
 
 (global-set-key (kbd "C-x p c") 'ft-compile-wrapper)
+(global-set-key (kbd "C-c C-c") 'recompile)
 
 (provide 'ft-compile)
