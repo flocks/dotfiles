@@ -45,11 +45,6 @@
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq dumb-jump-selector 'ivy))
 
-(defun ft/edit-config-file ()
-  "Open settings.org file"
-  (interactive)
-  (find-file "~/dotfiles/emacs/.emacs.d/settings.el"))
-
 (defun ft-fuzzy-find-file ()
   "Use 'project-find-file' when inside a project,
 fallback to counsel-fzf otherwise."
@@ -67,7 +62,6 @@ fallback to counsel-fzf otherwise."
 (with-eval-after-load 'ft-evil
   (define-key evil-normal-state-map (kbd "C-p") 'ft-fuzzy-find-file))
 
-(global-set-key (kbd "C-=") 'ft/edit-config-file)
 (global-set-key (kbd "C-h e") 'visit-*Messages*)
 (global-set-key (kbd "C-c L") 'ft-open-lisp-file)
 
