@@ -25,7 +25,6 @@
   (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
   (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)
   :bind
-  ("M-g" . magit-status)
   ("C-x g" . magit-status)
   ("C-c g" . magit-file-dispatch))
 
