@@ -68,4 +68,7 @@
   :config
   (elfeed-notifier-mode))
 
+(use-package elpher
+  :straight t)
+
 (provide 'ft-elfeed)
