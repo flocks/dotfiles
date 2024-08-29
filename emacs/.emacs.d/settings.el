@@ -139,7 +139,6 @@
 (require 'ft-elfeed)
 (require 'ft-buffer)
 (require 'ft-eshell)
-;; (require 'ft-emms)
 (require 'ft-code)
 (require 'ft-github)
 (require 'ft-misc)
