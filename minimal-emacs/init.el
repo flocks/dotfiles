@@ -12,8 +12,11 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(column-number-mode 1)
+(show-paren-mode 1)
 (repeat-mode)
 (defalias 'yes-or-no-p 'y-or-n-p)
+(set-frame-font "Berkeley Mono 12" nil t)
 (savehist-mode 1)
 (electric-pair-mode 1)
 
@@ -36,6 +39,10 @@
 	(border-mode-line-inactive "#696969")
 	(bg-mode-line-inactive unspecified)))
 
+(defun ft-load-theme ()
+  (interactive)
+  (mapc #'disable-theme custom-enabled-themes)
+  (call-interactively 'load-theme))
 
 
 ;; dired
@@ -49,6 +56,12 @@
 
 
 ;; compilation mode
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (read-only-mode)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (read-only-mode))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 (defun ft-compilation-switch-directory (dir)
   (interactive "D")
@@ -109,9 +122,12 @@
   :ensure t
   :config
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this))
+  (global-set-key (kbd "C-.") 'mc/mark-next-like-this-word))
 
 
 ;; buffer
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
+
+
+;; compilation mode
+(global-set-key (kbd "C-c c") 'compile)
