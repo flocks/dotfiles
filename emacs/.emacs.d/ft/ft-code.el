@@ -117,11 +117,6 @@
   :straight t)
 
 
-(use-package edbi
-  :straight t
-  :config
-  (define-key ctbl:table-mode-map (kbd "C-c C-o") 'edbi:dbview-query-result-quicklook-command))
-
 (use-package rainbow-delimiters
     :straight t)
 
@@ -156,9 +151,9 @@
   :config
   (add-hook 'json-ts-mode-hook 'yafolding-mode))
 
-  (progn
-	(evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
-	(evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error))
+(progn
+  (evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
+  (evil-define-key 'normal prog-mode-map (kbd "M-n") 'flymake-goto-next-error))
 
 (use-package git-link
   :straight t
