@@ -2,9 +2,6 @@
 (use-package json-mode
   :straight t)
 
-(use-package jq-mode
-  :straight t)
-
 (defun ft-json-view (start end)
   "Format json inside selection into a another buffer"
   (interactive "r")
@@ -21,7 +18,6 @@
 
 
 (global-set-key (kbd "C-c C-j") 'ft-json-view)
-
 
 (use-package jjumper
   :straight (jjumper :type git :host github :repo "flocks/jjumper")
