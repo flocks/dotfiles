@@ -209,7 +209,13 @@ require("lazy").setup({
   {
     "blazkowolf/gruber-darker.nvim",
     config = function ()
-      vim.cmd("colorscheme gruber-darker")
+      -- vim.cmd("colorscheme gruber-darker")
+    end
+  },
+  {
+    "Shatur/neovim-ayu",
+    config = function ()
+      vim.cmd("colorscheme ayu-dark")
     end
   },
   {
