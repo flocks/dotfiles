@@ -63,4 +63,4 @@ Diff buffer"
     (when url
       (ft-view-diff-from-github-url url))))
 
-(evil-define-key 'normal mu4e-view-mode-map (kbd "C-c C-g") 'ft-view-diff)
+(evil-define-key 'normal notmuch-show-mode (kbd "C-c C-g") 'ft-view-diff)
