@@ -39,7 +39,7 @@
   (interactive "s")
   (let* ((root (file-truename (locate-dominating-file default-directory ".git")))
 		 (filename (file-name-sans-extension file-name))
-		(copy (file-relative-name filename (format "%s/src" root))))
+		 (copy (file-relative-name filename (format "%s/src" root))))
 	(kill-new copy)
 	(message "Copied %s" copy)))
 
@@ -50,9 +50,7 @@
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-;; TODO conflict with vim s/foo/bar command
-(define-abbrev minibuffer-mode-abbrev-table "s" "rg --vimgrep")
-;; (add-hook 'minibuffer-mode-hook 'abbrev-mode)
+(add-hook 'minibuffer-setup-hook 'yas-minor-mode)
 
 (defun ft-lorem ()
   (interactive)
