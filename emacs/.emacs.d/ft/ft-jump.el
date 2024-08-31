@@ -33,12 +33,6 @@
   (interactive)
   (find-file (read-file-name "Config file: " "~/.emacs.d/ft/")))
 
-(defun visit-*Messages* ()
-  "Visit buffer `*Messages* in another window"
-  (interactive)
-  (switch-to-buffer-other-window (messages-buffer))
-  (goto-char (point-max)))
-
 (use-package dumb-jump
   :straight t
   :config
@@ -62,7 +56,6 @@ fallback to counsel-fzf otherwise."
 (with-eval-after-load 'ft-evil
   (define-key evil-normal-state-map (kbd "C-p") 'ft-fuzzy-find-file))
 
-(global-set-key (kbd "C-h e") 'visit-*Messages*)
 (global-set-key (kbd "C-c L") 'ft-open-lisp-file)
 
 (provide 'ft-jump)
