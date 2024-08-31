@@ -129,7 +129,6 @@
 (require 'ft-system)
 (require 'ft-window)
 (require 'ft-json)
-(require 'ft-term)
 (require 'ft-eww)
 (require 'ft-compile)
 (require 'ft-dired)
