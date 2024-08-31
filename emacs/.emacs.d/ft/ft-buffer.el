@@ -1,4 +1,5 @@
 (setq ibuffer-expert t)
+(require 'ibuffer)
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 (setq uniquify-separator "/")
