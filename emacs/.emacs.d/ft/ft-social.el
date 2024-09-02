@@ -6,7 +6,6 @@
 
   (defun ft-mastodon-dwim ()
 	(interactive)
-	;; TODO write other stuff if needed
 	(call-interactively #'mastodon-tl--thread))
 
   (evil-define-key 'normal mastodon-mode-map (kbd "o") 'ft-mastodon-dwim)
@@ -37,16 +36,6 @@
 					 :secret))))
 	(erc-tls :server "134.122.90.60" :port "5000" :nick "flocks" :password password)))
 
-
-(use-package sx
-  :straight t
-  :config
-  (defun ft-search-stack ()
-	(interactive)
-	(call-interactively 'sx-search))
-
-   (global-set-key (kbd "C-c C-h") 'ft-search-stack)
-   (evil-define-key 'normal sx-question-list-mode-map (kbd "RET") 'sx-display))
 
 (use-package elpher
   :straight t)
