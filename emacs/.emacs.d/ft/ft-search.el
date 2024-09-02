@@ -20,4 +20,23 @@ dired buffer"
 (define-key grep-mode-map (kbd "C-c d") 'ft-grep-to-dired)
 (evil-define-key 'normal grep-mode-map (kbd "g r") 'embark-rerun-collect-or-export)
 
+
+(eval-after-load 'ft-dired
+  (progn
+	(defun ft-my-consult-ripgrep ()
+	  (interactive)
+	  (if (and (eq major-mode 'dired-mode)
+			   (ft-dired-is-mark-active))
+		  (let* ((files (string-join (dired-get-marked-files) " "))
+				 (consult-ripgrep-args
+				  (format "%s %s"
+						  (string-join (butlast (split-string consult-ripgrep-args)) " ")
+						  files)))
+			(call-interactively #'consult-ripgrep))
+		(call-interactively #'consult-ripgrep)))
+
+	(evil-define-key '(motion normal) global-map (kbd "C-f") 'ft-my-consult-ripgrep)))
+
+
+
 (provide 'ft-search)
