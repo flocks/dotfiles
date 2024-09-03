@@ -47,7 +47,7 @@
 		("\\**mpv-elfeed*"
 		 (display-buffer-no-window))))
 
-(defun ft-get-erc-buffers-of-mode (mode)
+(defun ft-get-buffers-of-mode (mode)
   "Return list of buffer where major-mode is MODE"
   (let ((result))
 	(dolist (item (buffer-list))
@@ -64,7 +64,7 @@
  	:action   ,#'consult--buffer-action
     :state    ,#'consult--buffer-state
     :history  buffer-name-history
-    :items ,(lambda () (ft-get-erc-buffers-of-mode "erc-mode")))
+    :items ,(lambda () (ft-get-buffers-of-mode "erc-mode")))
   "consult source for IRC buffers")
 
 (add-to-list 'consult-buffer-sources 'consult--source-erc-buffers 'append)
