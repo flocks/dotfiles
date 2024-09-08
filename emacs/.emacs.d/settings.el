@@ -144,6 +144,7 @@
 (require 'ft-mail)
 (require 'ft-social)
 (require 'ft-modeline)
+(require 'ft-view-diff)
 
 (use-package notmuch)
 
