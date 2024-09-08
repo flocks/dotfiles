@@ -62,30 +62,35 @@
 						   (url (format "http://flocks.dev:8080/view/%s" id)))
 					  (message url)
 					  (kill-new url))
-					)
-				  )))
+					))))
 
-(defun ft-upload-snippet (beginning end)
-  "Take the region and upload it to server"
+
+(defun ft-share-region (begin end)
+  "Take region and upload the text to 0x0.st or equivalent"
   (interactive "r")
-  (if (use-region-p)
-	  (let ((text (buffer-substring-no-properties beginning end)))
-		(ft-upload-content-mirc text))))
+  (when (not (use-region-p))
+	(user-error "No region selected"))
+  (let* ((hostname "https://envs.sh")
+		 (text (buffer-substring-no-properties begin end))
+		 (file-text (make-temp-file "" nil ".txt" text))
+		 (upload-command (format "curl -s -F 'file=@%s' %s" file-text hostname))
+		 (url (shell-command-to-string upload-command)))
+	(kill-new url)
+	(delete-file file-text)
+	(message "%s" url)))
 
-(defun ft-upload-image ()
-  "Take the image under cursor and send its base64 representation to
-server"
-  (interactive)
-  (unless (eq major-mode 'dired-mode)
-	(error "Not in a dired buffer"))
-  (let ((files (dired-get-marked-files)))
-	(unless (= (length files) 1)
-	  (error "Multiple files marked, only support one file"))
-	(ft-upload-content-mirc (shell-command-to-string (format "base64 %s" (car files))))))
-
-(use-package hackernews
-  :straight t)
-
+(defun ft-share-file (file)
+  "Take region and upload the text to 0x0.st"
+  (interactive (list
+				(let ((files-marked (dired-get-marked-files)))
+				  (if (= (length files-marked) 1)
+					  (car files-marked)
+					(read-file-name "File to upload: ")))))
+  (let* ((hostname "https://envs.sh")
+		 (upload-command (format "curl -s -F'file=@%s' %s" (expand-file-name file) hostname))
+		 (url (shell-command-to-string upload-command)))
+	(kill-new url)
+	(message "%s" url)))
 
 
 (provide 'ft-social)
