@@ -96,7 +96,9 @@
 	 (tramp-connection-local-default-system-profile
 	  (path-separator . ":") (null-device . "/dev/null"))))
  '(custom-safe-themes
-   '("ed1b7b4db911724b2767d4b6ad240f5f238a6c07e98fff8823debcfb2f7d820a"
+   '("7758a8b8912ef92e8950a4df461a4d510484b11df0d7195a8a3d003965127abc"
+	 "e410458d3e769c33e0865971deb6e8422457fad02bf51f7862fa180ccc42c032"
+	 "ed1b7b4db911724b2767d4b6ad240f5f238a6c07e98fff8823debcfb2f7d820a"
 	 "0af489efe6c0d33b6e9b02c6690eb66ab12998e2649ea85ab7cfedfb39dd4ac9"
 	 "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78"
 	 "f943bbe619c11a066be5ed60111f3846e7e31af7a376a3fbc02596387f92cae7"
