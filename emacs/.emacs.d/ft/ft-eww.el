@@ -64,7 +64,12 @@
 							   ".answers-subheader"
 							   ".js-post-menu"
 							   ".votecell"
-							   ))))
+							   ))
+							 ("\\**github" .
+							  (".HeaderMenu"
+							   ".AppHeader"
+							   ))
+							 ))
   (add-hook 'eww-after-render-hook #'ewaser--hook))
 
 (use-package shr-tag-pre-highlight
