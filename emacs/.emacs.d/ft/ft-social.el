@@ -24,6 +24,7 @@
 
 (setq erc-join-buffer 'window-noselect)
 (setq erc-track-switch-direction 'importance)
+(setq erc-send-whitespace-lines t)
 
 
 (defun ft-irc ()
@@ -91,6 +92,5 @@
 		 (url (shell-command-to-string upload-command)))
 	(kill-new url)
 	(message "%s" url)))
-
 
 (provide 'ft-social)
