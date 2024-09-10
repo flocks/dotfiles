@@ -24,11 +24,9 @@
 					  (message "%s" (alist-get 'summary (alist-get 'fields json))))))))
 
 
-(defun ft-jira-issue-summary-at-point (beg end)
-  (interactive "r")
-  (unless (use-region-p)
-	(user-error "Nothing selected"))
-  (let* ((issue (buffer-substring-no-properties beg end))
+(defun ft-jira-issue-summary-at-point ()
+  (interactive)
+  (let* ((issue (thing-at-point 'word))
 		 (browse-url (format "https://ledgerhq.atlassian.net/browse/%s" issue)))
 	(ft-jira-issue-summary issue)
 	(kill-new browse-url)))
