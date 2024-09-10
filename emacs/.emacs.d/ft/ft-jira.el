@@ -20,8 +20,11 @@
 									  ("Authorization" . ,(ft-jira--get-basic-auth-token)))))
 	(url-retrieve url
 				  (lambda (status)
-					(let ((json (ft-jira--extract-json)))
-					  (message "%s" (alist-get 'summary (alist-get 'fields json))))))))
+					(let* ((json (ft-jira--extract-json))
+                           (fields (alist-get 'fields json))
+                           (summary (alist-get 'summary fields))
+                           (description (alist-get 'description fields)))
+					  (message "%s\n %s" summary (if (eq description :null) "" description)))))))
 
 
 (defun ft-jira-issue-summary-at-point ()
