@@ -1,9 +1,11 @@
+(require 'ft-utils)
+
 (defun ft-jira--get-basic-auth-token ()
-  (let ((token (funcall
-                (plist-get (nth 0 (auth-source-search :host "ledgerhq.atlassian.net" :user "florent.teissier@ledger.fr")) :secret))))
-    (format "Basic %s"
-            (shell-command-to-string
-             (format "echo -n florent.teissier@ledger.fr:%s | base64 -w0" token)))))
+  (let* ((host "ledgerhq.atlassian.net")
+		 (user "florent.teissier@ledger.fr")
+		 (token (ft-extract-auth-token host user))
+		 (command (format "echo -n florent.teissier@ledger.fr:%s | base64 -w0" token)))
+    (format "Basic %s" (shell-command-to-string command))))
 
 
 (defun ft-jira--extract-json ()
@@ -25,7 +27,6 @@
                            (summary (alist-get 'summary fields))
                            (description (alist-get 'description fields)))
 					  (message "%s\n %s" summary (if (eq description :null) "" description)))))))
-
 
 (defun ft-jira-issue-summary-at-point ()
   (interactive)
