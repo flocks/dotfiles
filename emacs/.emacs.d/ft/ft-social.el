@@ -37,7 +37,6 @@
 					 :secret))))
 	(erc-tls :server "134.122.90.60" :port "5000" :nick "flocks" :password password)))
 
-
 (use-package elpher
   :straight t)
 
@@ -47,24 +46,6 @@
   (evil-define-key 'normal bongo-mode-map (kbd "RET") 'bongo-play)
   ;; (define-key 'normal bongo-mode-map (kbd "o") 'bongo-insert-file)
   (evil-define-key 'normal bongo-mode-map (kbd "o") 'bongo-insert-file))
-
-(defun ft-upload-content-mirc (content)
-  "Send a POST request with content as data in plain text."
-  (let ((url-request-method "POST")
-		(url-request-extra-headers `(("Content-Type" . "text/plain")))
-		(url-request-data content))
-	(url-retrieve "http://flocks.dev:8080"
-				  (lambda (status)
-					(goto-char (point-min))
-					(re-search-forward "^$")
-					(delete-region (point) (point-min))
-					(let* ((response (json-parse-buffer :object-type 'alist))
-						   (id (alist-get 'id response))
-						   (url (format "http://flocks.dev:8080/view/%s" id)))
-					  (message url)
-					  (kill-new url))
-					))))
-
 
 (defun ft-share-region (begin end)
   "Take region and upload the text to 0x0.st or equivalent"
@@ -81,7 +62,7 @@
 	(message "%s" url)))
 
 (defun ft-share-file (file)
-  "Take region and upload the text to 0x0.st"
+  "Take marked file and upload it to 0x0.st. Prompt for file if no marked file"
   (interactive (list
 				(let ((files-marked (dired-get-marked-files)))
 				  (if (= (length files-marked) 1)
