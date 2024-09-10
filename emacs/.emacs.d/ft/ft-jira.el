@@ -26,7 +26,7 @@
 
 (defun ft-jira-issue-summary-at-point ()
   (interactive)
-  (let* ((issue (thing-at-point 'word))
+  (let* ((issue (thing-at-point 'word t))
 		 (browse-url (format "https://ledgerhq.atlassian.net/browse/%s" issue)))
 	(ft-jira-issue-summary issue)
 	(kill-new browse-url)))
