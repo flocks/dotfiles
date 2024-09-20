@@ -87,10 +87,11 @@
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
+;;(evil-define-key 'motion org-mode-map (kbd "RET") 'org-open-at-point)
 
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c C") 'org-capture)
 ;; 
 
 ;; auto insert closing parenthesis/bracket/quote..etc..
