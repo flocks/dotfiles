@@ -7,6 +7,8 @@
   (setq consult-find-args
 		"find . -not ( -wholename */.* -prune ) -not ( -wholename *node_modules* -prune )")
 
+  (setq consult-preview-key "C-.")
+
   (global-set-key (kbd "C-c M-i") 'consult-imenu)
   (global-set-key (kbd "C-c M-f") 'consult-focus-lines)
   (global-set-key (kbd "C-c M-k") 'consult-keep-lines)
