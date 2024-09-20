@@ -215,7 +215,13 @@ require("lazy").setup({
   {
     "Shatur/neovim-ayu",
     config = function ()
-      vim.cmd("colorscheme ayu-dark")
+      -- vim.cmd("colorscheme ayu-dark")
+    end
+  },
+  {
+    "miikanissi/modus-themes.nvim",
+    config = function()
+      vim.cmd("colorscheme modus_vivendi")
     end
   },
   {
