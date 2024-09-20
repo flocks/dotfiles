@@ -38,7 +38,22 @@
 	(erc-tls :server "134.122.90.60" :port "5000" :nick "flocks" :password password)))
 
 (use-package elpher
-  :straight t)
+  :straight t
+  :config
+  (defun ft-elpher-page-url ()
+	(let* ((address (elpher-page-address elpher-current-page))
+		   (url (elpher-address-to-url address)))
+	  url))
+
+  (defun ft-share-elpher-web ()
+	(interactive)
+	(unless (string= major-mode "elpher-mode")
+	  (user-error "Not inside elpher"))
+	(let* ((url (ft-elpher-page-url))
+		   (without-protocol (cadr (split-string url "gemini://")))
+		   (web-url (format "https://portal.mozz.us/gemini/%s" without-protocol)))
+	  (kill-new web-url)
+	  (message "%s" web-url))))
 
 (use-package bongo
   :straight t
