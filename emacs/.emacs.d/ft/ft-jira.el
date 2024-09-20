@@ -50,10 +50,11 @@ When PREFIX non nil, will force a cache refresh."
 	(ft-jira--select-issue ft-jira--issues-cache)))
 
 
-(defun ft-jira--get-my-issues (callback)
+(defun ft-jira--get-my-issues (callback &optional limit)
   "Get all my issues and call CALLBACK with them"
   (let* ((jql (url-hexify-string "assignee = currentUser() order by updated DESC"))
-		 (url (format "https://ledgerhq.atlassian.net/rest/api/2/search?jql=%s&maxResults=10" jql))
+		 (limit (or limit 20))
+		 (url (format "https://ledgerhq.atlassian.net/rest/api/2/search?jql=%s&maxResults=%s" jql limit))
 		 (url-request-extra-headers (ft-jira--get-headers)))
 	(url-retrieve url
 				  (lambda (status _callback)
@@ -66,7 +67,7 @@ When PREFIX non nil, will force a cache refresh."
 
 
 (defun ft-jira-issue-print-summary (issue)
-  "Fetch summary of one jira issue, issue is the key and not the id in jira world"
+  "Fetch summary of one jira ISSUE, ISSUE is the key and not the id in jira world"
   (interactive "sIssue: ")
   (let* ((url (format "https://ledgerhq.atlassian.net/rest/api/2/issue/%s" issue))
 		 (url-request-extra-headers (ft-jira--get-headers)))
