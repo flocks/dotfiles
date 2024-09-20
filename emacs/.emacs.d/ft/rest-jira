@@ -26,7 +26,15 @@ GET https://ledgerhq.atlassian.net/rest/agile/latest/board/24/issue
 :my-headers
 
 # GET an issue
-GET https://ledgerhq.atlassian.net/rest/api/2/issue/VSD-1286
+GET https://ledgerhq.atlassian.net/rest/api/2/issue/VG-21567
+:my-headers
+
+# GET my filters
+GET https://ledgerhq.atlassian.net/rest/api/2/filter/search?maxResults=300
+:my-headers
+
+# GET issues with jqal
+GET https://ledgerhq.atlassian.net/rest/api/2/search?jql=assignee%20=%20currentUser()%20order%20by%20updated%20DESC&maxResults=20
 :my-headers
 
 # GET an issue
