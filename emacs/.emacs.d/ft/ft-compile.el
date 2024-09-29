@@ -13,8 +13,8 @@
 	(add-to-list 'compilation-error-regexp-alist (intern (car regex)))
 	(add-to-list 'compilation-error-regexp-alist-alist
 				 `(,(intern (car regex))
-				  ,(cdr regex)
-				  1 2 3))))
+				   ,(cdr regex)
+				   1 2 3))))
 
 (setq project-compilation-buffer-name-function 'project-prefixed-buffer-name)
 (setq compilation-ask-about-save nil)
@@ -49,7 +49,7 @@
   (interactive "D")
   (setq compilation-directory dir)
   (setq default-directory dir)
-  (recompile))
+  (recompile t))
 
 ;; TODO makes this more generic to  use also  .git
 (defun ft-get-project-root ()
