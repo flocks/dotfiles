@@ -139,7 +139,7 @@ bindsym $mod+Shift+grave layout default
 
 set $g "#181818"
 set $w "#f4f6ff"
-set $r "#2e2e2e"
+set $r "#FFCC66"
 set $l "#555555"
 set $y "#ffff00"
 set $b "#000000"
