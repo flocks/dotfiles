@@ -2,13 +2,15 @@
 ;; optimization
 (setq gc-cons-threshold (* 1024 1024 100))
 (add-to-list 'load-path
-	     (expand-file-name (concat user-emacs-directory "ft")))
+             (expand-file-name (concat user-emacs-directory "ft")))
 
 (add-to-list 'load-path "/usr/share/emacs/site-lisp")
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp")
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
+
+(indent-tabs-mode -1)
 
 ;;;; package setup
 (when (not (package-installed-p 'use-package))
@@ -47,7 +49,7 @@
   (setq wgrep-auto-save-buffer t))
 
 (custom-set-variables
-    '(tab-width 4))
+ '(tab-width 4))
 
 (setq help-window-select t)
 
@@ -62,10 +64,10 @@
 
 
 (setq backup-directory-alist
-          `(("." . ,(concat user-emacs-directory "backups"))))
+      `(("." . ,(concat user-emacs-directory "backups"))))
 
 (setq auto-save-file-name-transforms
-  `((".*" "~/.emacs-saves/" t)))
+      `((".*" "~/.emacs-saves/" t)))
 
 ;; (setq epa-pinentry-mode 'loopback)
 
