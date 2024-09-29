@@ -147,6 +147,7 @@ bindkey "^[V" insert_vault_instance
 
 precmd() { pwd > /tmp/current-dir }
 in() { cd $(dirname $1) }
+cpath() { realpath "$1" | copy }
 
 # disable it's too slow
 # export NVM_DIR="$HOME/.nvm"
