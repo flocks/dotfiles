@@ -43,12 +43,12 @@ With a prefix argument, prompt for the regex."
 
   (interactive "P")
   (let ((regex-image
-	 (or (and arg (read-regexp "Regex for images"))
-	     ".png\\|.jpg\\|.svg")))
+		 (or (and arg (read-regexp "Regex for images"))
+			 ".png\\|.jpg\\|.svg")))
     (ft--ensure-dired-buffer)
     (dired-mark-files-regexp regex-image)))
-    ;; (dired-toggle-marks)
-    ;; (dired-do-kill-lines)))
+;; (dired-toggle-marks)
+;; (dired-do-kill-lines)))
 
 
 (defun ft-dired-mark-today ()
@@ -67,7 +67,7 @@ the preset date (1hour/1week/1month)"
   (interactive)
   (dired-insert-subdir
    (completing-read "Dir: "
-		    (split-string (shell-command-to-string "fd --type directory")))))
+					(split-string (shell-command-to-string "fd --type directory")))))
 
 
 (defun ft-gen-id ()
@@ -121,12 +121,12 @@ This function checks if at leat 1 mark has been explicitly set."
   ;; beginning with `dired-marker-char'
   (or (> (length (dired-get-marked-files)) 1)
       (save-excursion
-	(goto-char (point-min))
-	(while (and
-		(not (looking-at-p (char-to-string dired-marker-char)))
-		(not (eobp)))
-	  (forward-line 1))
-	(not (= (point) (point-max))))))
+		(goto-char (point-min))
+		(while (and
+				(not (looking-at-p (char-to-string dired-marker-char)))
+				(not (eobp)))
+		  (forward-line 1))
+		(not (= (point) (point-max))))))
 
 (defun ft-dired-concat-images (arg)
   "Use imagemagick to concat marked images.
