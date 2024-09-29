@@ -9,7 +9,7 @@
   (setq dired-recursive-copies 'always)
   (add-hook 'dired-mode-hook #'hl-line-mode)
   (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
-  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+  ;; (add-hook 'dired-mode-hook #'dired-hide-details-mode)
   (require 'dired-x)
   (evil-define-key 'normal dired-mode-map (kbd "M-%") 'dired-do-query-replace-regexp)
   ;; I don't want repeat mode for dired-jump
