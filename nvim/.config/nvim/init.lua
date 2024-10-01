@@ -170,6 +170,7 @@ end
 local lsp_servers = {
   'tsserver',
   'tailwindcss',
+  'pylsp'
 }
 
 require("lazy").setup({
@@ -344,6 +345,7 @@ require("lazy").setup({
       local servers = {
         'tsserver',
         'tailwindcss',
+        'pylsp'
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -355,6 +357,12 @@ require("lazy").setup({
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+          }
+        elseif lsp == "pylsp" then
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = {"python"}
           }
         else
           lspconfig[lsp].setup {
