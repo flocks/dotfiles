@@ -1,6 +1,3 @@
-(defun ft--sanitize-grep-filename (filename)
-  "Just clear filename from `:line:col' that is in the grep buffer"
-  (car (split-string filename ":")))
 (defun ft-search-thing (beg end)
   "Use rg to search for selected thing in root project
 
@@ -27,14 +24,16 @@ prefix-arg passed it searches only in current file"
 dired buffer"
   (interactive)
   (save-excursion
-	(goto-char (point-min))
-	(forward-line 2)
-	(let ((files))
-	  (while (not (eobp))
-		(when-let (file (thing-at-point 'filename))
-		  (push (ft--sanitize-grep-filename file) files))
-		(forward-line 1))
-	  (dired (cons "Grep" (cl-remove-duplicates files :test 'string=))))))
+    (goto-char (point-min))
+    (forward-line 4)
+    (let ((files))
+      (while (not (eobp))
+        (when-let* ((file-col-row (thing-at-point 'filename t))
+										(file (car (split-string file-col-row ":"))))
+					(when (file-exists-p file)
+						(push file files)))
+        (forward-line 1))
+      (dired (cons "Grep" (cl-remove-duplicates files :test 'string=))))))
 
 
 (define-key grep-mode-map (kbd "C-c d") 'ft-grep-to-dired)
@@ -43,19 +42,19 @@ dired buffer"
 
 (eval-after-load 'ft-dired
   (progn
-	(defun ft-my-consult-ripgrep ()
-	  (interactive)
-	  (if (and (eq major-mode 'dired-mode)
-			   (ft-dired-is-mark-active))
-		  (let* ((files (string-join (dired-get-marked-files) " "))
-				 (consult-ripgrep-args
-				  (format "%s %s"
-						  (string-join (butlast (split-string consult-ripgrep-args)) " ")
-						  files)))
-			(call-interactively #'consult-ripgrep))
-		(call-interactively #'consult-ripgrep)))
+    (defun ft-my-consult-ripgrep ()
+      (interactive)
+      (if (and (eq major-mode 'dired-mode)
+               (ft-dired-is-mark-active))
+          (let* ((files (string-join (dired-get-marked-files) " "))
+                 (consult-ripgrep-args
+                  (format "%s %s"
+                          (string-join (butlast (split-string consult-ripgrep-args)) " ")
+                          files)))
+            (call-interactively #'consult-ripgrep))
+        (call-interactively #'consult-ripgrep)))
 
-	(evil-define-key '(motion normal) global-map (kbd "C-f") 'ft-my-consult-ripgrep)))
+    (evil-define-key '(motion normal) global-map (kbd "C-f") 'ft-my-consult-ripgrep)))
 
 
 
