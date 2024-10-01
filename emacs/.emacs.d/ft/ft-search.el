@@ -1,6 +1,26 @@
 (defun ft--sanitize-grep-filename (filename)
   "Just clear filename from `:line:col' that is in the grep buffer"
   (car (split-string filename ":")))
+(defun ft-search-thing (beg end)
+  "Use rg to search for selected thing in root project
+
+When simple prefix-arg passed it searches in current folder When double
+prefix-arg passed it searches only in current file"
+
+  (interactive "r")
+  (let* ((search-term (if (use-region-p)
+                          (buffer-substring-no-properties beg end)
+                        (or (thing-at-point 'word t) (read-string "Search for: "))))
+         (default-directory (if current-prefix-arg
+                                default-directory
+                              (locate-dominating-file "." ".git")))
+         (file (or (and (equal current-prefix-arg '(16)) buffer-file-name) ""))
+         (command (format "rg --vimgrep '%s' %s" search-term file)))
+		(when search-term
+			(compile command))))
+
+(evil-global-set-key 'motion (kbd "C-c f") 'ft-search-thing)
+
 
 (defun ft-grep-to-dired ()
   "Inside a consult--grep buffer, takes all files and produce a
