@@ -147,7 +147,6 @@ directory."
 	(call-interactively 'eshell)))
 
 (global-set-key (kbd "M-`") 'ft-eshell-launcher)
-(global-set-key (kbd "M-~") 'vterm)
 
 (let ((map eshell-mode-map))
   (evil-collection-define-key 'normal 'map (kbd "C-p") nil)
