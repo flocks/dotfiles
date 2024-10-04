@@ -21,9 +21,11 @@
 
 (defun ft-jira--format-issue (issue)
   "From a jira ISSUE object format the issue for completion"
-  (format "%s: %s"
-		  (alist-get 'key issue)
-		  (alist-get 'summary (alist-get 'fields issue))))
+  (let ((fields (alist-get 'fields issue)))
+	(format "%s: %s %s"
+			(alist-get 'key issue)
+			(alist-get 'summary fields)
+			(alist-get 'name (alist-get 'status fields)))))
 
 (defun ft-jira--select-issue (issues)
   "Diplay prompt with all ISSUES, copy id of selected issue and propose to open in browser"
