@@ -1,4 +1,5 @@
 set line-graphics = utf-8
+set ignore-case = smart-case
 bind generic Y <sh -c "echo -n %(commit) | xclip -selection c"
 bind generic V >sh -c "git show %(commit) | nvim"
 bind main S !git format-patch -1 %(commit)
