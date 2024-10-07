@@ -144,7 +144,7 @@ set $l "#555555"
 set $y "#ffff00"
 set $b "#000000"
 
-client.focused          $r $r $w $r $r
+client.focused          $r #33415E $w $r $r
 client.focused_inactive $g $g $l $g $g
 client.unfocused        $g $g $l $g $g
 client.urgent           $y $y $b $y $y
