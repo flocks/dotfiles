@@ -240,9 +240,6 @@ require("lazy").setup({
     "tpope/vim-fugitive"
   },
   {
-    "tpope/vim-rsi"
-  },
-  {
     "itchyny/vim-qfedit"                   -- edit quickfix list
   },
   { "ThePrimeagen/harpoon",
