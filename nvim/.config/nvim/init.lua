@@ -242,15 +242,6 @@ require("lazy").setup({
   {
     "itchyny/vim-qfedit"                   -- edit quickfix list
   },
-  { "ThePrimeagen/harpoon",
-    config = function()
-      require("harpoon").setup({})
-      local harpoon_ui = require("harpoon.ui")
-      local harpoon_mark = require("harpoon.mark")
-         vim.keymap.set('n', '<C-e>', harpoon_ui.toggle_quick_menu)
-         vim.keymap.set('n', '<C-M-e>', harpoon_mark.add_file)
-    end
-  },
   -- auto pairs
   {
     "windwp/nvim-autopairs",
