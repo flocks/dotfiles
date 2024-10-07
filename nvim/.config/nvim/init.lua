@@ -203,22 +203,21 @@ require("lazy").setup({
       -- vim.cmd("colorscheme gruber-darker")
     end
   },
+  {"arcticicestudio/nord-vim",
+    config = function ()
+      vim.cmd("colorscheme nord")
+    end
+  },
   {
     "Shatur/neovim-ayu",
     config = function ()
-      -- vim.cmd("colorscheme ayu-dark")
+      -- vim.cmd("colorscheme ayu-mirage")
     end
   },
   {
     "miikanissi/modus-themes.nvim",
     config = function()
       -- vim.cmd("colorscheme modus_vivendi")
-    end
-  },
-  {
-    "thallada/farout.nvim",
-    config = function()
-      vim.cmd("colorscheme farout-night")
     end
   },
   {
