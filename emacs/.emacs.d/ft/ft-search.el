@@ -1,12 +1,12 @@
-(defun ft-search-thing (beg end)
+(defun ft-search-thing ()
   "Use rg to search for selected thing in root project
 
 When simple prefix-arg passed it searches in current folder When double
 prefix-arg passed it searches only in current file"
 
-  (interactive "r")
+  (interactive)
   (let* ((search-term (if (use-region-p)
-                          (buffer-substring-no-properties beg end)
+                          (buffer-substring-no-properties (region-beginning) (region-end))
                         (or (thing-at-point 'word t) (read-string "Search for: "))))
          (default-directory (if current-prefix-arg
                                 default-directory
@@ -16,7 +16,7 @@ prefix-arg passed it searches only in current file"
 		(when search-term
 			(compile command))))
 
-(evil-global-set-key 'motion (kbd "C-c f") 'ft-search-thing)
+(evil-define-key 'motion global-map (kbd "C-c f") 'ft-search-thing)
 
 
 (defun ft-grep-to-dired ()
