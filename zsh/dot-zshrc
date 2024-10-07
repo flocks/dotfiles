@@ -88,10 +88,10 @@ wrapQuote() {
 	zle beginning-of-line;
 }
 
-dir() {
-  dir=$(find -type d | rg -v "node_modules|.git" |  fzf)
-	BUFFER="$BUFFER $dir"
-	CURSOR=$(($CURSOR + $#dir + 1))
+insert_there() {
+  folder=$(cat ~/.here | fzf)
+	BUFFER="$BUFFER$folder"
+	CURSOR=$(($CURSOR + $#folder + 1))
 }
 
 insert_branch() {
@@ -118,12 +118,12 @@ lh () {
 
 bindkey -e
 zle -N pb-kill-line
+zle -N insert_there
 zle -N pb-copy-region-as-kill-deactivate-mark
 zle -N wrapQuickfix
 zle -N wrapProcess
 zle -N wrap
 zle -N wrapQuote
-zle -N dir
 zle -N insert_branch
 zle -N insert_modified_file
 zle -N insert_vault_instance
@@ -140,6 +140,7 @@ bindkey "^[\"" wrapQuote
 bindkey "^[B" insert_branch
 bindkey "^[T" insert_modified_file
 bindkey "^[V" insert_vault_instance
+bindkey "^[z" insert_there
 
 # proto
 # export PROTO_ROOT="$HOME/.proto"
@@ -148,6 +149,8 @@ bindkey "^[V" insert_vault_instance
 precmd() { pwd > /tmp/current-dir }
 in() { cd $(dirname $1) }
 cpath() { realpath "$1" | tr -d '\n' | copy }
+
+here() { echo $(pwd) >> ~/.here }
 
 # disable it's too slow
 # export NVM_DIR="$HOME/.nvm"
