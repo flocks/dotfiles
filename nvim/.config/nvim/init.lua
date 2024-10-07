@@ -352,11 +352,11 @@ require("lazy").setup({
         end
       end
 
-      lspconfig.clangd.setup({
-        cmd = { "clangd-12"},
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
+      -- lspconfig.clangd.setup({
+      --   cmd = { "clangd-12"},
+      --   on_attach = on_attach,
+      --   capabilities = capabilities,
+      -- })
 
 
     end
