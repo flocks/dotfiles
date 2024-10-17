@@ -187,8 +187,6 @@ require("lazy").setup({
   {
     "lambdalisue/vim-manpager"
   },
-  {"airblade/vim-rooter"},
-  {"nvim-telescope/telescope-project.nvim"},
   {
     "skywind3000/asyncrun.vim"
   },
@@ -258,7 +256,6 @@ require("lazy").setup({
       local ts_builtin = require('telescope.builtin')
 
       pcall(telescope.load_extension, 'fzf')
-      pcall(telescope.load_extension, 'project')
 
       telescope.setup({
         defaults = {
@@ -295,7 +292,6 @@ require("lazy").setup({
       )
 
       vim.api.nvim_set_keymap('n', '<C-c>p', ':FindCurrentDir<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<C-c>P', ':Telescope project<CR>', { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<C-c>f', ':Telescope diagnostics<CR>', { noremap = true, silent = true })
       vim.keymap.set('n', '<C-p>', ts_builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<C-;>', ts_builtin.buffers )
