@@ -43,7 +43,6 @@ alias gd="git diff"
 alias amend="git commit --amend"
 alias amendd="git commit --amend --no-edit"
 alias g="nvim '+Git|only'"
-alias gv="git status --short | cut -d ' ' -f3 | xargs nvim"
 alias bb='git branch | fzf | xargs git checkout'
 
 # programs

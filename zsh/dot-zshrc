@@ -116,6 +116,9 @@ lh () {
 	/bin/ls -1th | head -n ${1-1}
 }
 
+gv () {
+  git status --short | awk '{print $2}' | xargs nvim
+}
 bindkey -e
 zle -N pb-kill-line
 zle -N insert_there
