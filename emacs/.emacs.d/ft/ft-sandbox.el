@@ -171,5 +171,15 @@ and move this file to this folder renamed as index.{ext}"
 
 (global-set-key (kbd "M-*") 'ft-search-word)
 
+(defun ft-evil-ex-on-marked ()
+  (interactive)
+  (unless (eq major-mode 'dired-mode)
+	(user-error "Not in dired buffer"))
+  (let ((command (read-string "Command: "))
+		(files (dired-get-marked-files)))
+	(dolist (file files)
+	  (with-current-buffer (find-file-noselect file)
+		(evil-ex-execute command)
+		(save-buffer)))))
 
 (define-key minibuffer-mode-map (kbd "C-SPC") 'set-mark-command)
