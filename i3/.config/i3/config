@@ -17,7 +17,7 @@ set $mod Mod4
 
 # gaps inner all set 5
 
-font pango:Fira Code 7
+font pango:BerkeleyMono 12
 # move floating windows with $mod+mouse
 floating_modifier $mod
 
