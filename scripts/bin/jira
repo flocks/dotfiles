@@ -1,0 +1,15 @@
+#!/bin/sh
+
+token=$(echo -n "florent.teissier@ledger.fr:$JIRA_TOKEN" | base64 -w0)
+jql="assignee = currentUser() order by updated DESC"
+
+curl -s --request GET \
+  --url 'https://ledgerhq.atlassian.net/rest/api/2/search' \
+  --header "Content-type: application/json" \
+  --header "Authorization: Basic $token" \
+  --header 'Accept: application/json' \
+  -G \
+  --data-urlencode "jql=$jql" \
+  --data-urlencode "maxResults=20" | jq -r '.issues[] | "\(.key): \(.fields.summary)"'  | fzf | tr -d ':' | awk '{print "https://ledgerhq.atlassian.net/browse/"$1}' | tee /dev/tty | xclip -selection c
+  
+
