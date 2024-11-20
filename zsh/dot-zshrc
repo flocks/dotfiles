@@ -112,6 +112,11 @@ lh () {
 gv () {
   git status --short | awk '{print $2}' | xargs nvim
 }
+
+gitfiles () {
+  git show --pretty="" --name-only $1
+}
+
 bindkey -e
 zle -N pb-kill-line
 zle -N pb-copy-region-as-kill-deactivate-mark
