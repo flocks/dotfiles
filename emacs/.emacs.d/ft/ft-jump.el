@@ -6,6 +6,7 @@
   ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")) :exit t)
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
+  ("e" (lambda () (interactive) (find-file "~/ledger/vault-e2e-tests")) :exit t)
   ("0" (lambda () (interactive) (find-file "~/0xparser")) :exit t)
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
   ("R" (lambda () (interactive) (find-file "~/ledger/revault")) :exit t)
@@ -32,6 +33,8 @@
 (defun ft-open-lisp-file ()
   (interactive)
   (find-file (read-file-name "Config file: " "~/.emacs.d/ft/")))
+
+(global-set-key (kbd "C-c U") 'project-dired)
 
 (use-package dumb-jump
   :straight t
