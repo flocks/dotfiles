@@ -169,7 +169,7 @@ end
 -- =======
 
 local lsp_servers = {
-  'tsserver',
+  'ts_ls',
   'tailwindcss',
   'pylsp'
 }
@@ -315,7 +315,7 @@ require("lazy").setup({
     config = function()
       local lspconfig = require('lspconfig')
       local servers = {
-        'tsserver',
+        'ts_ls',
         'tailwindcss',
         'pylsp'
       }
@@ -324,7 +324,7 @@ require("lazy").setup({
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
       for _, lsp in ipairs(servers) do
-        if lsp == 'tsserver' then
+        if lsp == 'ts_ls' then
           lspconfig[lsp].setup {
             on_attach = on_attach,
             capabilities = capabilities,
