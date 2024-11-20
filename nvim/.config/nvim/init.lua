@@ -106,8 +106,8 @@ vim.keymap.set('n', "Q", ":qa!<CR>") -- never use Ex useless mode
 
 
 -- vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
-vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
-vim.keymap.set('n', "<C-c><C-c>", ":AsyncRun<Space>make<CR>") -- never use Ex useless mode
+vim.keymap.set('n', "<C-c>c", ":RunAsync<Space>") -- never use Ex useless mode
+vim.keymap.set('n', "<C-c><C-c>", ":ReRunAsync<CR>") -- never use Ex useless mode
 
 
 
@@ -424,3 +424,27 @@ require("lazy").setup({
   },
 }, opts)
 
+
+
+-- run :AsyncRun and store command in cache
+function RunAsyncCommand(cmd)
+    _G.last_async_command = cmd
+    vim.cmd("AsyncRun " .. cmd)
+end
+
+-- re-run last :AsyncRun command
+function ReRunAsync()
+    if _G.last_async_command ~= "" then
+        vim.cmd("AsyncRun " .. _G.last_async_command)
+    else
+        print("No command to re-run")
+    end
+end
+
+vim.api.nvim_create_user_command("RunAsync", function(args)
+    RunAsyncCommand(args.args)
+end, { nargs = 1 })
+
+vim.api.nvim_create_user_command("ReRunAsync", function()
+    ReRunAsync()
+end, {})
