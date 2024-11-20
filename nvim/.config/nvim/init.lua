@@ -112,6 +112,7 @@ vim.keymap.set('n', "<C-c><C-c>", ":AsyncRun<Space>make<CR>") -- never use Ex us
 
 
 vim.keymap.set('n', "<leader>f", ":Git grep -w -q <C-r><C-w><CR>") -- search word under cursor and populates quickfix
+vim.keymap.set('n', "<leader>F", ":Git grep -w -q <C-r><C-w> %<CR>") -- search word under cursor and populates quickfix
 
 vim.keymap.set({ 'n', 'i' }, "<c-s>", "<Esc>:x<CR>") -- c-s to save
 
