@@ -102,7 +102,7 @@ vim.keymap.set('n', "<M-p>", ":cprevious<CR>") -- reformat
 vim.keymap.set('n', "<space>", ":copen<CR>") -- openquickfix lsit
 vim.keymap.set('n', "<Leader>o", ":%bd|e#<CR>") -- close all buffers except the current one
 vim.keymap.set('n', "<Leader>m", "^vg_o") -- select all line content
-vim.keymap.set('n', "Q", ":cq<CR>") -- never use Ex useless mode
+vim.keymap.set('n', "Q", ":qa!<CR>") -- never use Ex useless mode
 
 
 -- vim.keymap.set('n', "<C-c>c", ":AsyncRun<Space>") -- never use Ex useless mode
