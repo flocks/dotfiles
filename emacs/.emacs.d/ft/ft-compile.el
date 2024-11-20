@@ -69,7 +69,7 @@
   (interactive)
   (let ((current (file-name-nondirectory (directory-file-name (ft-get-git-root))))
 		(projects '(("ledger-vault-front" .
-					 "yarn lint --format unix && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck")
+					 "yarn lint --format unix && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck && yarn spellcheck")
 					("turboph" .
 					 "stack build")
 					("hchess" .
