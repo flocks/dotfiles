@@ -37,6 +37,13 @@
   (unless (eq major-mode 'dired-mode)
     (error "Not in a dired buffer")))
 
+(defun ft-dired-copy-current-dir ()
+  (interactive)
+  (ft--ensure-dired-buffer)
+  (let ((dir (dired-current-directory)))
+	(message "%s" dir)
+	(kill-new dir)))
+
 (defun ft-dired-mark-images (arg)
   "Mark all images in current dired buffer.
 With a prefix argument, prompt for the regex."
@@ -87,6 +94,7 @@ the list"
 (let ((map dired-mode-map))
   (evil-define-key 'normal map (kbd "C-c C-d d") 'ft-dired-sort-date)
   (evil-define-key 'normal map (kbd "C-c C-d i") 'ft-dired-mark-images)
+  (evil-define-key 'normal map (kbd "C-c C-d y") 'ft-dired-copy-current-dir)
   (evil-define-key 'normal map (kbd "C-c C-d c") 'ft-dired-concat-images)
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
