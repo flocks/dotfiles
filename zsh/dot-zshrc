@@ -17,7 +17,6 @@ export PATH=~/.local/share/gem/ruby/3.0.0/bin:$PATH
 export LANG=en_US.UTF-8
 
 source "$HOME/ohmyzsh/oh-my-zsh.sh"
-source "$HOME/zsh-abbr/zsh-abbr.zsh"
 
 plugins=( git z )
 
