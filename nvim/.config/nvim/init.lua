@@ -195,27 +195,23 @@ require("lazy").setup({
     "tpope/vim-eunuch"
   },
   {"mogelbrod/vim-jsonpath"},
-  {
-    "blazkowolf/gruber-darker.nvim",
-    config = function ()
-      -- vim.cmd("colorscheme gruber-darker")
-    end
-  },
   {"arcticicestudio/nord-vim",
     config = function ()
-      vim.cmd("colorscheme nord")
+      -- vim.cmd("colorscheme nord")
     end
   },
+  {"tpope/vim-rsi"},
+  {"tpope/vim-dispatch"},
   {
-    "Shatur/neovim-ayu",
-    config = function ()
-      -- vim.cmd("colorscheme ayu-mirage")
-    end
-  },
-  {
-    "miikanissi/modus-themes.nvim",
+    "ishan9299/modus-theme-vim",
     config = function()
-      -- vim.cmd("colorscheme modus_vivendi")
+      vim.g.modus_dim_inactive_window = 0
+      vim.g.modus_termtrans_enable = 1
+      vim.g.modus_cursorline_intense = 0
+      vim.g.modus_green_strings = 1
+      vim.g.modus_yellow_comments = 1
+      vim.g.modus_green_strings = 1
+      vim.cmd("colorscheme modus-vivendi")
     end
   },
   {
