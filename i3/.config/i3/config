@@ -128,46 +128,42 @@ bindsym $mod+m bar mode toggle
 bindsym $mod+grave layout tabbed
 bindsym $mod+Shift+grave layout default
 
+# set primary gruvbox colorscheme colors
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
 
-# class                    border  backgr. text    indicator child_border
 
-# client.focused          #FFCC66 #33415E #FFFFFF #ff0000   #FFCC66
-# client.focused_inactive #1F2430 #1F2430 #FFFFFF #484E50   #1F2430
-# client.unfocused        #1F2430 #1F2430 #888888 #292D2E   #1F2430
-# client.urgent           #2F343A #FF3333 #FFFFFF #900000   #900000
-# client.placeholder      #1F2430 #1F2430 #FFFFFF #000000   #0C0C0C
+client.focused          $green $green $darkgray $purple $aqua
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
 
-set $g "#181818"
-set $w "#f4f6ff"
-set $r "#FFCC66"
-set $l "#555555"
-set $y "#ffff00"
-set $b "#000000"
-
-client.focused          $l $b $w $r $r
-client.focused_inactive $g $g $l $g $g
-client.unfocused        $g $g $l $g $g
-client.urgent           $y $y $b $y $y
-client.placeholder      $r $r $w $r $r
-client.background       $w
 
 bar {
     workspace_min_width 40
-    position bottom
+    position top
     status_command i3status -c "~/dotfiles/i3/.config/i3/i3status.conf"
     font pango: BerkeleyMono
     tray_output none
 
     colors {
-            separator  #1f222d
-            background #000000
-            statusline #81a1c1
-
-            focused_workspace  #000000 #000000    #ffffff
-            active_workspace   #2e2e2e #2e2e2e    #5e81ac
-            inactive_workspace #2e2e2e #2e2e2e    #4c566a
-            urgent_workspace   #2e2e2e #2e2e2e    #ee829f
-            binding_mode       #2e2e2e #2e2e2e    #2e3440
+        # bar background color
+        background $bg
+        # text color used for blocks that do not have a color specified.
+        statusline $yellow
+        # workspaces section            
+        #                    border  backgr. text
+        focused_workspace    $aqua $aqua $darkgray
+        inactive_workspace   $darkgray $darkgray $yellow
+        active_workspace     $darkgray $darkgray $yellow
+        urgent_workspace     $red $red $bg
     }
 }

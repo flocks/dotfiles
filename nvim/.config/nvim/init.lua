@@ -200,6 +200,11 @@ require("lazy").setup({
     config = function ()
       -- vim.cmd("colorscheme nord")
     end
+{"morhetz/gruvbox",
+config = function ()
+  vim.cmd("colorscheme gruvbox")
+  vim.g.lightline = { colorscheme = 'gruvbox' }
+end 
   },
   {"tpope/vim-rsi"},
   {"tpope/vim-dispatch"},
