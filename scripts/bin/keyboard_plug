@@ -6,7 +6,7 @@ if lsusb | grep -q "HHKB"
 then
   ~/bin/hhkb
 else
-  pkill xscape
+  pkill xcape
   xmodmap ~/.xmodmap.conf
   xcape -e 'Control_L=Escape'
 fi
