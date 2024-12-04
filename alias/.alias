@@ -7,8 +7,8 @@ alias Z="cd ~ && nvim .zshrc"
 alias resource="source ~/.zshrc"
 
 # folder
-alias 0="cd ~/0xparser"
 alias s="cd ~/screenshots"
+alias mobile="cd ~/ledger/revault/packages/mobile"
 alias S="cd ~/sandbox && v main.ts"
 alias gof="cd ~/gof"
 alias ex="cd ~/exvoto"
@@ -23,6 +23,7 @@ alias remote="cd ~/ledger/vault-remote"
 alias llc="cd ~/ledger/ledger-live-common"
 alias driver="cd ~/ledger/ledger-vault-hsm-driver"
 alias revault="cd ~/ledger/revault"
+alias e2e="cd ~/ledger/vault-e2e-tests/"
 alias inte="cd ~/.vault/vault-integration"
 alias dot="cd ~/dotfiles"
 alias vc="cd ~/dotfiles/nvim/.config/nvim"
@@ -34,6 +35,10 @@ alias dp="cd ~/deeprun-front/"
 alias b="cd ~/bin"
 alias h="cd"
 alias live="cd ~/ledger/ledger-live"
+alias r="cd ~/ledger/revault"
+alias rrm="cd ~/ledger/revault/packages/mobile"
+alias rrw="cd ~/ledger/revault/packages/web"
+alias rra="cd ~/ledger/revault/packages/api"
 
 
 # git stuff
@@ -60,7 +65,6 @@ alias nb=newsboat
 alias m="cd ~/music"
 alias hdcast='ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v libx264rgb -crf 0 -preset ultrafast'
 alias tign='tig --no-merges'
-alias ts='tig status'
 alias player="ncmpcpp"
 alias vimup="vim +'PlugUpgrade|PlugInstall|PlugUpdate|qa!'"
 alias vgit="nvim -c ':Git' -c ':only'"
@@ -76,6 +80,7 @@ alias mg="magit"
 # alias p="pnpm"
 
 # utils
+alias tvi="yarn typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && nvim -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"
 alias fn="find . -name"
 alias fic="find-in-code.sh"
