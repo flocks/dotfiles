@@ -30,10 +30,9 @@
 		  (bg-line-number-inactive unspecified)
 		  (fringe unspecified)
 		  (bg-line-number-active unspecified)
-		  (bg-mode-line-active unspecified)
-		  (fg-mode-line-active fg-main)
-		  (border-mode-line-active blue-intense)
-		  (border-mode-line-inactive "#696969")
+		  (border-mode-line-inactive unspecified)
+		  (border-mode-line-active unspecified)
+		  (bg-mode-line-active bg-sage)
 		  (bg-mode-line-inactive unspecified)))
 
   (modus-themes-toggle))
