@@ -92,7 +92,12 @@
 
 (global-set-key (kbd "M-!") 'async-shell-command)
 (define-key dired-mode-map (kbd "M-!") 'async-shell-command)
-(global-set-key (kbd "C-c c") 'compile)
+(defun my-compile ()
+  "Run `compile` with an empty prompt."
+  (interactive)
+  (let ((compile-command ""))
+    (call-interactively 'compile)))
+(global-set-key (kbd "C-c c") 'my-compile)
 
 (defun ft-compile-wrapper ()
   (interactive)
