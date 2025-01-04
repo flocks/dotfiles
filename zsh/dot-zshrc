@@ -72,6 +72,10 @@ wrap() {
 	zle beginning-of-line;
 }
 
+wrapTick() {
+  BUFFER=" \`($BUFFER)\`";
+	zle beginning-of-line;
+}
 wrapProcess() {
 	BUFFER=" <($BUFFER)";
 	zle beginning-of-line;
@@ -131,6 +135,7 @@ zle -N pb-kill-line
 zle -N pb-copy-region-as-kill-deactivate-mark
 zle -N wrapQuickfix
 zle -N wrapProcess
+zle -N wrapTick
 zle -N wrap
 zle -N wrapQuote
 zle -N insert_branch
@@ -145,6 +150,7 @@ bindkey "^[q" wrapQuickfix
 bindkey "^[w" pb-copy-region-as-kill-deactivate-mark
 bindkey "^[$" wrap
 bindkey "^[\<" wrapProcess
+bindkey "^[\`" wrapTick
 bindkey "^[\"" wrapQuote
 bindkey "^[B" insert_branch
 bindkey "^[T" insert_modified_file
