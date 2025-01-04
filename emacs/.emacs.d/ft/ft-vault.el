@@ -242,7 +242,7 @@ NAME is the buffer name."
 (defun vault--deploy-file (file)
   (let* ((owner "Florent")
 		 (name (read-string "Name: " "flo-")))
-	(async-shell-command (format "ledger-vault deploy --name %s --owner %s --values \"$(cat %s |yq)\""
+	(async-shell-command (format "ledger-vault deploy --name %s --owner %s --values \"$(cat %s |yq -o=json|jq -r tostring)\""
 								 name owner file)
 						 "*vault-deploy*")
 	(run-at-time 2 nil 'vault)))
