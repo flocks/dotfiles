@@ -39,7 +39,10 @@
   (global-set-key (kbd "C-c n") 'ft-new-buffer))
 
 (setq display-buffer-alist
-	  `(;; no window
+	  `(("\\*eldoc\\*"
+		 (display-buffer-reuse-window
+                display-buffer-at-bottom))
+		;; no window
 		("\\*Embark Actions\\*"
 		 (display-buffer-no-window))
 		("\\**vault-deploy*"
