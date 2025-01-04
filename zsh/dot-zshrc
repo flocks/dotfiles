@@ -18,7 +18,7 @@ export LANG=en_US.UTF-8
 
 source "$HOME/ohmyzsh/oh-my-zsh.sh"
 
-plugins=( git z )
+plugins=(git)
 
 
 source "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
