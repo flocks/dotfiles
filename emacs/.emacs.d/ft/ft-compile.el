@@ -106,6 +106,24 @@
 	(call-interactively 'compile)))
 
 (global-set-key (kbd "C-x p c") 'ft-compile-wrapper)
-(global-set-key (kbd "C-c C-c") 'recompile)
+
+
+(defun ft-get-visible-compilation-buffer ()
+  "Return the visible buffer in `compilation-mode` if any."
+  (cl-find-if
+   (lambda (win)
+     (with-current-buffer (window-buffer win)
+       (derived-mode-p 'compilation-mode)))
+   (window-list)))
+
+(defun ft-recompile ()
+  "Emacs default of recompiling is weird, it always takes first command
+even if we changed it in between"
+  (interactive)
+  (when-let ((win (ft-get-visible-compilation-buffer)))
+	(with-current-buffer (window-buffer win)
+	  (recompile))))
+
+(global-set-key (kbd "C-c C") 'ft-recompile)
 
 (provide 'ft-compile)
