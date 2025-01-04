@@ -76,6 +76,12 @@ wrapTick() {
   BUFFER=" \`($BUFFER)\`";
 	zle beginning-of-line;
 }
+
+copyLocation() {
+  BUFFER="pwd | copy";
+	zle end-of-line;
+}
+
 wrapProcess() {
 	BUFFER=" <($BUFFER)";
 	zle beginning-of-line;
@@ -136,6 +142,7 @@ zle -N pb-copy-region-as-kill-deactivate-mark
 zle -N wrapQuickfix
 zle -N wrapProcess
 zle -N wrapTick
+zle -N copyLocation
 zle -N wrap
 zle -N wrapQuote
 zle -N insert_branch
@@ -153,6 +160,7 @@ bindkey "^[\<" wrapProcess
 bindkey "^[\`" wrapTick
 bindkey "^[\"" wrapQuote
 bindkey "^[B" insert_branch
+bindkey "^[C" copyLocation
 bindkey "^[T" insert_modified_file
 bindkey "^[V" insert_vault_instance
 
