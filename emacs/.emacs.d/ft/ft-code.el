@@ -173,4 +173,6 @@
 (use-package utop
   :straight t)
 
+(setq gdb-many-windows t)
+
 (provide 'ft-code)
