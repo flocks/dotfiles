@@ -185,223 +185,200 @@ require("lazy").setup({
     "tpope/vim-eunuch"
   },
   {"mogelbrod/vim-jsonpath"},
-  {"yazeed1s/minimal.nvim", 
-  config = function() 
-    -- vim.cmd("colorscheme minimal")
-  end 
-},
-{"morhetz/gruvbox",
-config = function ()
-  vim.cmd("colorscheme gruvbox")
-  vim.g.lightline = { colorscheme = 'gruvbox' }
-end 
+  {"morhetz/gruvbox",
+    config = function ()
+      vim.cmd("colorscheme gruvbox")
+      vim.g.lightline = { colorscheme = 'gruvbox' }
+    end 
   },
+  {"ewilazarus/preto"},
+  {"Alligator/accent.vim"},
   {'itchyny/lightline.vim'},
-  {"arcticicestudio/nord-vim",
-  config = function ()
-    -- vim.cmd("colorscheme nord")
-  end
-},
-{"tpope/vim-rsi"},
-{"tpope/vim-repeat"},
-{"tpope/vim-dispatch"},
-{
-  "ishan9299/modus-theme-vim",
-  config = function()
-    vim.g.modus_dim_inactive_window = 0
-    vim.g.modus_termtrans_enable = 1
-    vim.g.modus_cursorline_intense = 0
-    vim.g.modus_green_strings = 1
-    vim.g.modus_yellow_comments = 1
-    vim.g.modus_green_strings = 1
-    -- vim.cmd("colorscheme modus-vivendi")
-  end
-},
-{
-  "tpope/vim-commentary"
-},
-{ 
-  "ruifm/gitlinker.nvim",
-  config = function()
-    require("gitlinker").setup()
-  end
-},
-{
-  "tpope/vim-fugitive"
-},
-{
-  "itchyny/vim-qfedit"                   -- edit quickfix list
-},
--- auto pairs
-{
-  "windwp/nvim-autopairs",
-  config = function()
-    require("nvim-autopairs").setup({ map_cr = true })
-  end
-},
-{ "nvim-lua/plenary.nvim", build = 'make' },
-{ "nvim-telescope/telescope-fzf-native.nvim" },
-{
-  "nvim-telescope/telescope.nvim",
-  config = function()
-    local telescope = require('telescope')
-    local ts_builtin = require('telescope.builtin')
+  {"tpope/vim-rsi"},
+  {"tpope/vim-obsession"},
+  {"tpope/vim-repeat"},
+  {"tpope/vim-dispatch"},
+  {
+    "tpope/vim-commentary"
+  },
+  { 
+    "ruifm/gitlinker.nvim",
+    config = function()
+      require("gitlinker").setup()
+    end
+  },
+  {"tpope/vim-fugitive"},
+  {"NeogitOrg/neogit"},
+  { "itchyny/vim-qfedit"},
+  {
+    "windwp/nvim-autopairs",
+    config = function()
+      require("nvim-autopairs").setup({ map_cr = true })
+    end
+  },
+  { "nvim-lua/plenary.nvim", build = 'make' },
+  { "nvim-telescope/telescope-fzf-native.nvim" },
+  {
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      local telescope = require('telescope')
+      local ts_builtin = require('telescope.builtin')
 
-    pcall(telescope.load_extension, 'fzf')
+      pcall(telescope.load_extension, 'fzf')
 
-    telescope.setup({
-      defaults = {
-        preview_cutoff = 20,
-        layout_config = {
-          preview_width = 0.65,
-          vertical = {
-            width = 0.95,
+      telescope.setup({
+        defaults = {
+          preview_cutoff = 20,
+          layout_config = {
+            preview_width = 0.65,
+            vertical = {
+              width = 0.95,
+            },
+            horizontal = {
+              width = 0.95,
+            }
           },
-          horizontal = {
-            width = 0.95,
+          mappings = {
+            i = {
+              ['<C-u>'] = false,
+              ['<C-d>'] = false,
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            previewer = false
           }
         },
-        mappings = {
-          i = {
-            ['<C-u>'] = false,
-            ['<C-d>'] = false,
-          },
-        },
-      },
-      pickers = {
-        find_files = {
-          previewer = false
-        }
-      },
-    })
+      })
 
 
-    vim.api.nvim_create_user_command(
-    'FindCurrentDir',
-    function ()
-      ts_builtin.find_files({cwd = vim.fn.expand('%:p:h')})
+      vim.api.nvim_create_user_command(
+      'FindCurrentDir',
+      function ()
+        ts_builtin.find_files({cwd = vim.fn.expand('%:p:h')})
+      end,
+      {}
+      )
+
+      vim.api.nvim_set_keymap('n', '<C-c>p', ':FindCurrentDir<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<C-c>f', ':Telescope diagnostics<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<C-p>', ts_builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<C-;>', ts_builtin.buffers )
+      vim.keymap.set('n', '<C-b>', ts_builtin.buffers )
+      -- vim.keymap.set('n', '<leader>f', ts_builtin.grep_string, { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<C-f>', ts_builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sd', ts_builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     end,
-    {}
-    )
+  },
+  -- LSP
+  { "williamboman/mason.nvim" },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require('mason').setup()
+      require('mason-lspconfig').setup({
+        ensure_installed = lsp_servers,
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      local lspconfig = require('lspconfig')
+      local servers = {
+        'ts_ls',
+        'tailwindcss',
+        'pylsp'
+      }
 
-    vim.api.nvim_set_keymap('n', '<C-c>p', ':FindCurrentDir<CR>', { noremap = true, silent = true })
-    vim.api.nvim_set_keymap('n', '<C-c>f', ':Telescope diagnostics<CR>', { noremap = true, silent = true })
-    vim.keymap.set('n', '<C-p>', ts_builtin.find_files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<C-;>', ts_builtin.buffers )
-    vim.keymap.set('n', '<C-b>', ts_builtin.buffers )
-    -- vim.keymap.set('n', '<leader>f', ts_builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<C-f>', ts_builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', ts_builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-  end,
-},
--- LSP
-{ "williamboman/mason.nvim" },
-{
-  "williamboman/mason-lspconfig.nvim",
-  config = function()
-    require('mason').setup()
-    require('mason-lspconfig').setup({
-      ensure_installed = lsp_servers,
-    })
-  end
-},
-{
-  "neovim/nvim-lspconfig",
-  config = function()
-    local lspconfig = require('lspconfig')
-    local servers = {
-      'ts_ls',
-      'tailwindcss',
-      'pylsp'
-    }
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-    for _, lsp in ipairs(servers) do
-      if lsp == 'ts_ls' then
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
-        }
-      elseif lsp == "pylsp" then
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = {"python"}
-        }
-      else
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }
+      for _, lsp in ipairs(servers) do
+        if lsp == 'ts_ls' then
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+          }
+        elseif lsp == "pylsp" then
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = {"python"}
+          }
+        else
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+        end
       end
     end
-  end
-},
--- completion
-{ "hrsh7th/cmp-nvim-lsp" },
-{
-  "L3MON4D3/LuaSnip",
-  config = function()
-    require("luasnip.loaders.from_snipmate").load()
-  end
-},
-{ "saadparwaiz1/cmp_luasnip" },
-{ "hrsh7th/cmp-buffer" },
-{
-  "hrsh7th/nvim-cmp",
-  config = function()
-    local cmp = require('cmp')
-    local luasnip = require('luasnip')
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
+  },
+  -- completion
+  { "hrsh7th/cmp-nvim-lsp" },
+  {
+    "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip.loaders.from_snipmate").load()
+    end
+  },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-buffer" },
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-          if luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif cmp.visible() then
-            cmp.select_next_item()
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { 'i', 's' }),
-      },
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer'}
-      },
-      fallback = {
-        enable = true,
-        source = 'vim',
-        -- You can specify additional sources here if desired.
-      },
-    })
-  end
-},
-}, opts)
+        mapping = cmp.mapping.preset.insert {
+          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          },
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer'}
+        },
+        fallback = {
+          enable = true,
+          source = 'vim',
+          -- You can specify additional sources here if desired.
+        },
+      })
+    end
+  },
+  }, opts)
 
 
 
@@ -427,3 +404,4 @@ end, { nargs = 1 })
 vim.api.nvim_create_user_command("ReRunAsync", function()
   ReRunAsync()
 end, {})
+
