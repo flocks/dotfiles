@@ -130,7 +130,7 @@ mixed () {
   git reset --mixed HEAD~$1
 }
 gv () {
-  git status --short | awk '{print $2}' | xargs nvim
+  nvim `git diff --name-only`
 }
 
 gitfiles () {
