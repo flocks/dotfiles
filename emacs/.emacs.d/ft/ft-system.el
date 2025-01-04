@@ -18,13 +18,10 @@
   (setq proced-goal-attribute nil))
 
 ;; kubernetes
-(use-package kubel
+(use-package kubed
   :straight t
   :config
-  (global-set-key (kbd "C-c k") 'kubel))
-
-(use-package kubel-evil
-  :straight t)
+  (global-set-key (kbd "C-c k") 'kubed))
 
 (use-package bluetooth
   :straight t)
