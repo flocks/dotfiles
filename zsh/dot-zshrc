@@ -51,6 +51,7 @@ source "$HOME/.path"
 source "$HOME/.gitprompt"
 source "$HOME/.prompt"
 source "$HOME/.private"
+export AWS_PROFILE="ledgersbx"
 
 #
 # useful for pinentry-tty prompt
