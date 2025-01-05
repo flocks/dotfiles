@@ -262,7 +262,7 @@ NAME is the buffer name."
 			 (completing-read "Instance: " (vault--list-instances)))))
   (let ((buff-name "*vault-proxy*")
 		(url (format "https://%s.%s" instance vault-remote-base-url) ))
-	(when-let ((process (get-buffer-process (get-buffer buff-name))))
+	(when-let* ((process (get-buffer-process (get-buffer buff-name))))
 	  (kill-process process))
 	(make-process
 	 :name buff-name
@@ -307,7 +307,7 @@ NAME is the buffer name."
 		 (buff-name (format "*vault-recipe* %s" instance))
 		 (url (format "https://%s.%s" instance vault-remote-base-url) )
 		 (buffer (get-buffer-create buff-name)))
-	(when-let ((process (get-buffer-process buffer)))
+	(when-let* ((process (get-buffer-process buffer)))
 	  (kill-process process))
 	(with-current-buffer buff-name
 	  (erase-buffer)

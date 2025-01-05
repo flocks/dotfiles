@@ -82,7 +82,7 @@
 					 "pnpm run ci")
 					("vault-remote" .
 					 "yarn lint && yarn prettier:check --loglevel silent && yarn typecheck && yarn validate-hooks && yarn test --coverage --coverageThreshold '{ \"global\": { \"branches\": 100, \"functions\": 100, \"lines\": 100, \"statements\": 100 } }'"))))
-	(if-let ((project (assoc current projects)))
+	(if-let* ((project (assoc current projects)))
 		(let ((compilation-read-command nil)
 			  (compile-command (cdr project)))
 		  (call-interactively #'project-compile))
@@ -91,7 +91,7 @@
 (global-set-key (kbd "M-*") 'ft/project-custom-ci)
 
 (global-set-key (kbd "M-!") 'async-shell-command)
-(define-key dired-mode-map (kbd "M-!") 'async-shell-command)
+;; (define-key dired-mode-map (kbd "M-!") 'async-shell-command)
 (defun my-compile ()
   "Run `compile` with an empty prompt."
   (interactive)
@@ -120,7 +120,7 @@
   "Emacs default of recompiling is weird, it always takes first command
 even if we changed it in between"
   (interactive)
-  (when-let ((win (ft-get-visible-compilation-buffer)))
+  (when-let* ((win (ft-get-visible-compilation-buffer)))
 	(with-current-buffer (window-buffer win)
 	  (recompile))))
 

@@ -18,7 +18,7 @@
 	(interactive)
 	(let ((history (ring-elements eshell-history-ring))
 		  (content (eshell-get-old-input)))
-	  (when-let ((new-content (completing-read "Command: " history nil nil content)))
+	  (when-let* ((new-content (completing-read "Command: " history nil nil content)))
 		(eshell-kill-input)
 		(insert new-content))))
 
@@ -51,7 +51,7 @@ documentation string.  BODY is the set of arguments passed to the
   `(defun ,name ()
      ,doc
      (interactive)
-     (if-let ((file (ffap-file-at-point)))
+     (if-let* ((file (ffap-file-at-point)))
          ,@body
        (user-error "No file at point"))))
 
@@ -100,7 +100,7 @@ directory."
 (defun ft-eshell-root-dir ()
   "Switch to the root directory of the present project."
   (interactive)
-  (if-let ((root (or (vc-root-dir) (locate-dominating-file "." ".git"))))
+  (if-let* ((root (or (vc-root-dir) (locate-dominating-file "." ".git"))))
       (prot-eshell--cd root)
     (user-error "Cannot find a project root here")))
 
