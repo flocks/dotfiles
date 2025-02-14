@@ -1,0 +1,8 @@
+ #!/bin/bash
+
+ last_screenshot=$(ls "$HOME/screenshots" -1th | head -n 1 | awk -v home="$HOME/screenshots/" '{print home $1}')
+ ksnip -e "$last_screenshot"
+
+
+
+

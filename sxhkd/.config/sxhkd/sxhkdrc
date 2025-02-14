@@ -27,9 +27,6 @@ super + bracketleft
 super + shift + a
     ~/bin/blockchain-address
 
-super + shift + m
-    ~/bin/reset-minivault
-
 # lock screen
 super + w
     ~/bin/lock
@@ -50,9 +47,6 @@ super + comma
 # dmenu link handler
 super + period
     ~/bin/dmenu-links
-# dmenu to copy docker container id
-super + shift + d
-    ~/bin/dmenu_docker
 
 # increase sound
 super + equal
@@ -70,3 +64,8 @@ super + s
 # dmenu to launch app
 super + r
  rofi -show run
+
+super + shift + d
+ ~/bin/anotate-screenshot
+super + control + d
+ ~/bin/copy-last-screenshot
