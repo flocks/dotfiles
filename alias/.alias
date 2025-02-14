@@ -82,6 +82,7 @@ alias mg="magit"
 # alias p="pnpm"
 
 # utils
+alias make="make 2>&1"
 alias tvi="yarn typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && nvim -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"
 alias fn="find . -name"
@@ -93,6 +94,7 @@ alias bindings="grep bindsym ~/.config/i3/config | sed s/bindsym// | dmenu -l 10
 alias chmox="chmod +x"
 alias ls="ls --color"
 alias ll="ls -l"
+alias l="ls -l --group-directories-first"
 alias q="exit"
 alias cfgs="cat ~/dotfiles/configs"
 alias c="~/bin/configs"
