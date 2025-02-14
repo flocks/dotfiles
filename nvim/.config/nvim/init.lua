@@ -185,15 +185,48 @@ require("lazy").setup({
     "tpope/vim-eunuch"
   },
   {"mogelbrod/vim-jsonpath"},
-  {"morhetz/gruvbox",
-    config = function ()
-      vim.cmd("colorscheme gruvbox")
-      vim.g.lightline = { colorscheme = 'gruvbox' }
-    end 
+  {"arcticicestudio/nord-vim", 
+    config = function() 
+      vim.cmd("colorscheme nord")
+      -- vim.g.lightline = { colorscheme = 'nord' }
+    end
   },
   {"ewilazarus/preto"},
   {"Alligator/accent.vim"},
-  {'itchyny/lightline.vim'},
+  -- {'itchyny/lightline.vim'},
+  {
+    "nvim-lualine/lualine.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      options = {
+        icons_enabled = true,
+        theme = 'nord',
+        component_separators = '',
+        section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'diagnostics' },
+        lualine_c = {
+          { 'filename', path = 1 },
+        },
+        lualine_x = {},
+        lualine_y = { 'branch' },
+        lualine_z = { 'location' }
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          { 'filename', path = 1 },
+        },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {}
+      },
+    },
+  },
   {"tpope/vim-rsi"},
   {"tpope/vim-obsession"},
   {"tpope/vim-repeat"},
