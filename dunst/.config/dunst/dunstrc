@@ -277,7 +277,7 @@
     icon = ~/dotfiles/assets/icons/computer-2.png
 
 [urgency_normal]
-    background = "#2e2e2e"
+    background = "#333A47"
     foreground = "#ffffff"
     frame_color = "#69778e"
     progress_bar = true
