@@ -141,29 +141,29 @@ set $darkgray #1d2021
 
 
 
-client.focused          $green $green $darkgray $purple $aqua
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
-client.urgent           $red $red $white $red $red
+# client.focused          $green $green $darkgray $purple $aqua
+# client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+# client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+# client.urgent           $red $red $white $red $red
 
 
 bar {
-    workspace_min_width 40
-    position top
+    workspace_min_width 20
+    position bottom
     status_command i3status -c "~/dotfiles/i3/.config/i3/i3status.conf"
-    font pango: BerkeleyMono
+    font pango: BerkeleyMono 8 
     tray_output none
 
-    colors {
-        # bar background color
-        background $bg
-        # text color used for blocks that do not have a color specified.
-        statusline $yellow
-        # workspaces section            
-        #                    border  backgr. text
-        focused_workspace    $aqua $aqua $darkgray
-        inactive_workspace   $darkgray $darkgray $yellow
-        active_workspace     $darkgray $darkgray $yellow
-        urgent_workspace     $red $red $bg
-    }
+    # colors {
+    #     # bar background color
+    #     background $bg
+    #     # text color used for blocks that do not have a color specified.
+    #     statusline $yellow
+    #     # workspaces section            
+    #     #                    border  backgr. text
+    #     focused_workspace    $aqua $aqua $darkgray
+    #     inactive_workspace   $darkgray $darkgray $yellow
+    #     active_workspace     $darkgray $darkgray $yellow
+    #     urgent_workspace     $red $red $bg
+    # }
 }
