@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpv ~/dotfiles/assets/success.mp3 &>/dev/null

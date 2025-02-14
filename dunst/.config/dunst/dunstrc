@@ -366,6 +366,10 @@
 #    summary = "*"
 #    script = dunst_espeak.sh
 
+[play_sound]
+    summary = "*"
+    script = success-sound
+
 #[script-test]
 #    summary = "*script*"
 #    script = dunst_test.sh
