@@ -3,13 +3,13 @@
 (use-package dired
   :config
   (setq dired-dwim-target t)
-  (setq dired-listing-switches "-al --group-directories-first")
+  (setq dired-listing-switches "-ahl --group-directories-first")
   (setq dired-kill-when-opening-new-dired-buffer t)
   (setq dired-recursive-deletes 'always)
   (setq dired-recursive-copies 'always)
   (add-hook 'dired-mode-hook #'hl-line-mode)
   (add-hook 'dired-mode-hook #'turn-on-gnus-dired-mode)
-  (add-hook 'dired-mode-hook #'dired-hide-details-mode)
+  ;; (add-hook 'dired-mode-hook #'dired-hide-details-mode)
   (require 'dired-x)
   (evil-define-key 'normal dired-mode-map (kbd "M-%") 'dired-do-query-replace-regexp)
   ;; I don't want repeat mode for dired-jump
