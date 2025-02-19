@@ -175,4 +175,7 @@
 
 (setq gdb-many-windows t)
 
+(use-package rfc-mode
+  :straight t)
+
 (provide 'ft-code)
