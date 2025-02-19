@@ -43,6 +43,9 @@
 		( :name "unread github"
 		  :query "tag:github and tag:unread"
 		  :key ,(kbd "G"))
+		( :name "Sent"
+		  :query "(from:teissierflorent@gmail.com)"
+		  :key ,(kbd "s"))
 		( :name "mailing lists"
 		  :query "tag:list"
 		  :key ,(kbd "m"))
