@@ -79,4 +79,11 @@
 				(lambda ()
 				  (interactive)
 				  (notmuch-jump-search)))
+
+
+(use-package notmuch-bookmarks
+  :straight t
+  :config
+  (notmuch-bookmarks-mode))
+
 (provide 'ft-mail)
