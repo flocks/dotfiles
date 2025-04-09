@@ -110,7 +110,7 @@
 		  (large
 		   :default-height 180)
 		  (t ; our shared fallback properties
-		   :default-family "Berkeley Mono"
+		   :default-family "Iosevka Comfy"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
