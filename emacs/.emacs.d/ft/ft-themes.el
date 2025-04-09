@@ -25,15 +25,11 @@
   (setq modus-themes-bold-constructs t)
   (setq modus-themes-italic-constructs t)
   (setq modus-themes-common-palette-overrides
-		'((fg-line-number-inactive "gray50")
-		  (fg-line-number-active red-cooler)
+		'((fg-line-number-active red-cooler)
 		  (bg-line-number-inactive unspecified)
 		  (fringe unspecified)
-		  (bg-line-number-active unspecified)
-		  (border-mode-line-inactive unspecified)
-		  (border-mode-line-active unspecified)
-		  (bg-mode-line-active bg-sage)
-		  (bg-mode-line-inactive unspecified)))
+		  )
+		)
 
   (modus-themes-toggle))
 
