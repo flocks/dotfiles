@@ -10,7 +10,7 @@
 
 (setq-default notmuch-search-oldest-first nil) ;; why it's not the default val lol
 (setq notmuch-wash-signature-lines-max 100)
-(setq notmuch-wash-wrap-lines-length 120)
+(setq notmuch-wash-wrap-lines-length 90)
 
 ;; (advice-add 'notmuch-show-insert-headerline :before (lambda (&rest r) (newline 2)))
 
