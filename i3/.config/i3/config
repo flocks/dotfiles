@@ -150,8 +150,8 @@ set $darkgray #1d2021
 bar {
     workspace_min_width 20
     position bottom
-    status_command i3status -c "~/dotfiles/i3/.config/i3/i3status.conf"
-    font pango: BerkeleyMono 8 
+    status_command /home/fteissier/bin/i3status.sh
+    font pango: BerkeleyMono 12
     tray_output none
 
     # colors {
