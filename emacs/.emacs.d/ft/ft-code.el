@@ -9,6 +9,10 @@
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
+(use-package eglot-booster
+  :after eglot
+  :config	(eglot-booster-mode))
+
 (use-package magit
   :straight t
   :config
