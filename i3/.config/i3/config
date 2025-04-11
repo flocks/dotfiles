@@ -8,16 +8,16 @@ for_window [class="feh"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
 
 
-hide_edge_borders smart
-default_border pixel 2
-default_floating_border pixel 2
+# hide_edge_borders smart
+# default_border pixel 2
+# default_floating_border pixel 2
 
 
 set $mod Mod4
 
 # gaps inner all set 5
 
-font pango:BerkeleyMono 12
+font pango:BerkeleyMono 8 
 # move floating windows with $mod+mouse
 floating_modifier $mod
 
@@ -151,7 +151,7 @@ bar {
     workspace_min_width 20
     position bottom
     status_command /home/fteissier/bin/i3status.sh
-    font pango: BerkeleyMono 12
+    font pango: BerkeleyMono 8 
     tray_output none
 
     # colors {
