@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+
+clipboard_color=$(xclip -o)
+color=$(zenity --color-selection --color="$clipboard_color")
+rgb_values=$(echo $color | grep -oP '\d+,\s*\d+,\s*\d+')
+IFS=',' read -r r g b <<< "$rgb_values"
+hex=$(printf '#%02x%02x%02x\n' "$r" "$g" "$b")
+echo "$hex" | xclip -selection c 
+
+
+
