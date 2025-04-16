@@ -24,7 +24,7 @@ super + bracketleft
 #    $TERMINAL -e ncmpcpp
 
 # dmenu for chosing a blockchain address
-super + shift + a
+super + control + a
     ~/bin/blockchain-address
 
 # lock screen

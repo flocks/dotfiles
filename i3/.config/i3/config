@@ -79,8 +79,6 @@ bindsym $mod+Shift+t floating toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-
-# focus the child container
 bindsym $mod+Shift+a focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
