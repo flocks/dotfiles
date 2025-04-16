@@ -63,7 +63,7 @@ super + s
 
 # dmenu to launch app
 super + r
- rofi -show run
+ dmenu_run
 
 super + shift + d
  ~/bin/anotate-screenshot
