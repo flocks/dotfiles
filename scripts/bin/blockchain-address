@@ -81,7 +81,7 @@ Bep20
 Stellar
 Polkadot
 Cardano
-Contract" | dmenu)
+Contract" | dmenu -i)
 
 [[ "$currency" == "" ]] && exit 0
 
@@ -101,7 +101,7 @@ list=""
 [[ "$currency" == "Cardano" ]] && list="${cardano[*]}"
 [[ "$currency" == "Contract" ]] && list="${contract[*]}"
 
-addr=$(echo -e "$list" | dmenu)
+addr=$(echo -e "$list" | dmenu -i)
 
 [[ "$addr" == "" ]] && exit 0
 
