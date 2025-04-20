@@ -105,6 +105,8 @@
 		   :default-height 155)
 		  (large
 		   :default-height 180)
+		  (chill
+		   :default-height 200)
 		  (t ; our shared fallback properties
 		   :default-family "Iosevka Comfy"
 		   ))))
