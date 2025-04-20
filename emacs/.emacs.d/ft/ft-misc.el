@@ -44,6 +44,14 @@
 	(message "Copied %s" copy)))
 
 
+
+(defun ft-which ()
+  (interactive)
+  (let* ((program (read-string "Program to which: "))
+		 (location (shell-command-to-string (format "which %s" program))))
+	(find-file-other-window (s-trim location))
+	(dired-jump)))
+
 (global-set-key (kbd "C-x p y") (lambda () (interactive)
 								  (ft-copy-project-file-name buffer-file-name)))
 
