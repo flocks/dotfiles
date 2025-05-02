@@ -97,6 +97,7 @@ the list"
   (evil-define-key 'normal map (kbd "C-c C-d y") 'ft-dired-copy-current-dir)
   (evil-define-key 'normal map (kbd "C-c C-d c") 'ft-dired-concat-images)
   (evil-define-key 'normal map (kbd "C-c C-d t") 'ft-dired-mark-today)
+  (evil-define-key 'normal map (kbd "C-c C-d x") 'ft-dired-execute)
   (evil-define-key 'normal map (kbd "C-c C-d I") 'ft-dired-insert-sub-directory)
   (evil-define-key 'normal map (kbd "C-c C-d m") 'dired-mark-files-regexp)
   (evil-define-key 'normal map (kbd "&") 'ft-dired-do-compile-command)
@@ -193,5 +194,14 @@ We can reuse a dired buffer and it will append the marked files."
   :straight t
   :bind (:map dired-mode-map
               ("C-/" . dired-narrow)))
+
+
+(defun ft-dired-execute ()
+  (interactive)
+  (let ((file (dired-get-marked-files)))
+    (unless file (user-error "No file selected"))
+    (let ((compile-command (format "%s" (car file)))
+          (compilation-read-command t))
+      (call-interactively 'compile))))
 
 (provide 'ft-dired)
