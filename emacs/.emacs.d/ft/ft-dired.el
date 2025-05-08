@@ -200,8 +200,10 @@ We can reuse a dired buffer and it will append the marked files."
   (interactive)
   (let ((file (dired-get-marked-files)))
     (unless file (user-error "No file selected"))
-    (let ((compile-command (format "%s" (car file)))
+    (let ((compile-command (format "\"%s\"" (car file)))
           (compilation-read-command t))
-      (call-interactively 'compile))))
+      (let ((minibuffer-setup-hook
+             (list (lambda () (move-beginning-of-line 1)))))
+        (call-interactively 'compile)))))
 
 (provide 'ft-dired)
