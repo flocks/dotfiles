@@ -38,9 +38,13 @@ alias h="cd"
 alias live="cd ~/ledger/ledger-live"
 alias r="cd ~/ledger/revault"
 alias rrm="cd ~/ledger/revault/packages/mobile"
+alias rrs="cd ~/ledger/revault/packages/sdk"
+alias rro="cd ~/ledger/revault/packages/onboarding"
+alias rrd="cd ~/ledger/revault/packages/dls"
 alias rrw="cd ~/ledger/revault/packages/web"
 alias rru="cd ~/ledger/revault/packages/ui"
 alias rra="cd ~/ledger/revault/packages/api"
+alias vid="cd ~/Videos"
 
 
 # git stuff
