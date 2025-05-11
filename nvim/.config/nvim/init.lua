@@ -1,3 +1,5 @@
+vim.cmd('source ~/.vimrc')
+
 -- automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -5,132 +7,32 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = "-" -- set leader key
-vim.g.maplocalleader = '-' -- set local leader key
-
-vim.o.breakindent = true -- enable break indent
-vim.o.completeopt = 'menuone' -- set completeopt to have a better completion experience
-vim.o.hlsearch = true -- set highlight on search
-vim.o.ignorecase = true -- case insentitive search
-vim.o.mouse = 'a' -- enable mouse mode
-vim.o.smartcase = true -- sensitive search as soon as a different case is used
-vim.o.termguicolors = true -- term colors 
-vim.o.updatetime = 5 -- decrease update time
-vim.opt.autoread = true -- auto reload files when changed
-vim.opt.colorcolumn = "100" -- show the 100 chars column
-vim.opt.cursorline = true -- show cursor line
-vim.opt.encoding = "utf-8" -- encoding
-vim.opt.expandtab = true -- use space to indent
-vim.opt.hidden = true -- don't write empty unsaved files
-vim.opt.hlsearch = false -- prevent annoying highlight on search
-vim.opt.incsearch = true -- move on search
-vim.opt.laststatus = 2 -- always show status bar
-vim.opt.list = true -- show blank characters
-vim.opt.listchars = "tab:>-,trail:·,nbsp:%" -- define blank characters
-vim.opt.pumheight = 5 -- maximum number of items to show in the popup menu
-vim.opt.relativenumber = true -- relative line numbers
-vim.opt.scrolloff = 5 -- number of lines to keep above & below cursor when scrolling
-vim.opt.shiftwidth = 2 -- tab shiftwidth
-vim.opt.showmode = false -- show "lint" column
-vim.opt.sidescrolloff = 5 -- number of cols to keep above & below cursor when scrolling
-vim.opt.signcolumn = "yes" -- show "lint" column
-vim.opt.splitbelow = true -- behavior when splitting horizontally
-vim.opt.splitright = true -- behavior when splitting vertically
-vim.opt.swapfile = false -- don't create useless files
-vim.opt.tabstop = 2 -- tab tabstop
-vim.opt.termguicolors = true
-vim.opt.wb = false -- don't create useless files
-vim.opt.wildmenu = true -- enable wild menu
-vim.opt.wildmode = "longest,full" -- wild menu completion
-vim.opt.wrap = false
-vim.opt.writebackup = false -- don't create useless files
-vim.wo.number = true -- Make line numbers default
-vim.wo.signcolumn = 'yes' -- always show sign column
-vim.g.netrw_banner = 0; -- hide netrw file explorer banner
-
-vim.g.asyncrun_open = 8
-vim.b.prettier_exec_cmd = "prettierd"
-
-
-
 local signs = {Error = "", Warn = "", Hint = "", Info = ""}
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
 end
 
-vim.cmd("au BufReadPost * if line(\"'\\\"\") > 1 && line(\"'\\\"\") <= line(\"$\") | exe \"normal! g'\\\"\" | endif") -- retrieve last edited line
 vim.cmd("autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc") -- properly highlight json5 files
 vim.cmd("autocmd FileType typescript,typescriptreact compiler tsc")
+vim.cmd("colorscheme habamax")
 
-vim.api.nvim_command("set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case") -- use rg for :grep/lgrep
---
--- insert dir of current file into prompt
-vim.api.nvim_set_keymap('c', '<C-M-e>', 'expand("%:p:h") . "/"<Space>', { expr = true, noremap = true, silent = true })
-
-vim.keymap.set({ 'n', 'v' }, '-', '<Nop>', { silent = true }) -- disable default behavior of '-' (because leader)
 
 -- Diagnostic navigation
 vim.keymap.set('n', '<leader>N', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
-vim.keymap.set('n', '<leader>Y', ":let @+ = @%<CR>")
-vim.keymap.set('n', '<leader>y', ":let @+ = expand('%:p')<CR>")
-vim.keymap.set('n', '<leader>d', ":let @+ = expand('%:p:h')<CR>")
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
 vim.keymap.set('n', "<C-;>", ":Buffers<CR>") -- yank in systemclipboard
 vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
-vim.keymap.set('n', "<C-x><C-j>", ":Explore<CR>") -- file explorer
 vim.keymap.set('n', "<C-c><C-r>", ":%s/<C-r><C-w>/") -- s/foo/bar current word
-vim.keymap.set('n', "<M-p>", ":cprev<CR>") -- previous in quickfix list
-vim.keymap.set('n', "<M-n>", ":cnext<CR>") -- next in quickfix list
-
--- split management
-vim.keymap.set('n', "vv", "<C-w>v")   
-vim.keymap.set('n', "ss", "<C-w>s")   
-vim.keymap.set('n', "<C-h>", "<C-w>h")
-vim.keymap.set('n', "<C-l>", "<C-w>l")
-vim.keymap.set('n', "<C-j>", "<C-w>j")
-vim.keymap.set('n', "<C-k>", "<C-w>k")
-
-vim.keymap.set('n', "<M-p>", ":cprevious<CR>") -- reformat
-vim.keymap.set('n', "<space>", ":copen<CR>") -- openquickfix lsit
-vim.keymap.set('n', "<Leader>o", ":%bd|e#<CR>") -- close all buffers except the current one
-vim.keymap.set('n', "<Leader>m", "^vg_o") -- select all line content
-vim.keymap.set('n', "Q", ":qa!<CR>") -- never use Ex useless mode
 
 
-vim.keymap.set('n', "<C-c>c", ":RunAsync<Space>") -- never use Ex useless mode
-vim.keymap.set('n', "<C-c><C-c>", ":ReRunAsync<CR>") -- never use Ex useless mode
+vim.keymap.set('n', "<C-c>c", ":RunAsync<Space>")
+vim.keymap.set('n', "<C-c><C-c>", ":ReRunAsync<CR>")
 
-
-
-vim.keymap.set('n', "<leader>f", ":Git grep -w -q <C-r><C-w><CR>") -- search word under cursor and populates quickfix
-vim.keymap.set('n', "<leader>F", ":Git grep -w -q <C-r><C-w> %<CR>") -- search word under cursor in current file and populates quickfix
-
-vim.keymap.set("i", "AA", "<Esc>A") -- quick command in insert mode: go to line end
-vim.keymap.set("i", "II", "<Esc>I") -- quick command in insert mode: go to line start
-vim.keymap.set("i", "OO", "<Esc>O") -- quick command in insert mode: go to line above
-
-
-
--- automatically populates some register
--- d contains current folder path (absolute)
--- f contains current file name without extension
-vim.api.nvim_create_autocmd('BufEnter', {
-  callback = function()
-    local current_file = vim.fn.expand("%:p")
-    local folder = vim.fn.fnamemodify(current_file, ":p:h")
-    local filename_without_extension = vim.fn.fnamemodify(current_file, ":t:r")
-    folder = folder .. "/"
-
-    vim.fn.setreg('d', folder)
-    vim.fn.setreg('f', filename_without_extension)
-  end,
-  pattern = '*',
-})
 
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -184,16 +86,6 @@ require("lazy").setup({
   {
     "tpope/vim-eunuch"
   },
-  {"mogelbrod/vim-jsonpath"},
-  {"arcticicestudio/nord-vim", 
-    config = function() 
-      vim.cmd("colorscheme nord")
-      -- vim.g.lightline = { colorscheme = 'nord' }
-    end
-  },
-  {"ewilazarus/preto"},
-  {"Alligator/accent.vim"},
-  -- {'itchyny/lightline.vim'},
   {
     "nvim-lualine/lualine.nvim",
     lazy = false,
@@ -228,12 +120,8 @@ require("lazy").setup({
     },
   },
   {"tpope/vim-rsi"},
-  {"tpope/vim-obsession"},
   {"tpope/vim-repeat"},
-  {"tpope/vim-dispatch"},
-  {
-    "tpope/vim-commentary"
-  },
+  {"tpope/vim-commentary"},
   { 
     "ruifm/gitlinker.nvim",
     config = function()
@@ -241,7 +129,6 @@ require("lazy").setup({
     end
   },
   {"tpope/vim-fugitive"},
-  {"NeogitOrg/neogit"},
   { "itchyny/vim-qfedit"},
   {
     "windwp/nvim-autopairs",
@@ -340,6 +227,21 @@ require("lazy").setup({
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = {"python"}
+          }
+        elseif lsp == 'tailwindcss' then
+          lspconfig[lsp].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = {
+              tailwindCSS = {
+                experimental = {
+                  classRegex = {
+                    { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+                    { "cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }
+                  },
+                },
+              },
+            },
           }
         else
           lspconfig[lsp].setup {

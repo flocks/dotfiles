@@ -1,0 +1,105 @@
+set breakindent
+set completeopt=menuone
+set hlsearch
+set ignorecase
+set mouse=a
+set smartcase
+set t_Co=256
+set updatetime=5
+set autoread
+set colorcolumn=100
+set cursorline
+set autoindent
+set encoding=utf-8
+set expandtab
+set hidden
+set nohlsearch
+set incsearch
+set laststatus=2
+set list
+set listchars=tab:>-,trail:·,nbsp:% 
+set pumheight=5
+set relativenumber
+set scrolloff=5
+set shiftwidth=2
+" set showmode=false
+set sidescrolloff=5
+set signcolumn=yes
+set splitbelow
+set splitright
+set noswapfile
+set tabstop=2
+set wildmenu
+set wildmode=longest,full
+set nowrap
+set nowritebackup
+set number
+set signcolumn=yes
+let g:netrw_banner = 0
+let g:asyncrun_open = 8
+let b:prettier_exec_cmd = "prettierd"
+colorscheme desert
+
+nnoremap <leader>Y :let @+ = @%<CR>
+nnoremap <leader>y :let @+ = expand('%:p')<CR>
+nnoremap <leader>d :let @+ = expand('%:p:h')<CR>
+
+nnoremap <C-x><C-j> :Explore<CR>
+
+" Quickfix
+nnoremap <Esc>p :cprev<CR>  " Previous in quickfix list
+nnoremap <Esc>n :cnext<CR>  " Next in quickfix list
+nnoremap <space> :copen<CR> " Open quickfix list
+
+" Split management
+nnoremap vv <C-w>v          " Split window vertically
+nnoremap ss <C-w>s          " Split window horizontally
+nnoremap <C-h> <C-w>h       " Move to left window
+nnoremap <C-l> <C-w>l       " Move to right window
+nnoremap <C-j> <C-w>j       " Move to bottom window
+nnoremap <C-k> <C-w>k       " Move to top window
+nnoremap Q :qa!<CR>         " Move to top window
+
+" Quick commands in insert mode
+inoremap AA <Esc>A  " Go to line end
+inoremap II <Esc>I  " Go to line start
+inoremap OO <Esc>O  " Go to line above
+
+
+" Auto pair
+inoremap ( ()<Left>
+inoremap { {}<Left>
+inoremap [ []<Left>
+inoremap ' ''<Left>
+inoremap " ""<Left>
+
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
+" Search word under cursor and populate quickfix
+nnoremap <leader>f :grep -w  <C-r><C-w><CR>
+
+" Search word under cursor in current file and populate quickfix
+nnoremap <leader>F :grep -w  <C-r><C-w> %<CR>
+
+" Automatically populates some registers
+" d contains current folder path (absolute)
+" f contains current file name without extension
+augroup AutoPopulateRegisters
+  autocmd!
+  autocmd BufEnter * call PopulateRegisters()
+augroup END
+
+function! PopulateRegisters()
+  let current_file = expand("%:p")
+  let folder = fnamemodify(current_file, ":p:h")
+  let filename_without_extension = fnamemodify(current_file, ":t:r")
+  let folder = folder . "/"
+
+  call setreg('d', folder)
+  call setreg('f', filename_without_extension)
+endfunction
+
+" open file on latest edited line
+augroup LastEditedLine
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
