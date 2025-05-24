@@ -8,6 +8,19 @@
   (package-install 'use-package))
 
 
+;;; setup straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -124,6 +137,39 @@
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C-.") 'mc/mark-next-like-this-word))
 
+
+
+
+(use-package evil
+  :straight t ;; install the evil package if not installed
+  :init ;; tweak evil's configuration before loading it
+
+  (setq evil-ex-complete-emacs-commands nil)
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
+  (setq evil-want-keybinding nil)
+
+  :config ;; tweak evil after loading it
+  (add-hook 'view-mode-hook 'evil-local-mode)
+  (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?- "w")))
+  (add-hook 'after-change-major-mode-hook (lambda () (modify-syntax-entry ?_ "w")))
+  (evil-mode))
+
+(use-package evil-commentary
+  :after evil
+  :straight t
+  :init (evil-commentary-mode))
+
+(use-package evil-surround
+  :straight t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :straight t
+  :config
+  (evil-collection-init))
 
 ;; buffer
 (global-set-key (kbd "C-x k") 'kill-buffer-and-window)
