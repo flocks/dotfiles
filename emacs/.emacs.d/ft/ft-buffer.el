@@ -28,16 +28,6 @@
   ;; I prefer to manually toggle the filter rather than adding a hook
   (define-key ibuffer-mode-map (kbd "C-c C-p") 'ibuffer-vc-set-filter-groups-by-vc-root))
 
-(use-package scratch
-  :straight t
-  :config
-  (defun ft-new-buffer (prefix)
-	(interactive "P")
-	(let ((current-prefix-arg (if prefix nil 4)))
-	  (call-interactively #'scratch))) 
-
-  (global-set-key (kbd "C-c n") 'ft-new-buffer))
-
 (setq display-buffer-alist
 	  `(("\\*eldoc\\*"
 		 (display-buffer-reuse-window
