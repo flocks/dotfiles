@@ -19,22 +19,6 @@
 (use-package hydra
   :straight t)
 
-(use-package buffer-move
-  :straight t
-  :config
-  (defhydra hydra-windows (global-map "C-c w")
-	"window"
-
-	("J" evil-window-increase-height)
-	("K" evil-window-decrease-height)
-	("L" evil-window-increase-width)
-	("H" evil-window-decrease-width)
-
-	("j" buf-move-down)
-	("k" buf-move-up)
-	("l" buf-move-right)
-	("h" buf-move-left)))
-
 
 (use-package winner
    :straight t
