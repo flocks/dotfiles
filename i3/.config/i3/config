@@ -108,7 +108,7 @@ bindsym $mod+Shift+grave layout default
 bar {
     workspace_min_width 20
     position bottom
-    status_command /home/fteissier/bin/i3status.sh
     font pango: Aporetic 10 
+    status_command $HOME/bin/i3status.sh
     tray_output none
 }
