@@ -24,11 +24,11 @@
    (let ((files (dired-get-marked-files t current-prefix-arg nil nil t)))
      (list
       ;; Want to give feedback whether this file or marked files are used:
-      (dired-read-shell-command "& on %s: " current-prefix-arg files)
+      (dired-read-shell-command "& on \"%s\": " current-prefix-arg files)
       current-prefix-arg
       files)))
   
-  (let ((compile-command (format "%s %s" command (s-join " " file-list)))
+  (let ((compile-command (format "%s \"%s\"" command (s-join " " file-list)))
 		(compilation-read-command nil))
 	(call-interactively #'compile)))
 
