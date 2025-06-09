@@ -70,17 +70,6 @@
       smtpmail-smtp-server "smtp.gmail.com"
       smtpmail-smtp-service 587)
 
-(use-package notmuch-indicator
-  :straight t
-  :init
-  (setq notmuch-indicator-display-command (lambda ()
-											(setq minibar-group-left '((lambda () notmuch-indicator-string)))))
-  (setq notmuch-indicator-args
-		'((:terms "tag:unread and tag:inbox" :label "📧")
-		  (:terms "tag:unread and tag:github" :label "🖥️")
-		  (:terms "tag:unread and tag:list" :label "L")))
-  (notmuch-indicator-mode))
-
 (global-set-key (kbd "C-c m")
 				(lambda ()
 				  (interactive)
