@@ -43,22 +43,10 @@
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq dumb-jump-selector 'ivy))
 
-(defun ft-fuzzy-find-file ()
-  "Use 'project-find-file' when inside a project,
-fallback to counsel-fzf otherwise."
-  (interactive)
-  (let ((func (or
-			   (and (project-current) 'project-find-file)
-			   'consult-find)))
-	(call-interactively func)))
-
 ;; open directly elisp manual
 (global-set-key (kbd "C-h l") (lambda ()
 								(interactive)
 								(info "Elisp")))
-
-(with-eval-after-load 'ft-evil
-  (define-key evil-normal-state-map (kbd "C-p") 'ft-fuzzy-find-file))
 
 (global-set-key (kbd "C-c L") 'ft-open-lisp-file)
 
