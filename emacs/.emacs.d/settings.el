@@ -26,6 +26,10 @@
 ;;; I don't like that is done auto
 (setq auto-save-default nil)
 
+;;; I like to version control emacs bookmarks because I use different machines
+;;; but I want to keep some privacy (espacially for mail/web/gemini bookmarks)
+(setq bookmark-file (expand-file-name "~/dotfiles/emacs/bookmarks.gpg"))
+
 ;;; setup straight.el 
 (defvar bootstrap-version)
 (let ((bootstrap-file
