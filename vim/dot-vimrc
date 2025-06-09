@@ -40,6 +40,7 @@ let g:asyncrun_open = 8
 let b:prettier_exec_cmd = "prettierd"
 colorscheme desert
 
+" registers to clipboard
 nnoremap <leader>Y :let @+ = @%<CR>
 nnoremap <leader>y :let @+ = expand('%:p')<CR>
 nnoremap <leader>d :let @+ = expand('%:p:h')<CR>
@@ -66,6 +67,9 @@ inoremap II <Esc>I  " Go to line start
 inoremap OO <Esc>O  " Go to line above
 
 
+" buffers
+nnoremap <leader>b :ls<CR>:b
+
 " Auto pair
 inoremap ( ()<Left>
 inoremap { {}<Left>
@@ -74,11 +78,13 @@ inoremap ' ''<Left>
 inoremap " ""<Left>
 
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
+command! -nargs=* Sgrep silent! grep <args> | copen
+
 " Search word under cursor and populate quickfix
-nnoremap <leader>f :grep -w  <C-r><C-w><CR>
+nnoremap <leader>f :silent! grep -w  <C-r><C-w><CR>:copen<CR>
 
 " Search word under cursor in current file and populate quickfix
-nnoremap <leader>F :grep -w  <C-r><C-w> %<CR>
+nnoremap <leader>F :silent! grep -w  <C-r><C-w> %<CR>:copen<CR>
 
 " Automatically populates some registers
 " d contains current folder path (absolute)
