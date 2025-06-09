@@ -23,8 +23,7 @@
   ("d" (lambda () (interactive) (find-file "~/dotfiles")) :exit t)
   ("h" (lambda () (interactive) (find-file "~")) :exit t)
   ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t)
-  ("L" (lambda () (interactive) (find-file "~/ledger/ledger-live")) :exit t)
-  )
+  ("L" (lambda () (interactive) (find-file "~/ledger/ledger-live")) :exit t))
 
 (defun ft-diff-file-dwim ()
   (interactive)
