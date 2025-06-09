@@ -9,10 +9,10 @@ for_window [class="SimpleScreenRecorder"] floating enable
 
 set $mod Mod4
 
-font pango:Aporetic 10
+font pango:Berkeley Mono 10
 floating_modifier $mod
 
-workspace_layout tabbed
+# workspace_layout tabbed
 
 set $term --no-startup-id kitty
 
@@ -108,7 +108,7 @@ bindsym $mod+Shift+grave layout default
 bar {
     workspace_min_width 20
     position bottom
-    font pango: Aporetic 10 
+    font pango: Berkeley Mono 10
     status_command $HOME/bin/i3status.sh
     tray_output none
 }
