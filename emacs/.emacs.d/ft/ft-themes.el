@@ -108,7 +108,7 @@
 		  (chill
 		   :default-height 200)
 		  (t ; our shared fallback properties
-		   :default-family "Iosevka Comfy"
+		   :default-family "Aporetic Sans Mono"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
