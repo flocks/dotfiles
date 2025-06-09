@@ -149,7 +149,6 @@
 (require 'ft-misc)
 (require 'ft-mail)
 (require 'ft-social)
-(require 'ft-modeline)
 (require 'ft-view-diff)
 (require 'ft-jira)
 
