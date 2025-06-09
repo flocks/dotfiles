@@ -116,7 +116,7 @@
 	(interactive)
 	(let (completion-cycle-threshold completion-cycling)
 	  (apply #'consult-completion-in-region completion-in-region--data)))
-  (global-set-key (kbd "C-SPC") #'completion-at-point)
+  (global-set-key (kbd "C-M-i") #'completion-at-point)
   (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer))
 
 (use-package which-key
