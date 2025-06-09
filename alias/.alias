@@ -45,6 +45,7 @@ alias rrD="cd ~/ledger/revault/packages/dls"
 alias rrw="cd ~/ledger/revault/packages/web"
 alias rru="cd ~/ledger/revault/packages/ui"
 alias rra="cd ~/ledger/revault/packages/api"
+alias sig="cd ~/ledger/les-multisig-web"
 alias vid="cd ~/Videos"
 
 
