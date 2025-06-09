@@ -27,6 +27,9 @@ super + bracketleft
 super + control + a
     ~/bin/blockchain-address
 
+super + n
+   ~/bin/boomer
+
 # lock screen
 super + w
     ~/bin/lock
