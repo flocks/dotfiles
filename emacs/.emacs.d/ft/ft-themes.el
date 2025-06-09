@@ -18,10 +18,11 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 
+(use-package doric-themes
+  :straight t)
 (use-package modus-themes
   :straight t
   :config
-  (setq modus-themes-slanted-constructs t)
   (setq modus-themes-bold-constructs t)
   (setq modus-themes-italic-constructs t)
   (setq modus-themes-common-palette-overrides
@@ -35,56 +36,6 @@
 
 (use-package standard-themes :straight t)
 
-;; free distracting editing/reading
-(use-package darkroom
-  :straight t
-  :config
-  (defun ft-darkroom-setup ()
-	"Kill other window and toggle darkroom-mode"
-	(interactive)
-	(delete-other-windows)
-	(call-interactively 'darkroom-mode))
-  (setq darkroom-text-scale-increase 1)
-  (setq darkroom-margins 0.2)
-  (global-set-key (kbd "C-x F F") 'ft-darkroom-setup))
-
-(use-package ef-themes
-  :straight t)
-
-(use-package gruvbox-theme
-  :straight t)
-
-(use-package doom-themes
-  :straight t)
-
-(use-package pulsar
-  :straight t
-  :config
-  (pulsar-global-mode)
-  (global-set-key (kbd "C-x L") 'pulsar-pulse-line)
-  (setq pulsar-pulse-functions
-      '(recenter-top-bottom
-        move-to-window-line-top-bottom
-        reposition-window
-        bookmark-jump
-        other-window
-        delete-window
-        delete-other-windows
-        forward-page
-        backward-page
-        scroll-up-command
-        scroll-down-command
-        windmove-right
-        windmove-left
-        windmove-up
-        windmove-down
-        windmove-swap-states-right
-        windmove-swap-states-left
-        windmove-swap-states-up
-        windmove-swap-states-down
-        tab-new
-        tab-close
-        tab-next)))
 
 (defun ft-load-theme ()
   (interactive)
@@ -115,7 +66,16 @@
 (global-set-key (kbd "C-x F t") 'modus-themes-toggle)
 (global-set-key (kbd "C-x F f") 'fontaine-set-preset)
 
+(use-package almost-mono-themes
+  :straight t
+  :config
+  ;; (load-theme 'almost-mono-black t)
+  ;; (load-theme 'almost-mono-gray t)
+  ;; (load-theme 'almost-mono-cream t)
+  (load-theme 'almost-mono-white t))
 
 
+(use-package doric-themes
+  :straight t)
 
 (provide 'ft-themes)
