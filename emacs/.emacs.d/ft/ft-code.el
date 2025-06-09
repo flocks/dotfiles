@@ -138,11 +138,12 @@
   (setq lsp-eslint-enable t)
   (setq lsp-eldoc-enable-hover t)
 
-
   (define-key lsp-mode-map (kbd "C-c A") 'lsp-execute-code-action)
   (define-key lsp-mode-map (kbd "C-c K") 'lsp-execute-code-action)
-
-  )
+  :hook (
+		 (typescript-ts-mode . lsp-deferred)
+		 (tsx-ts-mode . lsp-deferred))
+  :commands (lsp lsp-deferred))
 
 
 (use-package flycheck
@@ -151,4 +152,6 @@
 (use-package lsp-tailwindcss
   :straight t
   :init
-  (setq lsp-tailwindcss-add-on-mode t))
+
+  (setq lsp-tailwindcss-add-on-mode t
+        lsp-tailwindcss-skip-config-check t))
