@@ -9,6 +9,10 @@ for_window [class="SimpleScreenRecorder"] floating enable
 
 set $mod Mod4
 
+hide_edge_borders smart
+default_border pixel 1
+default_floating_border pixel 1
+ 
 font pango:Berkeley Mono 10
 floating_modifier $mod
 
