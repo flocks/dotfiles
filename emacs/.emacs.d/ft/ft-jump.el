@@ -5,6 +5,7 @@
   "Jump"
   ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")) :exit t)
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
+  ("c" (lambda () (interactive) (find-file "~/chessblind")) :exit t)
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
   ("e" (lambda () (interactive) (find-file "~/ledger/vault-e2e-tests")) :exit t)
   ("0" (lambda () (interactive) (find-file "~/0xparser")) :exit t)
