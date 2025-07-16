@@ -7,6 +7,7 @@ alias Z="cd ~ && nvim .zshrc"
 alias resource="source ~/.zshrc"
 
 # folder
+alias chess="cd ~/chessblind"
 alias s="cd ~/screenshots"
 alias mobile="cd ~/ledger/revault/packages/mobile"
 alias S="cd ~/sandbox && v main.ts"
