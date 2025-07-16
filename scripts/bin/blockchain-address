@@ -4,6 +4,9 @@ westend=(
    "5G1ojzh47Yt8KoYhuAjXpHcazvsoCXe3G8LZchKDvumozJJJ" 
    "5GYaYNVq6e855t5hVCyk4Wuqssaf6ADTrvdPZ3QXyHvFXTip"
 )
+tron=(
+   "TP2UBwsCKKJvmo18JtBFYveRkC7qe2qJCE"
+)
 solana=(
    "HXnWFNs2oSfcYUojy1tAW4P3EQTamPTNSduEhPhWCCXN" 
 )
@@ -74,6 +77,7 @@ Bitcoin (testnet)
 Ethereum
 Ethereum (testnet)
 Westend
+Tron
 Solana
 cosmos
 XRP
@@ -93,6 +97,7 @@ list=""
 [[ "$currency" == "Bep20" ]] && list="${bep20[*]}"
 [[ "$currency" == "Ethereum (testnet)" ]] && list="${ropsten[*]}"
 [[ "$currency" == "Westend" ]] && list="${westend[*]}"
+[[ "$currency" == "Tron" ]] && list="${tron[*]}"
 [[ "$currency" == "Solana" ]] && list="${solana[*]}"
 [[ "$currency" == "Polkadot" ]] && list="${polkadot[*]}"
 [[ "$currency" == "XRP" ]] && list="${xrp[*]}"
