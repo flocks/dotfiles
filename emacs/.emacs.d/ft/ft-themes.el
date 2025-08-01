@@ -18,8 +18,6 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq display-line-numbers 'relative)
 
-(use-package doric-themes
-  :straight t)
 (use-package modus-themes
   :straight t
   :config
@@ -34,7 +32,9 @@
 
   (modus-themes-toggle))
 
-(use-package standard-themes :straight t)
+(use-package standard-themes :straight t
+  :config
+  (standard-themes-toggle))
 
 
 (defun ft-load-theme ()
@@ -59,23 +59,13 @@
 		  (chill
 		   :default-height 200)
 		  (t ; our shared fallback properties
-		   :default-family "Aporetic Sans Mono"
+		   :default-family "Berkeley Mono"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
-(global-set-key (kbd "C-x F t") 'modus-themes-toggle)
+(global-set-key (kbd "C-x F t") 'standard-themes-toggle)
 (global-set-key (kbd "C-x F f") 'fontaine-set-preset)
 
-(use-package almost-mono-themes
-  :straight t
-  :config
-  ;; (load-theme 'almost-mono-black t)
-  ;; (load-theme 'almost-mono-gray t)
-  ;; (load-theme 'almost-mono-cream t)
-  (load-theme 'almost-mono-white t))
 
-
-(use-package doric-themes
-  :straight t)
 
 (provide 'ft-themes)
