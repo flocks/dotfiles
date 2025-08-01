@@ -4,11 +4,9 @@ set hlsearch
 set ignorecase
 set mouse=a
 set smartcase
-set t_Co=256
 set updatetime=5
 set autoread
-set colorcolumn=100
-set cursorline
+set colorcolumn=""
 set autoindent
 set encoding=utf-8
 set expandtab
@@ -22,34 +20,37 @@ set pumheight=5
 set relativenumber
 set scrolloff=5
 set shiftwidth=2
-" set showmode=false
 set sidescrolloff=5
-set signcolumn=yes
+set signcolumn=auto
 set splitbelow
 set splitright
 set noswapfile
 set tabstop=2
 set wildmenu
-set wildmode=longest,full
+set wildmode=longest,full,full
 set nowrap
 set nowritebackup
 set number
-set signcolumn=yes
 let g:netrw_banner = 0
 let g:asyncrun_open = 8
 let b:prettier_exec_cmd = "prettierd"
-colorscheme desert
+set t_Co=256
+colorscheme default
+syntax on
 
 " registers to clipboard
 nnoremap <leader>Y :let @+ = @%<CR>
 nnoremap <leader>y :let @+ = expand('%:p')<CR>
 nnoremap <leader>d :let @+ = expand('%:p:h')<CR>
 
+" copy to system clipboard
+vnoremap <C-y> "+y
+
 nnoremap <C-x><C-j> :Explore<CR>
 
 " Quickfix
-nnoremap <Esc>p :cprev<CR>  " Previous in quickfix list
-nnoremap <Esc>n :cnext<CR>  " Next in quickfix list
+nnoremap <A-p> :cprev<CR>  " Previous in quickfix list
+nnoremap <A-n> :cnext<CR>  " Next in quickfix list
 nnoremap <space> :copen<CR> " Open quickfix list
 
 " Split management
@@ -69,6 +70,7 @@ inoremap OO <Esc>O  " Go to line above
 
 " buffers
 nnoremap <leader>b :ls<CR>:b
+nnoremap <C-;> :ls<CR>:b
 
 " Auto pair
 inoremap ( ()<Left>
@@ -76,6 +78,9 @@ inoremap { {}<Left>
 inoremap [ []<Left>
 inoremap ' ''<Left>
 inoremap " ""<Left>
+
+" s/foo/bar
+nnoremap <C-c><C-r> :%s/<C-r><C-w>/
 
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
 command! -nargs=* Sgrep silent! grep <args> | copen
@@ -109,3 +114,20 @@ augroup LastEditedLine
   autocmd!
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
+
+" fzf
+set rtp+=~/.fzf
+nnoremap <C-p> :FZF<CR>
+
+
+" Source plugin config if available
+if 0 && !has('nvim')
+  if filereadable(expand("~/.vim/plugins.vim"))
+    source ~/.vim/plugins.vim
+  endif
+
+  " Source language-specific LSP configs
+  if filereadable(expand("~/.vim/lsp/typescript.vim"))
+    source ~/.vim/lsp/typescript.vim
+  endif
+endif

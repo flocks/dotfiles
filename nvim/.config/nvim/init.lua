@@ -78,51 +78,52 @@ require("lazy").setup({
       })
     end
   },
-  {
-    "skywind3000/asyncrun.vim"
-  },
+  {"skywind3000/asyncrun.vim"},
   {"prettier/vim-prettier"},
-  {
-    "tpope/vim-eunuch"
+  {"tpope/vim-eunuch"},
+  {"projekt0n/github-nvim-theme",
+    config = function () 
+      vim.cmd("colorscheme github_dark_high_contrast")
+    end;
   },
-  {"gbprod/nord.nvim",
-  config =  function() 
-    vim.cmd("colorscheme nord")
-  end
-},
-{
-  "nvim-lualine/lualine.nvim",
-  lazy = false,
-  priority = 1000,
-  opts = {
-    options = {
-      icons_enabled = true,
-      theme = 'nord',
-      component_separators = '',
-      section_separators = { left = '', right = '' },
-    },
-    sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { 'diagnostics' },
-      lualine_c = {
-        { 'filename', path = 1 },
-      },
-      lualine_x = {},
-      lualine_y = { 'branch' },
-      lualine_z = { 'location' }
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {
-        { 'filename', path = 1 },
-      },
-      lualine_x = { 'location' },
-      lualine_y = {},
-      lualine_z = {}
-    },
-  },
-},
+  -- {"gbprod/nord.nvim",
+  -- config =  function() 
+  --   vim.cmd("colorscheme nord")
+  -- end
+-- },
+-- {
+--   "nvim-lualine/lualine.nvim",
+--   lazy = false,
+--   priority = 1000,
+--   opts = {
+--     options = {
+--       icons_enabled = true,
+--       theme = 'github_dark_high_contrast',
+--       component_separators = '',
+--       section_separators = { left = '', right = '' },
+--     },
+--     sections = {
+--       lualine_a = { 'mode' },
+--       lualine_b = { 'diagnostics' },
+--       lualine_c = {
+--         { 'filename', path = 1 },
+--       },
+--       lualine_x = {},
+--       lualine_y = { 'branch' },
+--       lualine_z = { 'location' }
+--     },
+--     inactive_sections = {
+--       lualine_a = {},
+--       lualine_b = {},
+--       lualine_c = {
+--         { 'filename', path = 1 },
+--       },
+--       lualine_x = { 'location' },
+--       lualine_y = {},
+--       lualine_z = {}
+--     },
+--   },
+-- },
 {"tpope/vim-rsi"},
 {"tpope/vim-repeat"},
 {"tpope/vim-commentary"},
@@ -133,15 +134,15 @@ require("lazy").setup({
   end
 },
 {"tpope/vim-fugitive"},
-{ "itchyny/vim-qfedit"},
+{"itchyny/vim-qfedit"},
 {
   "windwp/nvim-autopairs",
   config = function()
     require("nvim-autopairs").setup({ map_cr = true })
   end
 },
-{ "nvim-lua/plenary.nvim", build = 'make' },
-{ "nvim-telescope/telescope-fzf-native.nvim" },
+{"nvim-lua/plenary.nvim", build = 'make' },
+{"nvim-telescope/telescope-fzf-native.nvim" },
 {
   "nvim-telescope/telescope.nvim",
   config = function()
