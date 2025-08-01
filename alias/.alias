@@ -52,6 +52,7 @@ alias vid="cd ~/Videos"
 
 # git stuff
 alias gs="git status"
+alias gl="git log"
 alias gc="git commit"
 alias gd="git diff"
 alias gpo='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
@@ -69,7 +70,7 @@ alias ec='emacsclient -nw -c'
 alias pic="sxiv"
 alias v="nvim"
 alias xv="xargs nvim"
-alias vim="nvim"
+# alias vim="nvim"
 alias lg="lazygit"
 alias img="sxiv"
 alias nb=newsboat
@@ -91,6 +92,7 @@ alias mg="magit"
 # alias p="pnpm"
 
 # utils
+alias here="echo -n "$(pwd)" | copy"
 alias make="make 2>&1"
 alias tvi="pnpm typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && nvim -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"
