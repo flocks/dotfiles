@@ -8,6 +8,12 @@
 	  notmuch-hello-sections '(notmuch-hello-insert-saved-searches)
 	  notmuch-show-all-tags-list t)
 
+;; (setq notmuch-address-command "notmuch-get-addresses")
+;; (notmuch-address-setup)
+
+(setq notmuch-address-command 'internal)
+(setq notmuch-address-use-company nil)
+
 (setq-default notmuch-search-oldest-first nil) ;; why it's not the default val lol
 (setq notmuch-wash-signature-lines-max 100)
 (setq notmuch-wash-wrap-lines-length 90)
