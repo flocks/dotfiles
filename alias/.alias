@@ -92,7 +92,6 @@ alias mg="magit"
 # alias p="pnpm"
 
 # utils
-alias here="echo -n "$(pwd)" | copy"
 alias make="make 2>&1"
 alias tvi="pnpm typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && nvim -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"

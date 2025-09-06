@@ -172,6 +172,8 @@ precmd() { pwd > /tmp/current-dir }
 in() { cd $(dirname $1) }
 cpath() { realpath "$1" | tr -d '\n' | copy }
 
+here() { echo -n "$(pwd)" | copy}
+
 # disable it's too slow
 export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
