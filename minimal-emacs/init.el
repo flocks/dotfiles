@@ -135,8 +135,10 @@
 (use-package multiple-cursors
   :ensure t
   :config
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C-.") 'mc/mark-next-like-this-word))
+  (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-M-c") 'mc/edit-lines)
+  (global-set-key (kbd "C-M-n") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-M-j") 'mc/mark-all-like-this-dwim))
 
 
 
