@@ -7,6 +7,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(pending-delete-mode 1)
 
 ;;; setup straight.el
 (defvar bootstrap-version)
