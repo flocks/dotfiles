@@ -33,6 +33,17 @@ vim.keymap.set('n', "<C-c>c", ":RunAsync<Space>")
 vim.keymap.set('n', "<C-c><C-c>", ":ReRunAsync<CR>")
 
 
+-- add some roundness to neovim popup
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or 'rounded'
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+-- set cmd height to 0 
+vim.opt.cmdheight = 0
+
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -82,48 +93,48 @@ require("lazy").setup({
   {"prettier/vim-prettier"},
   {"tpope/vim-eunuch"},
   {"projekt0n/github-nvim-theme",
-    config = function () 
-      vim.cmd("colorscheme github_dark_high_contrast")
-    end;
+  config = function () 
+    -- vim.cmd("colorscheme github_dark_high_contrast")
+  end;
+},
+{"gbprod/nord.nvim",
+config =  function() 
+  vim.cmd("colorscheme nord")
+end
+},
+{
+  "nvim-lualine/lualine.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {
+    options = {
+      icons_enabled = true,
+      theme = 'nord',
+      component_separators = '',
+      section_separators = { left = '', right = '' },
+    },
+    sections = {
+      lualine_a = { 'mode' },
+      lualine_b = { 'diagnostics' },
+      lualine_c = {
+        { 'filename', path = 1 },
+      },
+      lualine_x = {},
+      lualine_y = { 'branch' },
+      lualine_z = { 'location' }
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {
+        { 'filename', path = 1 },
+      },
+      lualine_x = { 'location' },
+      lualine_y = {},
+      lualine_z = {}
+    },
   },
-  -- {"gbprod/nord.nvim",
-  -- config =  function() 
-  --   vim.cmd("colorscheme nord")
-  -- end
--- },
--- {
---   "nvim-lualine/lualine.nvim",
---   lazy = false,
---   priority = 1000,
---   opts = {
---     options = {
---       icons_enabled = true,
---       theme = 'github_dark_high_contrast',
---       component_separators = '',
---       section_separators = { left = '', right = '' },
---     },
---     sections = {
---       lualine_a = { 'mode' },
---       lualine_b = { 'diagnostics' },
---       lualine_c = {
---         { 'filename', path = 1 },
---       },
---       lualine_x = {},
---       lualine_y = { 'branch' },
---       lualine_z = { 'location' }
---     },
---     inactive_sections = {
---       lualine_a = {},
---       lualine_b = {},
---       lualine_c = {
---         { 'filename', path = 1 },
---       },
---       lualine_x = { 'location' },
---       lualine_y = {},
---       lualine_z = {}
---     },
---   },
--- },
+},
 {"tpope/vim-rsi"},
 {"tpope/vim-repeat"},
 {"tpope/vim-commentary"},
@@ -209,6 +220,7 @@ require("lazy").setup({
 },
 {
   "neovim/nvim-lspconfig",
+  dependencies = {  { 'j-hui/fidget.nvim', opts = {} }},
   config = function()
     local lspconfig = require('lspconfig')
     local servers = {
@@ -219,13 +231,22 @@ require("lazy").setup({
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    vim.lsp.config("ts_ls", { reuse_client = function() return true end })
+
 
     for _, lsp in ipairs(servers) do
       if lsp == 'ts_ls' then
         lspconfig[lsp].setup {
           on_attach = on_attach,
           capabilities = capabilities,
-          filetypes = {"typescript", "typescriptreact", "typescript.tsx"}
+          filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
+          settings = {
+            typescript = {
+              preferences = {
+                importModuleSpecifier = "non-relative",
+              }
+            }
+          }
         }
       elseif lsp == "pylsp" then
         lspconfig[lsp].setup {
@@ -257,6 +278,17 @@ require("lazy").setup({
     end
   end
 },
+-- copilot
+-- {
+--   'github/copilot.vim',
+--   config = function() 
+--     vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+--       expr = true,
+--       replace_keycodes = false,
+--     })
+--     vim.g.copilot_no_tab_map = true
+--   end
+-- },
 -- completion
 { "hrsh7th/cmp-nvim-lsp" },
 {
