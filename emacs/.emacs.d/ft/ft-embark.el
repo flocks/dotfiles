@@ -19,6 +19,7 @@
   :straight t
   :config
   (vertico-mode)
+  (setq vertico-count 3)
   (define-key vertico-map (kbd "M-r") 'consult-history)
   (define-key minibuffer-mode-map (kbd "M-r") 'consult-history)
   (define-key minibuffer-local-shell-command-map (kbd "M-r") 'consult-history))
