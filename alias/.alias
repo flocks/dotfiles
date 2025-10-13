@@ -7,6 +7,7 @@ alias Z="cd ~ && $EDITOR .zshrc"
 alias resource="source ~/.zshrc"
 
 # folder
+alias y="cd ~/yui"
 alias chess="cd ~/chessblind"
 alias s="cd ~/screenshots"
 alias mobile="cd ~/ledger/revault/packages/mobile"
@@ -87,11 +88,10 @@ alias lvca="ledger-vault create user --role admin --name $(date +%s)"
 alias music="ncmpcpp"
 alias i="instances"
 
-#emacs links
-alias mg="magit"
-# alias p="pnpm"
 
 # utils
+alias lint="pnpm lint --format $HOME/.config/yarn/global/node_modules/eslint-formatter-unix/index.js"
+alias tscheck="pnpm typecheck;  pnpm lint --format $HOME/.config/yarn/global/node_modules/eslint-formatter-unix/index.js"
 alias make="make 2>&1"
 alias tvi="pnpm typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && $EDITOR -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"
