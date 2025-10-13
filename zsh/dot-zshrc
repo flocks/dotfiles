@@ -5,7 +5,7 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-export EDITOR="$(command -v vim)"
+export EDITOR="$(command -v nvim)"
 export TERMINAL="$(command -v kitty)"
 export BROWSER="$(command -v google-chrome-stable)"
 export PATH=$PATH:~/.local/bin
@@ -88,7 +88,7 @@ wrapProcess() {
 }
 
 wrapQuickfix() {
-	BUFFER="nvim -q <($BUFFER)";
+	BUFFER="$EDITOR -q <($BUFFER)";
 	zle beginning-of-line;
 }
 
@@ -129,7 +129,7 @@ mixed () {
   git reset --mixed HEAD~$1
 }
 gv () {
-  nvim `git diff --name-only`
+  $EDITOR `git diff --name-only`
 }
 
 gitfiles () {

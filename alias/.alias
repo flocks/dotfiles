@@ -1,8 +1,8 @@
 # edit confs
-alias V="cd ~/dotfiles/nvim/.config/nvim && nvim init.lua"
-alias I="cd ~/dotfiles/i3/.config/i3 && nvim config"
-alias K="cd ~/dotfiles/kitty/.config/kitty && nvim kitty.conf"
-alias Z="cd ~ && nvim .zshrc"
+alias V="cd ~/dotfiles/nvim/.config/nvim && $EDITOR init.lua"
+alias I="cd ~/dotfiles/i3/.config/i3 && $EDITOR config"
+alias K="cd ~/dotfiles/kitty/.config/kitty && $EDITOR kitty.conf"
+alias Z="cd ~ && $EDITOR .zshrc"
 
 alias resource="source ~/.zshrc"
 
@@ -68,8 +68,8 @@ alias ydl="youtube-dl"
 alias t="tmux attach"
 alias ec='emacsclient -nw -c'
 alias pic="sxiv"
-alias v="nvim"
-alias xv="xargs nvim"
+alias v="$EDITOR"
+alias xv="xargs $EDITOR"
 # alias vim="nvim"
 alias lg="lazygit"
 alias img="sxiv"
@@ -93,7 +93,7 @@ alias mg="magit"
 
 # utils
 alias make="make 2>&1"
-alias tvi="pnpm typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && nvim -q <(cat /tmp/error.log) '+copen'"
+alias tvi="pnpm typecheck  | sed -E 's/\(([0-9]+),([0-9]+)\): error TS/:\1:\2: error TS/' | tee /tmp/error.log && $EDITOR -q <(cat /tmp/error.log) '+copen'"
 alias gb="git branch -r --contains"
 alias fn="find . -name"
 alias fic="find-in-code.sh"
@@ -110,7 +110,7 @@ alias cfgs="cat ~/dotfiles/configs"
 alias c="~/bin/configs"
 alias rg='rg --hidden --line-number --column'
 alias rgfiles="cut -d : -f 1 | sort | uniq"
-alias rv="cut -d : -f 1 | sort | uniq | xargs nvim"
+alias rv="cut -d : -f 1 | sort | uniq | xargs $EDITOR"
 alias difffiles="cut -d' ' -f 2 | sort | uniq"
 alias flowfiles='rg "^Error" | cut -d " " -f 3 | cut -d : -f 1 | sort | uniq'
 # useful to pipe, eg cat file.log | copy
