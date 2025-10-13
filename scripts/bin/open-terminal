@@ -1,5 +1,10 @@
 #!/bin/bash
 
+terminal_name=$(basename "$TERMINAL")
+if [ "$terminal_name" = "kitty" ]; then
+  dir=$(cat /tmp/current-dir)
+  $TERMINAL --directory="$dir"
+else
+  $TERMINAL
+fi
 
-dir=$(cat /tmp/current-dir)
-$TERMINAL --directory="$dir"
