@@ -51,6 +51,8 @@ nnoremap <C-x><C-j> :Explore<CR>
 " Quickfix
 nnoremap <A-p> :cprev<CR>  " Previous in quickfix list
 nnoremap <A-n> :cnext<CR>  " Next in quickfix list
+nnoremap <ESC>p :cprev<CR>  " Previous in quickfix list
+nnoremap <ESC>n :cnext<CR>  " Next in quickfix list
 nnoremap <space> :copen<CR> " Open quickfix list
 
 " Split management
