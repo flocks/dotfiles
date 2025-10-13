@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sui=(
+  "0x4f7bcde5e60934f351e6c6165379b9f09b5386ae2d9b3f104b4eae947fe773f1"
+  "0xb1a007c0dc3a769f37d41bcfd0331be43108e9b55ea56cb2c7d0810eb8dae1ee"
+)
 westend=(
    "5G1ojzh47Yt8KoYhuAjXpHcazvsoCXe3G8LZchKDvumozJJJ" 
    "5GYaYNVq6e855t5hVCyk4Wuqssaf6ADTrvdPZ3QXyHvFXTip"
@@ -71,6 +75,7 @@ contract=(
 IFS=$'\n'
 
 currency=$(echo -e "\
+Sui
 Bitcoin
 Tezos
 Bitcoin (testnet)
@@ -90,6 +95,7 @@ Contract" | dmenu -i)
 [[ "$currency" == "" ]] && exit 0
 
 list=""
+[[ "$currency" == "Sui" ]] && list="${sui[*]}"
 [[ "$currency" == "Bitcoin" ]] && list="${bitcoin[*]}"
 [[ "$currency" == "Tezos" ]] && list="${tezos[*]}"
 [[ "$currency" == "Bitcoin (testnet)" ]] && list="${bitcoin_testnet[*]}"
