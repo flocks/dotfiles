@@ -35,7 +35,8 @@ let g:netrw_banner = 0
 let g:asyncrun_open = 8
 let b:prettier_exec_cmd = "prettierd"
 set t_Co=256
-colorscheme default
+set background=dark
+colorscheme lunaperche
 syntax on
 
 " registers to clipboard
