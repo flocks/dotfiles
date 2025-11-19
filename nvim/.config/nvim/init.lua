@@ -25,7 +25,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist)
 
 vim.keymap.set('v', "<C-y>", "\"+y") -- yank in systemclipboard
 vim.keymap.set('n', "<C-;>", ":Buffers<CR>") -- yank in systemclipboard
-vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
+-- vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
+vim.keymap.set('n', "<C-c><C-f>", ":lua vim.lsp.buf.format()<CR>") -- reformat
 vim.keymap.set('n', "<C-c><C-r>", ":%s/<C-r><C-w>/") -- s/foo/bar current word
 
 

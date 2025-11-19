@@ -75,11 +75,14 @@
   :init
   (add-hook 'web-mode-hook 'add-node-modules-path t))
 
+(defun ft-format-buffer ()
+  (interactive)
+  (if (eglot-managed-p) (eglot-format-buffer) (msp-prettify)))
 (use-package msp
   :straight (:repo "https://github.com/flocks/msp.git")
   :config
   (setq msp-config-file '(".prettierrc" ".prettierrc.js" ".prettierrc.json" "prettier.config.cjs"))
-  (global-set-key (kbd "C-c C-f") 'msp-prettify))
+  (global-set-key (kbd "C-c C-f") 'ft-format-buffer))
 
 (use-package haskell-mode
   :straight t)
