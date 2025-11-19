@@ -68,11 +68,6 @@ nnoremap <C-j> <C-w>j       " Move to bottom window
 nnoremap <C-k> <C-w>k       " Move to top window
 nnoremap Q :qa!<CR>         " Move to top window
 
-" Quick commands in insert mode
-inoremap AA <Esc>A  " Go to line end
-inoremap II <Esc>I  " Go to line start
-inoremap OO <Esc>O  " Go to line above
-
 
 " buffers
 nnoremap <leader>b :ls<CR>:b
