@@ -76,7 +76,7 @@ end
 local lsp_servers = {
   'ts_ls',
   'tailwindcss',
-  'pylsp'
+  'lua'
 }
 
 require("lazy").setup({
@@ -189,7 +189,6 @@ end
       },
     })
 
-
     vim.api.nvim_create_user_command(
       'FindCurrentDir',
       function ()
@@ -215,7 +214,7 @@ end
   config = function()
     require('mason').setup()
     require('mason-lspconfig').setup({
-      ensure_installed = lsp_servers,
+      ensure_installed = lsp_servers
     })
   end
 },
@@ -223,73 +222,69 @@ end
   "neovim/nvim-lspconfig",
   dependencies = {  { 'j-hui/fidget.nvim', opts = {} }},
   config = function()
-    local lspconfig = require('lspconfig')
-    local servers = {
-      'ts_ls',
-      'tailwindcss',
-      'pylsp'
-    }
-
+    -- local util = require('lspconfig.util')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-    vim.lsp.config("ts_ls", { reuse_client = function() return true end })
 
-
-    for _, lsp in ipairs(servers) do
-      if lsp == 'ts_ls' then
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
-          settings = {
-            typescript = {
-              preferences = {
-                importModuleSpecifier = "non-relative",
-              }
-            }
+    vim.lsp.enable("ts_ls")
+    vim.lsp.config("ts_ls", {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = {"typescript", "typescriptreact", "typescript.tsx"},
+      settings = {
+        typescript = {
+          preferences = {
+            importModuleSpecifier = "non-relative",
           }
         }
-      elseif lsp == "pylsp" then
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          filetypes = {"python"}
-        }
-      elseif lsp == 'tailwindcss' then
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-          settings = {
-            tailwindCSS = {
-              experimental = {
-                classRegex = {
-                  { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-                  { "cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }
-                },
-              },
+      }
+    })
+
+    vim.lsp.enable("tailwindcss")
+    vim.lsp.config("tailwindcss", {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        tailwindCSS = {
+          experimental = {
+            classRegex = {
+              { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+              { "cn\\(((?:[^()]|\\([^()]*\\))*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }
             },
           },
-        }
-      else
-        lspconfig[lsp].setup {
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }
-      end
-    end
+        },
+      }
+    })
+
+    vim.lsp.config("lua_ls", {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+        },
+      },
+    })
+
   end
 },
 -- copilot
--- {
---   'github/copilot.vim',
---   config = function() 
---     vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
---       expr = true,
---       replace_keycodes = false,
---     })
---     vim.g.copilot_no_tab_map = true
---   end
--- },
+{
+  'github/copilot.vim',
+  config = function() 
+    vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      replace_keycodes = false,
+    })
+    vim.g.copilot_no_tab_map = true
+  end
+},
 -- completion
 { "hrsh7th/cmp-nvim-lsp" },
 {
