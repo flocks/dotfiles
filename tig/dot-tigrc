@@ -5,7 +5,7 @@ set main-view-author-display = abbreviated
 set git-colors = no
 
 bind generic Y <sh -c "echo -n %(commit) | xclip -selection c"
-bind generic V >sh -c "git show %(commit) | vim -"
+bind generic V >sh -c "git show %(commit) | $EDITOR -"
 bind main S !git format-patch -1 %(commit)
 bind main B !git branch -r --contains %(commit)
 bind main R !git rebase -i %(commit)^
