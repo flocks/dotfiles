@@ -41,6 +41,7 @@ set background=dark
 colorscheme lunaperche
 filetype plugin indent on
 syntax on
+set termguicolors
 
 " registers to clipboard
 nnoremap <leader>Y :let @+ = @%<CR>
@@ -80,11 +81,22 @@ inoremap [ []<Left>
 inoremap ' ''<Left>
 inoremap " ""<Left>
 
+
+" better make: no screen flickering and open quickfix if error and jump to
+" first error
+" same for grep
+command! -nargs=* Make silent make | cwindow | cfirst | redraw!
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
+command! -nargs=* Grep silent grep <args> | cwindow | cfirst | redraw!
+
+nnoremap <C-c><C-c> :Amake<CR>
+
+" allow to read local .vimrc per project
+set exrc          " allow reading .vimrc or .exrc in current directory
+set secure        " disables unsafe commands when reading local vimrc
+
 " s/foo/bar
 nnoremap <C-c><C-r> :%s/<C-r><C-w>/
-
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
-command! -nargs=* Sgrep silent! grep <args> | copen
 
 " Search word under cursor and populate quickfix
 nnoremap <leader>f :silent! grep -w  <C-r><C-w><CR>:copen<CR>
@@ -120,21 +132,31 @@ augroup END
 set rtp+=~/.fzf
 nnoremap <C-p> :FZF<CR>
 
-
-" Source plugin config if available
-if 0 && !has('nvim')
-  if filereadable(expand("~/.vim/plugins.vim"))
-    source ~/.vim/plugins.vim
-  endif
-
-  " Source language-specific LSP configs
-  if filereadable(expand("~/.vim/lsp/typescript.vim"))
-    source ~/.vim/lsp/typescript.vim
-  endif
-endif
-
 " some languages need tabs
 autocmd FileType go setlocal noexpandtab
-
 autocmd FileType python setlocal tabstop=2
 
+
+" still need some plugins
+" this needs plug.vim in ~/.vim/autoload folder
+if has('packages') && !has('nvim')
+    call plug#begin('~/.vim/plugged')
+      Plug 'tpope/vim-surround'
+      Plug 'tpope/vim-commentary'
+      Plug 'tpope/vim-rsi'
+      Plug 'tpope/vim-eunuch'
+      Plug 'jiangmiao/auto-pairs'
+      Plug 'vim-utils/vim-man'
+      Plug 'arcticicestudio/nord-vim'
+      Plug 'edkolev/vim-amake'
+    call plug#end()
+
+    colorscheme habamax
+    " useless for me and they (M-n/M-p) conflicts with my qf bindings
+    let g:AutoPairsShortcutToggle = ''
+    let g:AutoPairsShortcutJump = ''
+
+    " vim C doesn't know compound litterals from C99
+    let c_no_curly_error = 1
+
+endif
