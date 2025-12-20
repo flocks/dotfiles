@@ -39,11 +39,11 @@
 
 (global-set-key (kbd "C-c U") 'project-dired)
 
-(use-package dumb-jump
-  :straight t
-  :config
-  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq dumb-jump-selector 'ivy))
+;; (use-package dumb-jump
+;;   :straight t
+;;   :config
+;;   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
+;;   (setq dumb-jump-selector 'ivy))
 
 ;; open directly elisp manual
 (global-set-key (kbd "C-h l") (lambda ()
