@@ -28,7 +28,7 @@
       current-prefix-arg
       files)))
   
-  (let ((compile-command (format "%s \"%s\"" command (s-join " " file-list)))
+  (let ((compile-command (format "%s \"%s\"" command (mapconcat #'identity file-list " ")))
 		(compilation-read-command nil))
 	(call-interactively #'compile)))
 
