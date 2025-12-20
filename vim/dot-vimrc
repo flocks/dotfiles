@@ -89,7 +89,7 @@ command! -nargs=* Make silent make | cwindow | cfirst | redraw!
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
 command! -nargs=* Grep silent grep <args> | cwindow | cfirst | redraw!
 
-nnoremap <C-c><C-c> :Amake<CR>
+nnoremap <C-c><C-c> :Make -B<CR>
 
 " allow to read local .vimrc per project
 set exrc          " allow reading .vimrc or .exrc in current directory
@@ -151,7 +151,7 @@ if has('packages') && !has('nvim')
       Plug 'edkolev/vim-amake'
     call plug#end()
 
-    colorscheme habamax
+    colorscheme oblivion
     " useless for me and they (M-n/M-p) conflicts with my qf bindings
     let g:AutoPairsShortcutToggle = ''
     let g:AutoPairsShortcutJump = ''
