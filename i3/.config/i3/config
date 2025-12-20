@@ -10,10 +10,10 @@ for_window [class="SimpleScreenRecorder"] floating enable
 set $mod Mod4
 
 hide_edge_borders smart
-default_border pixel 1
+default_border normal
 default_floating_border pixel 1
  
-font pango:Berkeley Mono 10
+font pango:Berkeley Mono 7 
 floating_modifier $mod
 
 # workspace_layout tabbed
@@ -110,10 +110,9 @@ bindsym $mod+grave layout tabbed
 bindsym $mod+Shift+grave layout default
 
 bar {
-    workspace_min_width 20
+    workspace_min_width 10
     position bottom
-    font pango: Berkeley Mono 10
-    status_command $HOME/bin/i3status.sh
+    font pango: Berkeley Mono 7 
     status_command i3status
     tray_output none
 }
