@@ -20,7 +20,7 @@
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
   ("h" (lambda () (interactive) (find-file "~")) :exit t)
   ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t)
-  ("m" (lambda () (interactive) (find-file "~/ledger/les-multisig")) :exit t)
+  ("m" (lambda () (interactive) (find-file "~/ledger/les-multisig/packages/web")) :exit t)
   ("p" (lambda () (interactive) (find-file "~/riverodds")) :exit t)
   ("r" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
   ("s" (lambda () (interactive) (find-file "~/screenshots")) :exit t)
