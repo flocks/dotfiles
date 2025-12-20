@@ -1,27 +1,3 @@
-(use-package mastodon
-  :straight t
-  :config
-  (setq mastodon-instance-url "https://social.linux.pizza")
-  (setq mastodon-active-user "flocks@social.linux.pizza")
-
-  (defun ft-mastodon-dwim ()
-	(interactive)
-	(call-interactively #'mastodon-tl--thread))
-
-  (evil-define-key 'normal mastodon-mode-map (kbd "o") 'ft-mastodon-dwim)
-  (evil-define-key 'normal mastodon-mode-map (kbd "u") 'mastodon-url-lookup)
-  (evil-define-key 'normal mastodon-mode-map (kbd "C-c f") 'mastodon-tl--follow-user)
-  (evil-define-key 'normal mastodon-mode-map (kbd "C-c r") 'mastodon-toot--reply)
-  (evil-define-key 'normal mastodon-mode-map (kbd "C-c h") 'mastodon-tl--get-home-timeline)
-
-  (defun ft-mastodon ()
-	(interactive)
-	(mastodon)
-	(mastodon-tl--get-home-timeline))
-
-  (global-set-key (kbd "C-c M") 'ft-mastodon))
-
-
 (setq erc-join-buffer 'window-noselect)
 (setq erc-track-switch-direction 'importance)
 (setq erc-send-whitespace-lines t)
@@ -35,7 +11,7 @@
 						  (auth-source-search :host "irc.libera.chat"
 											  :user "flocks"))
 					 :secret))))
-	(erc-tls :server "134.122.90.60" :port "5000" :nick "flocks" :password password)))
+	(erc-tls :server "irc.libera.chat" :nick "flocks" :password password)))
 
 (use-package elpher
   :straight t
@@ -89,4 +65,6 @@
 	(kill-new url)
 	(message "%s" url)))
 
+
 (provide 'ft-social)
+
