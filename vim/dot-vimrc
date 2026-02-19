@@ -137,26 +137,11 @@ autocmd FileType go setlocal noexpandtab
 autocmd FileType python setlocal tabstop=2
 
 
-" still need some plugins
-" this needs plug.vim in ~/.vim/autoload folder
-if has('packages') && !has('nvim')
-    call plug#begin('~/.vim/plugged')
-      Plug 'tpope/vim-surround'
-      Plug 'tpope/vim-commentary'
-      Plug 'tpope/vim-rsi'
-      Plug 'tpope/vim-eunuch'
-      Plug 'jiangmiao/auto-pairs'
-      Plug 'vim-utils/vim-man'
-      Plug 'arcticicestudio/nord-vim'
-      Plug 'edkolev/vim-amake'
-    call plug#end()
+" Remove GUI elements in gvim
+set guioptions-=m  " no menu bar
+set guioptions-=T  " no toolbar
+set guioptions-=L  " no left scrollbar
+set guioptions-=R  " no right scrollbar
+set guioptions-=b  " no bottom scrollbar
+set guifont=Iosevka\ Comfy
 
-    colorscheme oblivion
-    " useless for me and they (M-n/M-p) conflicts with my qf bindings
-    let g:AutoPairsShortcutToggle = ''
-    let g:AutoPairsShortcutJump = ''
-
-    " vim C doesn't know compound litterals from C99
-    let c_no_curly_error = 1
-
-endif
