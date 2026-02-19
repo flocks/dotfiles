@@ -114,5 +114,5 @@ bar {
     position bottom
     font pango: Berkeley Mono 7 
     status_command i3status
-    tray_output none
+    # tray_output none
 }
