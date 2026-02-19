@@ -49,6 +49,7 @@ alias rru="cd ~/ledger/revault/packages/ui"
 alias rra="cd ~/ledger/revault/packages/api"
 alias sig="cd ~/ledger/les-multisig"
 alias ssw="cd ~/ledger/les-multisig/packages/web"
+alias argo="cd ~/ledger/sre-argocd/"
 alias ssa="cd ~/ledger/les-multisig/packages/api"
 alias vid="cd ~/Videos"
 
@@ -64,6 +65,7 @@ alias amendd="git commit --amend --no-edit"
 alias g="nvim '+Git|only'"
 alias bb='git branch | fzf | xargs git checkout'
 alias gfiles="git show --pretty=format: --name-only"
+alias gitp="git push"
 
 # programs
 alias rgn="rg --vimgrep"
@@ -92,6 +94,9 @@ alias i="instances"
 
 
 # utils
+alias k="kubectl"
+alias kn="kubens"
+alias kc="kubectx"
 alias lint="pnpm lint --format $HOME/.config/yarn/global/node_modules/eslint-formatter-unix/index.js"
 alias tscheck="pnpm typecheck;  pnpm lint --format $HOME/.config/yarn/global/node_modules/eslint-formatter-unix/index.js"
 alias make="make 2>&1"
