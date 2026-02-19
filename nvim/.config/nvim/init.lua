@@ -1,6 +1,4 @@
 vim.cmd('source ~/.vimrc')
-
-
 -- automatically install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -27,27 +25,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist)
 
 vim.keymap.set('v', "<C-y>", "\"+y")                               -- yank in systemclipboard
 vim.keymap.set('n', "<C-;>", ":Buffers<CR>")                       -- yank in systemclipboard
--- vim.keymap.set('n', "<C-c><C-f>", ":Prettier<CR>") -- reformat
--- vim.keymap.set('n', "<C-c><C-f>", ":lua vim.lsp.buf.format()<CR>") -- reformat
-vim.keymap.set('n', "<C-c><C-f>", function()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-  local biome_client = vim.tbl_filter(function(c) return c.name == "biome" end, clients)[1]
 
-  vim.lsp.buf.format({
-    filter = function(c)
-      if biome_client then
-        return c.id == biome_client.id
-      end
-      return true -- fallback: allow any client
-    end,
-    async = true,
-  })
-end, { noremap = true, silent = true })
+vim.keymap.set("n", "<C-c>f", vim.lsp.buf.format, { noremap = true, silent = true })
+
 vim.keymap.set('n', "<C-c><C-r>", ":%s/<C-r><C-w>/")               -- s/foo/bar current word
-
-
-vim.keymap.set('n', "<C-c>c", ":RunAsync<Space>")
-vim.keymap.set('n', "<C-c><C-c>", ":ReRunAsync<CR>")
 
 
 -- add some roundness to neovim popup
@@ -72,107 +53,151 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- LSP attach handler
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-end
-
--- PLUGINS
--- =======
-
-local lsp_servers = {
-  'ts_ls',
-  'tailwindcss',
-  'lua'
-}
-
+-- ================================
+-- Lazy.nvim plugin setup
+-- ================================
 require("lazy").setup({
+
+  -- ================================
+  -- LSP Config
+  -- ================================
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    "neovim/nvim-lspconfig",
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
+      local on_attach = function(_, bufnr)
+        local opts = { noremap=true, silent=true, buffer=bufnr }
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+      end
+
+      vim.lsp.config("tsgo", {
+        on_attach = on_attach,
+        settings = {
+          preferences = {
+            importModuleSpecifierPreference = 'non-relative'
+          }
+        }
+      })
+      vim.lsp.enable("tsgo")
+
+      vim.lsp.config("biome", {
+        on_attach = on_attach,
+      })
+      vim.lsp.enable("biome")
+    end,
+
+    
+    vim.diagnostic.config {
+      severity_sort = true,
+      float = {
+        border = 'rounded',
+        source = 'if_many',
+        header = '',
+      },
+      underline = {
+        severity = vim.diagnostic.severity.ERROR,
+      },
+      signs = vim.g.have_nerd_font and {
+        text = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.INFO] = '',
+          [vim.diagnostic.severity.HINT] = '',
+        },
+      } or {},
+      virtual_text = {
+        source = 'if_many',
+        spacing = 2,
+        format = function(diagnostic)
+          local diagnostic_message = {
+            [vim.diagnostic.severity.ERROR] = diagnostic.message,
+            [vim.diagnostic.severity.WARN] = diagnostic.message,
+            [vim.diagnostic.severity.INFO] = diagnostic.message,
+            [vim.diagnostic.severity.HINT] = diagnostic.message,
+          }
+          return diagnostic_message[diagnostic.severity]
+        end,
+      },
+    }
+  },
+
+  -- ================================
+  -- Autocompletion
+  -- ================================
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+    },
+    config = function()
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      require("luasnip.loaders.from_snipmate").load()
+
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ['<C-M-i>'] = cmp.mapping.complete(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+        }),
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "path" },
+          { name = "luasnip" },
+        }),
+      })
+    end,
+  },
+
+  -- ================================
+  -- Mason for LSP installation
+  -- ================================
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "tailwindcss", "tsgo", "biome" },
       })
     end
   },
-  { "skywind3000/asyncrun.vim" },
-  { "prettier/vim-prettier" },
-  { "tpope/vim-eunuch" },
-  {
-    "gbprod/nord.nvim",
-    config = function()
-      vim.cmd("colorscheme nord")
-    end
-  },
-  {"morhetz/gruvbox",
-    config = function()
-      -- vim.cmd("colorscheme gruvbox")
-    end
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      options = {
-        icons_enabled = true,
-        theme = 'nord',
-        component_separators = '',
-        section_separators = { left = '', right = '' },
-      },
-      sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'diagnostics' },
-        lualine_c = {
-          { 'filename', path = 1 },
-        },
-        lualine_x = {},
-        lualine_y = { 'branch' },
-        lualine_z = { 'location' }
-      },
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          { 'filename', path = 1 },
-        },
-        lualine_x = { 'location' },
-        lualine_y = {},
-        lualine_z = {}
-      },
-    },
-  },
-  { "tpope/vim-rsi" },
-  { "tpope/vim-repeat" },
-  { "tpope/vim-commentary" },
-  {
-    "ruifm/gitlinker.nvim",
-    config = function()
-      require("gitlinker").setup()
-    end
-  },
-  { "tpope/vim-fugitive" },
-  { "itchyny/vim-qfedit" },
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({ map_cr = true })
-    end
-  },
-  { "nvim-lua/plenary.nvim",                   build = 'make' },
+
+
+  { "nvim-lua/plenary.nvim", build = 'make' },
   { "nvim-telescope/telescope-fzf-native.nvim" },
+  --
+  -- ================================
+  -- Telescope
+  -- ================================
   {
     "nvim-telescope/telescope.nvim",
     config = function()
@@ -216,7 +241,6 @@ require("lazy").setup({
       )
 
       vim.api.nvim_set_keymap('n', '<C-c>p', ':FindCurrentDir<CR>', { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<C-c>f', ':Telescope diagnostics<CR>', { noremap = true, silent = true })
       vim.keymap.set('n', '<C-p>', ts_builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<C-;>', ts_builtin.buffers)
       vim.keymap.set('n', '<C-b>', ts_builtin.buffers)
@@ -225,169 +249,49 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>sd', ts_builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     end,
   },
-  -- LSP
-  { "williamboman/mason.nvim" },
+
+  --
+  -- ================================
+  -- Tim Pope sections :)
+  -- ================================
+  { "tpope/vim-eunuch" },
+  { "tpope/vim-rsi" },
+  { "tpope/vim-repeat" },
+  { "tpope/vim-commentary" },
+  { "tpope/vim-fugitive" },
+  --
+  -- ================================
+  -- misc
+  -- ================================
+  { "itchyny/vim-qfedit" }, -- edit quickfix list
   {
-    "williamboman/mason-lspconfig.nvim",
+    "ruifm/gitlinker.nvim",
     config = function()
-      require('mason').setup()
-      require('mason-lspconfig').setup({
-        ensure_installed = lsp_servers
-      })
+      require("gitlinker").setup()
     end
   },
   {
-    "neovim/nvim-lspconfig",
-    dependencies = { { 'j-hui/fidget.nvim', opts = {} } },
+    "windwp/nvim-autopairs",
     config = function()
-      -- local util = require('lspconfig.util')
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
-      vim.lsp.enable("ts_ls")
-      vim.lsp.config("ts_ls", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-        settings = {
-          typescript = {
-            preferences = {
-              importModuleSpecifier = "non-relative",
-            }
-          }
-        }
-      })
-
-      vim.lsp.enable("tailwindcss")
-      vim.lsp.config("tailwindcss", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          tailwindCSS = {
-            experimental = {
-              classRegex = {
-                { "cva\\(((?:[^()]|\\([^()]*\\))*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-                { "cn\\(((?:[^()]|\\([^()]*\\))*)\\)",  "(?:'|\"|`)([^']*)(?:'|\"|`)" }
-              },
-            },
-          },
-        }
-      })
-
-      vim.lsp.config("lua_ls", {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file("", true),
-              checkThirdParty = false,
-            },
-          },
-        },
-      })
+      require("nvim-autopairs").setup({ map_cr = true })
     end
   },
-  -- copilot
+
+  -- ================================
+  -- Theme
+  -- ================================
   {
-    'github/copilot.vim',
+    "gbprod/nord.nvim",
     config = function()
-      vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
-        expr = true,
-        replace_keycodes = false,
-      })
-      vim.g.copilot_no_tab_map = true
 
-      vim.cmd("Copilot disable")
+      vim.cmd("colorscheme nord")
+      -- darker background
+      local darkerBg = "#181818" 
+      vim.api.nvim_set_hl(0, "Normal", { bg = darkerBg })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = darkerBg })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = darkerBg })
+      vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = darkerBg })
     end
-  },
-  -- completion
-  { "hrsh7th/cmp-nvim-lsp" },
-  {
-    "L3MON4D3/LuaSnip",
-    config = function()
-      require("luasnip.loaders.from_snipmate").load()
-    end
-  },
-  { "saadparwaiz1/cmp_luasnip" },
-  { "hrsh7th/cmp-buffer" },
-  {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      local cmp = require('cmp')
-      local luasnip = require('luasnip')
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert {
-          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-M-i>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-        },
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' }
-        },
-        fallback = {
-          enable = true,
-          source = 'vim',
-          -- You can specify additional sources here if desired.
-        },
-      })
-    end
-  },
-}, opts)
+  }
 
-
-
--- run :AsyncRun and store command in cache
-function RunAsyncCommand(cmd)
-  _G.last_async_command = cmd
-  vim.cmd("AsyncRun " .. cmd)
-end
-
--- re-run last :AsyncRun command
-function ReRunAsync()
-  if _G.last_async_command ~= "" then
-    vim.cmd("AsyncRun " .. _G.last_async_command)
-  else
-    print("No command to re-run")
-  end
-end
-
-vim.api.nvim_create_user_command("RunAsync", function(args)
-  RunAsyncCommand(args.args)
-end, { nargs = 1 })
-
-vim.api.nvim_create_user_command("ReRunAsync", function()
-  ReRunAsync()
-end, {})
+})
