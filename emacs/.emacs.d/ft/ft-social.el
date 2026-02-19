@@ -5,13 +5,16 @@
 
 (defun ft-irc ()
   (interactive)
-  (let ((password
-		 (funcall
-		  (plist-get (nth 0
-						  (auth-source-search :host "irc.libera.chat"
-											  :user "flocks"))
-					 :secret))))
-	(erc-tls :server "irc.libera.chat" :nick "flocks" :password password)))
+  (erc-tls :server "irc.libera.chat" :nick "flocks")
+  (erc-tls :server "irc.dgtlgrove.com" :nick "flocks"))
+
+(defun ft/erc-after-connect (server nick)
+  "Run command after erc conncetion"
+  (let (password (funcall (plist-get (nth 0 (auth-source-search :host "irc.libera.chat" :user "flocks")) :secret)))
+	(erc-message "PRIVMSG" (format "NickServ IDENTIFY %s" password))))
+
+(add-hook 'erc-after-connect #'ft/erc-after-connect)
+
 
 (use-package elpher
   :straight t
