@@ -52,6 +52,7 @@ alias ssw="cd ~/ledger/les-multisig/packages/web"
 alias argo="cd ~/ledger/sre-argocd/"
 alias ssa="cd ~/ledger/les-multisig/packages/api"
 alias vid="cd ~/Videos"
+alias p="cd ~/projects"
 
 
 # git stuff
