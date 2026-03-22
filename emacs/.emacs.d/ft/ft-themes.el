@@ -3,13 +3,11 @@
 (scroll-bar-mode -1)
 (set-default 'truncate-lines t)
 
-(setq
- visible-bell nil
- ring-bell-function #'ignore)
+(setq visible-bell nil ring-bell-function #'ignore)
 
 ; default font
 (set-face-attribute 'default nil
-		    :family "Berkeley Mono"
+		    :family "Iosevka"
 		    :width 'normal
 		    :height 120)
 
@@ -59,7 +57,7 @@
 		  (chill
 		   :default-height 200)
 		  (t ; our shared fallback properties
-		   :default-family "Berkeley Mono"
+		   :default-family "Iosevka"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)

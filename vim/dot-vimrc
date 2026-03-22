@@ -136,12 +136,11 @@ nnoremap <C-p> :FZF<CR>
 autocmd FileType go setlocal noexpandtab
 autocmd FileType python setlocal tabstop=2
 
-
 " Remove GUI elements in gvim
 set guioptions-=m  " no menu bar
 set guioptions-=T  " no toolbar
 set guioptions-=L  " no left scrollbar
 set guioptions-=R  " no right scrollbar
 set guioptions-=b  " no bottom scrollbar
-set guifont=Iosevka\ Comfy
+set guifont=Iosevka
 
