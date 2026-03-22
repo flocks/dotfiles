@@ -1,13 +1,13 @@
 (let ((regex-alist
 	   '(
-		 ("ts-build". "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
-		 ("vitest" . "^ ❯ \s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
-		 ("turbo" ."\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
-		 ("cc" . "^\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
-		 ("flowtype" . "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
-		 ("prettier" . "\\[error] \\(.*\\): SyntaxError: Unexpected token (\\([0-9]+\\):\\([0-9]+\\)")
-		 ("typecheck" . "^\s?+\\(src.*\\):\\([0-9]+\\):\\([0-9]+\\)" )
-		 ("haskell" . "\\([a-zA-Z]+.hs\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("ts-build". "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("vitest" . "^ ❯ \s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("turbo" ."\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("cc" . "^\\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("flowtype" . "- \\([^\s]+\\):\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("prettier" . "\\[error] \\(.*\\): SyntaxError: Unexpected token (\\([0-9]+\\):\\([0-9]+\\)")
+		 ;; ("typecheck" . "^\s?+\\(src.*\\):\\([0-9]+\\):\\([0-9]+\\)" )
+		 ;; ("haskell" . "\\([a-zA-Z]+.hs\\):\\([0-9]+\\):\\([0-9]+\\)")
 		 )))
   (dolist (regex regex-alist)
 	(add-to-list 'compilation-error-regexp-alist (intern (car regex)))
@@ -59,37 +59,10 @@
 (defun ft-get-git-root ()
   (locate-dominating-file (or (buffer-file-name) default-directory) ".git"))
 
-
-
 ;; make emacs consider project with package.json as full project
 ;; useful for monorepo!
 (setq project-vc-extra-root-markers '("package.json"))
 
-
-(defun ft/project-custom-ci ()
-  (interactive)
-  (let ((current (file-name-nondirectory (directory-file-name (ft-get-git-root))))
-		(projects '(("ledger-vault-front" .
-					 "yarn lint --format unix && yarn prettier:check --loglevel silent && yarn flow && yarn typecheck && yarn spellcheck")
-					("turboph" .
-					 "stack build")
-					("hchess" .
-					 "cabal build")
-					("gof" .
-					 "go test")
-					("concage" .
-					 "go run main.go")
-					("vault-ts" .
-					 "pnpm run ci")
-					("vault-remote" .
-					 "yarn lint && yarn prettier:check --loglevel silent && yarn typecheck && yarn validate-hooks && yarn test --coverage --coverageThreshold '{ \"global\": { \"branches\": 100, \"functions\": 100, \"lines\": 100, \"statements\": 100 } }'"))))
-	(if-let* ((project (assoc current projects)))
-		(let ((compilation-read-command nil)
-			  (compile-command (cdr project)))
-		  (call-interactively #'project-compile))
-	  (call-interactively #'project-compile))))
-
-(global-set-key (kbd "M-*") 'ft/project-custom-ci)
 
 (global-set-key (kbd "M-!") 'async-shell-command)
 ;; (define-key dired-mode-map (kbd "M-!") 'async-shell-command)
