@@ -1,4 +1,6 @@
 ANDROID_HOME=$HOME/Android/Sdk
+PNPM_HOME="/home/flocks/.local/share/pnpm"
+
 
 PNPM_HOME=$HOME/.local/share/pnpm
 PATH=$PATH:$HOME/bin
