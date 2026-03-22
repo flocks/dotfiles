@@ -33,7 +33,7 @@
   ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t)
   ("m" hydra-jump-m/body "multisig" :exit t)
   ("r" hydra-jump-r/body "rev" :exit t)
-  ("p" (lambda () (interactive) (find-file "~/riverodds")) :exit t)
+  ("p" (lambda () (interactive) (find-file "~/projects")) :exit t)
   ("R" (lambda () (interactive) (find-file "~/ledger/vault-remote")) :exit t)
   ("s" (lambda () (interactive) (find-file "~/screenshots")) :exit t)
   ("v" (lambda () (interactive) (find-file "~/ledger/vault-ts")) :exit t)
@@ -51,12 +51,6 @@
   (find-file (read-file-name "Config file: " "~/.emacs.d/ft/")))
 
 (global-set-key (kbd "C-c U") 'project-dired)
-
-;; (use-package dumb-jump
-;;   :straight t
-;;   :config
-;;   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
-;;   (setq dumb-jump-selector 'ivy))
 
 ;; open directly elisp manual
 (global-set-key (kbd "C-h l") (lambda ()
