@@ -87,4 +87,10 @@
   :config
   (notmuch-bookmarks-mode))
 
+(defun ft-fetch-mail ()
+  (interactive)
+  (async-shell-command "mbsync -a && notmuch new"))
+
+(evil-define-key 'normal notmuch-search-mode-map (kbd "R") 'ft-fetch-mail)
+
 (provide 'ft-mail)
