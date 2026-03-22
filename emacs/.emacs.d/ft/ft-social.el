@@ -46,7 +46,7 @@
   (interactive "r")
   (when (not (use-region-p))
 	(user-error "No region selected"))
-  (let* ((hostname "https://envs.sh")
+  (let* ((hostname "https://0x0.st")
 		 (text (buffer-substring-no-properties begin end))
 		 (file-text (make-temp-file "" nil ".txt" text))
 		 (upload-command (format "curl -s -F 'file=@%s' %s" file-text hostname))
