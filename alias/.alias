@@ -95,6 +95,7 @@ alias i="instances"
 
 
 # utils
+alias sm="mbsync -a && notmuch new"
 alias k="kubectl"
 alias kn="kubens"
 alias kc="kubectx"
