@@ -39,13 +39,13 @@
 (use-package magit-scripts
   :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
 
-;; (use-package typescript-mode
-;;   :straight t
-;;   :config
-;;   (define-derived-mode typescript-react-mode typescript-mode
-;;     "Typescript JSX")
-;;   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-react-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
+(use-package typescript-mode
+  :straight t
+  :config
+  (define-derived-mode typescript-react-mode typescript-mode
+    "Typescript JSX")
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-react-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
 (use-package flymake-eslint
   :straight t
