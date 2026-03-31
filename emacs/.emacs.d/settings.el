@@ -75,10 +75,6 @@
 
 ;; (setq epa-pinentry-mode 'loopback)
 
-
-(require 'treesit)
-(setq treesit-extra-load-path '("~/tree-sitter-module/dist"))
-
 (use-package ivy-xref
   :straight t
   :config
