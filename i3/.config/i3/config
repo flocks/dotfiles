@@ -4,6 +4,7 @@ for_window [title="mpv"] resize set height 600
 for_window [title="mpv"] move position center center
 for_window [class="ksnip"] floating enable, fullscreen enable
 for_window [class="feh"] floating enable
+for_window [class="zenity"] floating enable
 
 for_window [class="SimpleScreenRecorder"] floating enable
 
