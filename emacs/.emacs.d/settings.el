@@ -103,6 +103,10 @@
 ;; auto insert closing parenthesis/bracket/quote..etc..
 (electric-pair-mode 1)
 
+
+;; this put clipboard into kill ring
+(setq save-interprogram-paste-before-kill t)
+
 (use-package corfu
   :straight t
   :custom
