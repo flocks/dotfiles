@@ -10,8 +10,8 @@ ffcast -s ffmpeg -f x11grab -framerate 60 -show_region 1 -s %s -i %D+%c -c:v lib
 
 notify-send "MP4 RECORDED" "encoding as gif now..."
 output=$(echo "filename.gif" | dmenu -p "FILENAME" -i)
-gifgen -o "$HOME/$output" "$fileName"
-notify-send "GIF READY" "Gif file is ready at $HOME/$output"
+gifgen -o "$HOME/gifs/$output" "$fileName"
+notify-send "GIF READY" "Gif file is ready at $HOME/gifs/$output"
 
 echo "$fileName"
 
