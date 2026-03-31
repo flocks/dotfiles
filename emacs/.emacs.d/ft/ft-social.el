@@ -8,12 +8,18 @@
   (erc-tls :server "irc.libera.chat" :nick "flocks")
   (erc-tls :server "irc.dgtlgrove.com" :nick "flocks"))
 
+(setq erc-autojoin-channels-alist
+      '(("Libera.chat" "#emacs" "#linux" "#brillance")
+        ("irc.dgtlgrove.com" "#public")))
+
 (defun ft/erc-after-connect (server nick)
   "Run command after erc conncetion"
-  (let (password (funcall (plist-get (nth 0 (auth-source-search :host "irc.libera.chat" :user "flocks")) :secret)))
+  (let ((password (funcall (plist-get (nth 0 (auth-source-search :host "irc.libera.chat" :user "flocks")) :secret))))
 	(erc-message "PRIVMSG" (format "NickServ IDENTIFY %s" password))))
 
 (add-hook 'erc-after-connect #'ft/erc-after-connect)
+;; (add-hook 'erc-after-connect 'erc-autojoin-channels)
+
 
 
 (use-package elpher
