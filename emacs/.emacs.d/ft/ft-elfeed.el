@@ -63,10 +63,5 @@
 
   (load-file "~/dotfiles/emacs/.emacs.d/feeds.el.gpg"))
 
-(use-package elfeed-notifier
-  :straight (elfeed-notifier :type git :host github :repo "flocks/elfeed-notifier")
-  :config
-  (elfeed-notifier-mode))
-
 
 (provide 'ft-elfeed)
