@@ -9,6 +9,12 @@
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
+(add-hook 'c-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 4)
+            (setq c-basic-offset 4)))
+
 (use-package eglot-booster
   :after eglot
   :config	(eglot-booster-mode))
@@ -177,6 +183,12 @@
   :straight t)
 
 (setq gdb-many-windows t)
+
+(use-package markdown-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
 
 (use-package rfc-mode
   :straight t)
