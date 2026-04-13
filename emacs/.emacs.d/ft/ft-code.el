@@ -193,4 +193,6 @@
 (use-package rfc-mode
   :straight t)
 
+; use // for comment in C
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 (provide 'ft-code)
