@@ -40,6 +40,13 @@
 	  (kill-new web-url)
 	  (message "%s" web-url))))
 
+(use-package emms
+  :straight t
+  :config
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "~/music/"))
+
 (use-package bongo
   :straight t
   :config
