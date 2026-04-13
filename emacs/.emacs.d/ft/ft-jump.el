@@ -29,6 +29,7 @@
   ("e" (lambda () (interactive) (find-file "~/ledger/vault-e2e-tests")) :exit t)
   ("f" (lambda () (interactive) (find-file "~/ledger/ledger-vault-front")) :exit t)
   ("g" (lambda () (interactive) (find-file "~/ledger/ledger-vault-api")) :exit t)
+  ("G" (lambda () (interactive) (find-file "~/gifs")) :exit t)
   ("h" (lambda () (interactive) (find-file "~")) :exit t)
   ("l" (lambda () (interactive) (find-file "~/ledger")) :exit t)
   ("m" hydra-jump-m/body "multisig" :exit t)
