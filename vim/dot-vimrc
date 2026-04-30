@@ -144,3 +144,5 @@ set guioptions-=R  " no right scrollbar
 set guioptions-=b  " no bottom scrollbar
 set guifont=Iosevka
 
+runtime! ftplugin/man.vim
+
