@@ -157,5 +157,6 @@ if !has("nvim") && filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'tpope/vim-fugitive'
 
   Plug 'itchyny/vim-qfedit'
+  Plug 'machakann/vim-swap'
   call plug#end()
 endif

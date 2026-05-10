@@ -271,6 +271,7 @@ require("lazy").setup({
       require("gitlinker").setup()
     end
   },
+  {"machakann/vim-swap"},
   {
     "windwp/nvim-autopairs",
     config = function()
