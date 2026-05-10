@@ -76,14 +76,6 @@ nnoremap Q :qa!<CR>         " Move to top window
 nnoremap <leader>b :ls<CR>:b
 nnoremap <C-;> :ls<CR>:b
 
-" Auto pair
-inoremap ( ()<Left>
-inoremap { {}<Left>
-inoremap [ []<Left>
-inoremap ' ''<Left>
-inoremap " ""<Left>
-
-
 " better make: no screen flickering and open quickfix if error and jump to
 " first error
 " same for grep
@@ -150,3 +142,20 @@ set guifont=Iosevka
 
 runtime! ftplugin/man.vim
 
+if !has("nvim") && filereadable(expand('~/.vim/autoload/plug.vim'))
+  call plug#begin()
+  Plug 'junegunn/vim-easy-align'
+  xmap ga <Plug>(EasyAlign)
+  Plug 'jiangmiao/auto-pairs'
+
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-rsi'
+  Plug 'tpope/vim-fugitive'
+
+  Plug 'itchyny/vim-qfedit'
+  call plug#end()
+endif
