@@ -255,6 +255,7 @@ require("lazy").setup({
   -- Tim Pope sections :)
   -- ================================
   { "tpope/vim-eunuch" },
+  { "tpope/vim-surround" },
   { "tpope/vim-rsi" },
   { "tpope/vim-repeat" },
   { "tpope/vim-commentary" },
