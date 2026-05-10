@@ -11,7 +11,6 @@ set autoindent
 set encoding=utf-8
 set expandtab
 set hidden
-set nohlsearch
 set incsearch
 set laststatus=2
 set list
@@ -42,6 +41,9 @@ colorscheme lunaperche
 filetype plugin indent on
 syntax on
 set termguicolors
+
+
+nnoremap <silent> <leader>h :nohlsearch<CR>
 
 " registers to clipboard
 nnoremap <leader>Y :let @+ = @%<CR>
