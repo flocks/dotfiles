@@ -40,6 +40,9 @@
 	  (kill-new web-url)
 	  (message "%s" web-url))))
 
+(use-package mpdel
+  :straight t)
+
 (use-package emms
   :straight t
   :config
