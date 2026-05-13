@@ -83,7 +83,17 @@ command! -nargs=* Make silent make | cwindow | cfirst | redraw!
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case  " Use rg for :grep/lgrep
 command! -nargs=* Grep silent grep <args> | cwindow | cfirst | redraw!
 
-nnoremap <C-c><C-c> :Make -B<CR>
+function! FirstError()
+  for i in range(1, len(getqflist()))
+    let item = getqflist()[i - 1]
+    if item.text =~? 'error' || item.text =~? 'warning'
+      execute 'cc ' . i
+      return
+    endif
+  endfor
+  echo "No error found"
+endfunction
+nnoremap <C-c><C-c> :Make -B<CR>:call FirstError()<CR>
 
 " allow to read local .vimrc per project
 set exrc          " allow reading .vimrc or .exrc in current directory
@@ -158,5 +168,6 @@ if !has("nvim") && filereadable(expand('~/.vim/autoload/plug.vim'))
 
   Plug 'itchyny/vim-qfedit'
   Plug 'machakann/vim-swap'
+
   call plug#end()
 endif
