@@ -20,8 +20,8 @@ super + shift + c
 super + bracketleft
       $TERMINAL -e k9s
 
-# super + shift + p
-#    $TERMINAL -e ncmpcpp
+super + control + p
+   $TERMINAL -e ncmpcpp
 
 # dmenu for chosing a blockchain address
 super + control + a
