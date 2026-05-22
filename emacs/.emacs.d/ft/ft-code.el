@@ -12,8 +12,8 @@
 (add-hook 'c-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq tab-width 4)
-            (setq c-basic-offset 4)))
+            (setq tab-width 2)
+            (setq c-basic-offset 2)))
 
 (use-package eglot-booster
   :after eglot
