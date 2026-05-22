@@ -175,6 +175,6 @@ endif
 
 nnoremap <C-c><C-t> :term ++hidden ctags -R .<CR>
 " per project configuration (with local .vimrc)
-nnoremap <C-c><C-s> :source .vimrc <CR>
+nnoremap <C-c><C-s> :source .vimrc <CR> :source ~/.vimrc <CR>
 nnoremap <C-c><C-r> :execute 'term ' . g:project_name_exe<CR>
 nnoremap <C-c><C-d> :execute 'term ++hidden gf2 ' . g:project_name_exe<CR>
