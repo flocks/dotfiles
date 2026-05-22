@@ -8,6 +8,7 @@ for_window [class="zenity"] floating enable
 for_window [class="pavucontrol"] floating enable
 for_window [title="ncmpcpp"] floating enable
 for_window [class="SimpleScreenRecorder"] floating enable
+for_window [title="gf2"] floating enable
 
 set $mod Mod4
 
