@@ -67,6 +67,39 @@
 
 (add-hook 'minibuffer-setup-hook 'my-dabbrev-minibuffer-setup)
 
+
+(defcustom project-exe-name nil
+  "Executable name for the current project."
+  :type '(choice string (const nil)))
+
+(defcustom makeprg nil
+  "Command to compile current project."
+  :type '(choice string (const nil)))
+
+(global-set-key (kbd "C-c C-r")
+				(lambda () (interactive)
+				  (message "%s" project-exe-name)))
+
+(global-set-key (kbd "C-c C-c")
+				(lambda () (interactive)
+				  (let ((compile-command (format "hey: %s" makeprg)))
+					(call-interactively 'project-compile))))
+
+
+(define-key c-mode-map (kbd "C-c C-r") (lambda () (interactive) (async-shell-command (format "%s" project-exe-name))))
+(define-key c-mode-map (kbd "C-c C-d") (lambda () (interactive) (async-shell-command (format "gf2 %s" project-exe-name))))
+(define-key c-mode-map (kbd "C-c C-c") (lambda () (interactive)
+										 (let ((compile-command makeprg)
+											   (compilation-read-command nil))
+										   (call-interactively 'project-compile))))
+
+
+(defun ft-reload-dir-locals ()
+  (interactive)
+  (dolist (buffer (project-buffers (project-current)))
+	(with-current-buffer buffer
+	  (normal-mode))))
+
 (defun ft-lorem ()
   (interactive)
   (insert "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"))
