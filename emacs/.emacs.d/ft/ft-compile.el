@@ -73,31 +73,36 @@
     (call-interactively 'compile)))
 (global-set-key (kbd "C-c c") 'my-compile)
 
-(defun ft-compile-wrapper ()
+(defcustom project-exe-name "main"
+  "Executable name for the current project."
+  :type '(choice string (const nil)))
+
+(defcustom makeprg "make"
+  "Command to compile current project."
+  :type '(choice string (const nil)))
+
+(defun ft-run-project-exe ()
   (interactive)
-  (if (project-current)
-	  (call-interactively 'project-compile)
-	(call-interactively 'compile)))
+  (async-shell-command (format "%s" project-exe-name)))
 
-(global-set-key (kbd "C-x p c") 'ft-compile-wrapper)
+(defun ft-debug-project-exe (begin end)
+  (interactive "r")
+  (let ((fun (buffer-substring-no-properties begin end)))
+	(if (string-equal fun "")
+		(async-shell-command (format "gf2 %s" project-exe-name))
+	  (async-shell-command (format "gf2 %s -ex 'b %s' -ex 'info break' -ex 'c'" project-exe-name fun)))
+	
+	;; (message "%s" fun)
+	))
 
-
-(defun ft-get-visible-compilation-buffer ()
-  "Return the visible buffer in `compilation-mode` if any."
-  (cl-find-if
-   (lambda (win)
-     (with-current-buffer (window-buffer win)
-       (derived-mode-p 'compilation-mode)))
-   (window-list)))
-
-(defun ft-recompile ()
-  "Emacs default of recompiling is weird, it always takes first command
-even if we changed it in between"
+(defun ft-compile-project ()
   (interactive)
-  (when-let* ((win (ft-get-visible-compilation-buffer)))
-	(with-current-buffer (window-buffer win)
-	  (recompile))))
+  (let ((compile-command makeprg)
+		(compilation-read-command nil))
+	(call-interactively 'project-compile)))
 
-(global-set-key (kbd "C-c C") 'ft-recompile)
+(define-key c-mode-map (kbd "C-c C-r") #'ft-run-project-exe)
+(define-key c-mode-map (kbd "C-c C-d") #'ft-debug-project-exe)
+(define-key c-mode-map (kbd "C-c C-c") #'ft-compile-project)
 
 (provide 'ft-compile)

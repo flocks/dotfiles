@@ -67,23 +67,6 @@
 
 (add-hook 'minibuffer-setup-hook 'my-dabbrev-minibuffer-setup)
 
-
-(defcustom project-exe-name "main"
-  "Executable name for the current project."
-  :type '(choice string (const nil)))
-
-(defcustom makeprg "make"
-  "Command to compile current project."
-  :type '(choice string (const nil)))
-
-(define-key c-mode-map (kbd "C-c C-r") (lambda () (interactive) (async-shell-command (format "%s" project-exe-name))))
-(define-key c-mode-map (kbd "C-c C-d") (lambda () (interactive) (async-shell-command (format "gf2 %s" project-exe-name))))
-(define-key c-mode-map (kbd "C-c C-c") (lambda () (interactive)
-										 (let ((compile-command makeprg)
-											   (compilation-read-command nil))
-										   (call-interactively 'project-compile))))
-
-
 (defun ft-reload-dir-locals ()
   (interactive)
   (dolist (buffer (project-buffers (project-current)))
