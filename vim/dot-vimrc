@@ -181,6 +181,5 @@ nnoremap <C-c><C-r> :execute 'term ' . g:project_name_exe<CR>
 nnoremap <C-c><C-d> :execute 'term ++hidden gf2 ' . g:project_name_exe<CR>
 
 " quickly rename things
-nnoremap @ :%s/\<<C-r><C-w>\>/
-nnoremap <C-@> :s/\<<C-r><C-w>\>/ 
-vnoremap @ :<C-u>'<,'>s/\<<C-r>"\>/
+nnoremap <leader>r :%s/\<<C-r><C-w>\>/
+vnoremap <leader>r :<C-u>'<,'>s/\<<C-r>"\>/
