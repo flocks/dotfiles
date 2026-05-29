@@ -169,6 +169,7 @@ if !has("nvim") && filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'itchyny/vim-qfedit'
   Plug 'machakann/vim-swap'
 
+  Plug 'markonm/traces.vim'
   call plug#end()
 endif
 
@@ -178,3 +179,8 @@ nnoremap <C-c><C-t> :term ++hidden ctags -R .<CR>
 nnoremap <C-c><C-s> :source .vimrc <CR> :source ~/.vimrc <CR>
 nnoremap <C-c><C-r> :execute 'term ' . g:project_name_exe<CR>
 nnoremap <C-c><C-d> :execute 'term ++hidden gf2 ' . g:project_name_exe<CR>
+
+" quickly rename things
+nnoremap @ :%s/\<<C-r><C-w>\>/
+nnoremap <C-@> :s/\<<C-r><C-w>\>/ 
+vnoremap @ :<C-u>'<,'>s/\<<C-r>"\>/
