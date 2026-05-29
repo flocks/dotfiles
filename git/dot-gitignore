@@ -2,3 +2,4 @@ Session.vim
 TAGS
 tags
 .vimrc
+.dir-locals.el
