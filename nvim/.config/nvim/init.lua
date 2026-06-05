@@ -65,6 +65,11 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     config = function()
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities()
+      )
       local on_attach = function(_, bufnr)
         local opts = { noremap=true, silent=true, buffer=bufnr }
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -76,6 +81,8 @@ require("lazy").setup({
 
       vim.lsp.config("tsgo", {
         on_attach = on_attach,
+        capabilities = capabilities,
+
         settings = {
           preferences = {
             importModuleSpecifierPreference = 'non-relative'
@@ -86,9 +93,16 @@ require("lazy").setup({
 
       vim.lsp.config("biome", {
         on_attach = on_attach,
+        capabilities = capabilities
       })
       vim.lsp.enable("biome")
+      vim.lsp.config("tailwindcss", {
+        on_attach = on_attach,
+        capabilities = capabilities
+      })
+      vim.lsp.enable("tailwindcss")
     end,
+ 
 
     
     vim.diagnostic.config {
@@ -182,14 +196,6 @@ require("lazy").setup({
       require("mason").setup()
     end
   },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "tailwindcss", "tsgo", "biome" },
-      })
-    end
-  },
 
 
   { "nvim-lua/plenary.nvim", build = 'make' },
@@ -260,6 +266,7 @@ require("lazy").setup({
   { "tpope/vim-repeat" },
   { "tpope/vim-commentary" },
   { "tpope/vim-fugitive" },
+  {"machakann/vim-swap"},
   --
   -- ================================
   -- misc
@@ -277,6 +284,17 @@ require("lazy").setup({
     config = function()
       require("nvim-autopairs").setup({ map_cr = true })
     end
+  },
+
+  {
+    "junegunn/vim-easy-align",
+    keys = {
+      { "ga", mode = { "n", "x" } },
+    },
+    config = function()
+      vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
+      vim.keymap.set("x", "ga", "<Plug>(EasyAlign)")
+    end,
   },
 
   -- ================================
