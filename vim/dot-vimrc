@@ -178,9 +178,9 @@ endif
 nnoremap <C-c><C-t> :term ++hidden ctags -R .<CR>
 " per project configuration (with local .vimrc)
 nnoremap <C-c><C-s> :source .vimrc <CR> :source ~/.vimrc <CR>
-nnoremap <C-c><C-r> :execute 'term ' . g:project_name_exe<CR>
+nnoremap <C-c><C-r> :execute 'term ++hidden ' . g:project_name_exe<CR>
 nnoremap <C-c><C-d> :execute 'term ++hidden gf2 ' . g:project_name_exe<CR>
 
 " quickly rename things
-nnoremap <leader>r :%s/\<<C-r><C-w>\>/
-vnoremap <leader>r :<C-u>'<,'>s/\<<C-r>"\>/
+nnoremap <C-c>r :%s/\<<C-r><C-w>\>/
+vnoremap <C-c>r :<C-u>'<,'>s/\<<C-r>"\>/
