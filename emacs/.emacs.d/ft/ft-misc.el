@@ -78,7 +78,7 @@
   (let ((word (thing-at-point 'word t)))
 	(evil-ex (format "%%s/\\<%s\\>/" word))))
 
-(global-set-key (kbd "C-c C-r") 'ft-quick-replace)
+(global-set-key (kbd "C-c r") 'ft-quick-replace)
 
 (defun ft-lorem ()
   (interactive)
