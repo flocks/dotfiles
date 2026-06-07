@@ -87,13 +87,7 @@
 
 (defun ft-debug-project-exe (begin end)
   (interactive "r")
-  (let ((fun (buffer-substring-no-properties begin end)))
-	(if (string-equal fun "")
-		(async-shell-command (format "gf2 %s" project-exe-name))
-	  (async-shell-command (format "gf2 %s -ex 'b %s' -ex 'info break' -ex 'c'" project-exe-name fun)))
-	
-	;; (message "%s" fun)
-	))
+  (async-shell-command (format "gf2 %s" project-exe-name)))
 
 (defun ft-compile-project ()
   (interactive)
