@@ -26,6 +26,7 @@ set splitright
 set noswapfile
 set wildmenu
 set wildmode=longest,full,full
+set wildoptions=pum
 set nowrap
 set nowritebackup
 set number
