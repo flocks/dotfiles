@@ -17,8 +17,6 @@
 	(goto-char (point-min))))
 
 
-(global-set-key (kbd "C-c C-j") 'ft-json-view)
-
 (use-package jjumper
   :straight (jjumper :type git :host github :repo "flocks/jjumper")
   :after (json-ts-mode)

@@ -11,6 +11,9 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+(fido-vertical-mode 1)
+(setq max-mini-window-height 5)
+
 (indent-tabs-mode -1)
 
 ;;;; package setup
@@ -104,43 +107,26 @@
 ;; this put clipboard into kill ring
 (setq save-interprogram-paste-before-kill t)
 
-(use-package corfu
-  :straight t
-  :custom
-  (corfu-cycle t)
-  (corfu-auto t)
-  (corfu-auto-delay 0.2)
-  :init
-  (global-corfu-mode)
-  :config
-  (defun corfu-move-to-minibuffer ()
-	(interactive)
-	(let (completion-cycle-threshold completion-cycling)
-	  (apply #'consult-completion-in-region completion-in-region--data)))
-  (global-set-key (kbd "C-M-i") #'completion-at-point)
-  (define-key corfu-map (kbd "C-c C-o") #'corfu-move-to-minibuffer))
-
-(use-package which-key
-  :straight t
-  :config
-  (which-key-mode 1)
-  (setq which-key-side-window-location 'left)
-  (setq which-key-max-description-length 100))
-
 (use-package request
   :straight t)
+
+(use-package company
+  :straight t
+  :config
+  (global-company-mode)
+  (setq company-backends '((company-capf company-dabbrev-code)))
+  (global-set-key (kbd "C-M-i") 'company-complete))
 
 (require 'ft-evil)
 (require 'ft-themes)
 (require 'ft-jump)
-(require 'ft-vault)
+;; (require 'ft-vault)
 (require 'ft-system)
 (require 'ft-window)
 (require 'ft-json)
 (require 'ft-eww)
 (require 'ft-compile)
 (require 'ft-dired)
-(require 'ft-embark)
 (require 'ft-search)
 (require 'ft-shell-command)
 (require 'ft-elfeed)
@@ -150,8 +136,8 @@
 (require 'ft-misc)
 (require 'ft-mail)
 (require 'ft-social)
-(require 'ft-view-diff)
-(require 'ft-jira)
+;; (require 'ft-view-diff)
+;; (require 'ft-jira)
 
 (use-package notmuch)
 

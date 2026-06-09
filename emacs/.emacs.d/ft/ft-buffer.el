@@ -49,17 +49,4 @@
 		  (push (buffer-name item) result))))
 	result))
 
-(defvar consult--source-erc-buffers
-  `(:name     "IRC"
-    :narrow   ?i
-    :category buffer
-    :face     consult-buffer
- 	:action   ,#'consult--buffer-action
-    :state    ,#'consult--buffer-state
-    :history  buffer-name-history
-    :items ,(lambda () (ft-get-buffers-of-mode "erc-mode")))
-  "consult source for IRC buffers")
-
-(add-to-list 'consult-buffer-sources 'consult--source-erc-buffers 'append)
-
 (provide 'ft-buffer)

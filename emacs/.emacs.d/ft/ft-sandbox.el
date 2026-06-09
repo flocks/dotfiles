@@ -100,76 +100,9 @@ and move this file to this folder renamed as index.{ext}"
 	(evil-insert 0)))
 
 
-(defun ft-change-dir-shell-command ()
-  (interactive)
-  (let* ((enable-recursive-minibuffers t)
-		 (file-name (file-name-nondirectory (minibuffer-contents)))
-		 (new-dir (consult-dir--pick))
-		 (new-full-name (concat (file-name-as-directory new-dir)
-								file-name)))
-	(when new-dir
-	  (let ((default-directory new-full-name)
-			(previous-content (minibuffer-contents)))
-		(minibuffer-quit-recursive-edit)
-		(call-interactively #'shell-command)))))
-
-(define-key minibuffer-local-map (kbd "C-x C-d") 'ft-change-dir-shell-command)
 
 
 
-(defun ft-button ()
-  (interactive)
-  (let ((changes '(("variant=\"primary\"". "variant=\"color\"")
-				   ("variant=\"outline\"". "variant=\"color\"\noutline\n")
-				   ("variant=\"unstyled\"". "")
-				   ("variant=\"outline_danger\"". "variant=\"error\"\noutline\n")
-				   ("square". "iconButton")
-				   ("variant=\"transparent\"". "variant=\"main\"\noutline\n")
-				   ("iconOnRight". "iconPosition=\"right\"")
-				   ("variant=\"link\"". "variant=\"shade\""))))
-	(ignore-errors
-	  (goto-char (point-min))
-	  (while (and (re-search-forward "<Button") (not (eobp)))
-		(re-search-backward "<")
-		(mark-sexp)
-		(narrow-to-region (region-beginning) (region-end))
-		(dolist (change changes)
-		  (while (re-search-forward (car change) nil t)
-			(replace-match (cdr change))))
-		(widen)
-		(forward-word))
-	  (deactivate-mark))))
-
-(defun ft-secpr1 ()
-  (interactive)
-  (let* ((default-directory "~/secp256k1")
-		 (result (shell-command-to-string "ts-node src/index.ts | head -n 1 | awk '{print $3}'")))
-	(message "%s" result)
-	(kill-new result)))
-
-(defun ft-dired-buttons ()
-  (interactive)
-  (dolist (file (dired-get-marked-files))
-	(with-current-buffer (find-file-noselect file)
-	  (ft-button)
-	  (save-buffer))))
-
-(let ((default-directory (project-root (project-current t)))
-        (compilation-buffer-name-function
-         (or project-compilation-buffer-name-function
-             compilation-buffer-name-function)))
-    (call-interactively #'compile))
-
-(defun ft-search-word ()
-  (interactive)
-  (let* ((search (thing-at-point 'word))
-		(default-directory (project-root (project-current t)))
-		(compilation-buffer-name-function (lambda (_) (format "grep %s" search)))
-		(compile-command (format "rg --vimgrep %s" search)))
-	(call-interactively #'compile)))
-
-
-(global-set-key (kbd "M-*") 'ft-search-word)
 
 (defun ft-evil-ex-on-marked ()
   (interactive)

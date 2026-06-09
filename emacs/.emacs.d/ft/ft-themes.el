@@ -7,14 +7,16 @@
 
 ; default font
 (set-face-attribute 'default nil
-		    :family "Iosevka"
+		    :family "IBM Plex Mono"
 		    :width 'normal
 		    :height 120)
 
 ;; highlight/hide current line
-(global-hl-line-mode -1)
+(global-hl-line-mode 1)
+(setq display-line-numbers-type 'relative)
+
+
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-(setq display-line-numbers 'relative)
 
 (use-package modus-themes
   :straight t
@@ -57,13 +59,12 @@
 		  (chill
 		   :default-height 200)
 		  (t ; our shared fallback properties
-		   :default-family "Iosevka"
+		   :default-family "IBM Plex Mono"
 		   ))))
 
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
 (global-set-key (kbd "C-x F t") 'standard-themes-toggle)
 (global-set-key (kbd "C-x F f") 'fontaine-set-preset)
-
 
 
 (provide 'ft-themes)

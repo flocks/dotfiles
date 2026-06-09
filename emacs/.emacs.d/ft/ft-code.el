@@ -1,23 +1,15 @@
 (require 'evil)
-(setq js-indent-level 2)
-(setq typescript-indent-level 2)
-(setq js-import-style "absolute")
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
+;; C code
 (add-hook 'c-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 2)
             (setq c-basic-offset 2)))
+; use // for comment in C
+(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 
-(use-package eglot-booster
-  :after eglot
-  :config	(eglot-booster-mode))
 
 (use-package magit
   :straight t
@@ -42,9 +34,6 @@
 (use-package string-inflection
   :straight t)
 
-(use-package magit-scripts
-  :straight (magit-scripts :type git :host github :repo "flocks/magit-scripts"))
-
 (use-package typescript-mode
   :straight t
   :config
@@ -53,21 +42,6 @@
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-react-mode))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
 
-(use-package flymake-eslint
-  :straight t
-  :config
-  (add-hook 'web-mode-hook (lambda ()
-							;; it seems we need to wait for eglot
-							(run-with-timer 10 nil 'flymake-eslint-enable)))
-  (add-hook 'js-ts-mode-hook (lambda ()
-							;; it seems we need to wait for eglot
-							(run-with-timer 10 nil 'flymake-eslint-enable))))
-
-
- (use-package eldoc-box
-   :straight t
-   :config
-   (global-set-key (kbd "C-c C-k") #'eldoc-box-help-at-point))
 
 (setq eldoc-echo-area-use-multiline-p nil)
 (setq eglot-events-buffer-size 0
@@ -76,56 +50,17 @@
 	  eglot-autoshutdown t)
 
 
-(use-package add-node-modules-path
-    :straight t
-  :init
-  (add-hook 'web-mode-hook 'add-node-modules-path t))
-
-(defun ft-format-buffer ()
-  (interactive)
-  (if (eglot-managed-p) (eglot-format-buffer) (msp-prettify)))
-(use-package msp
-  :straight (:repo "https://github.com/flocks/msp.git")
-  :config
-  (setq msp-config-file '(".prettierrc" ".prettierrc.js" ".prettierrc.json" "prettier.config.cjs"))
-  (global-set-key (kbd "C-c C-f") 'ft-format-buffer))
-
-(use-package haskell-mode
-  :straight t)
-
-(use-package go-mode
-  :straight t)
-
 (use-package eglot
   :config
   ;; I don't like the small lag the first time I open a file that
   ;; that starts the server
   (setq eglot-sync-connect nil)
-  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-  (add-hook 'rust-ts-mode-hook 'eglot-ensure)
-  (add-hook 'go-ts-mode-hook 'eglot-ensure)
-  (add-hook 'go-mode-hook 'eglot-ensure)
-  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-  (add-hook 'js-ts-mode-hook 'eglot-ensure)
-  (add-hook 'js-mode-hook 'eglot-ensure)
-  (add-hook 'web-mode-hook 'eglot-ensure)
+  (add-hook 'typescript-mode-hook 'eglot-ensure)
 
-	(setq eglot-server-programs '((html-mode . ("tailwindcss-language-server" "--stdio"))
-																(python-mode . ("pylsp"))
-																(tsx-ts-mode . ("typescript-language-server" "--stdio" "--log-level" "4"))
-																(typescript-ts-mode . ("typescript-language-server" "--stdio" "--log-level" "4"))
-																(rust-ts-mode . ("rust-analyzer"))
-																(c-mode . ("clangd-12"))
-																(go-mode . ("gopls"))
-																(go-ts-mode . ("gopls"))
-																))
+  (setq eglot-server-programs '((html-mode . ("tailwindcss-language-server" "--stdio"))))
 
   (define-key eglot-mode-map (kbd "C-c A") 'eglot-code-actions)
   (define-key eglot-mode-map (kbd "C-c C-r") 'eglot-rename))
-
-(use-package restclient
-  :straight t)
-
 
 (use-package rainbow-delimiters
     :straight t)
@@ -178,21 +113,9 @@
 	(remove-hook 'comint-output-filter-functions 'nodejs-repl--delete-prompt t))
   (add-hook 'nodejs-repl-mode-hook #'dp/nodejs-repl-remove-broken-filter))
 
-;; ocaml repl
-(use-package utop
-  :straight t)
-
-(setq gdb-many-windows t)
-
 (use-package markdown-mode
   :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
-
-(use-package rfc-mode
-  :straight t)
-
-; use // for comment in C
-(add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 (provide 'ft-code)

@@ -190,10 +190,6 @@ We can reuse a dired buffer and it will append the marked files."
 		  (dired (cons buffer-name (append existing-files files))))
 	  (dired (cons buffer-name files)))))
 
-(use-package dired-narrow
-  :straight t
-  :bind (:map dired-mode-map
-              ("C-/" . dired-narrow)))
 
 
 (defun ft-dired-execute ()

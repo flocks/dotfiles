@@ -9,7 +9,7 @@
   (erc-tls :server "irc.dgtlgrove.com" :nick "flocks"))
 
 (setq erc-autojoin-channels-alist
-      '(("Libera.chat" "#emacs" "#linux" "#brillance")
+      '(("Libera.chat" "#emacs" "#linux" "#brillance" "#emacs-social")
         ("irc.dgtlgrove.com" "#public")))
 
 (defun ft/erc-after-connect (server nick)
