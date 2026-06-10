@@ -51,11 +51,6 @@
 (setq make-backup-files nil)
 (setq create-lockfiles nil)
 
-(use-package wgrep
-  :straight t
-  :config
-  (setq wgrep-auto-save-buffer t))
-
 (custom-set-variables
  '(tab-width 4))
 
