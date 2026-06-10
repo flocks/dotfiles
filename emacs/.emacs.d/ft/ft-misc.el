@@ -48,7 +48,9 @@
 
 (setq-default mode-line-remote
 			  '(:eval
-				(when (tramp-tramp-file-p (or (buffer-file-name) (dired-current-directory)))
+				(when (and (fboundp 'tramp-tramp-file-p)
+						   (tramp-tramp-file-p (or (buffer-file-name)
+												   (dired-current-directory))))
 				  (propertize " TRAMP " 'face '(:background "red" :foreground "white")))))
 
 (provide 'ft-misc)

@@ -20,8 +20,6 @@
 (add-hook 'erc-after-connect #'ft/erc-after-connect)
 ;; (add-hook 'erc-after-connect 'erc-autojoin-channels)
 
-
-
 (use-package elpher
   :straight t
   :config
@@ -39,16 +37,6 @@
 		   (web-url (format "https://portal.mozz.us/gemini/%s" without-protocol)))
 	  (kill-new web-url)
 	  (message "%s" web-url))))
-
-(use-package mpdel
-  :straight t)
-
-(use-package emms
-  :straight t
-  :config
-  (emms-all)
-  (emms-default-players)
-  (setq emms-source-file-default-directory "~/music/"))
 
 (use-package bongo
   :straight t

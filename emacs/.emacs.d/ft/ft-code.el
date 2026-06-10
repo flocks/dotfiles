@@ -10,6 +10,7 @@
 ; use // for comment in C
 (add-hook 'c-mode-hook (lambda () (c-toggle-comment-style -1)))
 
+(use-package transient :straight t)
 
 (use-package magit
   :straight t

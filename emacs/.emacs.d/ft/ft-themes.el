@@ -42,29 +42,8 @@
   (mapc #'disable-theme custom-enabled-themes)
   (call-interactively 'load-theme))
 
-(use-package fontaine
-  :straight t
-  :config
-  (setq fontaine-presets
-		'((small
-		   :default-height 100)
-		  (regular
-		   :default-height 125)
-		  (medium
-		   :default-height 135)
-		  (big
-		   :default-height 155)
-		  (large
-		   :default-height 180)
-		  (chill
-		   :default-height 200)
-		  (t ; our shared fallback properties
-		   :default-family "IBM Plex Mono"
-		   ))))
-
 (global-set-key (kbd "C-x F l") 'global-display-line-numbers-mode)
 (global-set-key (kbd "C-x F t") 'standard-themes-toggle)
-(global-set-key (kbd "C-x F f") 'fontaine-set-preset)
 
 
 (provide 'ft-themes)
