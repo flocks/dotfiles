@@ -1,4 +1,3 @@
-
 (use-package eww
   :config
   (setq eww-history-limit 100)
@@ -51,26 +50,6 @@
   (evil-collection-define-key 'normal 'eww-mode-map "J" 'ft-eww-jump)
   (evil-collection-define-key 'normal 'eww-mode-map "gm" 'ft-eww-jump))
 
-(use-package ewaser
-  :straight (ewaser :type git :host github :repo "flocks/ewaser")
-  :after (eww)
-  :config
-  (setq ewaser-rules-alist '(("\\**stackoverflow" .
-							  ("#left-sidebar"
-							   "#sidebar"
-							   "#footer"
-							   ".s-topbar--container"
-							   ".post-taglist"
-							   ".answers-subheader"
-							   ".js-post-menu"
-							   ".votecell"
-							   ))
-							 ("\\**github" .
-							  (".HeaderMenu"
-							   ".AppHeader"
-							   ))
-							 ))
-  (add-hook 'eww-after-render-hook #'ewaser--hook))
 
 (use-package shr-tag-pre-highlight
   :straight t
