@@ -1,3 +1,4 @@
+(require 'compile)
 (let ((regex-alist
 	   '(
 		 ;; ("ts-build". "^\s?+\\(.*\\):\\([0-9]+\\):\\([0-9]+\\)")
