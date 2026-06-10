@@ -126,7 +126,6 @@
 (require 'ft-shell-command)
 (require 'ft-elfeed)
 (require 'ft-buffer)
-(require 'ft-eshell)
 (require 'ft-code)
 (require 'ft-misc)
 (require 'ft-mail)
