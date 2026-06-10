@@ -1,5 +1,7 @@
-(require 'package)
 ;; optimization
+(require 'package)
+;; we use straight
+; (setq package-enable-at-startup nil)
 (setq gc-cons-threshold (* 1024 1024 100))
 (add-to-list 'load-path
              (expand-file-name (concat user-emacs-directory "ft")))
