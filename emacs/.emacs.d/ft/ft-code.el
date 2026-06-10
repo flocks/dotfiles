@@ -1,6 +1,5 @@
 (require 'evil)
 
-
 ;; C code
 (add-hook 'c-mode-hook
           (lambda ()
@@ -91,11 +90,6 @@
   :straight t
   :config
   (add-hook 'emacs-lisp-mode-hook 'eros-mode))
-
-(use-package yafolding
-  :straight t
-  :config
-  (add-hook 'json-ts-mode-hook 'yafolding-mode))
 
 (progn
   (evil-define-key 'normal prog-mode-map (kbd "M-p") 'flymake-goto-prev-error)
