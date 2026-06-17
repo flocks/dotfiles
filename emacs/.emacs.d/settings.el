@@ -76,11 +76,7 @@
 
 ;; (setq epa-pinentry-mode 'loopback)
 
-(use-package ivy-xref
-  :straight t
-  :config
-  (setf xref-show-definitions-function #'ivy-xref-show-defs))
-
+(setq xref-show-definitions-function #'xref-show-definitions-completing-read)
 
 (use-package yasnippet
   :straight t
