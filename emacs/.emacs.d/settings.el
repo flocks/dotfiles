@@ -104,9 +104,6 @@
 ;; this put clipboard into kill ring
 (setq save-interprogram-paste-before-kill t)
 
-(use-package request
-  :straight t)
-
 (use-package company
   :straight t
   :config

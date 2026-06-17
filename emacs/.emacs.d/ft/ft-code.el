@@ -30,10 +30,6 @@
   ("C-x g" . magit-status)
   ("C-c g" . magit-file-dispatch))
 
-;; useful to turn camelCase to snakeCase etc
-(use-package string-inflection
-  :straight t)
-
 (use-package typescript-mode
   :straight t
   :config
@@ -99,14 +95,6 @@
   :straight t
   :config
   (setq git-link-default-branch "main"))
-
-(use-package nodejs-repl
-  :straight t
-  :config
-  (global-set-key (kbd "C-c C-n") 'nodejs-repl)
-  (defun dp/nodejs-repl-remove-broken-filter ()
-	(remove-hook 'comint-output-filter-functions 'nodejs-repl--delete-prompt t))
-  (add-hook 'nodejs-repl-mode-hook #'dp/nodejs-repl-remove-broken-filter))
 
 (use-package markdown-mode
   :straight t
