@@ -43,7 +43,11 @@
 	(let* ((history eww-prompt-history)
 		   (pages (cl-remove-duplicates (append history nil) :test (lambda (x y) (equal x y))))
 		   (initial-prompt (plist-get eww-data :url)))
-	  (eww (completing-read "EWW: " pages nil nil initial-prompt) arg)))
+	  (let ((minibuffer-local-completion-map
+			 (let ((map (copy-keymap minibuffer-local-completion-map)))
+			   (define-key map (kbd "SPC") #'self-insert-command)
+			   map)))
+		(eww (completing-read "EWW: " pages nil nil initial-prompt) arg))))
 
   (global-set-key (kbd "C-\\") 'ft-eww-prompt)
   (evil-collection-define-key  'normal 'eww-mode-map (kbd "o") 'ft-eww-prompt)
