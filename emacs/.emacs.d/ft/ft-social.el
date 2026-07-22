@@ -46,29 +46,30 @@
   (evil-define-key 'normal bongo-mode-map (kbd "o") 'bongo-insert-file))
 
 (defun ft-share-region (begin end)
-  "Take region and upload the text to 0x0.st or equivalent"
+  "Take region and upload the text to my unxr server"
   (interactive "r")
   (when (not (use-region-p))
 	(user-error "No region selected"))
-  (let* ((hostname "https://0x0.st")
-		 (text (buffer-substring-no-properties begin end))
+  (let* ((text (buffer-substring-no-properties begin end))
 		 (file-text (make-temp-file "" nil ".txt" text))
-		 (upload-command (format "curl -s -F 'file=@%s' %s" file-text hostname))
-		 (url (shell-command-to-string upload-command)))
+		 (upload-command (format "scp %s flocks@unxr:/srv/data" file-text))
+		 (url (format "https://files.unxr.net/%s" (file-name-nondirectory file-text))))
+	(set-file-modes file-text #o644)
+	(shell-command-to-string upload-command)
 	(kill-new url)
 	(delete-file file-text)
 	(message "%s" url)))
 
 (defun ft-share-file (file)
-  "Take marked file and upload it to 0x0.st. Prompt for file if no marked file"
+  "Take marked file and upload it my server. Prompt for file if no marked file"
   (interactive (list
 				(let ((files-marked (dired-get-marked-files)))
 				  (if (= (length files-marked) 1)
 					  (car files-marked)
 					(read-file-name "File to upload: ")))))
-  (let* ((hostname "https://envs.sh")
-		 (upload-command (format "curl -s -F'file=@%s' %s" (expand-file-name file) hostname))
-		 (url (shell-command-to-string upload-command)))
+  (let* ((upload-command (format "scp %s flocks@unxr:/srv/data" (expand-file-name file)))
+		 (url (format "https://files.unxr.net/%s" (file-name-nondirectory (expand-file-name file)))))
+	(shell-command-to-string upload-command)
 	(kill-new url)
 	(message "%s" url)))
 
