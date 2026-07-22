@@ -84,11 +84,11 @@
 
 (defun ft-run-project-exe ()
   (interactive)
-  (async-shell-command (format "%s" project-exe-name)))
+  (async-shell-command (format "./%s" project-exe-name)))
 
 (defun ft-debug-project-exe (begin end)
   (interactive "r")
-  (async-shell-command (format "gf2 %s" project-exe-name)))
+  (async-shell-command (format "gf2 ./%s" project-exe-name)))
 
 (defun ft-compile-project ()
   (interactive)
