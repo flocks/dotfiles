@@ -1,0 +1,5 @@
+# -*- mode: minibuffer -*-
+# name: rg 
+# key: rg
+# --
+rg --vimgrep 
