@@ -11,8 +11,13 @@
 
 (defun ft-sudo-this-file ()
   (interactive)
-  (let ((file (buffer-file-name (current-buffer))))
-	(find-file (format "/sudo::%s" file))))
+  (let* ((file (if (derived-mode-p 'dired-mode)
+				   default-directory
+				 (buffer-file-name)))
+		 (file (and file (expand-file-name file))))
+	(when file
+	  (find-file (format "/sudo::%s" file)))))
+
 
 (provide 'ft-system)
 ;;; ft-system ends here
