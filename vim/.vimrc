@@ -38,7 +38,7 @@ set shiftwidth=2
 let b:prettier_exec_cmd = "prettierd"
 set t_Co=256
 set background=dark
-colorscheme lunaperche
+colorscheme fleury
 filetype plugin indent on
 syntax on
 set termguicolors
@@ -104,10 +104,10 @@ set secure        " disables unsafe commands when reading local vimrc
 nnoremap <C-c><C-r> :%s/<C-r><C-w>/
 
 " Search word under cursor and populate quickfix
-nnoremap <leader>f :silent! grep -w  <C-r><C-w><CR>:copen<CR>
+nnoremap <leader>f :silent! Grep -w  <C-r><C-w><CR>:copen<CR>
 
 " Search word under cursor in current file and populate quickfix
-nnoremap <leader>F :silent! grep -w  <C-r><C-w> %<CR>:copen<CR>
+nnoremap <leader>F :silent! Grep -w <C-r><C-w> %<CR>:copen<CR>
 
 " Automatically populates some registers
 " d contains current folder path (absolute)
@@ -169,6 +169,11 @@ if !has("nvim") && filereadable(expand('~/.vim/autoload/plug.vim'))
 
   Plug 'itchyny/vim-qfedit'
   Plug 'machakann/vim-swap'
+
+  Plug 'SirVer/ultisnips'
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<tab>"
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
   Plug 'markonm/traces.vim'
   call plug#end()
